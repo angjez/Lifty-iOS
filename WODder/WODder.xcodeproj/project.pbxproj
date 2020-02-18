@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,9 +17,12 @@
 		666F1AAF239D825500A5BAAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666F1AAD239D825500A5BAAA /* LaunchScreen.storyboard */; };
 		666F1ABA239D825500A5BAAA /* WODderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AB9239D825500A5BAAA /* WODderTests.swift */; };
 		666F1AC5239D825500A5BAAA /* WODderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AC4239D825500A5BAAA /* WODderUITests.swift */; };
+		66C6962623FAE84500D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; };
+		66C6962723FAE84500D51C62 /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		66C6962923FAE89600D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; platformFilter = ios; };
+		66C6962A23FAE89B00D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; platformFilter = ios; };
+		66E6E78823FC24B400501FEE /* Example in Resources */ = {isa = PBXBuildFile; fileRef = 66E6E78723FC24B400501FEE /* Example */; };
 		66E7DA8623FAAD7100C31B06 /* NewWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */; };
-		66E7DAF023FACB9000C31B06 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7DAEE23FACB7C00C31B06 /* Eureka.framework */; };
-		66E7DAF123FACB9000C31B06 /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7DAEE23FACB7C00C31B06 /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,16 +40,30 @@
 			remoteGlobalIDString = 666F1A99239D825400A5BAAA;
 			remoteInfo = WODder;
 		};
+		66C6962123FAE81D00D51C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66C6961C23FAE81A00D51C62 /* Eureka.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51729DEB1B9A4F5E004A00EB;
+			remoteInfo = Eureka;
+		};
+		66C6962323FAE81D00D51C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66C6961C23FAE81A00D51C62 /* Eureka.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51729DF51B9A4F5E004A00EB;
+			remoteInfo = EurekaTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		66E7DAE323FAC4F500C31B06 /* Embed Frameworks */ = {
+		66C6962823FAE84500D51C62 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				66E7DAF123FACB9000C31B06 /* Eureka.framework in Embed Frameworks */,
+				66C6962723FAE84500D51C62 /* Eureka.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,8 +87,9 @@
 		666F1AC0239D825500A5BAAA /* WODderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WODderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		666F1AC4239D825500A5BAAA /* WODderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WODderUITests.swift; sourceTree = "<group>"; };
 		666F1AC6239D825500A5BAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66C6961C23FAE81A00D51C62 /* Eureka.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Eureka.xcodeproj; path = Eureka/Eureka.xcodeproj; sourceTree = "<group>"; };
+		66E6E78723FC24B400501FEE /* Example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Example; path = Eureka/Example; sourceTree = SOURCE_ROOT; };
 		66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkout.swift; sourceTree = "<group>"; };
-		66E7DAEE23FACB7C00C31B06 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66E7DAF023FACB9000C31B06 /* Eureka.framework in Frameworks */,
+				66C6962623FAE84500D51C62 /* Eureka.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C6962923FAE89600D51C62 /* Eureka.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C6962A23FAE89B00D51C62 /* Eureka.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,11 +123,12 @@
 		666F1A91239D825300A5BAAA = {
 			isa = PBXGroup;
 			children = (
-				66E7DAEE23FACB7C00C31B06 /* Eureka.framework */,
 				666F1A9C239D825400A5BAAA /* WODder */,
 				666F1AB8239D825500A5BAAA /* WODderTests */,
 				666F1AC3239D825500A5BAAA /* WODderUITests */,
 				666F1A9B239D825400A5BAAA /* Products */,
+				66C6961C23FAE81A00D51C62 /* Eureka.xcodeproj */,
+				66C6962523FAE84500D51C62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +151,7 @@
 				666F1AA3239D825400A5BAAA /* Quickstart.swift */,
 				66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */,
 				666F1AA5239D825400A5BAAA /* Main.storyboard */,
+				66E6E78723FC24B400501FEE /* Example */,
 				666F1AAB239D825500A5BAAA /* Assets.xcassets */,
 				666F1AAD239D825500A5BAAA /* LaunchScreen.storyboard */,
 				666F1AB0239D825500A5BAAA /* Info.plist */,
@@ -156,6 +178,22 @@
 			path = WODderUITests;
 			sourceTree = "<group>";
 		};
+		66C6961D23FAE81A00D51C62 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66C6962223FAE81D00D51C62 /* Eureka.framework */,
+				66C6962423FAE81D00D51C62 /* EurekaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66C6962523FAE84500D51C62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -163,18 +201,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 666F1AC9239D825500A5BAAA /* Build configuration list for PBXNativeTarget "WODder" */;
 			buildPhases = (
-				4EE13773FF0261E0DD1845DA /* [CP] Check Pods Manifest.lock */,
 				666F1A96239D825400A5BAAA /* Sources */,
 				666F1A97239D825400A5BAAA /* Frameworks */,
 				666F1A98239D825400A5BAAA /* Resources */,
-				A1CCC35B816BAF5D91B84858 /* [CP] Embed Pods Frameworks */,
-				66E7DAE323FAC4F500C31B06 /* Embed Frameworks */,
+				66C6962823FAE84500D51C62 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = WODder;
+			packageProductDependencies = (
+			);
 			productName = WODder;
 			productReference = 666F1A9A239D825400A5BAAA /* WODder.app */;
 			productType = "com.apple.product-type.application";
@@ -247,8 +285,16 @@
 				Base,
 			);
 			mainGroup = 666F1A91239D825300A5BAAA;
+			packageReferences = (
+			);
 			productRefGroup = 666F1A9B239D825400A5BAAA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 66C6961D23FAE81A00D51C62 /* Products */;
+					ProjectRef = 66C6961C23FAE81A00D51C62 /* Eureka.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				666F1A99239D825400A5BAAA /* WODder */,
@@ -258,6 +304,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		66C6962223FAE81D00D51C62 /* Eureka.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Eureka.framework;
+			remoteRef = 66C6962123FAE81D00D51C62 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		66C6962423FAE81D00D51C62 /* EurekaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EurekaTests.xctest;
+			remoteRef = 66C6962323FAE81D00D51C62 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		666F1A98239D825400A5BAAA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -266,6 +329,7 @@
 				666F1AAF239D825500A5BAAA /* LaunchScreen.storyboard in Resources */,
 				666F1AAC239D825500A5BAAA /* Assets.xcassets in Resources */,
 				666F1AA7239D825400A5BAAA /* Main.storyboard in Resources */,
+				66E6E78823FC24B400501FEE /* Example in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,48 +348,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4EE13773FF0261E0DD1845DA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WODder-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A1CCC35B816BAF5D91B84858 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WODder/Pods-WODder-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WODder/Pods-WODder-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WODder/Pods-WODder-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		666F1A96239D825400A5BAAA /* Sources */ = {
