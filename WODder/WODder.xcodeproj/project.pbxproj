@@ -22,6 +22,7 @@
 		66C6962923FAE89600D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; platformFilter = ios; };
 		66C6962A23FAE89B00D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; platformFilter = ios; };
 		66E6E78823FC24B400501FEE /* Example in Resources */ = {isa = PBXBuildFile; fileRef = 66E6E78723FC24B400501FEE /* Example */; };
+		66E6E78D23FC665700501FEE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6E78C23FC665700501FEE /* Exercise.swift */; };
 		66E7DA8623FAAD7100C31B06 /* NewWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		666F1AC6239D825500A5BAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66C6961C23FAE81A00D51C62 /* Eureka.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Eureka.xcodeproj; path = Eureka/Eureka.xcodeproj; sourceTree = "<group>"; };
 		66E6E78723FC24B400501FEE /* Example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Example; path = Eureka/Example; sourceTree = SOURCE_ROOT; };
+		66E6E78C23FC665700501FEE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 				666F1AA1239D825400A5BAAA /* SavedWODs.swift */,
 				666F1AA3239D825400A5BAAA /* Quickstart.swift */,
 				66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */,
+				66E6E78C23FC665700501FEE /* Exercise.swift */,
 				666F1AA5239D825400A5BAAA /* Main.storyboard */,
 				66E6E78723FC24B400501FEE /* Example */,
 				666F1AAB239D825500A5BAAA /* Assets.xcassets */,
@@ -359,6 +362,7 @@
 				666F1AA4239D825400A5BAAA /* Quickstart.swift in Sources */,
 				666F1AA2239D825400A5BAAA /* SavedWODs.swift in Sources */,
 				666F1A9E239D825400A5BAAA /* AppDelegate.swift in Sources */,
+				66E6E78D23FC665700501FEE /* Exercise.swift in Sources */,
 				666F1AA0239D825400A5BAAA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

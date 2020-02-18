@@ -13,7 +13,10 @@ import Eureka
 
 class NewWorkout: FormViewController {
     
+    @IBOutlet weak var triggerButton: UIButton!
+    
     var workoutTypes =  ["AMRAP","EMOM","for time","tabata"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,15 +103,59 @@ class NewWorkout: FormViewController {
                 $0.tag = "emom_t"
                 $0.hidden = "$segments != 'EMOM'"
             }
-            <<< TextRow(){
-                $0.title = "Which music style do you like most?"
+            <<< IntRow() {
+                $0.title = "Every: "
+                $0.placeholder = "' for minutes '' for seconds'"
+                $0.add(rule: RuleGreaterThan(min: 0))
+                $0.add(rule: RuleSmallerThan(max: 1000))
+                }
+                .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
+                }
+                .onRowValidationChanged { cell, row in
+                    let rowIndex = row.indexPath!.row
+                    while row.section!.count > rowIndex + 1 && row.section?[rowIndex  + 1] is LabelRow {
+                        row.section?.remove(at: rowIndex + 1)
+                    }
+                    if !row.isValid {
+                        for (index, validationMsg) in row.validationErrors.map({ $0.msg }).enumerated() {
+                            let labelRow = LabelRow() {
+                                $0.title = validationMsg
+                                $0.cell.height = { 30 }
+                            }
+                            let indexPath = row.indexPath!.row + index + 1
+                            row.section?.insert(labelRow, at: indexPath)
+                        }
+                    }
             }
 
-            <<< TextRow(){
-                $0.title = "Which is your favourite singer?"
-            }
-            <<< TextRow(){
-                $0.title = "How many CDs have you got?"
+            <<< IntRow() {
+                $0.title = "Rounds: "
+                $0.add(rule: RuleGreaterThan(min: 0))
+                $0.add(rule: RuleSmallerThan(max: 1000))
+                }
+                .cellUpdate { cell, row in
+                    if !row.isValid {
+                        cell.titleLabel?.textColor = .red
+                    }
+                }
+                .onRowValidationChanged { cell, row in
+                    let rowIndex = row.indexPath!.row
+                    while row.section!.count > rowIndex + 1 && row.section?[rowIndex  + 1] is LabelRow {
+                        row.section?.remove(at: rowIndex + 1)
+                    }
+                    if !row.isValid {
+                        for (index, validationMsg) in row.validationErrors.map({ $0.msg }).enumerated() {
+                            let labelRow = LabelRow() {
+                                $0.title = validationMsg
+                                $0.cell.height = { 30 }
+                            }
+                            let indexPath = row.indexPath!.row + index + 1
+                            row.section?.insert(labelRow, at: indexPath)
+                        }
+                    }
             }
 
             +++ Section(){
@@ -154,7 +201,7 @@ class NewWorkout: FormViewController {
                                         $0.value = "tap to edit"
                                         }
                                         .onCellSelection { cell, row in
-                                            row.title = (row.title ?? "") + " 🇺🇾 "
+                                            self.triggerButton.sendActions(for: .touchUpInside)
                                             row.reload() // or row.updateCell()
                                     }
                                 }
@@ -163,13 +210,11 @@ class NewWorkout: FormViewController {
                                     $0.value = "tap to edit"
                                     }
                                     .onCellSelection { cell, row in
-                                        row.title = (row.title ?? "") + " 🇺🇾 "
+                                        self.triggerButton.sendActions(for: .touchUpInside)
                                         row.reload() // or row.updateCell()
                                 }
                             }
 
             }
-        
-    }
     
-
+}

@@ -79,18 +79,46 @@
         <!--Create new workout-->
         <scene sceneID="Gav-sP-eXi">
             <objects>
-                <viewController id="VqB-fT-kkn" customClass="NewWorkout" customModule="WODder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewWorkoutStoryboard" id="VqB-fT-kkn" customClass="NewWorkout" customModule="WODder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="30o-iV-WYz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhC-IQ-Aza">
+                                <rect key="frame" x="184" y="100" width="46" height="101"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="aA0-58-sbG" kind="presentation" modalPresentationStyle="fullScreen" id="Wr8-7W-txn"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iNj-tD-26B"/>
                     </view>
                     <navigationItem key="navigationItem" title="Create new workout" id="aRu-Fc-cdB"/>
+                    <connections>
+                        <outlet property="triggerButton" destination="bhC-IQ-Aza" id="HuP-lI-pck"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VG8-ah-Twu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1671.0144927536232" y="-320.08928571428572"/>
+            <point key="canvasLocation" x="1731.8840579710147" y="-320.08928571428572"/>
+        </scene>
+        <!--Exercise-->
+        <scene sceneID="dQm-S9-IlE">
+            <objects>
+                <viewController id="aA0-58-sbG" customClass="Exercise" customModule="WODder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VOZ-4e-3LC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="07S-ZB-xad"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLv-7N-9uh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2565" y="-320"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
