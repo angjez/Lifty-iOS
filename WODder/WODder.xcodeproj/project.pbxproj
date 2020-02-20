@@ -17,7 +17,7 @@
 		666F1AAF239D825500A5BAAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666F1AAD239D825500A5BAAA /* LaunchScreen.storyboard */; };
 		666F1ABA239D825500A5BAAA /* WODderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AB9239D825500A5BAAA /* WODderTests.swift */; };
 		666F1AC5239D825500A5BAAA /* WODderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AC4239D825500A5BAAA /* WODderUITests.swift */; };
-		66C6962623FAE84500D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; };
+		66C6962623FAE84500D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		66C6962723FAE84500D51C62 /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		66C6962923FAE89600D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; platformFilter = ios; };
 		66C6962A23FAE89B00D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; platformFilter = ios; };
@@ -58,6 +58,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		665A1ED723FEE9240065801F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		66C6962823FAE84500D51C62 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,6 +217,7 @@
 				666F1A97239D825400A5BAAA /* Frameworks */,
 				666F1A98239D825400A5BAAA /* Resources */,
 				66C6962823FAE84500D51C62 /* Embed Frameworks */,
+				665A1ED723FEE9240065801F /* CopyFiles */,
 			);
 			buildRules = (
 			);

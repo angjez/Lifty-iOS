@@ -20,27 +20,37 @@ class NewWorkout: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        form +++
 
-              TextRow("Title").cellSetup { cell, row in
-                cell.textField.placeholder = row.tag
-              }
+        createWorkoutTitleForm()
+        createWorkoutTypeForm()
+        createExercisesForm()
+
+    }
+    
+    
+    func createWorkoutTitleForm () {
+            
+            form +++
+
+                  TextRow("Title").cellSetup { cell, row in
+                    cell.textField.placeholder = row.tag
+                  }
+    }
         
-//        workout types
+    func createWorkoutTypeForm () {
         TextRow.defaultCellUpdate = { cell, row in
             cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 12)
         }
 
         form +++
             Section()
-            <<< SegmentedRow<String>("segments"){
+            <<< SegmentedRow<String>("workoutTypes"){
                 $0.options = ["FOR TIME", "EMOM", "AMRAP", "TABATA"]
                 $0.value = "FOR TIME"
             }
             +++ Section(){
                 $0.tag = "for_time_t"
-                $0.hidden = "$segments != 'FOR TIME'" // .Predicate(NSPredicate(format: "$segments != 'FOR TIME'"))
+                $0.hidden = "$workoutTypes != 'FOR TIME'" // .Predicate(NSPredicate(format: "$segments != 'FOR TIME'"))
             }
             
             <<< IntRow() {
@@ -101,7 +111,7 @@ class NewWorkout: FormViewController {
 
             +++ Section(){
                 $0.tag = "emom_t"
-                $0.hidden = "$segments != 'EMOM'"
+                $0.hidden = "$workoutTypes != 'EMOM'"
             }
             <<< PickerInputRow<String>(){
                 $0.title = "Every: "
@@ -154,7 +164,7 @@ class NewWorkout: FormViewController {
 
             +++ Section(){
                 $0.tag = "amrap_t"
-                $0.hidden = "$segments != 'AMRAP'"
+                $0.hidden = "$workoutTypes != 'AMRAP'"
             }
             <<< IntRow() {
                 $0.title = "Time cap: "
@@ -186,7 +196,7 @@ class NewWorkout: FormViewController {
         
         +++ Section(){
             $0.tag = "tabata_t"
-            $0.hidden = "$segments != 'TABATA'"
+            $0.hidden = "$workoutTypes != 'TABATA'"
         }
         <<< IntRow() {
             $0.title = "Rounds:"
@@ -258,9 +268,9 @@ class NewWorkout: FormViewController {
             $0.options.append("\(minutes):\(seconds)0")
             $0.value = $0.options.first
         }
-        
-//        add exercises
-        var index = 1
+    }
+    
+    func createExercisesForm () {
         form +++
             MultivaluedSection(multivaluedOptions: [.Reorder, .Insert, .Delete]) {
                                 $0.tag = "textfields"
@@ -269,12 +279,12 @@ class NewWorkout: FormViewController {
                                         $0.title = "Add another exercise"
                                         }.cellUpdate { cell, row in
                                             cell.textLabel?.textAlignment = .left
-                                            index += 1
+//                                            counter += 1
                                     }
                                 }
                                 $0.multivaluedRowToInsertAt = { index in
                                     return LabelRow () {
-                                        $0.title = "Exercise \(index)"
+                                        $0.title = "Exercise \(index+1)"
                                         $0.value = "tap to edit"
                                         }
                                         .onCellSelection { cell, row in
@@ -283,15 +293,14 @@ class NewWorkout: FormViewController {
                                     }
                                 }
                                 $0  <<< LabelRow () {
-                                    $0.title = "Exercise \(index)"
+                                    $0.title = "Exercise 1"
                                     $0.value = "tap to edit"
                                     }
                                     .onCellSelection { cell, row in
                                         self.triggerButton.sendActions(for: .touchUpInside)
                                         row.reload() // or row.updateCell()
                                 }
-                            }
-
             }
     
+    }
 }
