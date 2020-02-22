@@ -17,7 +17,7 @@ class AlertHelper {
     }
 }
 
-class Exercise: FormViewController{
+class ExerciseVC: FormViewController{
     
 
     override func viewDidLoad() {
@@ -120,6 +120,9 @@ class Exercise: FormViewController{
     func manageInput () {
         
         let alert = AlertHelper()
+        var reps: Int? = nil
+        var time: String? = nil
+        var exerciseName: String? = nil
         
 //        getting exercise name
         
@@ -128,7 +131,7 @@ class Exercise: FormViewController{
             alert.showAlert(fromController: self)
         }
         else {
-            let exerciseName = nameRow!.value
+            exerciseName = nameRow!.value
         }
         
 //        getting exercise type
@@ -144,7 +147,7 @@ class Exercise: FormViewController{
                 alert.showAlert(fromController: self)
             }
             else {
-                let time = timeRow!.value
+                time = timeRow!.value
             }
         }
         else if exerciseType == "Reps" {
@@ -153,7 +156,7 @@ class Exercise: FormViewController{
                 alert.showAlert(fromController: self)
             }
             else {
-                let reps = repsRow!.value
+                reps = repsRow!.value
             }
         }
         
@@ -161,5 +164,11 @@ class Exercise: FormViewController{
         
         let noteRow: TextAreaRow? = form.rowBy(tag: "Notes")
         let notes = noteRow!.value
+        
+//        creating the object
+        
+        let modifiedExercise = Exercise (name: exerciseName!, type: exerciseType!, reps: reps ?? 0, time: time ?? "-", notes: notes ?? "")
+        
+//        passing the object
     }
 }

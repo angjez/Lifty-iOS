@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SavedWODs: UIViewController {
+class SavedWODsVC: UIViewController {
     
     
     

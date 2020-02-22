@@ -11,7 +11,7 @@ import Eureka
 
 
 
-class NewWorkout: FormViewController {
+class NewWorkoutVC: FormViewController {
     
     @IBOutlet weak var triggerButton: UIButton!
     

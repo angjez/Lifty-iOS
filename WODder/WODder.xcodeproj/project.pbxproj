@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		665A1EE02401A30D0065801F /* DataClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665A1EDF2401A30D0065801F /* DataClasses.swift */; };
 		666F1A9E239D825400A5BAAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1A9D239D825400A5BAAA /* AppDelegate.swift */; };
 		666F1AA0239D825400A5BAAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1A9F239D825400A5BAAA /* SceneDelegate.swift */; };
-		666F1AA2239D825400A5BAAA /* SavedWODs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AA1239D825400A5BAAA /* SavedWODs.swift */; };
-		666F1AA4239D825400A5BAAA /* Quickstart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AA3239D825400A5BAAA /* Quickstart.swift */; };
+		666F1AA2239D825400A5BAAA /* SavedWODsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AA1239D825400A5BAAA /* SavedWODsVC.swift */; };
+		666F1AA4239D825400A5BAAA /* QuickstartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AA3239D825400A5BAAA /* QuickstartVC.swift */; };
 		666F1AA7239D825400A5BAAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666F1AA5239D825400A5BAAA /* Main.storyboard */; };
 		666F1AAA239D825400A5BAAA /* WODder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 666F1AA8239D825400A5BAAA /* WODder.xcdatamodeld */; };
 		666F1AAC239D825500A5BAAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666F1AAB239D825500A5BAAA /* Assets.xcassets */; };
@@ -22,8 +23,8 @@
 		66C6962923FAE89600D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; platformFilter = ios; };
 		66C6962A23FAE89B00D51C62 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C6962223FAE81D00D51C62 /* Eureka.framework */; platformFilter = ios; };
 		66E6E78823FC24B400501FEE /* Example in Resources */ = {isa = PBXBuildFile; fileRef = 66E6E78723FC24B400501FEE /* Example */; };
-		66E6E78D23FC665700501FEE /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6E78C23FC665700501FEE /* Exercise.swift */; };
-		66E7DA8623FAAD7100C31B06 /* NewWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */; };
+		66E6E78D23FC665700501FEE /* ExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6E78C23FC665700501FEE /* ExerciseVC.swift */; };
+		66E7DA8623FAAD7100C31B06 /* NewWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7DA8523FAAD7100C31B06 /* NewWorkoutVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,11 +82,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		665A1EDF2401A30D0065801F /* DataClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataClasses.swift; sourceTree = "<group>"; };
 		666F1A9A239D825400A5BAAA /* WODder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WODder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		666F1A9D239D825400A5BAAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		666F1A9F239D825400A5BAAA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		666F1AA1239D825400A5BAAA /* SavedWODs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWODs.swift; sourceTree = "<group>"; };
-		666F1AA3239D825400A5BAAA /* Quickstart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quickstart.swift; sourceTree = "<group>"; };
+		666F1AA1239D825400A5BAAA /* SavedWODsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWODsVC.swift; sourceTree = "<group>"; };
+		666F1AA3239D825400A5BAAA /* QuickstartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickstartVC.swift; sourceTree = "<group>"; };
 		666F1AA6239D825400A5BAAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		666F1AA9239D825400A5BAAA /* WODder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WODder.xcdatamodel; sourceTree = "<group>"; };
 		666F1AAB239D825500A5BAAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,8 +101,8 @@
 		666F1AC6239D825500A5BAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66C6961C23FAE81A00D51C62 /* Eureka.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Eureka.xcodeproj; path = Eureka/Eureka.xcodeproj; sourceTree = "<group>"; };
 		66E6E78723FC24B400501FEE /* Example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Example; path = Eureka/Example; sourceTree = SOURCE_ROOT; };
-		66E6E78C23FC665700501FEE /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
-		66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkout.swift; sourceTree = "<group>"; };
+		66E6E78C23FC665700501FEE /* ExerciseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseVC.swift; sourceTree = "<group>"; };
+		66E7DA8523FAAD7100C31B06 /* NewWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,10 +160,11 @@
 			children = (
 				666F1A9D239D825400A5BAAA /* AppDelegate.swift */,
 				666F1A9F239D825400A5BAAA /* SceneDelegate.swift */,
-				666F1AA1239D825400A5BAAA /* SavedWODs.swift */,
-				666F1AA3239D825400A5BAAA /* Quickstart.swift */,
-				66E7DA8523FAAD7100C31B06 /* NewWorkout.swift */,
-				66E6E78C23FC665700501FEE /* Exercise.swift */,
+				666F1AA1239D825400A5BAAA /* SavedWODsVC.swift */,
+				666F1AA3239D825400A5BAAA /* QuickstartVC.swift */,
+				66E7DA8523FAAD7100C31B06 /* NewWorkoutVC.swift */,
+				66E6E78C23FC665700501FEE /* ExerciseVC.swift */,
+				665A1EDF2401A30D0065801F /* DataClasses.swift */,
 				666F1AA5239D825400A5BAAA /* Main.storyboard */,
 				66E6E78723FC24B400501FEE /* Example */,
 				666F1AAB239D825500A5BAAA /* Assets.xcassets */,
@@ -367,12 +370,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66E7DA8623FAAD7100C31B06 /* NewWorkout.swift in Sources */,
+				66E7DA8623FAAD7100C31B06 /* NewWorkoutVC.swift in Sources */,
 				666F1AAA239D825400A5BAAA /* WODder.xcdatamodeld in Sources */,
-				666F1AA4239D825400A5BAAA /* Quickstart.swift in Sources */,
-				666F1AA2239D825400A5BAAA /* SavedWODs.swift in Sources */,
+				666F1AA4239D825400A5BAAA /* QuickstartVC.swift in Sources */,
+				666F1AA2239D825400A5BAAA /* SavedWODsVC.swift in Sources */,
+				665A1EE02401A30D0065801F /* DataClasses.swift in Sources */,
 				666F1A9E239D825400A5BAAA /* AppDelegate.swift in Sources */,
-				66E6E78D23FC665700501FEE /* Exercise.swift in Sources */,
+				66E6E78D23FC665700501FEE /* ExerciseVC.swift in Sources */,
 				666F1AA0239D825400A5BAAA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

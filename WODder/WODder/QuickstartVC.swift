@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Quickstart: UIViewController {
+class QuickstartVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
