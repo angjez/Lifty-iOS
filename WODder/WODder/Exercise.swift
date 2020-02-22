@@ -9,9 +9,16 @@
 import UIKit
 import Eureka
 
-
+class AlertHelper {
+    func showAlert(fromController controller: FormViewController) {
+        let unfilledAlert = UIAlertController(title: "Please fill out missing fields.", message: "", preferredStyle: UIAlertController.Style.alert)
+        unfilledAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        controller.present(unfilledAlert, animated: true, completion: nil)
+    }
+}
 
 class Exercise: FormViewController{
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +46,7 @@ class Exercise: FormViewController{
             }
             
             <<< IntRow() {
+                $0.tag = "Amout of reps"
                 $0.title = "Amout of reps"
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -70,8 +78,11 @@ class Exercise: FormViewController{
                 $0.hidden = "$exerciseType != 'Time'"
             }
             <<< PickerInputRow<String>(){
+                $0.tag = "Time: "
                 $0.title = "Time: "
                 $0.options = []
+                
+                $0.options.append("-")
 
                 var minutes = 0, seconds = 10
                  while minutes <= 4 {
@@ -94,10 +105,61 @@ class Exercise: FormViewController{
             +++ Section()
 
             <<< TextAreaRow() {
+                $0.tag = "Notes"
                 $0.placeholder = "Additional notes (weight used, technique etc.)."
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)
         }
-
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        manageInput()
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func manageInput () {
+        
+        let alert = AlertHelper()
+        
+//        getting exercise name
+        
+        let nameRow: TextRow? = form.rowBy(tag: "Name")
+        if nameRow!.value == nil {
+            alert.showAlert(fromController: self)
+        }
+        else {
+            let exerciseName = nameRow!.value
+        }
+        
+//        getting exercise type
+        
+        let typeRow: SegmentedRow<String>? = form.rowBy(tag: "exerciseType")
+        let exerciseType = typeRow!.value
+        
+//        getting time/reps
+        
+        if exerciseType == "Time" {
+            let timeRow: PickerInputRow<String>? = form.rowBy(tag: "Time: ")
+            if timeRow!.value == "-" {
+                alert.showAlert(fromController: self)
+            }
+            else {
+                let time = timeRow!.value
+            }
+        }
+        else if exerciseType == "Reps" {
+            let repsRow: IntRow? = form.rowBy(tag: "Amout of reps")
+            if repsRow!.value == nil {
+                alert.showAlert(fromController: self)
+            }
+            else {
+                let reps = repsRow!.value
+            }
+        }
+        
+//        getting notes
+        
+        let noteRow: TextAreaRow? = form.rowBy(tag: "Notes")
+        let notes = noteRow!.value
+    }
 }
