@@ -44,7 +44,7 @@
                                 <state key="normal" image="plus" catalog="system"/>
                                 <connections>
                                     <action selector="AddButtonTapped:" destination="9pv-A4-QxB" eventType="touchUpInside" id="myJ-b1-UZW"/>
-                                    <segue destination="VqB-fT-kkn" kind="presentation" id="EKU-ZK-4w8"/>
+                                    <segue destination="VqB-fT-kkn" kind="presentation" modalPresentationStyle="fullScreen" id="EKU-ZK-4w8"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -81,7 +81,7 @@
             <objects>
                 <viewController storyboardIdentifier="NewWorkoutStoryboard" id="VqB-fT-kkn" customClass="NewWorkout" customModule="WODder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="30o-iV-WYz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhC-IQ-Aza">
@@ -89,7 +89,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="aA0-58-sbG" kind="presentation" modalPresentationStyle="fullScreen" id="Wr8-7W-txn"/>
+                                    <segue destination="u7c-u3-zg5" kind="show" identifier="ExerciseSegue" id="ISz-m1-M2j"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -106,19 +106,20 @@
             <point key="canvasLocation" x="1731.8840579710147" y="-320.08928571428572"/>
         </scene>
         <!--Exercise-->
-        <scene sceneID="dQm-S9-IlE">
+        <scene sceneID="h0e-c8-nT3">
             <objects>
-                <viewController id="aA0-58-sbG" customClass="Exercise" customModule="WODder" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VOZ-4e-3LC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <viewController id="u7c-u3-zg5" customClass="Exercise" customModule="WODder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f0g-5U-SRL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="07S-ZB-xad"/>
+                        <viewLayoutGuide key="safeArea" id="nUK-nA-Xbs"/>
                     </view>
+                    <navigationItem key="navigationItem" id="6Ku-DN-buJ"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLv-7N-9uh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wkf-hl-05h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2565" y="-320"/>
+            <point key="canvasLocation" x="2567" y="-320"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">

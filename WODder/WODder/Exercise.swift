@@ -9,10 +9,13 @@
 import UIKit
 import Eureka
 
-class Exercise: FormViewController {
+
+
+class Exercise: FormViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         createForm();
     }
     

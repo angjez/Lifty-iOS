@@ -283,22 +283,16 @@ class NewWorkout: FormViewController {
                                     }
                                 }
                                 $0.multivaluedRowToInsertAt = { index in
-                                    return LabelRow () {
+                                    return ButtonRow () {
                                         $0.title = "Exercise \(index+1)"
                                         $0.value = "tap to edit"
-                                        }
-                                        .onCellSelection { cell, row in
-                                            self.triggerButton.sendActions(for: .touchUpInside)
-                                            row.reload() // or row.updateCell()
+                                        $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                     }
                                 }
-                                $0  <<< LabelRow () {
+                                $0  <<< ButtonRow () {
                                     $0.title = "Exercise 1"
                                     $0.value = "tap to edit"
-                                    }
-                                    .onCellSelection { cell, row in
-                                        self.triggerButton.sendActions(for: .touchUpInside)
-                                        row.reload() // or row.updateCell()
+                                    $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                 }
             }
     
