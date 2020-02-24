@@ -36,14 +36,28 @@ class Exercise {
     var reps: Int?
     var exerciseTime: String?
     var notes: String?
-    var exerciseIndex: Int?
+    var exerciseIndex: Int
     
-    init(exerciseName: String, exerciseType: String, reps: Int, exerciseTime: String, notes: String, exerciseIndex: Int) {
+    init(exerciseName: String, exerciseIndex: Int) {
         self.exerciseName = exerciseName
-        self.exerciseType = exerciseType
-        self.reps = reps
-        self.exerciseTime = exerciseTime
-        self.notes = notes
         self.exerciseIndex = exerciseIndex
+    }
+    
+//    init(exerciseName: String, exerciseType: String, reps: Int, exerciseTime: String, notes: String, exerciseIndex: Int) {
+//        self.exerciseName = exerciseName
+//        self.exerciseType = exerciseType
+//        self.reps = reps
+//        self.exerciseTime = exerciseTime
+//        self.notes = notes
+//        self.exerciseIndex = exerciseIndex
+//    }
+    
+    func assign(exerciseToAssign: Exercise) {
+        self.exerciseName = exerciseToAssign.exerciseName
+        self.exerciseType = exerciseToAssign.exerciseType
+        self.reps = exerciseToAssign.reps
+        self.exerciseTime = exerciseToAssign.exerciseTime
+        self.notes = exerciseToAssign.notes
+        self.exerciseIndex = exerciseToAssign.exerciseIndex
     }
 }

@@ -167,7 +167,11 @@ class ExerciseVC: FormViewController{
         
 //        creating the object
         
-        let modifiedExercise = Exercise (exerciseName: exerciseName!, exerciseType: exerciseType!, reps: reps ?? 0, exerciseTime: time ?? "-", notes: notes ?? "", exerciseIndex: 0)
+        let modifiedExercise = Exercise (exerciseName: exerciseName!, exerciseIndex: 0)
+        modifiedExercise.exerciseType = exerciseType
+        modifiedExercise.reps = reps
+        modifiedExercise.exerciseTime = time
+        modifiedExercise.notes = notes
         
         return modifiedExercise
     }

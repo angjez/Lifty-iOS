@@ -292,6 +292,8 @@ class NewWorkoutVC: FormViewController {
                                         $0.value = "tap to edit"
                                         $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                         $0.onCellSelection(self.buttonTapped)
+                                        let newExercise = Exercise(exerciseName: rowTitles[index], exerciseIndex: index+1)
+                                        self.workout.addExercise(exercise: newExercise)
                                     }
                                         
                                 }
@@ -301,6 +303,8 @@ class NewWorkoutVC: FormViewController {
                                     $0.value = "tap to edit"
                                     $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                     $0.onCellSelection(self.buttonTapped)
+                                    let newExercise = Exercise(exerciseName: rowTitles[0], exerciseIndex: 1)
+                                    self.workout.addExercise(exercise: newExercise)
                                 }
             }
     }
@@ -311,17 +315,50 @@ class NewWorkoutVC: FormViewController {
         chosenRow = row
     }
     
-//    func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
-//        chosenCell = row.indexPath!.row
-//    }
-    
     func isModified(modifiedExercise: Exercise) {
         
-        modifiedExercise.exerciseIndex = exerciseIndex
-        print(modifiedExercise.exerciseName)
+        for exercise in workout.exercises {
+            if exercise.exerciseIndex == exerciseIndex {
+                exercise.assign(exerciseToAssign: modifiedExercise)
+            }
+        }
+        
         rowTitles[exerciseIndex-1] = modifiedExercise.exerciseName
         chosenRow?.title = modifiedExercise.exerciseName
         chosenRow!.updateCell()
         
     }
+    
+//    detect reordering and correct data
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let firstToSwap = Exercise(exerciseName: "", exerciseIndex: 0)
+        let secondToSwap = Exercise(exerciseName: "", exerciseIndex: 0)
+        let dummy = Exercise(exerciseName: "", exerciseIndex: 0)
+        
+        for exercise in workout.exercises {
+            if exercise.exerciseIndex == sourceIndexPath[1]+1 {
+                firstToSwap.assign(exerciseToAssign: exercise)
+            }
+            if exercise.exerciseIndex == destinationIndexPath[1]+1 {
+                secondToSwap.assign(exerciseToAssign: exercise)
+                dummy.assign(exerciseToAssign: exercise)
+            }
+        }
+        workout.exercises[secondToSwap.exerciseIndex-1].assign(exerciseToAssign: firstToSwap)
+        workout.exercises[firstToSwap.exerciseIndex-1].assign(exerciseToAssign: dummy)
+        
+    }
+    
+//    detect deletion
+    
+
+    
+//    save workout data upon view dismissal
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
 }
