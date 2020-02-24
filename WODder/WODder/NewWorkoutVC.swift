@@ -9,13 +9,17 @@
 import UIKit
 import Eureka
 
-
+var exerciseIndex: Int = 0
+var chosenCell: ButtonCellOf<String>?
+var chosenRow: ButtonRowOf<String>?
+var rowTitles: [String] =  []
 
 class NewWorkoutVC: FormViewController {
     
     @IBOutlet weak var triggerButton: UIButton!
     
     var workoutTypes =  ["AMRAP","EMOM","for time","tabata"]
+    let workout = Workout()
 
     
     override func viewDidLoad() {
@@ -279,22 +283,45 @@ class NewWorkoutVC: FormViewController {
                                         $0.title = "Add another exercise"
                                         }.cellUpdate { cell, row in
                                             cell.textLabel?.textAlignment = .left
-//                                            counter += 1
                                     }
                                 }
                                 $0.multivaluedRowToInsertAt = { index in
                                     return ButtonRow () {
-                                        $0.title = "Exercise \(index+1)"
+                                        rowTitles.append("Exercise \(index+1)")
+                                        $0.title = rowTitles[index]
                                         $0.value = "tap to edit"
                                         $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
+                                        $0.onCellSelection(self.buttonTapped)
                                     }
+                                        
                                 }
                                 $0  <<< ButtonRow () {
-                                    $0.title = "Exercise 1"
+                                    rowTitles.append("Exercise 1")
+                                    $0.title = rowTitles[0]
                                     $0.value = "tap to edit"
                                     $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
+                                    $0.onCellSelection(self.buttonTapped)
                                 }
             }
+    }
     
+    func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
+        exerciseIndex = row.indexPath!.row + 1
+        chosenCell = cell
+        chosenRow = row
+    }
+    
+//    func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
+//        chosenCell = row.indexPath!.row
+//    }
+    
+    func isModified(modifiedExercise: Exercise) {
+        
+        modifiedExercise.exerciseIndex = exerciseIndex
+        print(modifiedExercise.exerciseName)
+        rowTitles[exerciseIndex-1] = modifiedExercise.exerciseName
+        chosenRow?.title = modifiedExercise.exerciseName
+        chosenRow!.updateCell()
+        
     }
 }

@@ -22,8 +22,7 @@ class ExerciseVC: FormViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        createForm();
+        createForm ()
     }
     
 
@@ -112,12 +111,13 @@ class ExerciseVC: FormViewController{
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        manageInput()
+        let modifiedExercise = manageInput()
+        NewWorkoutVC().isModified(modifiedExercise: modifiedExercise)
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func manageInput () {
+    func manageInput () -> (Exercise) {
         
         let alert = AlertHelper()
         var reps: Int? = nil
@@ -167,8 +167,8 @@ class ExerciseVC: FormViewController{
         
 //        creating the object
         
-        let modifiedExercise = Exercise (name: exerciseName!, type: exerciseType!, reps: reps ?? 0, time: time ?? "-", notes: notes ?? "")
+        let modifiedExercise = Exercise (exerciseName: exerciseName!, exerciseType: exerciseType!, reps: reps ?? 0, exerciseTime: time ?? "-", notes: notes ?? "", exerciseIndex: 0)
         
-//        passing the object
+        return modifiedExercise
     }
 }

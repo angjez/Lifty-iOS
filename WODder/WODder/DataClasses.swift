@@ -8,18 +8,42 @@
 
 import Foundation
 
-class Exercise {
-    var name: String
-    var type: String
-    var reps: Int?
-    var time: String?
-    var notes: String?
+class Workout {
+    var name: String?
+    var type: String?
+    var time: Int?
+    var restTime: Int?
+    var rounds: Int?
+    var exercises = [Exercise]()
     
-    init(name: String, type: String, reps: Int, time: String, notes: String) {
-        self.name = name
-        self.type = type
+//    init(name: String, type: String, time: Int, restTime: Int, rounds: Int) {
+//        self.name = name
+//        self.type = type
+//        self.time = time
+//        self.restTime = restTime
+//        self.rounds = rounds
+//    }
+    
+    func addExercise (exercise: Exercise) {
+        self.exercises.append(exercise)
+    }
+}
+
+
+class Exercise {
+    var exerciseName: String
+    var exerciseType: String?
+    var reps: Int?
+    var exerciseTime: String?
+    var notes: String?
+    var exerciseIndex: Int?
+    
+    init(exerciseName: String, exerciseType: String, reps: Int, exerciseTime: String, notes: String, exerciseIndex: Int) {
+        self.exerciseName = exerciseName
+        self.exerciseType = exerciseType
         self.reps = reps
-        self.time = time
+        self.exerciseTime = exerciseTime
         self.notes = notes
+        self.exerciseIndex = exerciseIndex
     }
 }
