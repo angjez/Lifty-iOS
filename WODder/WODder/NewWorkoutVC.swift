@@ -277,7 +277,7 @@ class NewWorkoutVC: FormViewController {
     func createExercisesForm () {
         form +++
             MultivaluedSection(multivaluedOptions: [.Reorder, .Insert, .Delete]) {
-                                $0.tag = "textfields"
+                                $0.tag = "exercises"
                                 $0.addButtonProvider = { section in
                                     return ButtonRow(){
                                         $0.title = "Add another exercise"
@@ -295,7 +295,6 @@ class NewWorkoutVC: FormViewController {
                                         let newExercise = Exercise(exerciseName: rowTitles[index], exerciseIndex: index+1)
                                         self.workout.addExercise(exercise: newExercise)
                                     }
-                                        
                                 }
                                 $0  <<< ButtonRow () {
                                     rowTitles.append("Exercise 1")
@@ -359,6 +358,7 @@ class NewWorkoutVC: FormViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        SavedWODsVC().addWorkout(workout: workout)
     }
     
 }

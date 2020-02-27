@@ -7,42 +7,87 @@
 //
 
 import UIKit
+import Eureka
 
-class SavedWODsVC: UIViewController {
-    
-    
+class SavedWODsVC: FormViewController {
     
     @IBOutlet weak var AddButton: UIButton!
+    
+    var workouts = [Workout]()
+    var WODrowTitles: [String] =  []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        self.initiateForm()
+    }
+    
+    public func addWorkout (workout: Workout) {
+        self.workouts.append(workout)
+        print(workouts)
+        self.loadView()
     }
 
     @IBAction func AddButtonTapped(_ sender: Any) {
         
     }
     
-    func workoutPressedActionSheet(controller: UIViewController) {
-        let alert = UIAlertController()
-        alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
-//            proceed to editing
-        }))
-
-        alert.addAction(UIAlertAction(title: "Select", style: .default, handler: { (_) in
-//            proceed to selecting
-        }))
-
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-//            proceed to deleting
-        }))
-
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
-//            dismiss
-        }))
-
-        self.present(alert, animated: true)
+    func initiateForm () {
+        form +++
+            MultivaluedSection(multivaluedOptions: [.Reorder, .Insert, .Delete]) {
+                                $0.tag = "workouts"
+                                $0.addButtonProvider = { section in
+                                    return ButtonRow(){
+                                        $0.title = "Add workout"
+                                        }.cellUpdate { cell, row in
+                                            cell.textLabel?.textAlignment = .left
+                                    }
+                                }
+                                $0.multivaluedRowToInsertAt = { index in
+                                    return ButtonRow () {
+                                        self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.AddButton)
+                                        self.WODrowTitles.append("Workout \(index+1)")
+                                        $0.title = self.WODrowTitles[index]
+                                        $0.value = "tap to edit"
+                                        $0.presentationMode = .segueName(segueName: "NewWorkoutSegue", onDismiss: nil)
+//                                        $0.onCellSelection(self.buttonTapped)
+//                                        let newExercise = Exercise(exerciseName: rowTitles[index], exerciseIndex: index+1)
+//                                        self.workout.addExercise(exercise: newExercise)
+                                    }
+                                }
+                                $0  <<< ButtonRow () {
+                                    self.WODrowTitles.append("Workout 1")
+                                    $0.title = self.WODrowTitles[0]
+                                    $0.value = "tap to edit"
+                                    $0.presentationMode = .segueName(segueName: "NewWorkoutSegue", onDismiss: nil)
+//                                    $0.onCellSelection(self.buttonTapped)
+//                                    let newExercise = Exercise(exerciseName: rowTitles[0], exerciseIndex: 1)
+//                                    self.workout.addExercise(exercise: newExercise)
+                                }
+            }
+        
     }
+    
+//    func workoutPressedActionSheet(controller: UIViewController) {
+//        let alert = UIAlertController()
+//        alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
+////            proceed to editing
+//        }))
+//
+//        alert.addAction(UIAlertAction(title: "Select", style: .default, handler: { (_) in
+////            proceed to selecting
+//        }))
+//
+//        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
+////            proceed to deleting
+//        }))
+//
+//        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
+////            dismiss
+//        }))
+//
+//        self.present(alert, animated: true)
+//    }
     
 }
 
