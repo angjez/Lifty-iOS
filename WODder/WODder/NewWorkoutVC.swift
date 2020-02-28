@@ -1,6 +1,6 @@
 //
 //  NewWorkout.swift
-//  WODder
+//  Lifty
 //
 //  Created by Angelika Jeziorska on 17/02/2020.
 //  Copyright © 2020 Angelika Jeziorska. All rights reserved.
@@ -358,7 +358,7 @@ class NewWorkoutVC: FormViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        SavedWODsVC().addWorkout(workout: workout)
+        SavedWorkoutsVC().addWorkout(workout: workout)
     }
     
 }

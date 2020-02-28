@@ -1,6 +1,6 @@
 //
 //  DataClasses.swift
-//  WODder
+//  Lifty
 //
 //  Created by Angelika Jeziorska on 22/02/2020.
 //  Copyright © 2020 Angelika Jeziorska. All rights reserved.

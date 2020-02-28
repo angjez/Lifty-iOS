@@ -1,6 +1,6 @@
 //
 //  SecondViewController.swift
-//  WODder
+//  Lifty
 //
 //  Created by Angelika Jeziorska on 08/12/2019.
 //  Copyright © 2019 Angelika Jeziorska. All rights reserved.
