@@ -1,3 +1,6 @@
 [submodule "WODder/Eureka"]
 	path = WODder/Eureka
 	url = https://github.com/xmartlabs/Eureka.git
+[submodule "Lifty/Eureka"]
+	path = Lifty/Eureka
+	url = https://github.com/xmartlabs/Eureka.git

@@ -1,0 +1,697 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66FF053524092C1C004AABF6 /* LiftyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053424092C1C004AABF6 /* LiftyTests.swift */; };
+		66FF054024092C1C004AABF6 /* LiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053F24092C1C004AABF6 /* LiftyUITests.swift */; };
+		66FF056F24092D02004AABF6 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FF056B24092CE9004AABF6 /* Eureka.framework */; };
+		66FF057024092D02004AABF6 /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66FF056B24092CE9004AABF6 /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		66FF057324092D29004AABF6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FF057224092D29004AABF6 /* Default-568h@2x.png */; };
+		66FF058F240930BE004AABF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0581240930BD004AABF6 /* AppDelegate.swift */; };
+		66FF0590240930BE004AABF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0582240930BD004AABF6 /* SceneDelegate.swift */; };
+		66FF0591240930BE004AABF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
+		66FF0592240930BE004AABF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */; };
+		66FF0593240930BE004AABF6 /* SavedWorkoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */; };
+		66FF0594240930BE004AABF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0586240930BE004AABF6 /* Assets.xcassets */; };
+		66FF0595240930BE004AABF6 /* QuickstartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0587240930BE004AABF6 /* QuickstartVC.swift */; };
+		66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0588240930BE004AABF6 /* Lifty.xcdatamodeld */; };
+		66FF0597240930BE004AABF6 /* ExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058A240930BE004AABF6 /* ExerciseVC.swift */; };
+		66FF0598240930BE004AABF6 /* DataClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058B240930BE004AABF6 /* DataClasses.swift */; };
+		66FF0599240930BE004AABF6 /* NewWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */; };
+		66FF059A240930BE004AABF6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66FF058D240930BE004AABF6 /* Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66FF053124092C1C004AABF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66FF050F24092C18004AABF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66FF051624092C18004AABF6;
+			remoteInfo = Lifty;
+		};
+		66FF053C24092C1C004AABF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66FF050F24092C18004AABF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66FF051624092C18004AABF6;
+			remoteInfo = Lifty;
+		};
+		66FF056A24092CE9004AABF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66FF056524092CE9004AABF6 /* Eureka.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51729DEB1B9A4F5E004A00EB;
+			remoteInfo = Eureka;
+		};
+		66FF056C24092CE9004AABF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66FF056524092CE9004AABF6 /* Eureka.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51729DF51B9A4F5E004A00EB;
+			remoteInfo = EurekaTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		66FF057124092D02004AABF6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				66FF057024092D02004AABF6 /* Eureka.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		66FF051724092C18004AABF6 /* Lifty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lifty.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66FF053024092C1C004AABF6 /* LiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66FF053424092C1C004AABF6 /* LiftyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftyTests.swift; sourceTree = "<group>"; };
+		66FF053624092C1C004AABF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66FF053B24092C1C004AABF6 /* LiftyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66FF053F24092C1C004AABF6 /* LiftyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftyUITests.swift; sourceTree = "<group>"; };
+		66FF054124092C1C004AABF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66FF056524092CE9004AABF6 /* Eureka.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Eureka.xcodeproj; path = Eureka/Eureka.xcodeproj; sourceTree = "<group>"; };
+		66FF057224092D29004AABF6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		66FF0581240930BD004AABF6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		66FF0582240930BD004AABF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		66FF0583240930BD004AABF6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedWorkoutsVC.swift; sourceTree = "<group>"; };
+		66FF0586240930BE004AABF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66FF0587240930BE004AABF6 /* QuickstartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickstartVC.swift; sourceTree = "<group>"; };
+		66FF0589240930BE004AABF6 /* Lifty.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lifty.xcdatamodel; sourceTree = "<group>"; };
+		66FF058A240930BE004AABF6 /* ExerciseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseVC.swift; sourceTree = "<group>"; };
+		66FF058B240930BE004AABF6 /* DataClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClasses.swift; sourceTree = "<group>"; };
+		66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWorkoutVC.swift; sourceTree = "<group>"; };
+		66FF058D240930BE004AABF6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66FF058E240930BE004AABF6 /* Lifty-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lifty-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66FF051424092C18004AABF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66FF056F24092D02004AABF6 /* Eureka.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66FF052D24092C1C004AABF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66FF053824092C1C004AABF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66FF050E24092C18004AABF6 = {
+			isa = PBXGroup;
+			children = (
+				66FF057224092D29004AABF6 /* Default-568h@2x.png */,
+				66FF051924092C18004AABF6 /* Lifty */,
+				66FF053324092C1C004AABF6 /* LiftyTests */,
+				66FF053E24092C1C004AABF6 /* LiftyUITests */,
+				66FF051824092C18004AABF6 /* Products */,
+				66FF056524092CE9004AABF6 /* Eureka.xcodeproj */,
+				66FF056E24092D02004AABF6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		66FF051824092C18004AABF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66FF051724092C18004AABF6 /* Lifty.app */,
+				66FF053024092C1C004AABF6 /* LiftyTests.xctest */,
+				66FF053B24092C1C004AABF6 /* LiftyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66FF051924092C18004AABF6 /* Lifty */ = {
+			isa = PBXGroup;
+			children = (
+				66FF0581240930BD004AABF6 /* AppDelegate.swift */,
+				66FF0586240930BE004AABF6 /* Assets.xcassets */,
+				66FF058B240930BE004AABF6 /* DataClasses.swift */,
+				66FF058A240930BE004AABF6 /* ExerciseVC.swift */,
+				66FF058D240930BE004AABF6 /* Info.plist */,
+				66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */,
+				66FF058E240930BE004AABF6 /* Lifty-Bridging-Header.h */,
+				66FF0588240930BE004AABF6 /* Lifty.xcdatamodeld */,
+				66FF0583240930BD004AABF6 /* Main.storyboard */,
+				66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */,
+				66FF0587240930BE004AABF6 /* QuickstartVC.swift */,
+				66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */,
+				66FF0582240930BD004AABF6 /* SceneDelegate.swift */,
+			);
+			path = Lifty;
+			sourceTree = "<group>";
+		};
+		66FF053324092C1C004AABF6 /* LiftyTests */ = {
+			isa = PBXGroup;
+			children = (
+				66FF053424092C1C004AABF6 /* LiftyTests.swift */,
+				66FF053624092C1C004AABF6 /* Info.plist */,
+			);
+			path = LiftyTests;
+			sourceTree = "<group>";
+		};
+		66FF053E24092C1C004AABF6 /* LiftyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				66FF053F24092C1C004AABF6 /* LiftyUITests.swift */,
+				66FF054124092C1C004AABF6 /* Info.plist */,
+			);
+			path = LiftyUITests;
+			sourceTree = "<group>";
+		};
+		66FF056624092CE9004AABF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66FF056B24092CE9004AABF6 /* Eureka.framework */,
+				66FF056D24092CE9004AABF6 /* EurekaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66FF056E24092D02004AABF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		66FF051624092C18004AABF6 /* Lifty */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66FF054424092C1C004AABF6 /* Build configuration list for PBXNativeTarget "Lifty" */;
+			buildPhases = (
+				66FF051324092C18004AABF6 /* Sources */,
+				66FF051424092C18004AABF6 /* Frameworks */,
+				66FF051524092C18004AABF6 /* Resources */,
+				66FF057124092D02004AABF6 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Lifty;
+			productName = Lifty;
+			productReference = 66FF051724092C18004AABF6 /* Lifty.app */;
+			productType = "com.apple.product-type.application";
+		};
+		66FF052F24092C1C004AABF6 /* LiftyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66FF054724092C1C004AABF6 /* Build configuration list for PBXNativeTarget "LiftyTests" */;
+			buildPhases = (
+				66FF052C24092C1C004AABF6 /* Sources */,
+				66FF052D24092C1C004AABF6 /* Frameworks */,
+				66FF052E24092C1C004AABF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66FF053224092C1C004AABF6 /* PBXTargetDependency */,
+			);
+			name = LiftyTests;
+			productName = LiftyTests;
+			productReference = 66FF053024092C1C004AABF6 /* LiftyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		66FF053A24092C1C004AABF6 /* LiftyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66FF054A24092C1C004AABF6 /* Build configuration list for PBXNativeTarget "LiftyUITests" */;
+			buildPhases = (
+				66FF053724092C1C004AABF6 /* Sources */,
+				66FF053824092C1C004AABF6 /* Frameworks */,
+				66FF053924092C1C004AABF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66FF053D24092C1C004AABF6 /* PBXTargetDependency */,
+			);
+			name = LiftyUITests;
+			productName = LiftyUITests;
+			productReference = 66FF053B24092C1C004AABF6 /* LiftyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66FF050F24092C18004AABF6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Angelika Jeziorska";
+				TargetAttributes = {
+					66FF051624092C18004AABF6 = {
+						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
+					};
+					66FF052F24092C1C004AABF6 = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 66FF051624092C18004AABF6;
+					};
+					66FF053A24092C1C004AABF6 = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 66FF051624092C18004AABF6;
+					};
+				};
+			};
+			buildConfigurationList = 66FF051224092C18004AABF6 /* Build configuration list for PBXProject "Lifty" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 66FF050E24092C18004AABF6;
+			productRefGroup = 66FF051824092C18004AABF6 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 66FF056624092CE9004AABF6 /* Products */;
+					ProjectRef = 66FF056524092CE9004AABF6 /* Eureka.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				66FF051624092C18004AABF6 /* Lifty */,
+				66FF052F24092C1C004AABF6 /* LiftyTests */,
+				66FF053A24092C1C004AABF6 /* LiftyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		66FF056B24092CE9004AABF6 /* Eureka.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Eureka.framework;
+			remoteRef = 66FF056A24092CE9004AABF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		66FF056D24092CE9004AABF6 /* EurekaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EurekaTests.xctest;
+			remoteRef = 66FF056C24092CE9004AABF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66FF051524092C18004AABF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66FF0592240930BE004AABF6 /* LaunchScreen.storyboard in Resources */,
+				66FF057324092D29004AABF6 /* Default-568h@2x.png in Resources */,
+				66FF0594240930BE004AABF6 /* Assets.xcassets in Resources */,
+				66FF059A240930BE004AABF6 /* Info.plist in Resources */,
+				66FF0591240930BE004AABF6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66FF052E24092C1C004AABF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66FF053924092C1C004AABF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66FF051324092C18004AABF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66FF0597240930BE004AABF6 /* ExerciseVC.swift in Sources */,
+				66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */,
+				66FF0598240930BE004AABF6 /* DataClasses.swift in Sources */,
+				66FF0599240930BE004AABF6 /* NewWorkoutVC.swift in Sources */,
+				66FF058F240930BE004AABF6 /* AppDelegate.swift in Sources */,
+				66FF0595240930BE004AABF6 /* QuickstartVC.swift in Sources */,
+				66FF0590240930BE004AABF6 /* SceneDelegate.swift in Sources */,
+				66FF0593240930BE004AABF6 /* SavedWorkoutsVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66FF052C24092C1C004AABF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66FF053524092C1C004AABF6 /* LiftyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66FF053724092C1C004AABF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66FF054024092C1C004AABF6 /* LiftyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66FF053224092C1C004AABF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66FF051624092C18004AABF6 /* Lifty */;
+			targetProxy = 66FF053124092C1C004AABF6 /* PBXContainerItemProxy */;
+		};
+		66FF053D24092C1C004AABF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66FF051624092C18004AABF6 /* Lifty */;
+			targetProxy = 66FF053C24092C1C004AABF6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		66FF054224092C1C004AABF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		66FF054324092C1C004AABF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		66FF054524092C1C004AABF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5TNJW87CR7;
+				INFOPLIST_FILE = Lifty/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AngelikaJeziorska.Lifty;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Lifty/Lifty-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		66FF054624092C1C004AABF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5TNJW87CR7;
+				INFOPLIST_FILE = Lifty/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AngelikaJeziorska.Lifty;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Lifty/Lifty-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		66FF054824092C1C004AABF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5TNJW87CR7;
+				INFOPLIST_FILE = LiftyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AngelikaJeziorska.LiftyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lifty.app/Lifty";
+			};
+			name = Debug;
+		};
+		66FF054924092C1C004AABF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5TNJW87CR7;
+				INFOPLIST_FILE = LiftyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AngelikaJeziorska.LiftyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lifty.app/Lifty";
+			};
+			name = Release;
+		};
+		66FF054B24092C1C004AABF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5TNJW87CR7;
+				INFOPLIST_FILE = LiftyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AngelikaJeziorska.LiftyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Lifty;
+			};
+			name = Debug;
+		};
+		66FF054C24092C1C004AABF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5TNJW87CR7;
+				INFOPLIST_FILE = LiftyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = AngelikaJeziorska.LiftyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Lifty;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66FF051224092C18004AABF6 /* Build configuration list for PBXProject "Lifty" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66FF054224092C1C004AABF6 /* Debug */,
+				66FF054324092C1C004AABF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66FF054424092C1C004AABF6 /* Build configuration list for PBXNativeTarget "Lifty" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66FF054524092C1C004AABF6 /* Debug */,
+				66FF054624092C1C004AABF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66FF054724092C1C004AABF6 /* Build configuration list for PBXNativeTarget "LiftyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66FF054824092C1C004AABF6 /* Debug */,
+				66FF054924092C1C004AABF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66FF054A24092C1C004AABF6 /* Build configuration list for PBXNativeTarget "LiftyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66FF054B24092C1C004AABF6 /* Debug */,
+				66FF054C24092C1C004AABF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		66FF0588240930BE004AABF6 /* Lifty.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				66FF0589240930BE004AABF6 /* Lifty.xcdatamodel */,
+			);
+			currentVersion = 66FF0589240930BE004AABF6 /* Lifty.xcdatamodel */;
+			path = Lifty.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 66FF050F24092C18004AABF6 /* Project object */;
+}
