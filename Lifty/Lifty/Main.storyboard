@@ -37,7 +37,7 @@
                     </tabBarItem>
                     <toolbarItems>
                         <barButtonItem style="plain" id="6tU-x8-8OE">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NL2-Xk-2uy">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NL2-Xk-2uy">
                                 <rect key="frame" x="20" y="12" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
@@ -47,7 +47,18 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Saved workouts" id="jxa-cc-rSH"/>
+                    <navigationItem key="navigationItem" title="Saved workouts" id="jxa-cc-rSH">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ijX-3g-6fP">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nGu-Er-uhk">
+                                <rect key="frame" x="348" y="7" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <connections>
+                                <segue destination="8dS-zr-tCA" kind="push" identifier="DisplayWorkoutSegue" id="YMt-jz-BgS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="NewWorkoutButton" destination="6tU-x8-8OE" id="Spg-wn-Ywh"/>
@@ -75,6 +86,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="360"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Tkt-wN-o0z">
+            <objects>
+                <viewController id="8dS-zr-tCA" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G3r-SG-xA3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Wel-hV-jdJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jBj-We-R0f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6dc-iQ-Jcz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1732" y="-1045"/>
         </scene>
         <!--Create new workout-->
         <scene sceneID="Gav-sP-eXi">

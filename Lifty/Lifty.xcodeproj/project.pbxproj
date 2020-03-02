@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66ABC65C240D300100295591 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66ABC65B240D300100295591 /* Assets.xcassets */; };
 		66FF053524092C1C004AABF6 /* LiftyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053424092C1C004AABF6 /* LiftyTests.swift */; };
 		66FF054024092C1C004AABF6 /* LiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053F24092C1C004AABF6 /* LiftyUITests.swift */; };
 		66FF056F24092D02004AABF6 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FF056B24092CE9004AABF6 /* Eureka.framework */; };
@@ -17,7 +18,6 @@
 		66FF0591240930BE004AABF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
 		66FF0592240930BE004AABF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */; };
 		66FF0593240930BE004AABF6 /* SavedWorkoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */; };
-		66FF0594240930BE004AABF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0586240930BE004AABF6 /* Assets.xcassets */; };
 		66FF0595240930BE004AABF6 /* QuickstartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0587240930BE004AABF6 /* QuickstartVC.swift */; };
 		66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0588240930BE004AABF6 /* Lifty.xcdatamodeld */; };
 		66FF0597240930BE004AABF6 /* ExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058A240930BE004AABF6 /* ExerciseVC.swift */; };
@@ -27,6 +27,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		66ABC676240D30D200295591 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66ABC671240D30D200295591 /* Eureka.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51729DEB1B9A4F5E004A00EB;
+			remoteInfo = Eureka;
+		};
+		66ABC678240D30D200295591 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66ABC671240D30D200295591 /* Eureka.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51729DF51B9A4F5E004A00EB;
+			remoteInfo = EurekaTests;
+		};
 		66FF053124092C1C004AABF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 66FF050F24092C18004AABF6 /* Project object */;
@@ -72,6 +86,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		66ABC65B240D300100295591 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66ABC671240D30D200295591 /* Eureka.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Eureka.xcodeproj; path = Eureka/Eureka.xcodeproj; sourceTree = "<group>"; };
 		66FF051724092C18004AABF6 /* Lifty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lifty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053024092C1C004AABF6 /* LiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053424092C1C004AABF6 /* LiftyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftyTests.swift; sourceTree = "<group>"; };
@@ -86,7 +102,6 @@
 		66FF0583240930BD004AABF6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedWorkoutsVC.swift; sourceTree = "<group>"; };
-		66FF0586240930BE004AABF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66FF0587240930BE004AABF6 /* QuickstartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickstartVC.swift; sourceTree = "<group>"; };
 		66FF0589240930BE004AABF6 /* Lifty.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lifty.xcdatamodel; sourceTree = "<group>"; };
 		66FF058A240930BE004AABF6 /* ExerciseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseVC.swift; sourceTree = "<group>"; };
@@ -122,6 +137,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		66ABC672240D30D200295591 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66ABC677240D30D200295591 /* Eureka.framework */,
+				66ABC679240D30D200295591 /* EurekaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		66FF050E24092C18004AABF6 = {
 			isa = PBXGroup;
 			children = (
@@ -149,9 +173,9 @@
 			isa = PBXGroup;
 			children = (
 				66FF0581240930BD004AABF6 /* AppDelegate.swift */,
-				66FF0586240930BE004AABF6 /* Assets.xcassets */,
 				66FF058B240930BE004AABF6 /* DataClasses.swift */,
 				66FF058A240930BE004AABF6 /* ExerciseVC.swift */,
+				66ABC65B240D300100295591 /* Assets.xcassets */,
 				66FF058D240930BE004AABF6 /* Info.plist */,
 				66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */,
 				66FF058E240930BE004AABF6 /* Lifty-Bridging-Header.h */,
@@ -195,6 +219,7 @@
 		66FF056E24092D02004AABF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				66ABC671240D30D200295591 /* Eureka.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -296,6 +321,10 @@
 					ProductGroup = 66FF056624092CE9004AABF6 /* Products */;
 					ProjectRef = 66FF056524092CE9004AABF6 /* Eureka.xcodeproj */;
 				},
+				{
+					ProductGroup = 66ABC672240D30D200295591 /* Products */;
+					ProjectRef = 66ABC671240D30D200295591 /* Eureka.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -307,6 +336,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		66ABC677240D30D200295591 /* Eureka.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Eureka.framework;
+			remoteRef = 66ABC676240D30D200295591 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		66ABC679240D30D200295591 /* EurekaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EurekaTests.xctest;
+			remoteRef = 66ABC678240D30D200295591 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		66FF056B24092CE9004AABF6 /* Eureka.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -330,9 +373,9 @@
 			files = (
 				66FF0592240930BE004AABF6 /* LaunchScreen.storyboard in Resources */,
 				66FF057324092D29004AABF6 /* Default-568h@2x.png in Resources */,
-				66FF0594240930BE004AABF6 /* Assets.xcassets in Resources */,
 				66FF059A240930BE004AABF6 /* Info.plist in Resources */,
 				66FF0591240930BE004AABF6 /* Main.storyboard in Resources */,
+				66ABC65C240D300100295591 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

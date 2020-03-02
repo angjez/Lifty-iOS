@@ -12,7 +12,6 @@ import Eureka
 var exerciseIndex: Int = 0
 var chosenCell: ButtonCellOf<String>?
 var chosenRow: ButtonRowOf<String>?
-var rowTitles: [String] =  []
 
 class NewWorkoutVC: FormViewController {
     
@@ -57,7 +56,7 @@ class NewWorkoutVC: FormViewController {
                 $0.hidden = "$workoutTypes != 'FOR TIME'" // .Predicate(NSPredicate(format: "$segments != 'FOR TIME'"))
             }
             
-            <<< IntRow() {
+            <<< IntRow("forTimeTime") {
                 $0.title = "Time cap:"
                 $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
@@ -85,7 +84,7 @@ class NewWorkoutVC: FormViewController {
                     }
             }
 
-            <<< IntRow() {
+            <<< IntRow("forTimeRounds") {
                 $0.title = "Rounds:"
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -117,7 +116,7 @@ class NewWorkoutVC: FormViewController {
                 $0.tag = "emom_t"
                 $0.hidden = "$workoutTypes != 'EMOM'"
             }
-            <<< PickerInputRow<String>(){
+            <<< PickerInputRow<String>("EMOMTime"){
                 $0.title = "Every: "
                 $0.options = []
 
@@ -139,7 +138,7 @@ class NewWorkoutVC: FormViewController {
                 $0.value = $0.options.first
             }
 
-            <<< IntRow() {
+            <<< IntRow("EMOMRounds") {
                 $0.title = "Rounds: "
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -170,7 +169,7 @@ class NewWorkoutVC: FormViewController {
                 $0.tag = "amrap_t"
                 $0.hidden = "$workoutTypes != 'AMRAP'"
             }
-            <<< IntRow() {
+            <<< IntRow("AMRAPTime") {
                 $0.title = "Time cap: "
                 $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
@@ -202,7 +201,7 @@ class NewWorkoutVC: FormViewController {
             $0.tag = "tabata_t"
             $0.hidden = "$workoutTypes != 'TABATA'"
         }
-        <<< IntRow() {
+        <<< IntRow("TabataRounds") {
             $0.title = "Rounds:"
             $0.add(rule: RuleGreaterThan(min: 0))
             $0.add(rule: RuleSmallerThan(max: 1000))
@@ -229,7 +228,7 @@ class NewWorkoutVC: FormViewController {
                 }
         }
 
-        <<< PickerInputRow<String>(){
+        <<< PickerInputRow<String>("TabataTime"){
             $0.title = "Work: "
             $0.options = []
 
@@ -251,7 +250,7 @@ class NewWorkoutVC: FormViewController {
             $0.value = $0.options.first
         }
         
-        <<< PickerInputRow<String>(){
+        <<< PickerInputRow<String>("TabataRestTime"){
             $0.title = "Rest: "
             $0.options = []
 
@@ -287,23 +286,43 @@ class NewWorkoutVC: FormViewController {
                                 }
                                 $0.multivaluedRowToInsertAt = { index in
                                     return ButtonRow () {
-                                        rowTitles.append("Exercise \(index+1)")
-                                        $0.title = rowTitles[index]
+                                        $0.title = "Exercise"
                                         $0.value = "tap to edit"
                                         $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                         $0.onCellSelection(self.buttonTapped)
-                                        let newExercise = Exercise(exerciseName: rowTitles[index], exerciseIndex: index+1)
+                                        let newExercise = Exercise(exerciseName: "Workout", exerciseIndex: index+1)
                                         self.workout.addExercise(exercise: newExercise)
+                                        
+                                        let deleteAction = SwipeAction(
+                                                     style: .destructive,
+                                                     title: "Delete",
+                                                     handler: { (action, row, completionHandler) in
+                                                         self.deleteExercise(index: row.indexPath!.row)
+                                                         completionHandler?(true)
+                                                     })
+
+                                                 $0.trailingSwipe.actions = [deleteAction]
+                                                 $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                                     }
                                 }
                                 $0  <<< ButtonRow () {
-                                    rowTitles.append("Exercise 1")
-                                    $0.title = rowTitles[0]
+                                    $0.title = "Exercise"
                                     $0.value = "tap to edit"
                                     $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                     $0.onCellSelection(self.buttonTapped)
-                                    let newExercise = Exercise(exerciseName: rowTitles[0], exerciseIndex: 1)
+                                    let newExercise = Exercise(exerciseName: "Workout", exerciseIndex: 1)
                                     self.workout.addExercise(exercise: newExercise)
+                                    
+                                    let deleteAction = SwipeAction(
+                                                 style: .destructive,
+                                                 title: "Delete",
+                                                 handler: { (action, row, completionHandler) in
+                                                    self.deleteExercise(index: row.indexPath!.row)
+                                                    completionHandler?(true)
+                                                 })
+
+                                             $0.trailingSwipe.actions = [deleteAction]
+                                             $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                                 }
             }
     }
@@ -321,8 +340,7 @@ class NewWorkoutVC: FormViewController {
                 exercise.assign(exerciseToAssign: modifiedExercise)
             }
         }
-        
-        rowTitles[exerciseIndex-1] = modifiedExercise.exerciseName
+
         chosenRow?.title = modifiedExercise.exerciseName
         chosenRow!.updateCell()
         
@@ -350,15 +368,78 @@ class NewWorkoutVC: FormViewController {
         
     }
     
-//    detect deletion
     
-
+//    handle deletion
+    
+    func deleteExercise (index: Int) {
+        workout.exercises.remove(at: index)
+        for exercise in workout.exercises {
+            print(exercise.exerciseIndex)
+        }
+    }
     
 //    save workout data upon view dismissal
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        SavedWorkoutsVC().addWorkout(workout: workout)
+//        fix indexes
+        for (index, exercise) in workout.exercises.enumerated() {
+            exercise.exerciseIndex = index
+        }
+                
+//        getting workout title
+                
+        let titleRow: TextRow? = form.rowBy(tag: "Title")
+        workout.name = titleRow?.value ?? "Workout"
+                
+//        getting workout type and specyfics
+        let typeRow: SegmentedRow<String>? = form.rowBy(tag: "workoutTypes")
+        workout.type = typeRow!.value
+        
+        if workout.type == "for time" {
+            let timeRow: IntRow? = form.rowBy(tag: "forTimeTime")
+            workout.time = timeRow!.value
+            workout.time = workout.time! * 60
+            let roundsRow: IntRow? = form.rowBy(tag: "forTimeRounds")
+            workout.rounds = roundsRow!.value
+        }
+        if workout.type == "EMOM" {
+            let timeRow: PickerInputRow<String>? = form.rowBy(tag: "EMOMTime")
+            let time = pickerRowStringToInt(timeToConvert: timeRow!.value)
+            workout.time = time
+            let roundsRow: IntRow? = form.rowBy(tag: "EMOMRounds")
+            workout.rounds = roundsRow!.value
+        }
+        if workout.type == "AMRAP" {
+            let timeRow: IntRow? = form.rowBy(tag: "AMRAPTime")
+            workout.time = timeRow!.value
+            workout.time = workout.time! * 60
+        }
+        if workout.type == "tabata" {
+            let roundsRow: IntRow? = form.rowBy(tag: "TabataRounds")
+            workout.rounds = roundsRow!.value
+            let timeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataTime")
+            let time = pickerRowStringToInt(timeToConvert: timeRow!.value)
+            workout.time = time
+            let restTimeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataRestTime")
+            let restTime = pickerRowStringToInt(timeToConvert: restTimeRow!.value)
+            workout.restTime = restTime
+        }
+        
+        SavedWorkoutsVC().changeWorkoutData(workout: workout)
+    }
+    
+    func pickerRowStringToInt (timeToConvert: String?) -> Int {
+        var minutes: Int
+        if (timeToConvert!.count == 4) {
+            minutes = Int(timeToConvert!.prefix(1))!
+        }
+        else {
+            minutes = Int(timeToConvert!.prefix(2))!
+        }
+        let seconds = Int(timeToConvert!.suffix(2))!
+
+        return minutes * 60 + seconds
     }
     
 }

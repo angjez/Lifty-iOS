@@ -9,23 +9,20 @@
 import UIKit
 import Eureka
 
+var chosenWorkoutCell: ButtonCellOf<String>?
+var chosenWorkoutRow: ButtonRowOf<String>?
+var workoutIndex: Int?
+
 class SavedWorkoutsVC: FormViewController {
     
-    var workouts = [Workout]()
-    var WorkoutRowTitles: [String] =  []
-    
     @IBOutlet weak var NewWorkoutButton: UIBarButtonItem!
+    
+    var workouts = [Workout]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         self.initiateForm()
-    }
-    
-    public func addWorkout (workout: Workout) {
-        self.workouts.append(workout)
-        print(workouts)
-        self.loadView()
     }
     
     func initiateForm () {
@@ -42,21 +39,19 @@ class SavedWorkoutsVC: FormViewController {
                                 $0.multivaluedRowToInsertAt = { index in
                                     return ButtonRow () {
                                         self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
-                                        self.WorkoutRowTitles.append("Workout \(index+1)")
-                                        $0.title = self.WorkoutRowTitles[index]
+                                        $0.title = "Workout"
                                         $0.value = "tap to edit"
-                                        $0.presentationMode = .segueName(segueName: "NewWorkoutSegue", onDismiss: nil)
-//                                        $0.onCellSelection(self.buttonTapped)
-//                                        let newExercise = Exercise(exerciseName: rowTitles[index], exerciseIndex: index+1)
-//                                        self.workout.addExercise(exercise: newExercise)
+                                        $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
+                                        $0.onCellSelection(self.assignCellRow)
+                                        let newWorkout = Workout()
+                                        self.workouts.append(newWorkout)
                                         
                                         
                                         let deleteAction = SwipeAction(
                                             style: .destructive,
                                             title: "Delete",
                                             handler: { (action, row, completionHandler) in
-                                                //add your code here.
-                                                //make sure you call the completionHandler once done.
+                                                self.deleteWorkout()
                                                 completionHandler?(true)
                                             })
 
@@ -65,10 +60,9 @@ class SavedWorkoutsVC: FormViewController {
 
                                         let infoAction = SwipeAction(
                                             style: .normal,
-                                            title: "Favourite",
+                                            title: "Edit",
                                             handler: { (action, row, completionHandler) in
-                                                //add your code here.
-                                                //make sure you call the completionHandler once done.
+                                                self.editWorkout()
                                                 completionHandler?(true)
                                             })
                                         infoAction.actionBackgroundColor = .orange
@@ -78,13 +72,12 @@ class SavedWorkoutsVC: FormViewController {
                                     }
                                 }
                                 $0  <<< ButtonRow () {
-                                    self.WorkoutRowTitles.append("Workout 1")
-                                    $0.title = self.WorkoutRowTitles[0]
+                                    $0.title = "Workout"
                                     $0.value = "tap to edit"
-                                    $0.presentationMode = .segueName(segueName: "NewWorkoutSegue", onDismiss: nil)
-//                                    $0.onCellSelection(self.buttonTapped)
-//                                    let newExercise = Exercise(exerciseName: rowTitles[0], exerciseIndex: 1)
-//                                    self.workout.addExercise(exercise: newExercise)
+                                    $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
+                                    $0.onCellSelection(self.assignCellRow)
+                                    let newWorkout = Workout()
+                                    self.workouts.append(newWorkout)
                                     
                                     
                                     
@@ -92,8 +85,7 @@ class SavedWorkoutsVC: FormViewController {
                                          style: .destructive,
                                          title: "Delete",
                                          handler: { (action, row, completionHandler) in
-                                             //add your code here.
-                                             //make sure you call the completionHandler once done.
+                                            self.deleteWorkout()
                                              completionHandler?(true)
                                          })
 
@@ -102,10 +94,9 @@ class SavedWorkoutsVC: FormViewController {
 
                                      let infoAction = SwipeAction(
                                          style: .normal,
-                                         title: "Favourite",
+                                         title: "Edit",
                                          handler: { (action, row, completionHandler) in
-                                             //add your code here.
-                                             //make sure you call the completionHandler once done.
+                                            self.editWorkout ()
                                              completionHandler?(true)
                                          })
                                      infoAction.actionBackgroundColor = .orange
@@ -117,30 +108,23 @@ class SavedWorkoutsVC: FormViewController {
             }
         
     }
-
-
     
-//    
-//    func workoutPressedActionSheet(controller: UIViewController) {
-//        let alert = UIAlertController()
-//        alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
-////            proceed to editing
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Select", style: .default, handler: { (_) in
-////            proceed to selecting
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-////            proceed to deleting
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
-////            dismiss
-//        }))
-//
-//        self.present(alert, animated: true)
-//    }
+    func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
+//        workoutIndex = row.indexPath!.row + 1
+        chosenWorkoutCell = cell
+        chosenWorkoutRow = row
+    }
+    
+    func deleteWorkout () {
+        
+    }
+    
+    func editWorkout () {
+        
+    }
+    
+    func changeWorkoutData (workout: Workout) {
+    }
     
 }
 
