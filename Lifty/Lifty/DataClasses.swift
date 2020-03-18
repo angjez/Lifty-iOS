@@ -20,6 +20,15 @@ class Workout {
     func addExercise (exercise: Exercise) {
         self.exercises.append(exercise)
     }
+    
+    func assign(workoutToAssign: Workout) {
+        self.name = workoutToAssign.name
+        self.type = workoutToAssign.type
+        self.time = workoutToAssign.time
+        self.restTime = workoutToAssign.restTime
+        self.rounds = workoutToAssign.rounds
+        self.exercises = workoutToAssign.exercises
+    }
 }
 
 

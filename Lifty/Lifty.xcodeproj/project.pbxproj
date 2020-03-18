@@ -172,19 +172,19 @@
 		66FF051924092C18004AABF6 /* Lifty */ = {
 			isa = PBXGroup;
 			children = (
+				66ABC65B240D300100295591 /* Assets.xcassets */,
 				66FF0581240930BD004AABF6 /* AppDelegate.swift */,
 				66FF058B240930BE004AABF6 /* DataClasses.swift */,
 				66FF058A240930BE004AABF6 /* ExerciseVC.swift */,
-				66ABC65B240D300100295591 /* Assets.xcassets */,
-				66FF058D240930BE004AABF6 /* Info.plist */,
-				66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */,
-				66FF058E240930BE004AABF6 /* Lifty-Bridging-Header.h */,
-				66FF0588240930BE004AABF6 /* Lifty.xcdatamodeld */,
-				66FF0583240930BD004AABF6 /* Main.storyboard */,
 				66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */,
 				66FF0587240930BE004AABF6 /* QuickstartVC.swift */,
 				66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */,
 				66FF0582240930BD004AABF6 /* SceneDelegate.swift */,
+				66FF0583240930BD004AABF6 /* Main.storyboard */,
+				66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */,
+				66FF058E240930BE004AABF6 /* Lifty-Bridging-Header.h */,
+				66FF058D240930BE004AABF6 /* Info.plist */,
+				66FF0588240930BE004AABF6 /* Lifty.xcdatamodeld */,
 			);
 			path = Lifty;
 			sourceTree = "<group>";

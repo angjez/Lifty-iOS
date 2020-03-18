@@ -289,8 +289,8 @@ class NewWorkoutVC: FormViewController {
                                         $0.title = "Exercise"
                                         $0.value = "tap to edit"
                                         $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
-                                        $0.onCellSelection(self.buttonTapped)
-                                        let newExercise = Exercise(exerciseName: "Workout", exerciseIndex: index+1)
+                                        $0.onCellSelection(self.selected)
+                                        let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: index+1)
                                         self.workout.addExercise(exercise: newExercise)
                                         
                                         let deleteAction = SwipeAction(
@@ -309,8 +309,8 @@ class NewWorkoutVC: FormViewController {
                                     $0.title = "Exercise"
                                     $0.value = "tap to edit"
                                     $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
-                                    $0.onCellSelection(self.buttonTapped)
-                                    let newExercise = Exercise(exerciseName: "Workout", exerciseIndex: 1)
+                                    $0.onCellSelection(self.selected)
+                                    let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: 1)
                                     self.workout.addExercise(exercise: newExercise)
                                     
                                     let deleteAction = SwipeAction(
@@ -327,7 +327,7 @@ class NewWorkoutVC: FormViewController {
             }
     }
     
-    func buttonTapped(cell: ButtonCellOf<String>, row: ButtonRow) {
+    func selected(cell: ButtonCellOf<String>, row: ButtonRow) {
         exerciseIndex = row.indexPath!.row + 1
         chosenCell = cell
         chosenRow = row
@@ -426,7 +426,7 @@ class NewWorkoutVC: FormViewController {
             workout.restTime = restTime
         }
         
-        SavedWorkoutsVC().changeWorkoutData(workout: workout)
+        SavedWorkoutsVC().changeWorkoutData(modifiedWorkout: workout)
     }
     
     func pickerRowStringToInt (timeToConvert: String?) -> Int {

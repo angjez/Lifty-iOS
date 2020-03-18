@@ -52,7 +52,6 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nGu-Er-uhk">
                                 <rect key="frame" x="348" y="7" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
                             </button>
                             <connections>
                                 <segue destination="8dS-zr-tCA" kind="push" identifier="DisplayWorkoutSegue" id="YMt-jz-BgS"/>

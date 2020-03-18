@@ -38,7 +38,6 @@ class SavedWorkoutsVC: FormViewController {
                                 }
                                 $0.multivaluedRowToInsertAt = { index in
                                     return ButtonRow () {
-                                        self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                                         $0.title = "Workout"
                                         $0.value = "tap to edit"
                                         $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
@@ -69,6 +68,12 @@ class SavedWorkoutsVC: FormViewController {
 
                                         $0.leadingSwipe.actions = [infoAction]
                                         $0.leadingSwipe.performsFirstActionWithFullSwipe = true
+                                        
+
+                                        workoutIndex = index
+                                        chosenWorkoutCell = $0.cell
+                                        chosenWorkoutRow = $0
+                                        self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                                     }
                                 }
                                 $0  <<< ButtonRow () {
@@ -78,8 +83,6 @@ class SavedWorkoutsVC: FormViewController {
                                     $0.onCellSelection(self.assignCellRow)
                                     let newWorkout = Workout()
                                     self.workouts.append(newWorkout)
-                                    
-                                    
                                     
                                     let deleteAction = SwipeAction(
                                          style: .destructive,
@@ -110,7 +113,7 @@ class SavedWorkoutsVC: FormViewController {
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-//        workoutIndex = row.indexPath!.row + 1
+        workoutIndex = row.indexPath!.row
         chosenWorkoutCell = cell
         chosenWorkoutRow = row
     }
@@ -123,7 +126,19 @@ class SavedWorkoutsVC: FormViewController {
         
     }
     
-    func changeWorkoutData (workout: Workout) {
+    func changeWorkoutData (modifiedWorkout: Workout) {
+        
+        for (index, workout) in workouts.enumerated()  {
+            if index == workoutIndex {
+                workout.assign(workoutToAssign: modifiedWorkout)
+            }
+        }
+        
+        print(chosenWorkoutCell)
+        print(workoutIndex)
+
+        chosenWorkoutRow!.title = modifiedWorkout.name
+        chosenWorkoutRow!.updateCell()
     }
     
 }
