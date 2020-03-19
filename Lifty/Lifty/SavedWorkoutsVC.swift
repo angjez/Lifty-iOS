@@ -12,6 +12,8 @@ import Eureka
 var chosenWorkoutCell: ButtonCellOf<String>?
 var chosenWorkoutRow: ButtonRowOf<String>?
 var workoutIndex: Int?
+var chosenWorkout = Workout()
+var globalSavedWorkoutsVC: SavedWorkoutsVC?
 
 class SavedWorkoutsVC: FormViewController {
     
@@ -20,7 +22,11 @@ class SavedWorkoutsVC: FormViewController {
     var workouts = [Workout]()
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
+        
+        globalSavedWorkoutsVC = self as! SavedWorkoutsVC
+        
         self.view.backgroundColor = UIColor.white
         self.initiateForm()
     }
@@ -50,7 +56,7 @@ class SavedWorkoutsVC: FormViewController {
                                             style: .destructive,
                                             title: "Delete",
                                             handler: { (action, row, completionHandler) in
-                                                self.deleteWorkout()
+                                                self.workouts.remove(at: index)
                                                 completionHandler?(true)
                                             })
 
@@ -88,7 +94,7 @@ class SavedWorkoutsVC: FormViewController {
                                          style: .destructive,
                                          title: "Delete",
                                          handler: { (action, row, completionHandler) in
-                                            self.deleteWorkout()
+                                            self.workouts.remove(at: 0)
                                              completionHandler?(true)
                                          })
 
@@ -118,10 +124,6 @@ class SavedWorkoutsVC: FormViewController {
         chosenWorkoutRow = row
     }
     
-    func deleteWorkout () {
-        
-    }
-    
     func editWorkout () {
         
     }
@@ -133,9 +135,6 @@ class SavedWorkoutsVC: FormViewController {
                 workout.assign(workoutToAssign: modifiedWorkout)
             }
         }
-        
-        print(chosenWorkoutCell)
-        print(workoutIndex)
 
         chosenWorkoutRow!.title = modifiedWorkout.name
         chosenWorkoutRow!.updateCell()

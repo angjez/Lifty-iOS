@@ -31,7 +31,13 @@ class ExerciseVC: FormViewController{
          form +++
 
                TextRow("Name").cellSetup { cell, row in
-                 cell.textField.placeholder = row.tag
+                if chosenExercise.exerciseName != "" {
+                    print(chosenExercise.exerciseName)
+                    cell.textField.text = chosenExercise.exerciseName
+                }
+                else {
+                    cell.textField.placeholder = row.tag
+                }
                }
         form +++
             Section()
@@ -111,8 +117,8 @@ class ExerciseVC: FormViewController{
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        let modifiedExercise = manageInput()
-        NewWorkoutVC().isModified(modifiedExercise: modifiedExercise)
+        let modifiedExercise = self.manageInput()
+        globalNewWorkoutVC!.isModified(modifiedExercise: modifiedExercise)
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }

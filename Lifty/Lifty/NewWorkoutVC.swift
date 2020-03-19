@@ -12,6 +12,8 @@ import Eureka
 var exerciseIndex: Int = 0
 var chosenCell: ButtonCellOf<String>?
 var chosenRow: ButtonRowOf<String>?
+var chosenExercise = Exercise(exerciseName: "", exerciseIndex: 0)
+var globalNewWorkoutVC: NewWorkoutVC?
 
 class NewWorkoutVC: FormViewController {
     
@@ -24,12 +26,13 @@ class NewWorkoutVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        globalNewWorkoutVC = self as! NewWorkoutVC
+        
         createWorkoutTitleForm()
         createWorkoutTypeForm()
         createExercisesForm()
 
     }
-    
     
     func createWorkoutTitleForm () {
             
@@ -291,7 +294,7 @@ class NewWorkoutVC: FormViewController {
                                         $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                         $0.onCellSelection(self.selected)
                                         let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: index+1)
-                                        self.workout.addExercise(exercise: newExercise)
+                                        self.workout.exercises.append(newExercise)
                                         
                                         let deleteAction = SwipeAction(
                                                      style: .destructive,
@@ -311,7 +314,7 @@ class NewWorkoutVC: FormViewController {
                                     $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                     $0.onCellSelection(self.selected)
                                     let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: 1)
-                                    self.workout.addExercise(exercise: newExercise)
+                                    self.workout.exercises.append(newExercise)
                                     
                                     let deleteAction = SwipeAction(
                                                  style: .destructive,
@@ -328,22 +331,28 @@ class NewWorkoutVC: FormViewController {
     }
     
     func selected(cell: ButtonCellOf<String>, row: ButtonRow) {
-        exerciseIndex = row.indexPath!.row + 1
+        exerciseIndex = row.indexPath!.row
         chosenCell = cell
         chosenRow = row
+        for exercise in workout.exercises {
+            if exercise.exerciseIndex == exerciseIndex {
+                chosenExercise.assign(exerciseToAssign: exercise);
+            }
+        }
     }
     
     func isModified(modifiedExercise: Exercise) {
-        
+        print(workout.exercises)
         for exercise in workout.exercises {
+            print(exercise.exerciseIndex)
+            print(exerciseIndex)
             if exercise.exerciseIndex == exerciseIndex {
                 exercise.assign(exerciseToAssign: modifiedExercise)
+                chosenRow?.title = exercise.exerciseName
+                chosenRow!.updateCell()
+                
             }
         }
-
-        chosenRow?.title = modifiedExercise.exerciseName
-        chosenRow!.updateCell()
-        
     }
     
 //    detect reordering and correct data
@@ -373,9 +382,6 @@ class NewWorkoutVC: FormViewController {
     
     func deleteExercise (index: Int) {
         workout.exercises.remove(at: index)
-        for exercise in workout.exercises {
-            print(exercise.exerciseIndex)
-        }
     }
     
 //    save workout data upon view dismissal
@@ -388,7 +394,6 @@ class NewWorkoutVC: FormViewController {
         }
                 
 //        getting workout title
-                
         let titleRow: TextRow? = form.rowBy(tag: "Title")
         workout.name = titleRow?.value ?? "Workout"
                 
@@ -426,7 +431,7 @@ class NewWorkoutVC: FormViewController {
             workout.restTime = restTime
         }
         
-        SavedWorkoutsVC().changeWorkoutData(modifiedWorkout: workout)
+        globalSavedWorkoutsVC!.changeWorkoutData(modifiedWorkout: workout)
     }
     
     func pickerRowStringToInt (timeToConvert: String?) -> Int {
