@@ -119,6 +119,7 @@ class SavedWorkoutsVC: FormViewController {
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
+        chosenWorkout = workouts[row.indexPath!.row]
         workoutIndex = row.indexPath!.row
         chosenWorkoutCell = cell
         chosenWorkoutRow = row
@@ -133,11 +134,11 @@ class SavedWorkoutsVC: FormViewController {
         for (index, workout) in workouts.enumerated()  {
             if index == workoutIndex {
                 workout.assign(workoutToAssign: modifiedWorkout)
+                chosenWorkoutRow!.title = workout.name
+                chosenWorkoutRow!.updateCell()
+                break
             }
         }
-
-        chosenWorkoutRow!.title = modifiedWorkout.name
-        chosenWorkoutRow!.updateCell()
     }
     
 }

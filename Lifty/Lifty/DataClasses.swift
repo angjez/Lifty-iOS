@@ -12,8 +12,8 @@ class Workout {
     
     var name: String?
     var type: String?
-    var time: Int?
-    var restTime: Int?
+    var time: String?
+    var restTime: String?
     var rounds: Int?
     var exercises = [Exercise]()
     

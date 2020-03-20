@@ -342,14 +342,12 @@ class NewWorkoutVC: FormViewController {
     }
     
     func isModified(modifiedExercise: Exercise) {
-        print(workout.exercises)
         for exercise in workout.exercises {
-            print(exercise.exerciseIndex)
-            print(exerciseIndex)
             if exercise.exerciseIndex == exerciseIndex {
                 exercise.assign(exerciseToAssign: modifiedExercise)
                 chosenRow?.title = exercise.exerciseName
                 chosenRow!.updateCell()
+                break
                 
             }
         }
@@ -401,50 +399,45 @@ class NewWorkoutVC: FormViewController {
         let typeRow: SegmentedRow<String>? = form.rowBy(tag: "workoutTypes")
         workout.type = typeRow!.value
         
-        if workout.type == "for time" {
+        if workout.type == "FOR TIME" {
             let timeRow: IntRow? = form.rowBy(tag: "forTimeTime")
-            workout.time = timeRow!.value
-            workout.time = workout.time! * 60
+            workout.time = "\(String(describing: timeRow!.value!))"
             let roundsRow: IntRow? = form.rowBy(tag: "forTimeRounds")
-            workout.rounds = roundsRow!.value
+            workout.rounds = roundsRow!.value!
         }
         if workout.type == "EMOM" {
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "EMOMTime")
-            let time = pickerRowStringToInt(timeToConvert: timeRow!.value)
-            workout.time = time
+            workout.time = timeRow!.value!
             let roundsRow: IntRow? = form.rowBy(tag: "EMOMRounds")
-            workout.rounds = roundsRow!.value
+            workout.rounds = roundsRow!.value!
         }
         if workout.type == "AMRAP" {
             let timeRow: IntRow? = form.rowBy(tag: "AMRAPTime")
-            workout.time = timeRow!.value
-            workout.time = workout.time! * 60
+            workout.time = "\(String(describing: timeRow!.value!))"
         }
-        if workout.type == "tabata" {
+        if workout.type == "TABATA" {
             let roundsRow: IntRow? = form.rowBy(tag: "TabataRounds")
-            workout.rounds = roundsRow!.value
+            workout.rounds = roundsRow!.value!
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataTime")
-            let time = pickerRowStringToInt(timeToConvert: timeRow!.value)
-            workout.time = time
+            workout.time = timeRow!.value!
             let restTimeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataRestTime")
-            let restTime = pickerRowStringToInt(timeToConvert: restTimeRow!.value)
-            workout.restTime = restTime
+            workout.restTime = restTimeRow!.value!
         }
         
         globalSavedWorkoutsVC!.changeWorkoutData(modifiedWorkout: workout)
     }
     
-    func pickerRowStringToInt (timeToConvert: String?) -> Int {
-        var minutes: Int
-        if (timeToConvert!.count == 4) {
-            minutes = Int(timeToConvert!.prefix(1))!
-        }
-        else {
-            minutes = Int(timeToConvert!.prefix(2))!
-        }
-        let seconds = Int(timeToConvert!.suffix(2))!
-
-        return minutes * 60 + seconds
-    }
+//    func pickerRowStringToInt (timeToConvert: String?) -> Int {
+//        var minutes: Int
+//        if (timeToConvert!.count == 4) {
+//            minutes = Int(timeToConvert!.prefix(1))!
+//        }
+//        else {
+//            minutes = Int(timeToConvert!.prefix(2))!
+//        }
+//        let seconds = Int(timeToConvert!.suffix(2))!
+//
+//        return minutes * 60 + seconds
+//    }
     
 }
