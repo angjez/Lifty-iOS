@@ -39,7 +39,12 @@ class NewWorkoutVC: FormViewController {
             form +++
 
                   TextRow("Title").cellSetup { cell, row in
-                    cell.textField.placeholder = row.tag
+                    if (chosenWorkout.name != nil && chosenWorkout.name != "Workout") {
+                        cell.textField.placeholder = chosenWorkout.name!
+                    }
+                    else {
+                        cell.textField.placeholder = row.tag
+                    }
                   }
     }
         
@@ -52,7 +57,7 @@ class NewWorkoutVC: FormViewController {
             Section()
             <<< SegmentedRow<String>("workoutTypes"){
                 $0.options = ["FOR TIME", "EMOM", "AMRAP", "TABATA"]
-                $0.value = "FOR TIME"
+                $0.value = chosenWorkout.type ?? "FOR TIME"
             }
             +++ Section(){
                 $0.tag = "for_time_t"
@@ -61,6 +66,9 @@ class NewWorkoutVC: FormViewController {
             
             <<< IntRow("forTimeTime") {
                 $0.title = "Time cap:"
+                if (chosenWorkout.time != nil) {
+                    $0.value = Int(chosenWorkout.time!)
+                }
                 $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -89,6 +97,9 @@ class NewWorkoutVC: FormViewController {
 
             <<< IntRow("forTimeRounds") {
                 $0.title = "Rounds:"
+                if (chosenWorkout.rounds != nil) {
+                    $0.value = chosenWorkout.rounds!
+                }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
                 }
@@ -121,6 +132,9 @@ class NewWorkoutVC: FormViewController {
             }
             <<< PickerInputRow<String>("EMOMTime"){
                 $0.title = "Every: "
+                if (chosenWorkout.time != nil) {
+                    $0.value = chosenWorkout.time!
+                }
                 $0.options = []
 
                 var minutes = 0, seconds = 15
@@ -143,6 +157,9 @@ class NewWorkoutVC: FormViewController {
 
             <<< IntRow("EMOMRounds") {
                 $0.title = "Rounds: "
+                if (chosenWorkout.rounds != nil) {
+                    $0.value = chosenWorkout.rounds!
+                }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
                 }
@@ -174,6 +191,9 @@ class NewWorkoutVC: FormViewController {
             }
             <<< IntRow("AMRAPTime") {
                 $0.title = "Time cap: "
+                if (chosenWorkout.time != nil) {
+                    $0.value = Int(chosenWorkout.time!)
+                }
                 $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -206,6 +226,9 @@ class NewWorkoutVC: FormViewController {
         }
         <<< IntRow("TabataRounds") {
             $0.title = "Rounds:"
+            if (chosenWorkout.rounds != nil) {
+                $0.value = chosenWorkout.rounds!
+            }
             $0.add(rule: RuleGreaterThan(min: 0))
             $0.add(rule: RuleSmallerThan(max: 1000))
             }
@@ -233,6 +256,9 @@ class NewWorkoutVC: FormViewController {
 
         <<< PickerInputRow<String>("TabataTime"){
             $0.title = "Work: "
+            if (chosenWorkout.time != nil) {
+                $0.value = chosenWorkout.time!
+            }
             $0.options = []
 
             var minutes = 0, seconds = 15
@@ -255,6 +281,9 @@ class NewWorkoutVC: FormViewController {
         
         <<< PickerInputRow<String>("TabataRestTime"){
             $0.title = "Rest: "
+            if (chosenWorkout.restTime != nil) {
+                $0.value = chosenWorkout.restTime!
+            }
             $0.options = []
 
             var minutes = 0, seconds = 15
@@ -289,12 +318,14 @@ class NewWorkoutVC: FormViewController {
                                 }
                                 $0.multivaluedRowToInsertAt = { index in
                                     return ButtonRow () {
+
                                         $0.title = "Exercise"
                                         $0.value = "tap to edit"
-                                        $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
-                                        $0.onCellSelection(self.selected)
                                         let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: index+1)
                                         self.workout.exercises.append(newExercise)
+                                        
+                                        $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
+                                        $0.onCellSelection(self.selected)
                                         
                                         let deleteAction = SwipeAction(
                                                      style: .destructive,
@@ -309,12 +340,20 @@ class NewWorkoutVC: FormViewController {
                                     }
                                 }
                                 $0  <<< ButtonRow () {
-                                    $0.title = "Exercise"
-                                    $0.value = "tap to edit"
+                                    if (!chosenWorkout.exercises.isEmpty) {
+                                        $0.title = chosenWorkout.exercises[0].exerciseName
+                                        $0.value = "tap to edit"
+                                        self.workout.exercises.append(chosenWorkout.exercises[0])
+                                    }
+                                    else {
+                                        $0.title = "Exercise"
+                                        $0.value = "tap to edit"
+                                        let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: 1)
+                                        self.workout.exercises.append(newExercise)
+                                    }
+                                    
                                     $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                     $0.onCellSelection(self.selected)
-                                    let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: 1)
-                                    self.workout.exercises.append(newExercise)
                                     
                                     let deleteAction = SwipeAction(
                                                  style: .destructive,
@@ -327,6 +366,32 @@ class NewWorkoutVC: FormViewController {
                                              $0.trailingSwipe.actions = [deleteAction]
                                              $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                                 }
+                for (index, exercise) in chosenWorkout.exercises.enumerated() {
+                    $0  <<< ButtonRow () {
+                        if (index == 0) {
+                            
+                        }
+                        else {
+                            $0.title = exercise.exerciseName
+                            $0.value = "tap to edit"
+                            self.workout.exercises.append(exercise)
+                            $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
+                            $0.onCellSelection(self.selected)
+                            
+                            let deleteAction = SwipeAction(
+                                         style: .destructive,
+                                         title: "Delete",
+                                         handler: { (action, row, completionHandler) in
+                                            self.deleteExercise(index: row.indexPath!.row)
+                                            completionHandler?(true)
+                                         })
+
+                                     $0.trailingSwipe.actions = [deleteAction]
+                                     $0.trailingSwipe.performsFirstActionWithFullSwipe = true
+                        }
+                    }
+
+                }
             }
     }
     

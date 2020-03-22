@@ -67,7 +67,10 @@ class SavedWorkoutsVC: FormViewController {
                                             style: .normal,
                                             title: "Edit",
                                             handler: { (action, row, completionHandler) in
-                                                self.editWorkout()
+                                                chosenWorkout = self.workouts[row.indexPath!.row]
+                                                workoutIndex = row.indexPath!.row
+                                                chosenWorkoutRow = row as! ButtonRowOf<String>
+                                                self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                                                 completionHandler?(true)
                                             })
                                         infoAction.actionBackgroundColor = .orange
@@ -105,7 +108,10 @@ class SavedWorkoutsVC: FormViewController {
                                          style: .normal,
                                          title: "Edit",
                                          handler: { (action, row, completionHandler) in
-                                            self.editWorkout ()
+                                            chosenWorkout = self.workouts[row.indexPath!.row]
+                                            workoutIndex = row.indexPath!.row
+                                            chosenWorkoutRow = row as! ButtonRowOf<String>
+                                            self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                                              completionHandler?(true)
                                          })
                                      infoAction.actionBackgroundColor = .orange
@@ -123,10 +129,6 @@ class SavedWorkoutsVC: FormViewController {
         workoutIndex = row.indexPath!.row
         chosenWorkoutCell = cell
         chosenWorkoutRow = row
-    }
-    
-    func editWorkout () {
-        
     }
     
     func changeWorkoutData (modifiedWorkout: Workout) {
