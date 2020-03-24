@@ -41,6 +41,7 @@ class NewWorkoutVC: FormViewController {
                   TextRow("Title").cellSetup { cell, row in
                     if (chosenWorkout.name != nil && chosenWorkout.name != "Workout") {
                         cell.textField.placeholder = chosenWorkout.name!
+                        row.value = chosenExercise.exerciseName
                     }
                     else {
                         cell.textField.placeholder = row.tag
@@ -367,30 +368,26 @@ class NewWorkoutVC: FormViewController {
                                              $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                                 }
                 for (index, exercise) in chosenWorkout.exercises.enumerated() {
-                    $0  <<< ButtonRow () {
-                        if (index == 0) {
-                            
-                        }
-                        else {
-                            $0.title = exercise.exerciseName
-                            $0.value = "tap to edit"
-                            self.workout.exercises.append(exercise)
-                            $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
-                            $0.onCellSelection(self.selected)
-                            
-                            let deleteAction = SwipeAction(
-                                         style: .destructive,
-                                         title: "Delete",
-                                         handler: { (action, row, completionHandler) in
-                                            self.deleteExercise(index: row.indexPath!.row)
-                                            completionHandler?(true)
-                                         })
+                    if (index != 0) {
+                        $0  <<< ButtonRow () {
+                                $0.title = exercise.exerciseName
+                                $0.value = "tap to edit"
+                                self.workout.exercises.append(exercise)
+                                $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
+                                $0.onCellSelection(self.selected)
+                                
+                                let deleteAction = SwipeAction(
+                                             style: .destructive,
+                                             title: "Delete",
+                                             handler: { (action, row, completionHandler) in
+                                                self.deleteExercise(index: row.indexPath!.row)
+                                                completionHandler?(true)
+                                             })
 
-                                     $0.trailingSwipe.actions = [deleteAction]
-                                     $0.trailingSwipe.performsFirstActionWithFullSwipe = true
+                                         $0.trailingSwipe.actions = [deleteAction]
+                                         $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                         }
                     }
-
                 }
             }
     }
@@ -466,27 +463,27 @@ class NewWorkoutVC: FormViewController {
         
         if workout.type == "FOR TIME" {
             let timeRow: IntRow? = form.rowBy(tag: "forTimeTime")
-            workout.time = "\(String(describing: timeRow!.value!))"
+            workout.time = String(describing: timeRow?.value)
             let roundsRow: IntRow? = form.rowBy(tag: "forTimeRounds")
-            workout.rounds = roundsRow!.value!
+            workout.rounds = roundsRow?.value
         }
         if workout.type == "EMOM" {
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "EMOMTime")
-            workout.time = timeRow!.value!
+            workout.time = timeRow?.value
             let roundsRow: IntRow? = form.rowBy(tag: "EMOMRounds")
-            workout.rounds = roundsRow!.value!
+            workout.rounds = roundsRow?.value
         }
         if workout.type == "AMRAP" {
             let timeRow: IntRow? = form.rowBy(tag: "AMRAPTime")
-            workout.time = "\(String(describing: timeRow!.value!))"
+            workout.time = String(describing: timeRow?.value)
         }
         if workout.type == "TABATA" {
             let roundsRow: IntRow? = form.rowBy(tag: "TabataRounds")
-            workout.rounds = roundsRow!.value!
+            workout.rounds = roundsRow?.value
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataTime")
-            workout.time = timeRow!.value!
+            workout.time = timeRow?.value
             let restTimeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataRestTime")
-            workout.restTime = restTimeRow!.value!
+            workout.restTime = restTimeRow?.value
         }
         
         globalSavedWorkoutsVC!.changeWorkoutData(modifiedWorkout: workout)

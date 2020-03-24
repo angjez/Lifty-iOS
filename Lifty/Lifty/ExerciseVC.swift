@@ -32,8 +32,8 @@ class ExerciseVC: FormViewController{
 
                TextRow("Name").cellSetup { cell, row in
                 if chosenExercise.exerciseName != "" {
-                    print(chosenExercise.exerciseName)
-                    cell.textField.text = chosenExercise.exerciseName
+                    cell.textField.placeholder = chosenExercise.exerciseName
+                    row.value = chosenExercise.exerciseName
                 }
                 else {
                     cell.textField.placeholder = row.tag
@@ -43,7 +43,12 @@ class ExerciseVC: FormViewController{
             Section()
         <<< SegmentedRow<String>("exerciseType"){
                 $0.options = ["Reps", "Time"]
-                $0.value = "Reps"
+                if (chosenExercise.exerciseType == "Time") {
+                    $0.value = "Time"
+                }
+                else {
+                    $0.value = "Reps"
+                }
             }
             +++ Section(){
                 $0.tag = "reps_t"
@@ -53,6 +58,9 @@ class ExerciseVC: FormViewController{
             <<< IntRow() {
                 $0.tag = "Amout of reps"
                 $0.title = "Amout of reps"
+                if (chosenExercise.exerciseType == "Reps") {
+                    $0.value = chosenExercise.reps
+                }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
                 }
@@ -86,6 +94,9 @@ class ExerciseVC: FormViewController{
                 $0.tag = "Time: "
                 $0.title = "Time: "
                 $0.options = []
+                if (chosenExercise.exerciseType == "Time") {
+                    $0.value = chosenExercise.exerciseTime
+                }
                 
                 $0.options.append("-")
 
@@ -111,6 +122,9 @@ class ExerciseVC: FormViewController{
 
             <<< TextAreaRow() {
                 $0.tag = "Notes"
+                if (chosenExercise.notes != nil) {
+                    $0.value = chosenExercise.notes
+                }
                 $0.placeholder = "Additional notes (weight used, technique etc.)."
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)
         }
@@ -173,7 +187,7 @@ class ExerciseVC: FormViewController{
         
 //        creating the object
         
-        let modifiedExercise = Exercise (exerciseName: exerciseName!, exerciseIndex: 0)
+        let modifiedExercise = Exercise (exerciseName: exerciseName ?? "Exercise", exerciseIndex: 0)
         modifiedExercise.exerciseType = exerciseType
         modifiedExercise.reps = reps
         modifiedExercise.exerciseTime = time
