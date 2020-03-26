@@ -10,12 +10,20 @@ import Foundation
 
 class Workout {
     
-    var name: String?
-    var type: String?
-    var time: String?
-    var restTime: String?
-    var rounds: Int?
+    var name: String
+    var type: String
+    var time: String
+    var restTime: String
+    var rounds: Int
     var exercises = [Exercise]()
+    
+    init() {
+        self.name = "Workout"
+        self.type = ""
+        self.time = "-"
+        self.restTime = "-"
+        self.rounds = 0
+    }
     
     func addExercise (exercise: Exercise) {
         self.exercises.append(exercise)
@@ -35,14 +43,18 @@ class Workout {
 class Exercise {
     var exerciseIndex: Int
     var exerciseName: String
-    var exerciseType: String?
-    var reps: Int?
-    var exerciseTime: String?
-    var notes: String?
+    var exerciseType: String
+    var reps: Int
+    var exerciseTime: String
+    var notes: String
     
-    init(exerciseName: String, exerciseIndex: Int) {
-        self.exerciseName = exerciseName
+    init(exerciseIndex: Int) {
+        self.exerciseName = "Exercise"
         self.exerciseIndex = exerciseIndex
+        self.exerciseType = ""
+        self.exerciseTime = "-"
+        self.notes = ""
+        self.reps = 0
     }
     
     func assign(exerciseToAssign: Exercise) {

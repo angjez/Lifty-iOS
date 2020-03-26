@@ -162,6 +162,7 @@ class ExerciseVC: FormViewController{
 //        getting time/reps
         
         if exerciseType == "Time" {
+            reps = 0
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "Time: ")
             if timeRow!.value == "-" {
                 alert.showAlert(fromController: self)
@@ -171,6 +172,7 @@ class ExerciseVC: FormViewController{
             }
         }
         else if exerciseType == "Reps" {
+            time = "-"
             let repsRow: IntRow? = form.rowBy(tag: "Amout of reps")
             if repsRow!.value == nil {
                 alert.showAlert(fromController: self)
@@ -187,11 +189,12 @@ class ExerciseVC: FormViewController{
         
 //        creating the object
         
-        let modifiedExercise = Exercise (exerciseName: exerciseName ?? "Exercise", exerciseIndex: 0)
-        modifiedExercise.exerciseType = exerciseType
-        modifiedExercise.reps = reps
-        modifiedExercise.exerciseTime = time
-        modifiedExercise.notes = notes
+        let modifiedExercise = Exercise (exerciseIndex: 0)
+        modifiedExercise.exerciseName = exerciseName!
+        modifiedExercise.exerciseType = exerciseType!
+        modifiedExercise.reps = reps!
+        modifiedExercise.exerciseTime = time!
+        modifiedExercise.notes = notes!
         
         return modifiedExercise
     }

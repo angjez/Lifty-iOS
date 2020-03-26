@@ -19,10 +19,10 @@ extension ExerciseEntity {
 
     @NSManaged public var index: Int32
     @NSManaged public var name: String?
-    @NSManaged public var type: String?
-    @NSManaged public var reps: String?
-    @NSManaged public var time: String?
     @NSManaged public var notes: String?
+    @NSManaged public var reps: Int32
+    @NSManaged public var time: String?
+    @NSManaged public var type: String?
     @NSManaged public var ofWorkout: WorkoutEntity?
 
 }

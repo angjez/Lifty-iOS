@@ -12,7 +12,7 @@ import Eureka
 var exerciseIndex: Int = 0
 var chosenCell: ButtonCellOf<String>?
 var chosenRow: ButtonRowOf<String>?
-var chosenExercise = Exercise(exerciseName: "", exerciseIndex: 0)
+var chosenExercise = Exercise(exerciseIndex: 0)
 var globalNewWorkoutVC: NewWorkoutVC?
 
 class NewWorkoutVC: FormViewController {
@@ -39,9 +39,9 @@ class NewWorkoutVC: FormViewController {
             form +++
 
                   TextRow("Title").cellSetup { cell, row in
-                    if (chosenWorkout.name != nil && chosenWorkout.name != "Workout") {
-                        cell.textField.placeholder = chosenWorkout.name!
-                        row.value = chosenExercise.exerciseName
+                    if (chosenWorkout.name != "Workout") {
+                        cell.textField.placeholder = chosenWorkout.name
+                        row.value = chosenWorkout.name
                     }
                     else {
                         cell.textField.placeholder = row.tag
@@ -58,7 +58,12 @@ class NewWorkoutVC: FormViewController {
             Section()
             <<< SegmentedRow<String>("workoutTypes"){
                 $0.options = ["FOR TIME", "EMOM", "AMRAP", "TABATA"]
-                $0.value = chosenWorkout.type ?? "FOR TIME"
+                if chosenWorkout.type != "" {
+                    $0.value = chosenWorkout.type
+                }
+                else {
+                    $0.value = "FOR TIME"
+                }
             }
             +++ Section(){
                 $0.tag = "for_time_t"
@@ -66,9 +71,10 @@ class NewWorkoutVC: FormViewController {
             }
             
             <<< IntRow("forTimeTime") {
+                $0.add(rule: RuleRequired())
                 $0.title = "Time cap:"
-                if (chosenWorkout.time != nil) {
-                    $0.value = Int(chosenWorkout.time!)
+                if (chosenWorkout.time != "-") {
+                    $0.value = Int(chosenWorkout.time)
                 }
                 $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
@@ -97,9 +103,10 @@ class NewWorkoutVC: FormViewController {
             }
 
             <<< IntRow("forTimeRounds") {
+                $0.add(rule: RuleRequired())
                 $0.title = "Rounds:"
-                if (chosenWorkout.rounds != nil) {
-                    $0.value = chosenWorkout.rounds!
+                if (chosenWorkout.rounds != 0) {
+                    $0.value = chosenWorkout.rounds
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -133,8 +140,8 @@ class NewWorkoutVC: FormViewController {
             }
             <<< PickerInputRow<String>("EMOMTime"){
                 $0.title = "Every: "
-                if (chosenWorkout.time != nil) {
-                    $0.value = chosenWorkout.time!
+                if (chosenWorkout.time != "-") {
+                    $0.value = chosenWorkout.time
                 }
                 $0.options = []
 
@@ -157,9 +164,10 @@ class NewWorkoutVC: FormViewController {
             }
 
             <<< IntRow("EMOMRounds") {
+                $0.add(rule: RuleRequired())
                 $0.title = "Rounds: "
-                if (chosenWorkout.rounds != nil) {
-                    $0.value = chosenWorkout.rounds!
+                if (chosenWorkout.rounds != 0) {
+                    $0.value = chosenWorkout.rounds
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -191,9 +199,10 @@ class NewWorkoutVC: FormViewController {
                 $0.hidden = "$workoutTypes != 'AMRAP'"
             }
             <<< IntRow("AMRAPTime") {
+                $0.add(rule: RuleRequired())
                 $0.title = "Time cap: "
-                if (chosenWorkout.time != nil) {
-                    $0.value = Int(chosenWorkout.time!)
+                if (chosenWorkout.time != "-") {
+                    $0.value = Int(chosenWorkout.time)
                 }
                 $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
@@ -226,9 +235,10 @@ class NewWorkoutVC: FormViewController {
             $0.hidden = "$workoutTypes != 'TABATA'"
         }
         <<< IntRow("TabataRounds") {
+            $0.add(rule: RuleRequired())
             $0.title = "Rounds:"
-            if (chosenWorkout.rounds != nil) {
-                $0.value = chosenWorkout.rounds!
+            if (chosenWorkout.rounds != 0) {
+                $0.value = chosenWorkout.rounds
             }
             $0.add(rule: RuleGreaterThan(min: 0))
             $0.add(rule: RuleSmallerThan(max: 1000))
@@ -257,8 +267,8 @@ class NewWorkoutVC: FormViewController {
 
         <<< PickerInputRow<String>("TabataTime"){
             $0.title = "Work: "
-            if (chosenWorkout.time != nil) {
-                $0.value = chosenWorkout.time!
+            if (chosenWorkout.time != "-") {
+                $0.value = chosenWorkout.time
             }
             $0.options = []
 
@@ -282,8 +292,8 @@ class NewWorkoutVC: FormViewController {
         
         <<< PickerInputRow<String>("TabataRestTime"){
             $0.title = "Rest: "
-            if (chosenWorkout.restTime != nil) {
-                $0.value = chosenWorkout.restTime!
+            if (chosenWorkout.restTime != "-") {
+                $0.value = chosenWorkout.restTime
             }
             $0.options = []
 
@@ -322,7 +332,10 @@ class NewWorkoutVC: FormViewController {
 
                                         $0.title = "Exercise"
                                         $0.value = "tap to edit"
-                                        let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: index+1)
+                                        let newExercise = Exercise(exerciseIndex: index+1)
+                                        newExercise.reps = 0
+                                        newExercise.notes = ""
+                                        newExercise.exerciseTime = ""
                                         self.workout.exercises.append(newExercise)
                                         
                                         $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
@@ -349,7 +362,10 @@ class NewWorkoutVC: FormViewController {
                                     else {
                                         $0.title = "Exercise"
                                         $0.value = "tap to edit"
-                                        let newExercise = Exercise(exerciseName: "Exercise", exerciseIndex: 1)
+                                        let newExercise = Exercise(exerciseIndex: 1)
+                                        newExercise.reps = 0
+                                        newExercise.notes = ""
+                                        newExercise.exerciseTime = ""
                                         self.workout.exercises.append(newExercise)
                                     }
                                     
@@ -419,9 +435,9 @@ class NewWorkoutVC: FormViewController {
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        let firstToSwap = Exercise(exerciseName: "", exerciseIndex: 0)
-        let secondToSwap = Exercise(exerciseName: "", exerciseIndex: 0)
-        let dummy = Exercise(exerciseName: "", exerciseIndex: 0)
+        let firstToSwap = Exercise(exerciseIndex: 0)
+        let secondToSwap = Exercise(exerciseIndex: 0)
+        let dummy = Exercise(exerciseIndex: 0)
         
         for exercise in workout.exercises {
             if exercise.exerciseIndex == sourceIndexPath[1]+1 {
@@ -455,51 +471,45 @@ class NewWorkoutVC: FormViewController {
                 
 //        getting workout title
         let titleRow: TextRow? = form.rowBy(tag: "Title")
-        workout.name = titleRow?.value ?? "Workout"
+        workout.name = titleRow!.value!
                 
 //        getting workout type and specyfics
         let typeRow: SegmentedRow<String>? = form.rowBy(tag: "workoutTypes")
-        workout.type = typeRow!.value
+        workout.type = typeRow!.value!
         
         if workout.type == "FOR TIME" {
             let timeRow: IntRow? = form.rowBy(tag: "forTimeTime")
             workout.time = String(describing: timeRow?.value)
             let roundsRow: IntRow? = form.rowBy(tag: "forTimeRounds")
-            workout.rounds = roundsRow?.value
+            workout.rounds = roundsRow!.value!
+            
+            workout.restTime = ""
         }
         if workout.type == "EMOM" {
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "EMOMTime")
-            workout.time = timeRow?.value
+            workout.time = timeRow!.value!
             let roundsRow: IntRow? = form.rowBy(tag: "EMOMRounds")
-            workout.rounds = roundsRow?.value
+            workout.rounds = roundsRow!.value!
+            
+            workout.restTime = ""
         }
         if workout.type == "AMRAP" {
             let timeRow: IntRow? = form.rowBy(tag: "AMRAPTime")
             workout.time = String(describing: timeRow?.value)
+            
+            workout.restTime = ""
+            workout.rounds = 0
         }
         if workout.type == "TABATA" {
             let roundsRow: IntRow? = form.rowBy(tag: "TabataRounds")
-            workout.rounds = roundsRow?.value
+            workout.rounds = roundsRow!.value!
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataTime")
-            workout.time = timeRow?.value
+            workout.time = timeRow!.value!
             let restTimeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataRestTime")
-            workout.restTime = restTimeRow?.value
+            workout.restTime = restTimeRow!.value!
         }
         
         globalSavedWorkoutsVC!.changeWorkoutData(modifiedWorkout: workout)
     }
-    
-//    func pickerRowStringToInt (timeToConvert: String?) -> Int {
-//        var minutes: Int
-//        if (timeToConvert!.count == 4) {
-//            minutes = Int(timeToConvert!.prefix(1))!
-//        }
-//        else {
-//            minutes = Int(timeToConvert!.prefix(2))!
-//        }
-//        let seconds = Int(timeToConvert!.suffix(2))!
-//
-//        return minutes * 60 + seconds
-//    }
     
 }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ExerciseEntity" representedClassName="ExerciseEntity" syncable="YES" codeGenerationType="class">
+    <entity name="ExerciseEntity" representedClassName=".ExerciseEntity" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
-        <attribute name="reps" optional="YES" attributeType="String"/>
+        <attribute name="reps" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="time" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="ofWorkout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutEntity" inverseName="exercises" inverseEntity="WorkoutEntity"/>
     </entity>
-    <entity name="WorkoutEntity" representedClassName="WorkoutEntity" syncable="YES" codeGenerationType="class">
+    <entity name="WorkoutEntity" representedClassName=".WorkoutEntity" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="restTime" optional="YES" attributeType="String"/>
         <attribute name="rounds" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -18,7 +18,7 @@
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseEntity" inverseName="ofWorkout" inverseEntity="ExerciseEntity"/>
     </entity>
     <elements>
-        <element name="WorkoutEntity" positionX="-63" positionY="-18" width="128" height="28"/>
-        <element name="ExerciseEntity" positionX="-54" positionY="0" width="128" height="28"/>
+        <element name="ExerciseEntity" positionX="-54" positionY="0" width="128" height="148"/>
+        <element name="WorkoutEntity" positionX="-63" positionY="-18" width="128" height="133"/>
     </elements>
 </model>

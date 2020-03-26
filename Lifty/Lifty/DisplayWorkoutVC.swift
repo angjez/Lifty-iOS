@@ -30,7 +30,7 @@ class DisplayWorkoutVC: UIViewController {
 
     func checkType () {
         var rounds: String?
-        if (chosenWorkout.type != "AMRAP" && chosenWorkout.rounds!>1) {
+        if (chosenWorkout.type != "AMRAP" && chosenWorkout.rounds>1) {
             rounds = " rounds of:"
         }
         else {
@@ -38,30 +38,29 @@ class DisplayWorkoutVC: UIViewController {
         }
         switch chosenWorkout.type {
         case "AMRAP":
-            specyficsLabel.text! +=  "Time cap: " +  (chosenWorkout.time  ?? "-") + "'. "
+            specyficsLabel.text! +=  "Time cap: " +  (chosenWorkout.time) + "'. "
         case "EMOM":
-            specyficsLabel.text! += "Every " + (chosenWorkout.time  ?? "-") + ". "
-            specyficsLabel.text! +=  String(chosenWorkout.rounds!) + rounds!
+            specyficsLabel.text! += "Every " + (chosenWorkout.time
+        ) + ". "
+            specyficsLabel.text! +=  String(chosenWorkout.rounds) + rounds!
         case "FOR TIME":
-            specyficsLabel.text! += "Time cap: " +  (chosenWorkout.time  ?? "-") + "'. "
-            specyficsLabel.text! += String(chosenWorkout.rounds!) + rounds!
+            specyficsLabel.text! += "Time cap: " +  (chosenWorkout.time) + "'. "
+            specyficsLabel.text! += String(chosenWorkout.rounds) + rounds!
         case "TABATA":
-            specyficsLabel.text! += (chosenWorkout.time ?? "-") + " on " + (chosenWorkout.restTime ?? "-") + " off. "
-            specyficsLabel.text! +=  String(chosenWorkout.rounds!) + rounds!
-        case .none:
-            specyficsLabel.text = ""
-        case .some(_):
-            specyficsLabel.text = ""
+            specyficsLabel.text! += (chosenWorkout.time) + " on " + (chosenWorkout.restTime) + " off. "
+            specyficsLabel.text! +=  String(chosenWorkout.rounds) + rounds!
+        default:
+            specyficsLabel.text! = ""
         }
     }
     
     func loadExercises () {
         for exercise in chosenWorkout.exercises {
             if exercise.exerciseType == "Reps" {
-                exercisesTextView.text += String(exercise.reps!) + "    " + exercise.exerciseName + "\n"
+                exercisesTextView.text += String(exercise.reps) + "    " + exercise.exerciseName + "\n"
             }
             else if exercise.exerciseType == "Time" {
-                exercisesTextView.text += exercise.exerciseTime! + "    " + exercise.exerciseName + "\n"
+                exercisesTextView.text += exercise.exerciseTime + "    " + exercise.exerciseName + "\n"
             }
         }
     }
