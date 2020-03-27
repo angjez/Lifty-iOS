@@ -60,8 +60,8 @@ class SavedWorkoutsVC: FormViewController {
                                             style: .destructive,
                                             title: "Delete",
                                             handler: { (action, row, completionHandler) in
-                                                self.workouts.remove(at: index)
                                                 deleteWorkout(workout: self.workouts[index])
+                                                self.workouts.remove(at: index)
                                                 completionHandler?(true)
                                             })
 
@@ -72,10 +72,11 @@ class SavedWorkoutsVC: FormViewController {
                                             style: .normal,
                                             title: "Edit",
                                             handler: { (action, row, completionHandler) in
-                                                chosenWorkout = self.workouts[row.indexPath!.row]
                                                 workoutIndex = row.indexPath!.row
+                                                chosenWorkout = self.workouts[row.indexPath!.row]
                                                 chosenWorkoutRow = (row as! ButtonRowOf<String>)
                                                 self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
+                                                 completionHandler?(true)
                                                 completionHandler?(true)
                                             })
                                         infoAction.actionBackgroundColor = .orange
@@ -87,6 +88,7 @@ class SavedWorkoutsVC: FormViewController {
                                         workoutIndex = index
                                         chosenWorkoutCell = $0.cell
                                         chosenWorkoutRow = $0
+                                        chosenWorkout = newWorkout
                                         self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                                     }
                                 }
@@ -104,9 +106,9 @@ class SavedWorkoutsVC: FormViewController {
                                          style: .destructive,
                                          title: "Delete",
                                          handler: { (action, row, completionHandler) in
-                                            self.workouts.remove(at: 0)
                                             deleteWorkout(workout: self.workouts[0])
-                                             completionHandler?(true)
+                                            self.workouts.remove(at: 0)
+                                            completionHandler?(true)
                                          })
 
                                      $0.trailingSwipe.actions = [deleteAction]
@@ -121,6 +123,7 @@ class SavedWorkoutsVC: FormViewController {
                                             chosenWorkoutRow = (row as! ButtonRowOf<String>)
                                             self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                                              completionHandler?(true)
+                                             completionHandler?(true)
                                          })
                                      infoAction.actionBackgroundColor = .orange
 
@@ -130,20 +133,19 @@ class SavedWorkoutsVC: FormViewController {
                                 }
                 }
                 for (index, workout) in workouts.enumerated() {
-                    if (index != 0) {
                         $0  <<< ButtonRow () {
                                 $0.title = workout.name
                                 $0.value = "tap to edit"
-                                $0.presentationMode = .segueName(segueName: "NewWorkoutSegue", onDismiss: nil)
+                                $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
                                 $0.onCellSelection(self.assignCellRow)
                                 
                                 let deleteAction = SwipeAction(
                                      style: .destructive,
                                      title: "Delete",
                                      handler: { (action, row, completionHandler) in
-                                        self.workouts.remove(at: 0)
-                                        deleteWorkout(workout: self.workouts[0])
-                                         completionHandler?(true)
+                                        deleteWorkout(workout: self.workouts[index])
+                                        self.workouts.remove(at: index)
+                                        completionHandler?(true)
                                      })
 
                                  $0.trailingSwipe.actions = [deleteAction]
@@ -156,7 +158,6 @@ class SavedWorkoutsVC: FormViewController {
                                         chosenWorkout = self.workouts[row.indexPath!.row]
                                         workoutIndex = row.indexPath!.row
                                         chosenWorkoutRow = (row as! ButtonRowOf<String>)
-                                        print(chosenWorkout.name)
                                         self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                                          completionHandler?(true)
                                      })
@@ -164,7 +165,6 @@ class SavedWorkoutsVC: FormViewController {
 
                                  $0.leadingSwipe.actions = [infoAction]
                                  $0.leadingSwipe.performsFirstActionWithFullSwipe = true
-                        }
                     }
                 }
             }

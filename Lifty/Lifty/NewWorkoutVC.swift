@@ -5,7 +5,6 @@
 //  Created by Angelika Jeziorska on 17/02/2020.
 //  Copyright © 2020 Angelika Jeziorska. All rights reserved.
 //
-
 import UIKit
 import Eureka
 
@@ -74,9 +73,10 @@ class NewWorkoutVC: FormViewController {
                 $0.add(rule: RuleRequired())
                 $0.title = "Time cap:"
                 if (chosenWorkout.time != "-") {
+                    print(chosenWorkout.time)
                     $0.value = Int(chosenWorkout.time)
                 }
-                $0.placeholder = "in minutes"
+//                $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
                 }
@@ -353,22 +353,17 @@ class NewWorkoutVC: FormViewController {
                                                  $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                                     }
                                 }
+                if (chosenWorkout.exercises.isEmpty) {
                                 $0  <<< ButtonRow () {
-                                    if (!chosenWorkout.exercises.isEmpty) {
-                                        $0.title = chosenWorkout.exercises[0].exerciseName
-                                        $0.value = "tap to edit"
-                                        self.workout.exercises.append(chosenWorkout.exercises[0])
-                                    }
-                                    else {
-                                        $0.title = "Exercise"
-                                        $0.value = "tap to edit"
-                                        let newExercise = Exercise(exerciseIndex: 1)
-                                        newExercise.reps = 0
-                                        newExercise.notes = ""
-                                        newExercise.exerciseTime = ""
-                                        self.workout.exercises.append(newExercise)
-                                    }
-                                    
+
+                                    $0.title = "Exercise"
+                                    $0.value = "tap to edit"
+                                    let newExercise = Exercise(exerciseIndex: 1)
+                                    newExercise.reps = 0
+                                    newExercise.notes = ""
+                                    newExercise.exerciseTime = ""
+                                    self.workout.exercises.append(newExercise)
+
                                     $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                     $0.onCellSelection(self.selected)
                                     
@@ -383,8 +378,8 @@ class NewWorkoutVC: FormViewController {
                                              $0.trailingSwipe.actions = [deleteAction]
                                              $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                                 }
-                for (index, exercise) in chosenWorkout.exercises.enumerated() {
-                    if (index != 0) {
+                }
+                for exercise in chosenWorkout.exercises {
                         $0  <<< ButtonRow () {
                                 $0.title = exercise.exerciseName
                                 $0.value = "tap to edit"
@@ -402,7 +397,6 @@ class NewWorkoutVC: FormViewController {
 
                                          $0.trailingSwipe.actions = [deleteAction]
                                          $0.trailingSwipe.performsFirstActionWithFullSwipe = true
-                        }
                     }
                 }
             }
@@ -479,7 +473,7 @@ class NewWorkoutVC: FormViewController {
         
         if workout.type == "FOR TIME" {
             let timeRow: IntRow? = form.rowBy(tag: "forTimeTime")
-            workout.time = String(describing: timeRow?.value)
+            workout.time = String(describing: timeRow!.value!)
             let roundsRow: IntRow? = form.rowBy(tag: "forTimeRounds")
             workout.rounds = roundsRow!.value!
             
