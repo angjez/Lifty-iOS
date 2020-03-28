@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66093234242F5A08001BEC19 /* UIextensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* UIextensions.swift */; };
 		6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */; };
 		66A48571242A5EC4004D4AE2 /* ExerciseEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */; };
 		66A48573242A5EC4004D4AE2 /* WorkoutEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */; };
@@ -91,6 +92,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		66093233242F5A08001BEC19 /* UIextensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIextensions.swift; sourceTree = "<group>"; };
 		66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */,
 				66FF0587240930BE004AABF6 /* QuickstartVC.swift */,
 				66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */,
+				66093233242F5A08001BEC19 /* UIextensions.swift */,
 				66D661EB2423E19A00A5FCC2 /* DisplayWorkoutVC.swift */,
 				66FF0582240930BD004AABF6 /* SceneDelegate.swift */,
 				66FF0583240930BD004AABF6 /* Main.storyboard */,
@@ -426,6 +429,7 @@
 				66FF058F240930BE004AABF6 /* AppDelegate.swift in Sources */,
 				6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */,
 				66FF0595240930BE004AABF6 /* QuickstartVC.swift in Sources */,
+				66093234242F5A08001BEC19 /* UIextensions.swift in Sources */,
 				66FF0590240930BE004AABF6 /* SceneDelegate.swift in Sources */,
 				66FF0593240930BE004AABF6 /* SavedWorkoutsVC.swift in Sources */,
 			);

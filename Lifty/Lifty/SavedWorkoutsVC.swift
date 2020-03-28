@@ -25,6 +25,24 @@ class SavedWorkoutsVC: FormViewController {
 
         super.viewDidLoad()
         
+        guard
+            let navigationController = navigationController,
+            let flareGradientImageNavBar = CAGradientLayer.primaryGradient(on: navigationController.navigationBar)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+
+        navigationController.navigationBar.barTintColor = UIColor(patternImage: flareGradientImageNavBar)
+        guard
+            let tabBarController = tabBarController,
+            let flareGradientImageTabBar = CAGradientLayer.primaryGradient(on: navigationController.navigationBar)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+        tabBarController.tabBar.barTintColor = UIColor(patternImage: flareGradientImageTabBar)
+        
         globalSavedWorkoutsVC = self as! SavedWorkoutsVC
         
 //        deleteAll()
@@ -33,6 +51,7 @@ class SavedWorkoutsVC: FormViewController {
         self.view.backgroundColor = UIColor.white
         self.initiateForm()
     }
+    
     
     func initiateForm () {
         form +++
@@ -143,7 +162,7 @@ class SavedWorkoutsVC: FormViewController {
                                      style: .destructive,
                                      title: "Delete",
                                      handler: { (action, row, completionHandler) in
-                                        deleteWorkout(workout: self.workouts[index])
+                                        deleteWorkout(workout: self.workouts[row.indexPath!.row])
                                         self.workouts.remove(at: index)
                                         completionHandler?(true)
                                      })
