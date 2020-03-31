@@ -18,18 +18,38 @@ class DisplayWorkoutVC: UIViewController {
     
     @IBOutlet weak var exercisesTextView: UITextView!
     
+    @IBOutlet weak var timeRepsTextView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = chosenWorkout.name
-        typeLabel.text = (chosenWorkout.type ?? "Workout")
+        titleLabel.text = " " + " " + chosenWorkout.name
+        typeLabel.text = " " + " " + (chosenWorkout.type ?? "Workout")
         checkType()
         loadExercises()
+
+        titleLabel.layer.borderColor = UIColor.white.cgColor
+        titleLabel.layer.borderWidth = 3.0
+        titleLabel.layer.cornerRadius = 5
+        titleLabel.layer.masksToBounds = true
         
+        
+        guard
+            let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+        
+        self.view.backgroundColor = UIColor(patternImage: flareGradientImage)
+        
+        exercisesTextView.adjustUITextViewHeight()
+        timeRepsTextView.adjustUITextViewHeight()
     }
 
     func checkType () {
         var rounds: String?
+        specyficsLabel.text! += " " + " "
         if (chosenWorkout.type != "AMRAP" && chosenWorkout.rounds>1) {
             rounds = " rounds of:"
         }
@@ -52,17 +72,68 @@ class DisplayWorkoutVC: UIViewController {
         default:
             specyficsLabel.text! = ""
         }
+        
+        specyficsLabel.layer.borderColor = UIColor.white.cgColor
+        specyficsLabel.layer.borderWidth = 3.0
+        specyficsLabel.layer.cornerRadius = 5
+        specyficsLabel.layer.masksToBounds = true
+
+        
     }
     
     func loadExercises () {
         for exercise in chosenWorkout.exercises {
+            timeRepsTextView.text += "\n"
+            exercisesTextView.text += "\n"
             if exercise.exerciseType == "Reps" {
-                exercisesTextView.text += String(exercise.reps) + "    " + exercise.exerciseName + "\n"
+                timeRepsTextView.text += String(exercise.reps) + "\n"
+                exercisesTextView.text += exercise.exerciseName + "\n"
             }
             else if exercise.exerciseType == "Time" {
-                exercisesTextView.text += exercise.exerciseTime + "    " + exercise.exerciseName + "\n"
+                timeRepsTextView.text += exercise.exerciseTime + "\n"
+                exercisesTextView.text += exercise.exerciseName + "\n"
+            }
+            if exercise.notes != " " && exercise.notes != "" {
+                let linesBefore = exercisesTextView.numberOfLines()
+                exercisesTextView.text += exercise.notes + "\n"
+                let linesAfter = exercisesTextView.numberOfLines()
+                for _ in 1...(linesAfter-linesBefore) {
+                    timeRepsTextView.text += "\n"
+                }
             }
         }
+        exercisesTextView.adjustUITextViewHeight()
+        timeRepsTextView.adjustUITextViewHeight()
+        exercisesTextView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        timeRepsTextView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        exercisesTextView.layer.borderColor = UIColor.white.cgColor
+        exercisesTextView.layer.borderWidth = 3.0
+        exercisesTextView.layer.cornerRadius = 5
+        exercisesTextView.layer.masksToBounds = true
+        
+        timeRepsTextView.layer.borderColor = UIColor.white.cgColor
+        timeRepsTextView.layer.borderWidth = 3.0
+        timeRepsTextView.layer.cornerRadius = 5
+        timeRepsTextView.layer.masksToBounds = true
+    }
+}
+
+//MARK: - UITextView
+extension UITextView{
+
+    func numberOfLines() -> Int{
+        if let fontUnwrapped = self.font{
+            return Int(self.contentSize.height / fontUnwrapped.lineHeight)
+        }
+        return 0
+    }
+    
+    func adjustUITextViewHeight()
+    {
+        var frame = self.frame
+        frame.size.height = self.contentSize.height
+        self.frame = frame
+        
     }
 
 }

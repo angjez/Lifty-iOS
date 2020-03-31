@@ -26,6 +26,15 @@ class SavedWorkoutsVC: FormViewController {
         super.viewDidLoad()
         
         guard
+            let tabBarController = tabBarController,
+            let flareGradientImageTabBar = CAGradientLayer.primaryGradient(on: tabBarController.tabBar)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+        tabBarController.tabBar.barTintColor = UIColor(patternImage: flareGradientImageTabBar)
+        
+        guard
             let navigationController = navigationController,
             let flareGradientImageNavBar = CAGradientLayer.primaryGradient(on: navigationController.navigationBar)
             else {
@@ -34,14 +43,6 @@ class SavedWorkoutsVC: FormViewController {
             }
 
         navigationController.navigationBar.barTintColor = UIColor(patternImage: flareGradientImageNavBar)
-        guard
-            let tabBarController = tabBarController,
-            let flareGradientImageTabBar = CAGradientLayer.primaryGradient(on: navigationController.navigationBar)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
-        tabBarController.tabBar.barTintColor = UIColor(patternImage: flareGradientImageTabBar)
         
         globalSavedWorkoutsVC = self as! SavedWorkoutsVC
         
@@ -73,8 +74,8 @@ class SavedWorkoutsVC: FormViewController {
                                         let newWorkout = Workout()
                                         self.workouts.append(newWorkout)
                                         saveWorkout(workout: newWorkout)
-                                        
-                                        
+
+
                                         let deleteAction = SwipeAction(
                                             style: .destructive,
                                             title: "Delete",
@@ -102,7 +103,7 @@ class SavedWorkoutsVC: FormViewController {
 
                                         $0.leadingSwipe.actions = [infoAction]
                                         $0.leadingSwipe.performsFirstActionWithFullSwipe = true
-                                        
+
 
                                         workoutIndex = index
                                         chosenWorkoutCell = $0.cell
@@ -120,7 +121,7 @@ class SavedWorkoutsVC: FormViewController {
                                     let newWorkout = Workout()
                                     self.workouts.append(newWorkout)
                                     saveWorkout(workout: newWorkout)
-                                    
+
                                     let deleteAction = SwipeAction(
                                          style: .destructive,
                                          title: "Delete",
@@ -148,7 +149,7 @@ class SavedWorkoutsVC: FormViewController {
 
                                      $0.leadingSwipe.actions = [infoAction]
                                      $0.leadingSwipe.performsFirstActionWithFullSwipe = true
-                                    
+
                                 }
                 }
                 for (index, workout) in workouts.enumerated() {
@@ -157,7 +158,7 @@ class SavedWorkoutsVC: FormViewController {
                                 $0.value = "tap to edit"
                                 $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
                                 $0.onCellSelection(self.assignCellRow)
-                                
+
                                 let deleteAction = SwipeAction(
                                      style: .destructive,
                                      title: "Delete",
@@ -187,7 +188,7 @@ class SavedWorkoutsVC: FormViewController {
                     }
                 }
             }
-        
+
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {

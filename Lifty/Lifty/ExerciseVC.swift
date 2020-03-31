@@ -185,7 +185,10 @@ class ExerciseVC: FormViewController{
 //        getting notes
         
         let noteRow: TextAreaRow? = form.rowBy(tag: "Notes")
-        let notes = noteRow!.value
+        var notes = ""
+        if (noteRow!.value != nil && noteRow!.value != "") {
+            notes = noteRow!.value!
+        }
         
 //        creating the object
         
@@ -194,7 +197,7 @@ class ExerciseVC: FormViewController{
         modifiedExercise.exerciseType = exerciseType!
         modifiedExercise.reps = reps!
         modifiedExercise.exerciseTime = time!
-        modifiedExercise.notes = notes!
+        modifiedExercise.notes = notes
         
         return modifiedExercise
     }
