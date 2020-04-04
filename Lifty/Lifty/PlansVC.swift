@@ -7,45 +7,26 @@
 //
 
 import UIKit
+import Eureka
 
-class PlansVC: UIViewController {
+class PlansVC: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        setGradients()
-    
-    }
-    
-    func setGradients () {
-            guard
-                let tabBarController = tabBarController,
-                let flareGradientImageTabBar = CAGradientLayer.primaryGradient(on: tabBarController.tabBar)
-                else {
-                    print("Error creating gradient color!")
-                    return
-                }
-            tabBarController.tabBar.barTintColor = UIColor(patternImage: flareGradientImageTabBar)
-            
-            guard
-                let navigationController = navigationController,
-                let flareGradientImageNavBar = CAGradientLayer.primaryGradient(on: navigationController.navigationBar)
-                else {
-                    print("Error creating gradient color!")
-                    return
-                }
-
-            navigationController.navigationBar.barTintColor = UIColor(patternImage: flareGradientImageNavBar)
+        guard let tabBarController = self.tabBarController
+            else {
+                print("Error initializing tab bar controller!")
+                return
+        }
+        guard let navigationController = self.navigationController
+            else {
+                print("Error initializing navigation controller!")
+                return
+        }
         
-            
-            guard
-                let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
-                else {
-                    print("Error creating gradient color!")
-                    return
-                }
-            
-            self.view.backgroundColor = UIColor(patternImage: flareGradientImage)
+        setGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+    
     }
 }
 

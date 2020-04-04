@@ -32,7 +32,7 @@ class SavedWorkoutsVC: FormViewController {
         }
         guard let navigationController = self.navigationController
             else {
-                print("Error initializing tab bar controller!")
+                print("Error initializing navigation controller!")
                 return
         }
         
@@ -43,6 +43,7 @@ class SavedWorkoutsVC: FormViewController {
         self.tableView.rowHeight = 70
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView.backgroundColor = UIColor.white
+        self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
         
         //        deleteAll()
         loadWorkouts()
@@ -104,6 +105,7 @@ class SavedWorkoutsVC: FormViewController {
                 completionHandler?(false)
         })
         deleteAction.actionBackgroundColor = .lightGray
+        deleteAction.image = UIImage(systemName: "trash")
         let editAction = SwipeAction(
             style: .normal,
             title: "Edit",
@@ -115,6 +117,7 @@ class SavedWorkoutsVC: FormViewController {
                 completionHandler?(true)
         })
         editAction.actionBackgroundColor = .lightGray
+        editAction.image = UIImage(systemName: "pencil")
         
         for row in form.rows {
             row.baseCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)

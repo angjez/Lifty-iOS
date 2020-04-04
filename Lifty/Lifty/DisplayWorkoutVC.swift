@@ -28,24 +28,20 @@ class DisplayWorkoutVC: UIViewController {
         checkType()
         loadExercises()
 
-        titleLabel.layer.borderColor = UIColor.white.cgColor
+        let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
+        titleLabel.layer.borderColor = UIColor(patternImage: flareGradientImage!).cgColor
         titleLabel.layer.borderWidth = 3.0
+        titleLabel.textColor = UIColor.systemIndigo
+        typeLabel.textColor = UIColor.lightGray
         
-        
-        guard
-            let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
-        
-        self.view.backgroundColor = UIColor(patternImage: flareGradientImage)
+        self.view.backgroundColor = UIColor.white
         
         exercisesTextView.adjustUITextViewHeight()
         timeRepsTextView.adjustUITextViewHeight()
     }
 
     func checkType () {
+        let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
         var rounds: String?
         specyficsLabel.text! += " " + " "
         if (chosenWorkout.type != "AMRAP" && chosenWorkout.rounds>1) {
@@ -71,13 +67,15 @@ class DisplayWorkoutVC: UIViewController {
             specyficsLabel.text! = ""
         }
         
-        specyficsLabel.layer.borderColor = UIColor.white.cgColor
+        specyficsLabel.layer.borderColor = UIColor(patternImage: flareGradientImage!).cgColor
         specyficsLabel.layer.borderWidth = 3.0
+        specyficsLabel.textColor = UIColor.systemIndigo
 
         
     }
     
     func loadExercises () {
+        let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
         for exercise in chosenWorkout.exercises {
             timeRepsTextView.text += "\n"
             exercisesTextView.text += "\n"
@@ -102,11 +100,14 @@ class DisplayWorkoutVC: UIViewController {
         timeRepsTextView.adjustUITextViewHeight()
         exercisesTextView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         timeRepsTextView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        exercisesTextView.layer.borderColor = UIColor.white.cgColor
+        exercisesTextView.layer.borderColor = UIColor(patternImage: flareGradientImage!).cgColor
         exercisesTextView.layer.borderWidth = 3.0
         
-        timeRepsTextView.layer.borderColor = UIColor.white.cgColor
+        timeRepsTextView.layer.borderColor = UIColor(patternImage: flareGradientImage!).cgColor
         timeRepsTextView.layer.borderWidth = 3.0
+        
+        exercisesTextView.textColor = UIColor.systemIndigo
+        timeRepsTextView.textColor = UIColor.systemIndigo
     }
 }
 
