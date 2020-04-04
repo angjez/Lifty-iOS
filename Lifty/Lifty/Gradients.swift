@@ -13,8 +13,8 @@ extension CAGradientLayer {
     
     class func primaryGradient(on view: UIView) -> UIImage? {
         let gradient = CAGradientLayer()
-        let red = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
-        let orange = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        let red = #colorLiteral(red: 0.368627451, green: 0.3607843137, blue: 0.9019607843, alpha: 1)
+        let orange = #colorLiteral(red: 0.527336061, green: 0.5237882137, blue: 0.9017493725, alpha: 1)
         var bounds = view.bounds
         bounds.size.height += UIApplication.shared.statusBarFrame.size.height
         gradient.frame = bounds
@@ -62,6 +62,6 @@ func setGradients (tabBarController: UITabBarController, navigationController: U
                 return
             }
         
-        view.backgroundColor = UIColor(patternImage: flareGradientImage)
-        tableView.backgroundColor = UIColor(patternImage: flareGradientImage)
+//        view.backgroundColor = UIColor(patternImage: flareGradientImage)
+//        tableView.backgroundColor = UIColor(patternImage: flareGradientImage)
 }
