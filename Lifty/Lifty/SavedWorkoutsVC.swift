@@ -5,14 +5,13 @@
 //  Created by Angelika Jeziorska on 08/12/2019.
 //  Copyright © 2019 Angelika Jeziorska. All rights reserved.
 //
-
 import UIKit
 import Eureka
 
 var chosenWorkoutCell: ButtonCellOf<String>?
 var chosenWorkoutRow: ButtonRowOf<String>?
-var workoutIndex: Int?
-var chosenWorkout = Workout()
+var chosenWorkout = Workout(name: "")
+var chosenWorkoutIndex: Int?
 var globalSavedWorkoutsVC: SavedWorkoutsVC?
 
 class SavedWorkoutsVC: FormViewController {
@@ -24,154 +23,117 @@ class SavedWorkoutsVC: FormViewController {
     var workouts = [Workout]()
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         
         guard let tabBarController = self.tabBarController
-        else {
-            print("Error initializing tab bar controller!")
-            return
+            else {
+                print("Error initializing tab bar controller!")
+                return
         }
         guard let navigationController = self.navigationController
-        else {
-            print("Error initializing tab bar controller!")
-            return
+            else {
+                print("Error initializing tab bar controller!")
+                return
         }
-
+        
         setGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
         
         globalSavedWorkoutsVC = self as! SavedWorkoutsVC
         
         self.tableView.rowHeight = 70
-
-        self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-//        deleteAll()
+        //        deleteAll()
         loadWorkouts()
         initiateForm()
     }
     
     
     func initiateForm () {
+        for (index, workout) in workouts.enumerated() {
+            form +++ Section()
+                <<< ButtonRow () {
+                    $0.title = workout.name
+                    $0.tag = String(index)
+                    $0.value = "tap to edit"
+                    $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
+                    $0.onCellSelection(self.assignCellRow)
+                }.cellUpdate { cell, row in
+                    cell.textLabel?.textColor = UIColor.white
+                    cell.indentationLevel = 2
+                    cell.indentationWidth = 10
+                }.cellSetup { cell, _ in
+                    cell.backgroundColor = UIColor.clear
+                    cell.layer.borderColor = UIColor.white.cgColor
+                    cell.layer.borderWidth = 3.0
+                    cell.contentView.layoutMargins.right = 20
+            }
+        }
+        
         let deleteAction = SwipeAction(
             style: .destructive,
             title: "Delete",
             handler: { (action, row, completionHandler) in
-                deleteWorkout(workout: self.workouts[row.indexPath!.row])
-                self.workouts.remove(at: row.indexPath!.row)
+                deleteWorkout(workout: self.workouts[Int(row.tag!)!])
+                self.workouts.remove(at: Int(row.tag!)!)
+                self.form.removeAll()
+                self.initiateForm()
                 completionHandler?(true)
-            })
+        })
+        deleteAction.actionBackgroundColor = .red
         let editAction = SwipeAction(
             style: .normal,
             title: "Edit",
             handler: { (action, row, completionHandler) in
-                workoutIndex = row.indexPath!.row
-                chosenWorkout = self.workouts[row.indexPath!.row]
+                chosenWorkoutIndex = Int(row.tag!)
+                chosenWorkout = self.workouts[chosenWorkoutIndex!]
                 chosenWorkoutRow = (row as! ButtonRowOf<String>)
                 self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
-                 completionHandler?(true)
                 completionHandler?(true)
-            })
+        })
         editAction.actionBackgroundColor = .orange
-        
-        form +++
-            MultivaluedSection(multivaluedOptions: [.Reorder, .Insert, .Delete]) {
-                                $0.tag = "workouts"
-                                $0.addButtonProvider = { section in
-                                    return ButtonRow(){
-                                        $0.title = "Add workout"
-                                        }.cellUpdate { cell, row in
-                                            cell.textLabel?.textAlignment = .left
-                                            cell.textLabel?.textColor = #colorLiteral(red: 0.6745098039, green: 0.168627451, blue: 0.1490196078, alpha: 1)
-                                    }
-                                }
-                                $0.multivaluedRowToInsertAt = { index in
-                                    return ButtonRow () {
-                                        $0.title = "Workout"
-                                        $0.value = "tap to edit"
-                                        $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
-                                        $0.onCellSelection(self.assignCellRow)
-                                        let newWorkout = Workout()
-                                        self.workouts.append(newWorkout)
-                                        saveWorkout(workout: newWorkout)
-
-                                        $0.cell.backgroundColor = UIColor.clear
-                                        $0.cell.layer.borderColor = UIColor.white.cgColor
-                                        $0.cell.layer.borderWidth = 3.0
-                                        $0.cell.contentView.layoutMargins.right = 20
-
-                                        workoutIndex = index
-                                        chosenWorkoutCell = $0.cell
-                                        chosenWorkoutRow = $0
-                                        chosenWorkout = newWorkout
-                                        self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
-                                    }.cellUpdate { cell, row in
-                                    cell.textLabel?.textColor = UIColor.white
-                                    cell.indentationLevel = 2
-                                    cell.indentationWidth = 10
-                                    }
-                                }
-                if (workouts.isEmpty) {
-                                $0  <<< ButtonRow () {
-                                    $0.title = "Workout"
-                                    $0.value = "tap to edit"
-                                    $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
-                                    $0.onCellSelection(self.assignCellRow)
-                                    let newWorkout = Workout()
-                                    self.workouts.append(newWorkout)
-                                    saveWorkout(workout: newWorkout)
-
-                                }.cellUpdate { cell, row in
-                                    cell.textLabel?.textColor = UIColor.white
-                                    cell.indentationLevel = 2
-                                }.cellSetup { cell, _ in
-                                    cell.backgroundColor = UIColor.clear
-                                    cell.layer.borderColor = UIColor.white.cgColor
-                                    cell.layer.borderWidth = 3.0
-                                    cell.contentView.layoutMargins.right = 20
-                                }
-                }
-                for workout in workouts {
-                        $0  <<< ButtonRow () {
-                                $0.title = workout.name
-                                $0.value = "tap to edit"
-                                $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
-                                $0.onCellSelection(self.assignCellRow)
-                        }.cellUpdate { cell, row in
-                            cell.textLabel?.textColor = UIColor.white
-                            cell.indentationLevel = 2
-                            cell.indentationWidth = 10
-                        }.cellSetup { cell, _ in
-                            cell.backgroundColor = UIColor.clear
-                            cell.layer.borderColor = UIColor.white.cgColor
-                            cell.layer.borderWidth = 3.0
-                            cell.contentView.layoutMargins.right = 20
-                        }
-                }
-            }
         
         for row in form.rows {
             row.baseCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             row.trailingSwipe.actions = [deleteAction]
             row.trailingSwipe.performsFirstActionWithFullSwipe = true
-
+            
             row.leadingSwipe.actions = [editAction]
             row.leadingSwipe.performsFirstActionWithFullSwipe = true
         }
-
+        form +++ Section()
+            <<< ButtonRow () {
+                $0.title = "Add workout"
+                $0.presentationMode = .segueName(segueName: "NewWorkoutSegue", onDismiss: nil)
+                $0.onCellSelection(self.assignCellRow)
+                $0.tag = "Add workout"
+            }.cellUpdate { cell, row in
+                cell.textLabel?.textAlignment = .left
+                cell.textLabel?.textColor = #colorLiteral(red: 0.6745098039, green: 0.168627451, blue: 0.1490196078, alpha: 1)
+        }
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        chosenWorkout = workouts[row.indexPath!.row]
-        workoutIndex = row.indexPath!.row
+        if (row.tag! == "Add workout") {
+            let newWorkout = Workout(name: "")
+            self.workouts.append(newWorkout)
+            saveWorkout(workout: newWorkout)
+            chosenWorkout = workouts.last!
+            chosenWorkoutIndex = workouts.count-1
+        }
+        else {
+            chosenWorkoutIndex = Int(row.tag!)
+            chosenWorkout = workouts[chosenWorkoutIndex!]
+        }
         chosenWorkoutCell = cell
         chosenWorkoutRow = row
     }
     
     func changeWorkoutData (modifiedWorkout: Workout) {
-        
-        for (index, workout) in workouts.enumerated()  {
-            if index == workoutIndex {
+        form.removeAll()
+        for (index, workout) in self.workouts.enumerated()  {
+            if workout.name == chosenWorkout.name && index == chosenWorkoutIndex {
                 deleteWorkout(workout: workout)
                 workout.assign(workoutToAssign: modifiedWorkout)
                 saveWorkout(workout: workout)
@@ -180,6 +142,7 @@ class SavedWorkoutsVC: FormViewController {
                 break
             }
         }
+        initiateForm()
     }
-
+    
 }

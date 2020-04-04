@@ -19,7 +19,7 @@ class NewWorkoutVC: FormViewController {
     @IBOutlet weak var triggerButton: UIButton!
     
     var workoutTypes =  ["AMRAP","EMOM","for time","tabata"]
-    let workout = Workout()
+    let workout = Workout(name: "New")
 
     
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class NewWorkoutVC: FormViewController {
             form +++
 
                   TextRow("Title").cellSetup { cell, row in
-                    if (chosenWorkout.name != "Workout") {
+                    if (chosenWorkout.name != "Workout" && chosenWorkout.name != "") {
                         cell.textField.placeholder = chosenWorkout.name
                         row.value = chosenWorkout.name
                     }

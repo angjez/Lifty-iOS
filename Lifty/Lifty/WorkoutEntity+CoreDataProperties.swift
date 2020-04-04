@@ -13,35 +13,35 @@ import UIKit
 
 
 extension WorkoutEntity {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<WorkoutEntity> {
         return NSFetchRequest<WorkoutEntity>(entityName: "WorkoutEntity")
     }
-
+    
     @NSManaged public var name: String?
     @NSManaged public var type: String?
     @NSManaged public var time: String?
     @NSManaged public var restTime: String?
     @NSManaged public var rounds: Int32
     @NSManaged public var exercises: NSSet?
-
+    
 }
 
 // MARK: Generated accessors for exercises
 extension WorkoutEntity {
-
+    
     @objc(addExercisesObject:)
     @NSManaged public func addToExercises(_ value: ExerciseEntity)
-
+    
     @objc(removeExercisesObject:)
     @NSManaged public func removeFromExercises(_ value: ExerciseEntity)
-
+    
     @objc(addExercises:)
     @NSManaged public func addToExercises(_ values: NSSet)
-
+    
     @objc(removeExercises:)
     @NSManaged public func removeFromExercises(_ values: NSSet)
-
+    
 }
 
 func saveWorkout (workout: Workout) {
@@ -56,7 +56,7 @@ func saveWorkout (workout: Workout) {
     workoutEntity.restTime = workout.restTime
     
     var exerciseEntities = [ExerciseEntity(context: managedObjectContext)]
-    for (index, exercise) in workout.exercises.enumerated() {
+    for exercise in workout.exercises {
         let newExerciseEntity = ExerciseEntity(context: managedObjectContext)
         newExerciseEntity.name = exercise.exerciseName
         newExerciseEntity.index = Int32(exercise.exerciseIndex)
@@ -94,7 +94,7 @@ func deleteWorkout (workout: Workout) {
         }
         try managedObjectContext.save()
     } catch let error as NSError {
-            print("\(error)")
+        print("\(error)")
     }
 }
 
@@ -107,31 +107,31 @@ func loadWorkouts () {
         let workoutEntities = try managedObjectContext.fetch(fetchRequest)
         for workoutEntity in workoutEntities {
             if (workoutEntity.value(forKey: "name") as? String != nil) {
-            let loadedWorkout = Workout()
-            loadedWorkout.name = workoutEntity.value(forKey: "name") as! String
-            loadedWorkout.type = workoutEntity.value(forKey: "type") as! String
-            loadedWorkout.time = workoutEntity.value(forKey: "time") as! String
-            loadedWorkout.restTime = workoutEntity.value(forKey: "restTime") as! String
-            loadedWorkout.rounds = workoutEntity.value(forKey: "rounds") as! Int
+                let loadedWorkout = Workout(name: "")
+                loadedWorkout.name = workoutEntity.value(forKey: "name") as! String
+                loadedWorkout.type = workoutEntity.value(forKey: "type") as! String
+                loadedWorkout.time = workoutEntity.value(forKey: "time") as! String
+                loadedWorkout.restTime = workoutEntity.value(forKey: "restTime") as! String
+                loadedWorkout.rounds = workoutEntity.value(forKey: "rounds") as! Int
                 
-            let exerciseFetchRequest = NSFetchRequest<ExerciseEntity>(entityName: "ExerciseEntity")
-            let exerciseEntities = try managedObjectContext.fetch(exerciseFetchRequest)
-            for exerciseEntity in exerciseEntities {
-                if exerciseEntity.ofWorkout!.name == loadedWorkout.name {
-                    if (exerciseEntity.name != nil) {
-                        let loadedExercise = Exercise(exerciseIndex: Int(exerciseEntity.index))
-                        loadedExercise.exerciseName = exerciseEntity.name!
-                        loadedExercise.exerciseType = exerciseEntity.type!
-                        loadedExercise.reps = Int(exerciseEntity.reps)
-                        loadedExercise.exerciseTime = exerciseEntity.time!
-                        if (exerciseEntity.notes != nil) {
-                            loadedExercise.notes = exerciseEntity.notes!
+                let exerciseFetchRequest = NSFetchRequest<ExerciseEntity>(entityName: "ExerciseEntity")
+                let exerciseEntities = try managedObjectContext.fetch(exerciseFetchRequest)
+                for exerciseEntity in exerciseEntities {
+                    if exerciseEntity.ofWorkout!.name == loadedWorkout.name {
+                        if (exerciseEntity.name != nil) {
+                            let loadedExercise = Exercise(exerciseIndex: Int(exerciseEntity.index))
+                            loadedExercise.exerciseName = exerciseEntity.name!
+                            loadedExercise.exerciseType = exerciseEntity.type!
+                            loadedExercise.reps = Int(exerciseEntity.reps)
+                            loadedExercise.exerciseTime = exerciseEntity.time!
+                            if (exerciseEntity.notes != nil) {
+                                loadedExercise.notes = exerciseEntity.notes!
+                            }
+                            loadedWorkout.addExercise(exercise: loadedExercise)
                         }
-                        loadedWorkout.addExercise(exercise: loadedExercise)
                     }
                 }
-            }
-            globalSavedWorkoutsVC?.workouts.append(loadedWorkout)
+                globalSavedWorkoutsVC?.workouts.append(loadedWorkout)
             }
         }
     } catch let error as NSError {

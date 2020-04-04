@@ -17,8 +17,8 @@ class Workout {
     var rounds: Int
     var exercises = [Exercise]()
     
-    init() {
-        self.name = "Workout"
+    init(name: String) {
+        self.name = name
         self.type = ""
         self.time = "-"
         self.restTime = "-"
