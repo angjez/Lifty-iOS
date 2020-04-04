@@ -35,3 +35,33 @@ extension CAGradientLayer {
         return gradientImage
     }
 }
+
+func setGradients (tabBarController: UITabBarController, navigationController: UINavigationController, view: UIView, tableView: UITableView) {
+        guard
+            let flareGradientImageTabBar = CAGradientLayer.primaryGradient(on: tabBarController.tabBar)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+        tabBarController.tabBar.barTintColor = UIColor(patternImage: flareGradientImageTabBar)
+        
+        guard
+            let flareGradientImageNavBar = CAGradientLayer.primaryGradient(on: navigationController.navigationBar)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+
+        navigationController.navigationBar.barTintColor = UIColor(patternImage: flareGradientImageNavBar)
+    
+        
+        guard
+            let flareGradientImage = CAGradientLayer.primaryGradient(on: view)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+        
+        view.backgroundColor = UIColor(patternImage: flareGradientImage)
+        tableView.backgroundColor = UIColor(patternImage: flareGradientImage)
+}

@@ -24,70 +24,29 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="SGl-ea-cts"/>
+                        <segue destination="o3s-eN-0NC" kind="relationship" relationship="rootViewController" id="Ojm-Es-Okw"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNn-du-G7I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749" y="-1045"/>
         </scene>
-        <!--Saved workouts-->
-        <scene sceneID="hNz-n2-bh7">
-            <objects>
-                <viewController id="9pv-A4-QxB" customClass="SavedWorkoutsVC" customModule="Lifty" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="list.dash" catalog="system" selectedImage="list.dash" id="acW-dT-cKf">
-                        <color key="badgeColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
-                    <toolbarItems>
-                        <barButtonItem style="plain" id="6tU-x8-8OE">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NL2-Xk-2uy">
-                                <rect key="frame" x="20" y="12" width="374" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <connections>
-                                <segue destination="VqB-fT-kkn" kind="push" identifier="NewWorkoutSegue" id="brT-mi-EM8"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="Saved workouts" id="jxa-cc-rSH">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="ijX-3g-6fP">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nGu-Er-uhk">
-                                <rect key="frame" x="348" y="7" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </button>
-                            <connections>
-                                <segue destination="8dS-zr-tCA" kind="push" identifier="DisplayWorkoutSegue" id="YMt-jz-BgS"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="NewWorkoutButton" destination="6tU-x8-8OE" id="ibk-Rl-1bD"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
-        </scene>
-        <!--Quickstart-->
+        <!--Create a plan-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="QuickstartVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="PlansVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="play.fill" catalog="system" id="cPa-gy-q4n">
-                        <color key="badgeColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
-                    <navigationItem key="navigationItem" title="Quickstart" id="Xpb-5n-8Oi"/>
+                    <tabBarItem key="tabBarItem" title="" image="play.fill" catalog="system" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" title="Create a plan" id="Xpb-5n-8Oi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="748" y="431"/>
         </scene>
         <!--Display WorkoutVC-->
         <scene sceneID="Tkt-wN-o0z">
@@ -227,7 +186,6 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.67450980390000004" green="0.16862745100000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="textShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -243,6 +201,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTq-6Q-Pur" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749" y="1078"/>
+        </scene>
+        <!--SavedWorkouts-->
+        <scene sceneID="R80-cs-QfO">
+            <objects>
+                <viewController storyboardIdentifier="SavedWorkouts" title="SavedWorkouts" id="o3s-eN-0NC" customClass="SavedWorkoutsVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="wMm-Xc-3YW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="" image="list.dash" catalog="system" id="hMo-jW-hSV">
+                        <color key="badgeColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" title="Saved workouts" id="1uc-h1-wgC">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="2Hk-K3-gzn">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JHg-Xt-YK2">
+                                <rect key="frame" x="20" y="1" width="85" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="8dS-zr-tCA" kind="push" identifier="DisplayWorkoutSegue" id="URu-UD-b54"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="FHE-mj-uSH">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Ho-hl-VeC">
+                                <rect key="frame" x="309" y="3" width="85" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="VqB-fT-kkn" kind="push" identifier="NewWorkoutSegue" id="C1y-jy-ME0"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HUc-8I-7HU" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="747.82608695652175" y="-320.08928571428572"/>
         </scene>
     </scenes>
     <resources>

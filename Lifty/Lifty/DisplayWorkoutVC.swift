@@ -30,8 +30,6 @@ class DisplayWorkoutVC: UIViewController {
 
         titleLabel.layer.borderColor = UIColor.white.cgColor
         titleLabel.layer.borderWidth = 3.0
-        titleLabel.layer.cornerRadius = 5
-        titleLabel.layer.masksToBounds = true
         
         
         guard
@@ -75,8 +73,6 @@ class DisplayWorkoutVC: UIViewController {
         
         specyficsLabel.layer.borderColor = UIColor.white.cgColor
         specyficsLabel.layer.borderWidth = 3.0
-        specyficsLabel.layer.cornerRadius = 5
-        specyficsLabel.layer.masksToBounds = true
 
         
     }
@@ -108,13 +104,9 @@ class DisplayWorkoutVC: UIViewController {
         timeRepsTextView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         exercisesTextView.layer.borderColor = UIColor.white.cgColor
         exercisesTextView.layer.borderWidth = 3.0
-        exercisesTextView.layer.cornerRadius = 5
-        exercisesTextView.layer.masksToBounds = true
         
         timeRepsTextView.layer.borderColor = UIColor.white.cgColor
         timeRepsTextView.layer.borderWidth = 3.0
-        timeRepsTextView.layer.cornerRadius = 5
-        timeRepsTextView.layer.masksToBounds = true
     }
 }
 

@@ -19,42 +19,61 @@ class SavedWorkoutsVC: FormViewController {
     
     @IBOutlet weak var NewWorkoutButton: UIBarButtonItem!
     
+    private let greenView = UIView()
+    
     var workouts = [Workout]()
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
         
-        guard
-            let tabBarController = tabBarController,
-            let flareGradientImageTabBar = CAGradientLayer.primaryGradient(on: tabBarController.tabBar)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
-        tabBarController.tabBar.barTintColor = UIColor(patternImage: flareGradientImageTabBar)
-        
-        guard
-            let navigationController = navigationController,
-            let flareGradientImageNavBar = CAGradientLayer.primaryGradient(on: navigationController.navigationBar)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
+        guard let tabBarController = self.tabBarController
+        else {
+            print("Error initializing tab bar controller!")
+            return
+        }
+        guard let navigationController = self.navigationController
+        else {
+            print("Error initializing tab bar controller!")
+            return
+        }
 
-        navigationController.navigationBar.barTintColor = UIColor(patternImage: flareGradientImageNavBar)
+        setGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
         
         globalSavedWorkoutsVC = self as! SavedWorkoutsVC
         
+        self.tableView.rowHeight = 70
+
+        self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
+        
 //        deleteAll()
         loadWorkouts()
-        
-        self.view.backgroundColor = UIColor.white
-        self.initiateForm()
+        initiateForm()
     }
     
     
     func initiateForm () {
+        let deleteAction = SwipeAction(
+            style: .destructive,
+            title: "Delete",
+            handler: { (action, row, completionHandler) in
+                deleteWorkout(workout: self.workouts[row.indexPath!.row])
+                self.workouts.remove(at: row.indexPath!.row)
+                completionHandler?(true)
+            })
+        let editAction = SwipeAction(
+            style: .normal,
+            title: "Edit",
+            handler: { (action, row, completionHandler) in
+                workoutIndex = row.indexPath!.row
+                chosenWorkout = self.workouts[row.indexPath!.row]
+                chosenWorkoutRow = (row as! ButtonRowOf<String>)
+                self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
+                 completionHandler?(true)
+                completionHandler?(true)
+            })
+        editAction.actionBackgroundColor = .orange
+        
         form +++
             MultivaluedSection(multivaluedOptions: [.Reorder, .Insert, .Delete]) {
                                 $0.tag = "workouts"
@@ -63,6 +82,7 @@ class SavedWorkoutsVC: FormViewController {
                                         $0.title = "Add workout"
                                         }.cellUpdate { cell, row in
                                             cell.textLabel?.textAlignment = .left
+                                            cell.textLabel?.textColor = #colorLiteral(red: 0.6745098039, green: 0.168627451, blue: 0.1490196078, alpha: 1)
                                     }
                                 }
                                 $0.multivaluedRowToInsertAt = { index in
@@ -75,44 +95,23 @@ class SavedWorkoutsVC: FormViewController {
                                         self.workouts.append(newWorkout)
                                         saveWorkout(workout: newWorkout)
 
-
-                                        let deleteAction = SwipeAction(
-                                            style: .destructive,
-                                            title: "Delete",
-                                            handler: { (action, row, completionHandler) in
-                                                deleteWorkout(workout: self.workouts[index])
-                                                self.workouts.remove(at: index)
-                                                completionHandler?(true)
-                                            })
-
-                                        $0.trailingSwipe.actions = [deleteAction]
-                                        $0.trailingSwipe.performsFirstActionWithFullSwipe = true
-
-                                        let infoAction = SwipeAction(
-                                            style: .normal,
-                                            title: "Edit",
-                                            handler: { (action, row, completionHandler) in
-                                                workoutIndex = row.indexPath!.row
-                                                chosenWorkout = self.workouts[row.indexPath!.row]
-                                                chosenWorkoutRow = (row as! ButtonRowOf<String>)
-                                                self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
-                                                 completionHandler?(true)
-                                                completionHandler?(true)
-                                            })
-                                        infoAction.actionBackgroundColor = .orange
-
-                                        $0.leadingSwipe.actions = [infoAction]
-                                        $0.leadingSwipe.performsFirstActionWithFullSwipe = true
-
+                                        $0.cell.backgroundColor = UIColor.clear
+                                        $0.cell.layer.borderColor = UIColor.white.cgColor
+                                        $0.cell.layer.borderWidth = 3.0
+                                        $0.cell.contentView.layoutMargins.right = 20
 
                                         workoutIndex = index
                                         chosenWorkoutCell = $0.cell
                                         chosenWorkoutRow = $0
                                         chosenWorkout = newWorkout
                                         self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
+                                    }.cellUpdate { cell, row in
+                                    cell.textLabel?.textColor = UIColor.white
+                                    cell.indentationLevel = 2
+                                    cell.indentationWidth = 10
                                     }
                                 }
-                if (workouts.count == 0) {
+                if (workouts.isEmpty) {
                                 $0  <<< ButtonRow () {
                                     $0.title = "Workout"
                                     $0.value = "tap to edit"
@@ -122,72 +121,43 @@ class SavedWorkoutsVC: FormViewController {
                                     self.workouts.append(newWorkout)
                                     saveWorkout(workout: newWorkout)
 
-                                    let deleteAction = SwipeAction(
-                                         style: .destructive,
-                                         title: "Delete",
-                                         handler: { (action, row, completionHandler) in
-                                            deleteWorkout(workout: self.workouts[0])
-                                            self.workouts.remove(at: 0)
-                                            completionHandler?(true)
-                                         })
-
-                                     $0.trailingSwipe.actions = [deleteAction]
-                                     $0.trailingSwipe.performsFirstActionWithFullSwipe = true
-
-                                     let infoAction = SwipeAction(
-                                         style: .normal,
-                                         title: "Edit",
-                                         handler: { (action, row, completionHandler) in
-                                            chosenWorkout = self.workouts[row.indexPath!.row]
-                                            workoutIndex = row.indexPath!.row
-                                            chosenWorkoutRow = (row as! ButtonRowOf<String>)
-                                            self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
-                                             completionHandler?(true)
-                                             completionHandler?(true)
-                                         })
-                                     infoAction.actionBackgroundColor = .orange
-
-                                     $0.leadingSwipe.actions = [infoAction]
-                                     $0.leadingSwipe.performsFirstActionWithFullSwipe = true
-
+                                }.cellUpdate { cell, row in
+                                    cell.textLabel?.textColor = UIColor.white
+                                    cell.indentationLevel = 2
+                                }.cellSetup { cell, _ in
+                                    cell.backgroundColor = UIColor.clear
+                                    cell.layer.borderColor = UIColor.white.cgColor
+                                    cell.layer.borderWidth = 3.0
+                                    cell.contentView.layoutMargins.right = 20
                                 }
                 }
-                for (index, workout) in workouts.enumerated() {
+                for workout in workouts {
                         $0  <<< ButtonRow () {
                                 $0.title = workout.name
                                 $0.value = "tap to edit"
                                 $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegue", onDismiss: nil)
                                 $0.onCellSelection(self.assignCellRow)
-
-                                let deleteAction = SwipeAction(
-                                     style: .destructive,
-                                     title: "Delete",
-                                     handler: { (action, row, completionHandler) in
-                                        deleteWorkout(workout: self.workouts[row.indexPath!.row])
-                                        self.workouts.remove(at: index)
-                                        completionHandler?(true)
-                                     })
-
-                                 $0.trailingSwipe.actions = [deleteAction]
-                                 $0.trailingSwipe.performsFirstActionWithFullSwipe = true
-
-                                 let infoAction = SwipeAction(
-                                     style: .normal,
-                                     title: "Edit",
-                                     handler: { (action, row, completionHandler) in
-                                        chosenWorkout = self.workouts[row.indexPath!.row]
-                                        workoutIndex = row.indexPath!.row
-                                        chosenWorkoutRow = (row as! ButtonRowOf<String>)
-                                        self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
-                                         completionHandler?(true)
-                                     })
-                                 infoAction.actionBackgroundColor = .orange
-
-                                 $0.leadingSwipe.actions = [infoAction]
-                                 $0.leadingSwipe.performsFirstActionWithFullSwipe = true
-                    }
+                        }.cellUpdate { cell, row in
+                            cell.textLabel?.textColor = UIColor.white
+                            cell.indentationLevel = 2
+                            cell.indentationWidth = 10
+                        }.cellSetup { cell, _ in
+                            cell.backgroundColor = UIColor.clear
+                            cell.layer.borderColor = UIColor.white.cgColor
+                            cell.layer.borderWidth = 3.0
+                            cell.contentView.layoutMargins.right = 20
+                        }
                 }
             }
+        
+        for row in form.rows {
+            row.baseCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            row.trailingSwipe.actions = [deleteAction]
+            row.trailingSwipe.performsFirstActionWithFullSwipe = true
+
+            row.leadingSwipe.actions = [editAction]
+            row.leadingSwipe.performsFirstActionWithFullSwipe = true
+        }
 
     }
     
@@ -211,6 +181,5 @@ class SavedWorkoutsVC: FormViewController {
             }
         }
     }
-    
-}
 
+}

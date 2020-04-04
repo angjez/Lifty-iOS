@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		66093234242F5A08001BEC19 /* UIextensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* UIextensions.swift */; };
+		66093234242F5A08001BEC19 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* Gradients.swift */; };
 		6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */; };
-		6649E3CC24334E7800991AB3 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6649E3CB24334E7800991AB3 /* Eureka.framework */; };
-		6649E3CD24334E7800991AB3 /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6649E3CB24334E7800991AB3 /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		66A48571242A5EC4004D4AE2 /* ExerciseEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */; };
 		66A48573242A5EC4004D4AE2 /* WorkoutEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */; };
 		66A48575242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A48574242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift */; };
@@ -24,12 +22,15 @@
 		66FF0591240930BE004AABF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
 		66FF0592240930BE004AABF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */; };
 		66FF0593240930BE004AABF6 /* SavedWorkoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */; };
-		66FF0595240930BE004AABF6 /* QuickstartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0587240930BE004AABF6 /* QuickstartVC.swift */; };
+		66FF0595240930BE004AABF6 /* PlansVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0587240930BE004AABF6 /* PlansVC.swift */; };
 		66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0588240930BE004AABF6 /* Lifty.xcdatamodeld */; };
 		66FF0597240930BE004AABF6 /* ExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058A240930BE004AABF6 /* ExerciseVC.swift */; };
 		66FF0598240930BE004AABF6 /* DataClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058B240930BE004AABF6 /* DataClasses.swift */; };
 		66FF0599240930BE004AABF6 /* NewWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */; };
 		66FF059A240930BE004AABF6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66FF058D240930BE004AABF6 /* Info.plist */; };
+		66FFE8982433BBA300AE6072 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FFE8952433BB9400AE6072 /* Eureka.framework */; };
+		66FFE8992433BBA300AE6072 /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66FFE8952433BB9400AE6072 /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		66FFE89A2433BBAA00AE6072 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FFE8952433BB9400AE6072 /* Eureka.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,20 @@
 			remoteGlobalIDString = 66FF051624092C18004AABF6;
 			remoteInfo = Lifty;
 		};
+		66FFE8942433BB9400AE6072 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51729DEB1B9A4F5E004A00EB;
+			remoteInfo = Eureka;
+		};
+		66FFE8962433BB9400AE6072 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51729DF51B9A4F5E004A00EB;
+			remoteInfo = EurekaTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,7 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6649E3CD24334E7800991AB3 /* Eureka.framework in Embed Frameworks */,
+				66FFE8992433BBA300AE6072 /* Eureka.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,12 +79,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		66093233242F5A08001BEC19 /* UIextensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIextensions.swift; sourceTree = "<group>"; };
+		66093233242F5A08001BEC19 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		6649E3C824334DD300991AB3 /* Eureka */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Eureka; path = ../Eureka; sourceTree = "<group>"; };
-		6649E3CB24334E7800991AB3 /* Eureka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Eureka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A48574242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		66ABC65B240D300100295591 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66D661EB2423E19A00A5FCC2 /* DisplayWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayWorkoutVC.swift; sourceTree = "<group>"; };
@@ -86,13 +99,14 @@
 		66FF0583240930BD004AABF6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedWorkoutsVC.swift; sourceTree = "<group>"; };
-		66FF0587240930BE004AABF6 /* QuickstartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickstartVC.swift; sourceTree = "<group>"; };
+		66FF0587240930BE004AABF6 /* PlansVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansVC.swift; sourceTree = "<group>"; };
 		66FF0589240930BE004AABF6 /* Lifty.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lifty.xcdatamodel; sourceTree = "<group>"; };
 		66FF058A240930BE004AABF6 /* ExerciseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseVC.swift; sourceTree = "<group>"; };
 		66FF058B240930BE004AABF6 /* DataClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClasses.swift; sourceTree = "<group>"; };
 		66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWorkoutVC.swift; sourceTree = "<group>"; };
 		66FF058D240930BE004AABF6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66FF058E240930BE004AABF6 /* Lifty-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lifty-Bridging-Header.h"; sourceTree = "<group>"; };
+		66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Eureka.xcodeproj; path = ../Eureka/Eureka.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6649E3CC24334E7800991AB3 /* Eureka.framework in Frameworks */,
+				66FFE89A2433BBAA00AE6072 /* Eureka.framework in Frameworks */,
+				66FFE8982433BBA300AE6072 /* Eureka.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +139,6 @@
 		6649E3CA24334E7800991AB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6649E3CB24334E7800991AB3 /* Eureka.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,7 +151,7 @@
 				66FF053324092C1C004AABF6 /* LiftyTests */,
 				66FF053E24092C1C004AABF6 /* LiftyUITests */,
 				66FF051824092C18004AABF6 /* Products */,
-				6649E3C824334DD300991AB3 /* Eureka */,
+				66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */,
 				6649E3CA24334E7800991AB3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -164,9 +178,9 @@
 				66FF058B240930BE004AABF6 /* DataClasses.swift */,
 				66FF058A240930BE004AABF6 /* ExerciseVC.swift */,
 				66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */,
-				66FF0587240930BE004AABF6 /* QuickstartVC.swift */,
+				66FF0587240930BE004AABF6 /* PlansVC.swift */,
 				66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */,
-				66093233242F5A08001BEC19 /* UIextensions.swift */,
+				66093233242F5A08001BEC19 /* Gradients.swift */,
 				66D661EB2423E19A00A5FCC2 /* DisplayWorkoutVC.swift */,
 				66FF0582240930BD004AABF6 /* SceneDelegate.swift */,
 				66FF0583240930BD004AABF6 /* Main.storyboard */,
@@ -194,6 +208,15 @@
 				66FF054124092C1C004AABF6 /* Info.plist */,
 			);
 			path = LiftyUITests;
+			sourceTree = "<group>";
+		};
+		66FFE8902433BB9400AE6072 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66FFE8952433BB9400AE6072 /* Eureka.framework */,
+				66FFE8972433BB9400AE6072 /* EurekaTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +311,12 @@
 			mainGroup = 66FF050E24092C18004AABF6;
 			productRefGroup = 66FF051824092C18004AABF6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 66FFE8902433BB9400AE6072 /* Products */;
+					ProjectRef = 66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				66FF051624092C18004AABF6 /* Lifty */,
@@ -296,6 +325,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		66FFE8952433BB9400AE6072 /* Eureka.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Eureka.framework;
+			remoteRef = 66FFE8942433BB9400AE6072 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		66FFE8972433BB9400AE6072 /* EurekaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EurekaTests.xctest;
+			remoteRef = 66FFE8962433BB9400AE6072 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		66FF051524092C18004AABF6 /* Resources */ = {
@@ -341,8 +387,8 @@
 				66FF0599240930BE004AABF6 /* NewWorkoutVC.swift in Sources */,
 				66FF058F240930BE004AABF6 /* AppDelegate.swift in Sources */,
 				6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */,
-				66FF0595240930BE004AABF6 /* QuickstartVC.swift in Sources */,
-				66093234242F5A08001BEC19 /* UIextensions.swift in Sources */,
+				66FF0595240930BE004AABF6 /* PlansVC.swift in Sources */,
+				66093234242F5A08001BEC19 /* Gradients.swift in Sources */,
 				66FF0590240930BE004AABF6 /* SceneDelegate.swift in Sources */,
 				66FF0593240930BE004AABF6 /* SavedWorkoutsVC.swift in Sources */,
 			);

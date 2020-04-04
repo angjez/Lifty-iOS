@@ -27,6 +27,21 @@ class NewWorkoutVC: FormViewController {
 
         globalNewWorkoutVC = self as! NewWorkoutVC
         
+        guard let tabBarController = self.tabBarController
+        else {
+            print("Error initializing tab bar controller!")
+            return
+        }
+        guard let navigationController = self.navigationController
+        else {
+            print("Error initializing tab bar controller!")
+            return
+        }
+
+        setGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+        
+        self.tableView.rowHeight = 70
+        
         createWorkoutTitleForm()
         createWorkoutTypeForm()
         createExercisesForm()
@@ -317,6 +332,14 @@ class NewWorkoutVC: FormViewController {
     }
     
     func createExercisesForm () {
+        let deleteAction = SwipeAction(
+                     style: .destructive,
+                     title: "Delete",
+                     handler: { (action, row, completionHandler) in
+                        self.deleteExercise(index: row.indexPath!.row)
+                        completionHandler?(true)
+                     })
+
         form +++
             MultivaluedSection(multivaluedOptions: [.Reorder, .Insert, .Delete]) {
                                 $0.tag = "exercises"
@@ -341,16 +364,9 @@ class NewWorkoutVC: FormViewController {
                                         $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                         $0.onCellSelection(self.selected)
                                         
-                                        let deleteAction = SwipeAction(
-                                                     style: .destructive,
-                                                     title: "Delete",
-                                                     handler: { (action, row, completionHandler) in
-                                                         self.deleteExercise(index: row.indexPath!.row)
-                                                         completionHandler?(true)
-                                                     })
 
-                                                 $0.trailingSwipe.actions = [deleteAction]
-                                                 $0.trailingSwipe.performsFirstActionWithFullSwipe = true
+                                        $0.trailingSwipe.actions = [deleteAction]
+                                        $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                                     }
                                 }
                 if (chosenWorkout.exercises.isEmpty) {
@@ -367,16 +383,9 @@ class NewWorkoutVC: FormViewController {
                                     $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                     $0.onCellSelection(self.selected)
                                     
-                                    let deleteAction = SwipeAction(
-                                                 style: .destructive,
-                                                 title: "Delete",
-                                                 handler: { (action, row, completionHandler) in
-                                                    self.deleteExercise(index: row.indexPath!.row)
-                                                    completionHandler?(true)
-                                                 })
 
-                                             $0.trailingSwipe.actions = [deleteAction]
-                                             $0.trailingSwipe.performsFirstActionWithFullSwipe = true
+                                    $0.trailingSwipe.actions = [deleteAction]
+                                    $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                                 }
                 }
                 for exercise in chosenWorkout.exercises {
@@ -386,17 +395,9 @@ class NewWorkoutVC: FormViewController {
                                 self.workout.exercises.append(exercise)
                                 $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                                 $0.onCellSelection(self.selected)
-                                
-                                let deleteAction = SwipeAction(
-                                             style: .destructive,
-                                             title: "Delete",
-                                             handler: { (action, row, completionHandler) in
-                                                self.deleteExercise(index: row.indexPath!.row)
-                                                completionHandler?(true)
-                                             })
-
-                                         $0.trailingSwipe.actions = [deleteAction]
-                                         $0.trailingSwipe.performsFirstActionWithFullSwipe = true
+                            
+                                $0.trailingSwipe.actions = [deleteAction]
+                                $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                     }
                 }
             }

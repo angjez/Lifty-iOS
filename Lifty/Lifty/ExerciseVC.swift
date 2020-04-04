@@ -9,19 +9,25 @@
 import UIKit
 import Eureka
 
-class AlertHelper {
-    func showAlert(fromController controller: FormViewController) {
-        let unfilledAlert = UIAlertController(title: "Please fill out missing fields.", message: "", preferredStyle: UIAlertController.Style.alert)
-        unfilledAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        controller.present(unfilledAlert, animated: true, completion: nil)
-    }
-}
-
 class ExerciseVC: FormViewController{
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let tabBarController = self.tabBarController
+        else {
+            print("Error initializing tab bar controller!")
+            return
+        }
+        guard let navigationController = self.navigationController
+        else {
+            print("Error initializing tab bar controller!")
+            return
+        }
+
+        setGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+        
         createForm ()
     }
     
@@ -31,7 +37,7 @@ class ExerciseVC: FormViewController{
          form +++
 
                TextRow("Name").cellSetup { cell, row in
-                if chosenExercise.exerciseName != "" {
+                if chosenExercise.exerciseName != "" && chosenExercise.exerciseName != "Exercise" {
                     cell.textField.placeholder = chosenExercise.exerciseName
                     row.value = chosenExercise.exerciseName
                 }
@@ -139,7 +145,6 @@ class ExerciseVC: FormViewController{
     
     func manageInput () -> (Exercise) {
         
-        let alert = AlertHelper()
         var reps: Int? = nil
         var time: String? = nil
         var exerciseName: String? = nil
@@ -147,12 +152,7 @@ class ExerciseVC: FormViewController{
 //        getting exercise name
         
         let nameRow: TextRow? = form.rowBy(tag: "Name")
-        if nameRow!.value == nil {
-            alert.showAlert(fromController: self)
-        }
-        else {
-            exerciseName = nameRow!.value
-        }
+        exerciseName = nameRow!.value
         
 //        getting exercise type
         
@@ -164,22 +164,13 @@ class ExerciseVC: FormViewController{
         if exerciseType == "Time" {
             reps = 0
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "Time: ")
-            if timeRow!.value == "-" {
-                alert.showAlert(fromController: self)
-            }
-            else {
-                time = timeRow!.value
-            }
+            time = timeRow!.value
+
         }
         else if exerciseType == "Reps" {
             time = "-"
             let repsRow: IntRow? = form.rowBy(tag: "Amout of reps")
-            if repsRow!.value == nil {
-                alert.showAlert(fromController: self)
-            }
-            else {
-                reps = repsRow!.value
-            }
+            reps = repsRow!.value
         }
         
 //        getting notes
