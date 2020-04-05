@@ -8,9 +8,6 @@
 import UIKit
 import Eureka
 
-var chosenWorkoutRow: ButtonRowOf<String>?
-var chosenWorkout = Workout(name: "")
-var chosenWorkoutIndex: Int?
 var globalSavedWorkoutsVC: SavedWorkoutsVC?
 
 class SavedWorkoutsVC: FormViewController {
@@ -20,25 +17,18 @@ class SavedWorkoutsVC: FormViewController {
     private let greenView = UIView()
     
     var workouts = [Workout]()
+    var chosenWorkoutRow: ButtonRowOf<String>?
+    var chosenWorkout = Workout(name: "")
+    var chosenWorkoutIndex: Int?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-        
-        setGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
-        
         globalSavedWorkoutsVC = self as! SavedWorkoutsVC
+        
+        self.tableView.showsHorizontalScrollIndicator = false
+        self.tableView.showsVerticalScrollIndicator = false
         
         self.tableView.rowHeight = 70
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -50,13 +40,26 @@ class SavedWorkoutsVC: FormViewController {
         initiateForm()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        guard let tabBarController = self.tabBarController
+            else {
+                print("Error initializing tab bar controller!")
+                return
+        }
+        guard let navigationController = self.navigationController
+            else {
+                print("Error initializing navigation controller!")
+                return
+        }
+        
+        setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+    }
+    
     @IBAction func addNewWorkout(_ sender: Any) {
         UIView.setAnimationsEnabled(false)
         form +++ Section()
             <<< ButtonRow () {
-                $0.title = "Add workout"
-                $0.presentationMode = .segueName(segueName: "NewWorkoutSegue", onDismiss: nil)
-                $0.onCellSelection(self.assignCellRow)
+                $0.title = "New workout"
                 $0.tag = "Add workout"
             }
         let newWorkout = Workout(name: "")
@@ -85,9 +88,9 @@ class SavedWorkoutsVC: FormViewController {
                     cell.indentationLevel = 2
                     cell.indentationWidth = 10
                 }.cellSetup { cell, _ in
-                    let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
+                    let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
                     cell.backgroundColor = UIColor.white
-                    cell.layer.borderColor = UIColor(patternImage: flareGradientImage!).cgColor
+                    cell.layer.borderColor = UIColor(patternImage: blueGradientImage!).cgColor
                     cell.layer.borderWidth = 3.0
                     cell.contentView.layoutMargins.right = 20
             }
@@ -110,9 +113,9 @@ class SavedWorkoutsVC: FormViewController {
             style: .normal,
             title: "Edit",
             handler: { (action, row, completionHandler) in
-                chosenWorkoutIndex = Int(row.tag!)
-                chosenWorkout = self.workouts[chosenWorkoutIndex!]
-                chosenWorkoutRow = (row as! ButtonRowOf<String>)
+                globalSavedWorkoutsVC!.chosenWorkoutIndex = Int(row.tag!)
+                globalSavedWorkoutsVC!.chosenWorkout = self.workouts[globalSavedWorkoutsVC!.chosenWorkoutIndex!]
+                globalSavedWorkoutsVC!.chosenWorkoutRow = (row as! ButtonRowOf<String>)
                 self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                 completionHandler?(true)
         })
@@ -131,9 +134,9 @@ class SavedWorkoutsVC: FormViewController {
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        chosenWorkoutIndex = Int(row.tag!)
-            chosenWorkout = workouts[chosenWorkoutIndex!]
-        chosenWorkoutRow = row
+        globalSavedWorkoutsVC!.chosenWorkoutIndex = Int(row.tag!)
+        globalSavedWorkoutsVC!.chosenWorkout = workouts[globalSavedWorkoutsVC!.chosenWorkoutIndex!]
+        globalSavedWorkoutsVC!.chosenWorkoutRow = row
     }
     
     func changeWorkoutData (modifiedWorkout: Workout) {

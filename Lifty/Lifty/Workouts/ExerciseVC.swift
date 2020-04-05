@@ -11,7 +11,6 @@ import Eureka
 
 class ExerciseVC: FormViewController{
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,7 +30,7 @@ class ExerciseVC: FormViewController{
         self.tableView.backgroundColor = UIColor.white
         self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
         
-        setGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+        setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
         
         createForm ()
     }
@@ -43,9 +42,9 @@ class ExerciseVC: FormViewController{
             
             TextRow("Name").cellSetup { cell, row in
             } .cellUpdate { cell, row in
-                if chosenExercise.exerciseName != "" && chosenExercise.exerciseName != "Exercise" {
-                    cell.textField.text = chosenExercise.exerciseName
-                    row.value = chosenExercise.exerciseName
+                if globalNewWorkoutVC!.chosenExercise.exerciseName != "" && globalNewWorkoutVC!.chosenExercise.exerciseName != "Exercise" {
+                    cell.textField.placeholder = globalNewWorkoutVC!.chosenExercise.exerciseName
+                    row.value = globalNewWorkoutVC!.chosenExercise.exerciseName
                 }
                 else {
                     cell.textField.placeholder = row.tag
@@ -53,9 +52,9 @@ class ExerciseVC: FormViewController{
                 cell.textField!.textColor = UIColor.systemIndigo
                 cell.indentationLevel = 2
                 cell.indentationWidth = 10
-                let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
+                let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
                 cell.backgroundColor = UIColor.white
-                cell.layer.borderColor = UIColor(patternImage: flareGradientImage!).cgColor
+                cell.layer.borderColor = UIColor(patternImage: blueGradientImage!).cgColor
                 cell.layer.borderWidth = 3.0
                 cell.contentView.layoutMargins.right = 20
         }
@@ -65,7 +64,7 @@ class ExerciseVC: FormViewController{
                 $0.cell.layer.borderWidth = 3.0
                 $0.cell.layer.borderColor = UIColor.lightGray.cgColor
                 $0.options = ["Reps", "Time"]
-                if (chosenExercise.exerciseType == "Time") {
+                if (globalNewWorkoutVC!.chosenExercise.exerciseType == "Time") {
                     $0.value = "Time"
                 }
                 else {
@@ -78,10 +77,12 @@ class ExerciseVC: FormViewController{
             }
             
             <<< IntRow() {
+                $0.cell.layer.borderWidth = 3.0
+                $0.cell.layer.borderColor = UIColor.lightGray.cgColor
                 $0.tag = "Amout of reps"
                 $0.title = "Amout of reps"
-                if (chosenExercise.exerciseType == "Reps") {
-                    $0.value = chosenExercise.reps
+                if (globalNewWorkoutVC!.chosenExercise.exerciseType == "Reps") {
+                    $0.value = globalNewWorkoutVC!.chosenExercise.reps
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -124,8 +125,8 @@ class ExerciseVC: FormViewController{
                 $0.tag = "Time: "
                 $0.title = "Time: "
                 $0.options = []
-                if (chosenExercise.exerciseType == "Time") {
-                    $0.value = chosenExercise.exerciseTime
+                if (globalNewWorkoutVC!.chosenExercise.exerciseType == "Time") {
+                    $0.value = globalNewWorkoutVC!.chosenExercise.exerciseTime
                 }
                 
                 $0.options.append("-")
@@ -154,8 +155,8 @@ class ExerciseVC: FormViewController{
                 $0.tag = "Notes"
                 $0.cell.layer.borderWidth = 3.0
                 $0.cell.layer.borderColor = UIColor.lightGray.cgColor
-                if (chosenExercise.notes != nil) {
-                    $0.value = chosenExercise.notes
+                if (globalNewWorkoutVC!.chosenExercise.notes != nil) {
+                    $0.value = globalNewWorkoutVC!.chosenExercise.notes
                 }
                 $0.placeholder = "Additional notes (weight used, technique etc.)."
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)

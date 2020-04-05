@@ -8,10 +8,6 @@
 import UIKit
 import Eureka
 
-var exerciseIndex: Int = 0
-var chosenCell: ButtonCellOf<String>?
-var chosenRow: ButtonRowOf<String>?
-var chosenExercise = Exercise(exerciseIndex: 0)
 var globalNewWorkoutVC: NewWorkoutVC?
 
 class NewWorkoutVC: FormViewController {
@@ -20,25 +16,16 @@ class NewWorkoutVC: FormViewController {
     
     var workoutTypes =  ["AMRAP","EMOM","for time","tabata"]
     let workout = Workout(name: "New")
+    var exerciseIndex: Int = 0
+    var chosenCell: ButtonCellOf<String>?
+    var chosenRow: ButtonRowOf<String>?
+    var chosenExercise = Exercise(exerciseIndex: 0)
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         globalNewWorkoutVC = self as! NewWorkoutVC
-        
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-        
-        setGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
         
         self.tableView.rowHeight = 70
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
@@ -52,7 +39,21 @@ class NewWorkoutVC: FormViewController {
         createWorkoutTypeForm()
         createExercisesForm()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        guard let tabBarController = self.tabBarController
+            else {
+                print("Error initializing tab bar controller!")
+                return
+        }
+        guard let navigationController = self.navigationController
+            else {
+                print("Error initializing navigation controller!")
+                return
+        }
         
+        setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
     }
     
     func createWorkoutTitleForm () {
@@ -61,9 +62,9 @@ class NewWorkoutVC: FormViewController {
             
             TextRow("Title").cellSetup { cell, row in
             }.cellUpdate { cell, row in
-                if (chosenWorkout.name != "Workout" && chosenWorkout.name != "") {
-                    cell.textField!.text = chosenWorkout.name
-                    row.value = chosenWorkout.name
+                if (globalSavedWorkoutsVC!.chosenWorkout.name != "Workout" && globalSavedWorkoutsVC!.chosenWorkout.name != "") {
+                    cell.textField!.placeholder = globalSavedWorkoutsVC!.chosenWorkout.name
+                    row.value = globalSavedWorkoutsVC!.chosenWorkout.name
                 }
                 else {
                     cell.textField.placeholder = row.tag
@@ -71,9 +72,9 @@ class NewWorkoutVC: FormViewController {
                 cell.textField!.textColor = UIColor.systemIndigo
                 cell.indentationLevel = 2
                 cell.indentationWidth = 10
-                let flareGradientImage = CAGradientLayer.primaryGradient(on: self.view)
+                let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
                 cell.backgroundColor = UIColor.white
-                cell.layer.borderColor = UIColor(patternImage: flareGradientImage!).cgColor
+                cell.layer.borderColor = UIColor(patternImage: blueGradientImage!).cgColor
                 cell.layer.borderWidth = 3.0
                 cell.contentView.layoutMargins.right = 20
         }
@@ -90,8 +91,8 @@ class NewWorkoutVC: FormViewController {
                 $0.options = ["FOR TIME", "EMOM", "AMRAP", "TABATA"]
                 $0.cell.layer.borderWidth = 3.0
                 $0.cell.layer.borderColor = UIColor.lightGray.cgColor
-                if chosenWorkout.type != "" {
-                    $0.value = chosenWorkout.type
+                if globalSavedWorkoutsVC!.chosenWorkout.type != "" {
+                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.type
                 }
                 else {
                     $0.value = "FOR TIME"
@@ -105,8 +106,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("forTimeTime") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Time cap:"
-                if (chosenWorkout.time != "-") {
-                    $0.value = Int(chosenWorkout.time)
+                if (globalSavedWorkoutsVC!.chosenWorkout.time != "-") {
+                    $0.value = Int(globalSavedWorkoutsVC!.chosenWorkout.time)
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -136,8 +137,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("forTimeRounds") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Rounds:"
-                if (chosenWorkout.rounds != 0) {
-                    $0.value = chosenWorkout.rounds
+                if (globalSavedWorkoutsVC!.chosenWorkout.rounds != 0) {
+                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.rounds
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -171,8 +172,8 @@ class NewWorkoutVC: FormViewController {
             }
             <<< PickerInputRow<String>("EMOMTime"){
                 $0.title = "Every: "
-                if (chosenWorkout.time != "-") {
-                    $0.value = chosenWorkout.time
+                if (globalSavedWorkoutsVC!.chosenWorkout.time != "-") {
+                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.time
                 }
                 $0.options = []
                 
@@ -197,8 +198,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("EMOMRounds") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Rounds: "
-                if (chosenWorkout.rounds != 0) {
-                    $0.value = chosenWorkout.rounds
+                if (globalSavedWorkoutsVC!.chosenWorkout.rounds != 0) {
+                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.rounds
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -232,8 +233,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("AMRAPTime") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Time cap: "
-                if (chosenWorkout.time != "-") {
-                    $0.value = Int(chosenWorkout.time)
+                if (globalSavedWorkoutsVC!.chosenWorkout.time != "-") {
+                    $0.value = Int(globalSavedWorkoutsVC!.chosenWorkout.time)
                 }
                 $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
@@ -268,8 +269,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("TabataRounds") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Rounds:"
-                if (chosenWorkout.rounds != 0) {
-                    $0.value = chosenWorkout.rounds
+                if (globalSavedWorkoutsVC!.chosenWorkout.rounds != 0) {
+                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.rounds
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -298,8 +299,8 @@ class NewWorkoutVC: FormViewController {
             
             <<< PickerInputRow<String>("TabataTime"){
                 $0.title = "Work: "
-                if (chosenWorkout.time != "-") {
-                    $0.value = chosenWorkout.time
+                if (globalSavedWorkoutsVC!.chosenWorkout.time != "-") {
+                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.time
                 }
                 $0.options = []
                 
@@ -323,8 +324,8 @@ class NewWorkoutVC: FormViewController {
             
             <<< PickerInputRow<String>("TabataRestTime"){
                 $0.title = "Rest: "
-                if (chosenWorkout.restTime != "-") {
-                    $0.value = chosenWorkout.restTime
+                if (globalSavedWorkoutsVC!.chosenWorkout.restTime != "-") {
+                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.restTime
                 }
                 $0.options = []
                 
@@ -355,6 +356,8 @@ class NewWorkoutVC: FormViewController {
                 self.deleteExercise(index: row.indexPath!.row)
                 completionHandler?(true)
         })
+        deleteAction.actionBackgroundColor = .lightGray
+        deleteAction.image = UIImage(systemName: "trash")
         
         form +++ Section()
         
@@ -388,7 +391,7 @@ class NewWorkoutVC: FormViewController {
                         $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                     }
                 }
-                if (chosenWorkout.exercises.isEmpty) {
+                if (globalSavedWorkoutsVC!.chosenWorkout.exercises.isEmpty) {
                     $0  <<< ButtonRow () {
                         
                         $0.title = "Exercise"
@@ -407,7 +410,7 @@ class NewWorkoutVC: FormViewController {
                         $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                     }
                 }
-                for exercise in chosenWorkout.exercises {
+                for exercise in globalSavedWorkoutsVC!.chosenWorkout.exercises {
                     $0  <<< ButtonRow () {
                         $0.title = exercise.exerciseName
                         $0.value = "tap to edit"

@@ -11,20 +11,44 @@ import Foundation
 
 extension CAGradientLayer {
     
-    class func primaryGradient(on view: UIView) -> UIImage? {
+    class func blueGradient(on view: UIView) -> UIImage? {
         let gradient = CAGradientLayer()
-        let red = #colorLiteral(red: 0.368627451, green: 0.3607843137, blue: 0.9019607843, alpha: 1)
-        let orange = #colorLiteral(red: 0.527336061, green: 0.5237882137, blue: 0.9017493725, alpha: 1)
+        let indigo = #colorLiteral(red: 0.368627451, green: 0.3607843137, blue: 0.9019607843, alpha: 1)
+        let lightIndigo = #colorLiteral(red: 0.527336061, green: 0.5237882137, blue: 0.9017493725, alpha: 1)
         var bounds = view.bounds
         bounds.size.height += UIApplication.shared.statusBarFrame.size.height
         gradient.frame = bounds
-        gradient.colors = [red.cgColor, orange.cgColor]
+        gradient.colors = [indigo.cgColor, lightIndigo.cgColor]
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 0)
-        return gradient.createGradientImage(on: view)
+        return gradient.createBlueGradientImage(on: view)
     }
     
-    private func createGradientImage(on view: UIView) -> UIImage? {
+    private func createBlueGradientImage(on view: UIView) -> UIImage? {
+        var gradientImage: UIImage?
+        UIGraphicsBeginImageContext(view.frame.size)
+        if let context = UIGraphicsGetCurrentContext() {
+            render(in: context)
+            gradientImage = UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch)
+        }
+        UIGraphicsEndImageContext()
+        return gradientImage
+    }
+    
+    class func pinkGradient(on view: UIView) -> UIImage? {
+        let gradient = CAGradientLayer()
+        let pink = #colorLiteral(red: 1, green: 0.2156862745, blue: 0.3725490196, alpha: 1)
+        let lightPeachPink = #colorLiteral(red: 0.9983616471, green: 0.4554040432, blue: 0.442511797, alpha: 1)
+        var bounds = view.bounds
+        bounds.size.height += UIApplication.shared.statusBarFrame.size.height
+        gradient.frame = bounds
+        gradient.colors = [pink.cgColor, lightPeachPink.cgColor]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 0)
+        return gradient.createBlueGradientImage(on: view)
+    }
+    
+    private func createPinkGradientImage(on view: UIView) -> UIImage? {
         var gradientImage: UIImage?
         UIGraphicsBeginImageContext(view.frame.size)
         if let context = UIGraphicsGetCurrentContext() {
@@ -36,32 +60,62 @@ extension CAGradientLayer {
     }
 }
 
-func setGradients (tabBarController: UITabBarController, navigationController: UINavigationController, view: UIView, tableView: UITableView) {
+func setBlueGradients (tabBarController: UITabBarController, navigationController: UINavigationController, view: UIView, tableView: UITableView) {
         guard
-            let flareGradientImageTabBar = CAGradientLayer.primaryGradient(on: tabBarController.tabBar)
+            let blueGradientImageTabBar = CAGradientLayer.blueGradient(on: tabBarController.tabBar)
             else {
                 print("Error creating gradient color!")
                 return
             }
-        tabBarController.tabBar.barTintColor = UIColor(patternImage: flareGradientImageTabBar)
+        tabBarController.tabBar.barTintColor = UIColor(patternImage: blueGradientImageTabBar)
         
         guard
-            let flareGradientImageNavBar = CAGradientLayer.primaryGradient(on: navigationController.navigationBar)
+            let blueGradientImageNavBar = CAGradientLayer.blueGradient(on: navigationController.navigationBar)
             else {
                 print("Error creating gradient color!")
                 return
             }
 
-        navigationController.navigationBar.barTintColor = UIColor(patternImage: flareGradientImageNavBar)
+        navigationController.navigationBar.barTintColor = UIColor(patternImage: blueGradientImageNavBar)
     
         
         guard
-            let flareGradientImage = CAGradientLayer.primaryGradient(on: view)
+            let blueGradientImage = CAGradientLayer.blueGradient(on: view)
             else {
                 print("Error creating gradient color!")
                 return
             }
         
-//        view.backgroundColor = UIColor(patternImage: flareGradientImage)
-//        tableView.backgroundColor = UIColor(patternImage: flareGradientImage)
+//        view.backgroundColor = UIColor(patternImage: blueGradientImage)
+//        tableView.backgroundColor = UIColor(patternImage: blueGradientImage)
+}
+
+func setPinkGradients (tabBarController: UITabBarController, navigationController: UINavigationController, view: UIView, tableView: UITableView) {
+        guard
+            let pinkGradientImageTabBar = CAGradientLayer.pinkGradient(on: tabBarController.tabBar)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+        tabBarController.tabBar.barTintColor = UIColor(patternImage: pinkGradientImageTabBar)
+        
+        guard
+            let pinkGradientImageNavBar = CAGradientLayer.pinkGradient(on: navigationController.navigationBar)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+
+        navigationController.navigationBar.barTintColor = UIColor(patternImage: pinkGradientImageNavBar)
+    
+        
+        guard
+            let pinkGradientImage = CAGradientLayer.pinkGradient(on: view)
+            else {
+                print("Error creating gradient color!")
+                return
+            }
+        
+//        view.backgroundColor = UIColor(patternImage: blueGradientImage)
+//        tableView.backgroundColor = UIColor(patternImage: blueGradientImage)
 }
