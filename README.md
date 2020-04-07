@@ -7,8 +7,6 @@ Current features:
 
 ![Alt Text](https://i.imgur.com/c4eKdaV.gif)
 ![Alt Text](https://i.imgur.com/0AudMqO.gif)
-![Alt Text](https://i.imgur.com/fOxJuZT.gif)
-![Alt Text](https://i.imgur.com/iLs1naP.gif)
 
 Planned features:
   * CRUD workout plans (currently developing the forms)
