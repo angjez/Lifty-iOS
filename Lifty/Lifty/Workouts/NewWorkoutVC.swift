@@ -362,7 +362,7 @@ class NewWorkoutVC: FormViewController {
         form +++ Section()
         
         form +++
-            MultivaluedSection(multivaluedOptions: [.Reorder, .Insert, .Delete]) {
+            MultivaluedSection(multivaluedOptions: [.Insert, .Delete]) {
                 $0.tag = "exercises"
                 $0.addButtonProvider = { section in
                     return ButtonRow(){
@@ -412,7 +412,11 @@ class NewWorkoutVC: FormViewController {
                 }
                 for exercise in globalSavedWorkoutsVC!.chosenWorkout.exercises {
                     $0  <<< ButtonRow () {
-                        $0.title = exercise.exerciseName
+                        if (exercise.exerciseType == "Reps") {
+                            $0.title = exercise.exerciseName + " " +  String(exercise.reps)
+                        } else {
+                            $0.title = exercise.exerciseName + " " +  exercise.exerciseTime
+                        }
                         $0.value = "tap to edit"
                         self.workout.exercises.append(exercise)
                         $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
@@ -440,36 +444,17 @@ class NewWorkoutVC: FormViewController {
         for exercise in workout.exercises {
             if exercise.exerciseIndex == exerciseIndex {
                 exercise.assign(exerciseToAssign: modifiedExercise)
-                chosenRow?.title = exercise.exerciseName
+                if chosenExercise.exerciseType == "Reps" {
+                    chosenRow?.title = exercise.exerciseName + String(exercise.reps)
+                } else {
+                    chosenRow?.title = exercise.exerciseName + exercise.exerciseTime
+                }
                 chosenRow!.updateCell()
                 break
                 
             }
         }
     }
-    
-    //    detect reordering and correct data
-    
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        let firstToSwap = Exercise(exerciseIndex: 0)
-        let secondToSwap = Exercise(exerciseIndex: 0)
-        let dummy = Exercise(exerciseIndex: 0)
-        
-        for exercise in workout.exercises {
-            if exercise.exerciseIndex == sourceIndexPath[1]+1 {
-                firstToSwap.assign(exerciseToAssign: exercise)
-            }
-            if exercise.exerciseIndex == destinationIndexPath[1]+1 {
-                secondToSwap.assign(exerciseToAssign: exercise)
-                dummy.assign(exerciseToAssign: exercise)
-            }
-        }
-        workout.exercises[secondToSwap.exerciseIndex-1].assign(exerciseToAssign: firstToSwap)
-        workout.exercises[firstToSwap.exerciseIndex-1].assign(exerciseToAssign: dummy)
-        
-    }
-    
     
     //    handle deletion
     

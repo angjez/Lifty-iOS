@@ -13,6 +13,10 @@ var globalNewPlanVC: NewPlanVC?
 
 class NewPlanVC: FormViewController {
     
+    var chosenWeekRow: ButtonRowOf<String>?
+    var chosenWeek = Week()
+    var chosenWeekIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,10 +96,9 @@ class NewPlanVC: FormViewController {
             form +++
                 ButtonRow () { row in
                     row.title = "Week " + String(globalPlansVC!.chosenPlan.weeks.count)
-                    row.tag = "Week " + String(globalPlansVC!.chosenPlan.weeks.count)
-                    row.value = "tap to edit"
-                    row.presentationMode = .segueName(segueName: "DisplayPlanSegue", onDismiss: nil)
-                    //                row.onCellSelection(self.assignCellRow)
+                    row.tag = String(globalPlansVC!.chosenPlan.weeks.count - 1)
+                    row.presentationMode = .segueName(segueName: "weekSegue", onDismiss: nil)
+                    row.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink
                     cell.indentationLevel = 2
@@ -104,11 +107,11 @@ class NewPlanVC: FormViewController {
         }
         while Int(weekStepperRow!.value!) < globalPlansVC!.chosenPlan.weeks.count {
             for (index, row) in self.form.rows.enumerated() {
-                if row.tag == "Week " + String(globalPlansVC!.chosenPlan.weeks.count) {
+                if row.tag == String(globalPlansVC!.chosenPlan.weeks.count - 1) {
                     self.form.remove(at: index)
                 }
             }
-             globalPlansVC!.chosenPlan.weeks.removeLast()
+            globalPlansVC!.chosenPlan.weeks.removeLast()
         }
     }
     
@@ -121,16 +124,21 @@ class NewPlanVC: FormViewController {
             form +++
                 ButtonRow () { row in
                     row.title = "Week " + String(index+1)
-                    row.tag = "Week " + String(index+1)
-                    row.value = "tap to edit"
-                    row.presentationMode = .segueName(segueName: "DisplayPlanSegue", onDismiss: nil)
-                    //                row.onCellSelection(self.assignCellRow)
+                    row.tag = String(index)
+                    row.presentationMode = .segueName(segueName: "weekSegue", onDismiss: nil)
+                    row.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink
                     cell.indentationLevel = 2
                     cell.indentationWidth = 10
             }
         }
+    }
+    
+    func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
+        globalNewPlanVC!.chosenWeekIndex = Int(row.tag!)
+        globalNewPlanVC!.chosenWeek = globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!]
+        globalNewPlanVC!.chosenWeekRow = row
     }
     
 }

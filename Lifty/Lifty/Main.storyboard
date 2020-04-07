@@ -40,10 +40,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPk-rS-mXH">
-                                <rect key="frame" x="184" y="272" width="46" height="138"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPk-rS-mXH">
+                                <rect key="frame" x="116" y="277" width="182" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Button" image="info"/>
                                 <connections>
                                     <segue destination="Q02-Qw-rjg" kind="push" identifier="DisplayPlanSegue" id="5kj-GC-MJj"/>
                                 </connections>
@@ -82,6 +82,16 @@
                     <view key="view" contentMode="scaleToFill" id="0V2-o3-x2a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fit-lA-ZTZ">
+                                <rect key="frame" x="184" y="93" width="46" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="nkv-tg-Shd" kind="push" identifier="weekSegue" id="hkU-je-wu4"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="rC7-dF-KyH"/>
                     </view>
@@ -89,7 +99,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xV1-BK-khs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="431"/>
+            <point key="canvasLocation" x="1731.8840579710147" y="430.58035714285711"/>
+        </scene>
+        <!--WeekVC-->
+        <scene sceneID="8PG-Dg-xfP">
+            <objects>
+                <viewController id="nkv-tg-Shd" customClass="WeekVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="geC-bm-DTS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7R-iy-7XU">
+                                <rect key="frame" x="196" y="224" width="46" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="UQI-er-X7U" kind="push" identifier="chooseWorkoutSegue" id="OIu-ps-ykh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="fEd-kz-xFo"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="QBr-H6-ZcX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g7l-Qj-yJM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2567" y="431"/>
+        </scene>
+        <!--Choose WorkoutsVC-->
+        <scene sceneID="Ksd-jk-E96">
+            <objects>
+                <viewController id="UQI-er-X7U" customClass="ChooseWorkoutsVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bcr-ft-F4F">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihi-PV-9Yd">
+                                <rect key="frame" x="177" y="117" width="46" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="8dS-zr-tCA" kind="push" identifier="DisplayWorkoutSegueFromChecklist" id="QXd-sx-J1p"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="9CN-sf-S0T"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="46J-K8-c4x"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ukQ-VU-lMX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3468" y="431"/>
         </scene>
         <!--Display WorkoutVC-->
         <scene sceneID="Tkt-wN-o0z">
@@ -348,7 +410,11 @@
             <point key="canvasLocation" x="1732" y="1077"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="QXd-sx-J1p"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="info" width="128" height="128"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="pen" width="128" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
