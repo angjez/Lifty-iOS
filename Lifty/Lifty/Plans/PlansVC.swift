@@ -57,7 +57,6 @@ class PlansVC: FormViewController {
             }
         let newPlan = Plan(name: "")
         self.plans.append(newPlan)
-//        saveWorkout(workout: newWorkout)
         chosenPlan = plans.last!
         chosenPlanIndex = plans.count-1
         chosenPlanRow = (self.form.rows.last as! ButtonRowOf<String>)
@@ -65,6 +64,7 @@ class PlansVC: FormViewController {
     }
     
     func initiateForm () {
+        form.removeAll()
         UIView.setAnimationsEnabled(false)
         for (index, plan) in plans.enumerated() {
             form +++ Section()
@@ -74,7 +74,7 @@ class PlansVC: FormViewController {
                     $0.presentationMode = .segueName(segueName: "DisplayPlanSegue", onDismiss: nil)
                     $0.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
-                    cell.textLabel?.textColor = UIColor.systemIndigo
+                    cell.textLabel?.textColor = UIColor.systemPink
                     cell.indentationLevel = 2
                     cell.indentationWidth = 10
                 }.cellSetup { cell, _ in

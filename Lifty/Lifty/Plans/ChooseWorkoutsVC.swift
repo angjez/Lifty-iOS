@@ -10,6 +10,8 @@ import UIKit
 import Eureka
 
 class ChooseWorkoutsVC: FormViewController {
+    
+    let workoutsSelectable = SelectableSection<ImageCheckRow<String>>("Swipe right for workout preview", selectionType: .multipleSelection)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +45,7 @@ class ChooseWorkoutsVC: FormViewController {
         infoAction.actionBackgroundColor = .lightGray
         infoAction.image = UIImage(systemName: "info")
 
-        form +++ SelectableSection<ImageCheckRow<String>>("Swipe right for workout preview", selectionType: .multipleSelection)
+        form +++ workoutsSelectable
         for workout in globalSavedWorkoutsVC!.workouts  {
             form.last! <<< ImageCheckRow<String>(workout.name){ lrow in
                 lrow.title = workout.name
@@ -52,6 +54,16 @@ class ChooseWorkoutsVC: FormViewController {
                 lrow.leadingSwipe.actions = [infoAction]
                 lrow.leadingSwipe.performsFirstActionWithFullSwipe = true
                 }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        for workout in globalSavedWorkoutsVC!.workouts {
+            for selectableWorkoutRow in workoutsSelectable.selectedRows() {
+                if selectableWorkoutRow.title! == workout.name {
+                    globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days[(globalWeekVC?.chosenDayIndex)!].workouts.append(workout)
+                }
+            }
         }
     }
 

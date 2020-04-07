@@ -141,56 +141,10 @@ class NewPlanVC: FormViewController {
         globalNewPlanVC!.chosenWeekRow = row
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        let titleRow: TextRow? = form.rowBy(tag: "Title")
+        globalPlansVC?.chosenPlan.name = titleRow!.value!
+        globalPlansVC?.initiateForm()
+    }
+    
 }
-//
-//let deleteAction = SwipeAction(
-//        style: .destructive,
-//        title: "Delete",
-//        handler: { (action, row, completionHandler) in
-//            globalPlansVC!.chosenPlan.weeks.remove(at: row.indexPath!.row)
-//            completionHandler?(true)
-//    })
-//deleteAction.actionBackgroundColor = .lightGray
-//deleteAction.image = UIImage(systemName: "trash")
-//
-//    form +++ Section()
-//
-//    form +++
-//        MultivaluedSection(multivaluedOptions: [.Insert, .Delete]) {
-//            $0.tag = "weeks"
-//            $0.addButtonProvider = { section in
-//                return ButtonRow(){
-//                    $0.title = "Add another week"
-//                    $0.tag = "addWeekProvider"
-//                }.cellUpdate { cell, row in
-//                    cell.textLabel?.textAlignment = .left
-//                    cell.textLabel?.textColor = UIColor.lightGray
-//                }
-//            }
-//            $0.multivaluedRowToInsertAt = { index in
-//                return ButtonRow () {
-//                    let newWeek = Week()
-//                    globalPlansVC!.chosenPlan.weeks.append(newWeek)
-//                    $0.title = "Week " + String(globalPlansVC!.chosenPlan.weeks.count)
-//                    $0.value = "tap to edit"
-//
-//                    $0.presentationMode = .segueName(segueName: "WeekSegue", onDismiss: nil)
-//                    $0.onCellSelection(self.selected)
-//
-//
-//                    $0.trailingSwipe.actions = [deleteAction]
-//                    $0.trailingSwipe.performsFirstActionWithFullSwipe = true
-//                }
-//            }
-//            for (index, week) in globalPlansVC!.chosenPlan.weeks.enumerated() {
-//                $0  <<< ButtonRow () {
-//                    $0.title = "Week " + String(index)
-//                    $0.value = "tap to edit"
-//                    $0.presentationMode = .segueName(segueName: "WeekSegue", onDismiss: nil)
-//                    $0.onCellSelection(self.selected)
-//
-//                    $0.trailingSwipe.actions = [deleteAction]
-//                    $0.trailingSwipe.performsFirstActionWithFullSwipe = true
-//                }
-//            }
-//    }
