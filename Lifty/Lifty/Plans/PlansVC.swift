@@ -25,6 +25,8 @@ class PlansVC: FormViewController {
         
         globalPlansVC = self as! PlansVC
         
+        loadPlans()
+        
         self.tableView.rowHeight = 70
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView.backgroundColor = UIColor.white
@@ -91,7 +93,7 @@ class PlansVC: FormViewController {
             title: "Delete",
             handler: { (action, row, completionHandler) in
                 UIView.setAnimationsEnabled(false)
-//                deleteWorkout(workout: self.workouts[Int(row.tag!)!])
+                deletePlan(plan: self.plans[Int(row.tag!)!])
                 self.plans.remove(at: Int(row.tag!)!)
                 self.form.removeAll()
                 self.initiateForm()

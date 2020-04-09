@@ -186,12 +186,12 @@
 		669FDF282439D40C00B038C5 /* Plans */ = {
 			isa = PBXGroup;
 			children = (
-				66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */,
-				66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */,
 				66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */,
 				66583C58243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift */,
 				66583C59243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift */,
 				66583C5A243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift */,
+				66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */,
+				66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */,
 				669FDF292439D5E400B038C5 /* PlanDataClasses.swift */,
 				66FF0587240930BE004AABF6 /* PlansVC.swift */,
 				66B798CF243A059B0019E37C /* DisplayPlanVC.swift */,

@@ -45,8 +45,8 @@ class ChooseWorkoutsVC: FormViewController {
         infoAction.image = UIImage(systemName: "info")
         
         form +++ workoutsSelectable
-        for workout in globalSavedWorkoutsVC!.workouts  {
-            form.last! <<< ImageCheckRow<String>(workout.name){ lrow in
+        for (index, workout) in globalSavedWorkoutsVC!.workouts.enumerated()  {
+            form.last! <<< ImageCheckRow<String>(workout.name + String(index)){ lrow in
                 lrow.title = workout.name
                 lrow.selectableValue = workout.name
                 lrow.value = nil

@@ -12,6 +12,7 @@ import CoreData
 import UIKit
 
 
+
 extension WorkoutEntity {
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<WorkoutEntity> {
@@ -68,13 +69,12 @@ func saveWorkout (workout: Workout) {
     }
     
     workoutEntity.exercises = NSSet.init (array: exerciseEntities)
-    
+
     do {
         try managedObjectContext.save()
     } catch let error as NSError {
         print("Could not save. \(error), \(error.userInfo)")
     }
-    
 }
 
 
@@ -88,7 +88,7 @@ func deleteWorkout (workout: Workout) {
         guard let workoutEntities = try? managedObjectContext.fetch(fetchRequest) else { return }
         
         for workoutEntity in workoutEntities {
-            if (workoutEntity.value(forKey: "name") as! String) == workout.name {
+            if (((workoutEntity.value(forKey: "name") as? String) != nil) && ((workoutEntity.value(forKey: "name") as! String) == workout.name)) {
                 managedObjectContext.delete(workoutEntity)
             }
         }
@@ -139,16 +139,59 @@ func loadWorkouts () {
     }
 }
 
-func deleteAll () {
+func loadWorkoutsForDay (day: Day, workoutName: String) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let managedObjectContext = appDelegate.persistentContainer.viewContext
     
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "WorkoutEntity")
+    let fetchRequest = NSFetchRequest<WorkoutEntity>(entityName: "WorkoutEntity")
     do {
-        guard let workoutEntities = try? managedObjectContext.fetch(fetchRequest) else { return }
-        
+        let workoutEntities = try managedObjectContext.fetch(fetchRequest)
         for workoutEntity in workoutEntities {
-            managedObjectContext.delete(workoutEntity)
+            if (workoutEntity.value(forKey: "name") as? String == workoutName) {
+                let loadedWorkout = Workout(name: "")
+                loadedWorkout.name = workoutEntity.value(forKey: "name") as! String
+                loadedWorkout.type = workoutEntity.value(forKey: "type") as! String
+                loadedWorkout.time = workoutEntity.value(forKey: "time") as! String
+                loadedWorkout.restTime = workoutEntity.value(forKey: "restTime") as! String
+                loadedWorkout.rounds = workoutEntity.value(forKey: "rounds") as! Int
+                
+                let exerciseFetchRequest = NSFetchRequest<ExerciseEntity>(entityName: "ExerciseEntity")
+                let exerciseEntities = try managedObjectContext.fetch(exerciseFetchRequest)
+                for exerciseEntity in exerciseEntities {
+                    if exerciseEntity.ofWorkout!.name == loadedWorkout.name {
+                        if (exerciseEntity.name != nil) {
+                            let loadedExercise = Exercise(exerciseIndex: Int(exerciseEntity.index))
+                            loadedExercise.exerciseName = exerciseEntity.name!
+                            loadedExercise.exerciseType = exerciseEntity.type!
+                            loadedExercise.reps = Int(exerciseEntity.reps)
+                            loadedExercise.exerciseTime = exerciseEntity.time!
+                            if (exerciseEntity.notes != nil) {
+                                loadedExercise.notes = exerciseEntity.notes!
+                            }
+                            loadedWorkout.addExercise(exercise: loadedExercise)
+                        }
+                    }
+                }
+                day.workouts.append(loadedWorkout)
+            }
         }
+    } catch let error as NSError {
+        print("Could not load. \(error), \(error.userInfo)")
+    }
+}
+
+func deleteAllRecords(name: String) {
+    //delete all data
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+    let context = appDelegate.persistentContainer.viewContext
+
+    let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: name)
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+
+    do {
+        try context.execute(deleteRequest)
+        try context.save()
+    } catch {
+        print ("There was an error")
     }
 }

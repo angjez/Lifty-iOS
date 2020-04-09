@@ -142,9 +142,14 @@ class NewPlanVC: FormViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        let titleRow: TextRow? = form.rowBy(tag: "Title")
-        globalPlansVC?.chosenPlan.name = titleRow!.value!
-        globalPlansVC?.initiateForm()
+        if isMovingFromParent
+        {
+            let titleRow: TextRow? = form.rowBy(tag: "Title")
+            globalPlansVC?.chosenPlan.name = titleRow!.value!
+            globalPlansVC?.initiateForm()
+            deletePlan(plan: globalPlansVC!.chosenPlan)
+            savePlan(plan: globalPlansVC!.chosenPlan)
+        }
+        super.viewWillDisappear(animated)
     }
-    
 }

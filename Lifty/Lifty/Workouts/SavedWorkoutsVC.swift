@@ -35,7 +35,6 @@ class SavedWorkoutsVC: FormViewController {
         self.tableView.backgroundColor = UIColor.white
         self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
         
-        //        deleteAll()
         loadWorkouts()
         initiateForm()
     }

@@ -414,7 +414,7 @@ class NewWorkoutVC: FormViewController {
                     $0  <<< ButtonRow () {
                         if (exercise.exerciseType == "Reps") {
                             $0.title = exercise.exerciseName + " " +  String(exercise.reps)
-                        } else {
+                        } else if (exercise.exerciseType == "Time") {
                             $0.title = exercise.exerciseName + " " +  exercise.exerciseTime
                         }
                         $0.value = "tap to edit"
@@ -444,14 +444,13 @@ class NewWorkoutVC: FormViewController {
         for exercise in workout.exercises {
             if exercise.exerciseIndex == exerciseIndex {
                 exercise.assign(exerciseToAssign: modifiedExercise)
-                if chosenExercise.exerciseType == "Reps" {
-                    chosenRow?.title = exercise.exerciseName + String(exercise.reps)
-                } else {
-                    chosenRow?.title = exercise.exerciseName + exercise.exerciseTime
+                if modifiedExercise.exerciseType == "Reps" {
+                    chosenRow?.title = exercise.exerciseName + " " + String(exercise.reps)
+                } else if (modifiedExercise.exerciseType == "Time")  {
+                    chosenRow?.title = exercise.exerciseName + " " + exercise.exerciseTime
                 }
                 chosenRow!.updateCell()
                 break
-                
             }
         }
     }
@@ -465,6 +464,7 @@ class NewWorkoutVC: FormViewController {
     //    save workout data upon view dismissal
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         //        fix indexes
         for (index, exercise) in workout.exercises.enumerated() {
@@ -512,6 +512,7 @@ class NewWorkoutVC: FormViewController {
         }
         
         globalSavedWorkoutsVC!.changeWorkoutData(modifiedWorkout: workout)
+        
     }
     
 }
