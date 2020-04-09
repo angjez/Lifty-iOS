@@ -27,12 +27,49 @@ class DisplayPlanVC: FormViewController {
         tableView.layoutMargins = UIEdgeInsets.zero
         tableView.separatorInset = UIEdgeInsets.zero
         
+        //        add gesture recognizers
+        
+        let left = UISwipeGestureRecognizer(target : self, action : #selector(self.leftSwipe))
+        left.direction = .left
+        self.view.addGestureRecognizer(left)
+        
+        let right = UISwipeGestureRecognizer(target : self, action : #selector(self.rightSwipe))
+        right.direction = .right
+        self.view.addGestureRecognizer(right)
+        
         initiatePlanLabelForm()
         initiateWeekLabelForm()
         initiateDayRows ()
     }
     
+    @objc
+    func leftSwipe(){
+        //        next day
+        print("left")
+        if(currentWeekIndex < globalPlansVC!.chosenPlan.weeks.count - 1) {
+            currentWeekIndex += 1
+            self.form.removeAll()
+            initiatePlanLabelForm()
+            initiateWeekLabelForm()
+            initiateDayRows()
+        }
+    }
+    
+    @objc
+    func rightSwipe(){
+        print("right")
+        //        prev day
+        if(currentWeekIndex != 0) {
+            currentWeekIndex += -1
+            self.form.removeAll()
+            initiatePlanLabelForm()
+            initiateWeekLabelForm()
+            initiateDayRows()
+        }
+    }
+    
     func initiatePlanLabelForm () {
+        UIView.setAnimationsEnabled(false)
         let pinkGradientImage = CAGradientLayer.pinkGradient(on: self.view)
         form +++ Section()
             <<< LabelRow () {
@@ -47,9 +84,11 @@ class DisplayPlanVC: FormViewController {
                 cell.layer.borderWidth = 3.0
                 cell.contentView.layoutMargins.right = 20
         }
+        UIView.setAnimationsEnabled(true)
     }
     
     func initiateWeekLabelForm () {
+        UIView.setAnimationsEnabled(false)
         form +++ LabelRow () {
             $0.title = "Week " + String(currentWeekIndex + 1)
         }.cellUpdate { cell, row in
@@ -63,6 +102,7 @@ class DisplayPlanVC: FormViewController {
             cell.layer.borderWidth = 3.0
             cell.contentView.layoutMargins.right = 20
         }
+        UIView.setAnimationsEnabled(true)
     }
     
     func initiateDayRows () {

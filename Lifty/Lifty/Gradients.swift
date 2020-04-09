@@ -14,7 +14,7 @@ extension CAGradientLayer {
     class func blueGradient(on view: UIView) -> UIImage? {
         let gradient = CAGradientLayer()
         let indigo = #colorLiteral(red: 0.368627451, green: 0.3607843137, blue: 0.9019607843, alpha: 1)
-        let lightIndigo = #colorLiteral(red: 0.527336061, green: 0.5237882137, blue: 0.9017493725, alpha: 1)
+        let lightIndigo = #colorLiteral(red: 0.5254901961, green: 0.5254901961, blue: 0.9019607843, alpha: 1)
         var bounds = view.bounds
         bounds.size.height += UIApplication.shared.statusBarFrame.size.height
         gradient.frame = bounds

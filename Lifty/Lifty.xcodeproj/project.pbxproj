@@ -10,6 +10,12 @@
 		66093234242F5A08001BEC19 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* Gradients.swift */; };
 		6621C15C243C810100B670CA /* CustomCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6621C159243C810100B670CA /* CustomCells.swift */; };
 		6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */; };
+		66583C5B243F297B00C8AB03 /* DayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */; };
+		66583C5C243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */; };
+		66583C5D243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */; };
+		66583C5E243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C58243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift */; };
+		66583C5F243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C59243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift */; };
+		66583C60243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C5A243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift */; };
 		66702EED243A525600020ED7 /* ChooseWorkoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66702EEC243A525600020ED7 /* ChooseWorkoutsVC.swift */; };
 		66702EF1243A526300020ED7 /* WeekVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66702EF0243A526300020ED7 /* WeekVC.swift */; };
 		669FDF2A2439D5E400B038C5 /* PlanDataClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669FDF292439D5E400B038C5 /* PlanDataClasses.swift */; };
@@ -90,6 +96,12 @@
 		66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		66583C58243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		66583C59243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		66583C5A243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		66702EEC243A525600020ED7 /* ChooseWorkoutsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseWorkoutsVC.swift; sourceTree = "<group>"; };
 		66702EF0243A526300020ED7 /* WeekVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekVC.swift; sourceTree = "<group>"; };
 		669FDF292439D5E400B038C5 /* PlanDataClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDataClasses.swift; sourceTree = "<group>"; };
@@ -174,6 +186,12 @@
 		669FDF282439D40C00B038C5 /* Plans */ = {
 			isa = PBXGroup;
 			children = (
+				66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */,
+				66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */,
+				66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */,
+				66583C58243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift */,
+				66583C59243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift */,
+				66583C5A243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift */,
 				669FDF292439D5E400B038C5 /* PlanDataClasses.swift */,
 				66FF0587240930BE004AABF6 /* PlansVC.swift */,
 				66B798CF243A059B0019E37C /* DisplayPlanVC.swift */,
@@ -415,20 +433,26 @@
 				66B798D0243A059B0019E37C /* DisplayPlanVC.swift in Sources */,
 				6621C15C243C810100B670CA /* CustomCells.swift in Sources */,
 				66A48575242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift in Sources */,
+				66583C5D243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift in Sources */,
 				66A48573242A5EC4004D4AE2 /* WorkoutEntity+CoreDataProperties.swift in Sources */,
 				66FF0597240930BE004AABF6 /* ExerciseVC.swift in Sources */,
 				66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */,
 				66FF0598240930BE004AABF6 /* WorkoutDataClasses.swift in Sources */,
+				66583C5E243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift in Sources */,
 				66D661EC2423E19A00A5FCC2 /* DisplayWorkoutVC.swift in Sources */,
 				66FF0599240930BE004AABF6 /* NewWorkoutVC.swift in Sources */,
 				66B798CE243A05900019E37C /* NewPlanVC.swift in Sources */,
+				66583C5B243F297B00C8AB03 /* DayEntity+CoreDataClass.swift in Sources */,
 				66FF058F240930BE004AABF6 /* AppDelegate.swift in Sources */,
 				669FDF2A2439D5E400B038C5 /* PlanDataClasses.swift in Sources */,
+				66583C5F243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift in Sources */,
 				6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */,
 				66FF0595240930BE004AABF6 /* PlansVC.swift in Sources */,
 				66093234242F5A08001BEC19 /* Gradients.swift in Sources */,
+				66583C60243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift in Sources */,
 				66702EED243A525600020ED7 /* ChooseWorkoutsVC.swift in Sources */,
 				66702EF1243A526300020ED7 /* WeekVC.swift in Sources */,
+				66583C5C243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift in Sources */,
 				66FF0590240930BE004AABF6 /* SceneDelegate.swift in Sources */,
 				66FF0593240930BE004AABF6 /* SavedWorkoutsVC.swift in Sources */,
 			);
