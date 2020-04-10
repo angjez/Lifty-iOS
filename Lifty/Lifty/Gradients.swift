@@ -77,17 +77,6 @@ func setBlueGradients (tabBarController: UITabBarController, navigationControlle
             }
 
         navigationController.navigationBar.barTintColor = UIColor(patternImage: blueGradientImageNavBar)
-    
-        
-        guard
-            let blueGradientImage = CAGradientLayer.blueGradient(on: view)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
-        
-//        view.backgroundColor = UIColor(patternImage: blueGradientImage)
-//        tableView.backgroundColor = UIColor(patternImage: blueGradientImage)
 }
 
 func setPinkGradients (tabBarController: UITabBarController, navigationController: UINavigationController, view: UIView, tableView: UITableView) {
@@ -107,15 +96,4 @@ func setPinkGradients (tabBarController: UITabBarController, navigationControlle
             }
 
         navigationController.navigationBar.barTintColor = UIColor(patternImage: pinkGradientImageNavBar)
-    
-        
-        guard
-            let pinkGradientImage = CAGradientLayer.pinkGradient(on: view)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
-        
-//        view.backgroundColor = UIColor(patternImage: blueGradientImage)
-//        tableView.backgroundColor = UIColor(patternImage: blueGradientImage)
 }

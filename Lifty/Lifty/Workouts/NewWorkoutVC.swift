@@ -27,13 +27,7 @@ class NewWorkoutVC: FormViewController {
         
         globalNewWorkoutVC = self as! NewWorkoutVC
         
-        self.tableView.rowHeight = 70
-        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        self.tableView.separatorColor = UIColor.systemIndigo
-        self.tableView.backgroundColor = UIColor.white
-        self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
-        tableView.layoutMargins = UIEdgeInsets.zero
-        tableView.separatorInset = UIEdgeInsets.zero
+        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         
         createWorkoutTitleForm()
         createWorkoutTypeForm()
@@ -57,7 +51,7 @@ class NewWorkoutVC: FormViewController {
     }
     
     func createWorkoutTitleForm () {
-        
+        let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
         form +++
             
             TextRow("Title").cellSetup { cell, row in
@@ -70,13 +64,7 @@ class NewWorkoutVC: FormViewController {
                     cell.textField.placeholder = row.tag
                 }
                 cell.textField!.textColor = UIColor.systemIndigo
-                cell.indentationLevel = 2
-                cell.indentationWidth = 10
-                let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
-                cell.backgroundColor = UIColor.white
-                cell.layer.borderColor = UIColor(patternImage: blueGradientImage!).cgColor
-                cell.layer.borderWidth = 3.0
-                cell.contentView.layoutMargins.right = 20
+                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
         }
     }
     

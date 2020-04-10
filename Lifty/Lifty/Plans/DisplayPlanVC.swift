@@ -16,16 +16,7 @@ class DisplayPlanVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.showsHorizontalScrollIndicator = false
-        self.tableView.showsVerticalScrollIndicator = false
-        
-        self.tableView.rowHeight = 70
-        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        self.tableView.separatorColor = UIColor.systemPink
-        self.tableView.backgroundColor = UIColor.white
-        self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
-        tableView.layoutMargins = UIEdgeInsets.zero
-        tableView.separatorInset = UIEdgeInsets.zero
+        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         //        add gesture recognizers
         
@@ -42,6 +33,21 @@ class DisplayPlanVC: FormViewController {
         initiateDayRows ()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        guard let tabBarController = self.tabBarController
+            else {
+                print("Error initializing tab bar controller!")
+                return
+        }
+        guard let navigationController = self.navigationController
+            else {
+                print("Error initializing navigation controller!")
+                return
+        }
+        
+        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+    }
+    
     @objc
     func leftSwipe(){
         //        next day
@@ -49,9 +55,7 @@ class DisplayPlanVC: FormViewController {
         if(currentWeekIndex < globalPlansVC!.chosenPlan.weeks.count - 1) {
             currentWeekIndex += 1
             self.form.removeAll()
-            initiatePlanLabelForm()
-            initiateWeekLabelForm()
-            initiateDayRows()
+            self.reInit()
         }
     }
     
@@ -61,11 +65,15 @@ class DisplayPlanVC: FormViewController {
         //        prev day
         if(currentWeekIndex != 0) {
             currentWeekIndex += -1
-            self.form.removeAll()
-            initiatePlanLabelForm()
-            initiateWeekLabelForm()
-            initiateDayRows()
+            self.reInit()
         }
+    }
+    
+    func reInit () {
+        self.form.removeAll()
+        self.initiatePlanLabelForm()
+        self.initiateWeekLabelForm()
+        self.initiateDayRows()
     }
     
     func initiatePlanLabelForm () {
@@ -77,13 +85,7 @@ class DisplayPlanVC: FormViewController {
             }.cellUpdate { cell, row in
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 40)
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
-                cell.textLabel?.textColor = UIColor.systemPink
-                cell.indentationLevel = 2
-                cell.indentationWidth = 10
-                cell.backgroundColor = UIColor.white
-                cell.layer.borderColor = UIColor(patternImage: pinkGradientImage!).cgColor
-                cell.layer.borderWidth = 3.0
-                cell.contentView.layoutMargins.right = 20
+                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
         }
         UIView.setAnimationsEnabled(true)
     }
@@ -95,13 +97,7 @@ class DisplayPlanVC: FormViewController {
         }.cellUpdate { cell, row in
             cell.height = {30}
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-            cell.textLabel?.textColor = UIColor.lightGray
-            cell.indentationLevel = 2
-            cell.indentationWidth = 10
-            cell.backgroundColor = UIColor.white
-            cell.layer.borderColor = UIColor.lightGray.cgColor
-            cell.layer.borderWidth = 3.0
-            cell.contentView.layoutMargins.right = 20
+            setLabelRowCellProperties(cell: cell, textColor: UIColor.lightGray, borderColor: UIColor.lightGray)
         }
         UIView.setAnimationsEnabled(true)
     }
@@ -115,13 +111,7 @@ class DisplayPlanVC: FormViewController {
                     $0.title = "Day " + String(dayIndex + 1)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-                    cell.textLabel?.textColor = UIColor.systemPink
-                    cell.indentationLevel = 2
-                    cell.indentationWidth = 10
-                    cell.backgroundColor = UIColor.white
-                    cell.layer.borderColor = UIColor(patternImage: pinkGradientImage!).cgColor
-                    cell.layer.borderWidth = 3.0
-                    cell.contentView.layoutMargins.right = 20
+                    setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
             }
             for (workoutIndex, workout) in globalPlansVC!.chosenPlan.weeks[currentWeekIndex].days[dayIndex].workouts.enumerated() {
                 form +++ Section()

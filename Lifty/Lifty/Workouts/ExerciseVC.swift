@@ -25,21 +25,18 @@ class ExerciseVC: FormViewController{
                 return
         }
         
-        self.tableView.rowHeight = 70
-        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.tableView.backgroundColor = UIColor.white
-        self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
+        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         
         setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
         
-        createForm ()
+        createTitleForm ()
+        createExerciseForm ()
+        createNotesForm ()
     }
     
-    
-    func createForm () {
-        
+    func createTitleForm () {
+        let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
         form +++
-            
             TextRow("Name").cellSetup { cell, row in
             } .cellUpdate { cell, row in
                 if globalNewWorkoutVC!.chosenExercise.exerciseName != "" && globalNewWorkoutVC!.chosenExercise.exerciseName != "Exercise" {
@@ -50,14 +47,11 @@ class ExerciseVC: FormViewController{
                     cell.textField.placeholder = row.tag
                 }
                 cell.textField!.textColor = UIColor.systemIndigo
-                cell.indentationLevel = 2
-                cell.indentationWidth = 10
-                let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
-                cell.backgroundColor = UIColor.white
-                cell.layer.borderColor = UIColor(patternImage: blueGradientImage!).cgColor
-                cell.layer.borderWidth = 3.0
-                cell.contentView.layoutMargins.right = 20
+                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
         }
+    }
+    
+    func createExerciseForm () {
         form +++
             Section()
             <<< SegmentedRow<String>("exerciseType"){
@@ -73,7 +67,7 @@ class ExerciseVC: FormViewController{
             }
             +++ Section(){
                 $0.tag = "reps_t"
-                $0.hidden = "$exerciseType != 'Reps'" // .Predicate(NSPredicate(format: "$segments != 'Reps'"))
+                $0.hidden = "$exerciseType != 'Reps'"
             }
             
             <<< IntRow() {
@@ -148,8 +142,10 @@ class ExerciseVC: FormViewController{
                 $0.options.append("\(minutes):\(seconds)0")
                 $0.value = $0.options.first
             }
-            
-            +++ Section()
+    }
+    
+    func createNotesForm () {
+          form  +++ Section()
             
             <<< TextAreaRow() {
                 $0.tag = "Notes"

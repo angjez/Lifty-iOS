@@ -42,16 +42,18 @@ extension DayEntity {
 
 
 func loadDays(weekEntity: WeekEntity, week: Week, loadedPlan: Plan) {
-    for _ in 1...weekEntity.days!.count {
-        week.days.append(Day())
-    }
-    for dayEntity in weekEntity.days! {
-        let loadedDay = Day()
-        for workout in (dayEntity as! DayEntity).workouts! {
-            if((workout as! WorkoutEntity).name != nil) {
-                loadWorkoutsForDay (day: loadedDay, workoutName: (workout as! WorkoutEntity).name!)
-            }
+    if (weekEntity.days!.count > 0) {
+        for _ in 1...weekEntity.days!.count {
+            week.days.append(Day())
         }
-        week.days[Int((dayEntity as! DayEntity).index)] = loadedDay
+        for dayEntity in weekEntity.days! {
+            let loadedDay = Day()
+            for workout in (dayEntity as! DayEntity).workouts! {
+                if((workout as! WorkoutEntity).name != nil) {
+                    loadWorkoutsForDay (day: loadedDay, workoutName: (workout as! WorkoutEntity).name!)
+                }
+            }
+            week.days[Int((dayEntity as! DayEntity).index)] = loadedDay
+        }
     }
 }

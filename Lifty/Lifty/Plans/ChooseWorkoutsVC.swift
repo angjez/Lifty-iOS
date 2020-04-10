@@ -16,20 +16,25 @@ class ChooseWorkoutsVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.showsHorizontalScrollIndicator = false
-        self.tableView.showsVerticalScrollIndicator = false
-        
-        self.tableView.rowHeight = 70
-        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        self.tableView.separatorColor = UIColor.systemPink
-        self.tableView.backgroundColor = UIColor.white
-        self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
-        tableView.layoutMargins = UIEdgeInsets.zero
-        tableView.separatorInset = UIEdgeInsets.zero
+        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         createSelectableWorkoutForm()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        guard let tabBarController = self.tabBarController
+            else {
+                print("Error initializing tab bar controller!")
+                return
+        }
+        guard let navigationController = self.navigationController
+            else {
+                print("Error initializing navigation controller!")
+                return
+        }
+        
+        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+    }
     
     func createSelectableWorkoutForm () {
         let infoAction = SwipeAction(

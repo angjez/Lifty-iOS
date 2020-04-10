@@ -25,6 +25,7 @@
 		66ABC65C240D300100295591 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66ABC65B240D300100295591 /* Assets.xcassets */; };
 		66B798CE243A05900019E37C /* NewPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B798CD243A05900019E37C /* NewPlanVC.swift */; };
 		66B798D0243A059B0019E37C /* DisplayPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B798CF243A059B0019E37C /* DisplayPlanVC.swift */; };
+		66D441F42440BB4F00FF62C2 /* TableViewCustomisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D441F32440BB4F00FF62C2 /* TableViewCustomisation.swift */; };
 		66D661EC2423E19A00A5FCC2 /* DisplayWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D661EB2423E19A00A5FCC2 /* DisplayWorkoutVC.swift */; };
 		66FF053524092C1C004AABF6 /* LiftyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053424092C1C004AABF6 /* LiftyTests.swift */; };
 		66FF054024092C1C004AABF6 /* LiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053F24092C1C004AABF6 /* LiftyUITests.swift */; };
@@ -109,6 +110,7 @@
 		66ABC65B240D300100295591 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66B798CD243A05900019E37C /* NewPlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlanVC.swift; sourceTree = "<group>"; };
 		66B798CF243A059B0019E37C /* DisplayPlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPlanVC.swift; sourceTree = "<group>"; };
+		66D441F32440BB4F00FF62C2 /* TableViewCustomisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCustomisation.swift; sourceTree = "<group>"; };
 		66D661EB2423E19A00A5FCC2 /* DisplayWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayWorkoutVC.swift; sourceTree = "<group>"; };
 		66FF051724092C18004AABF6 /* Lifty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lifty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053024092C1C004AABF6 /* LiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,10 +177,10 @@
 				66A48574242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift */,
 				6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */,
 				6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */,
-				66FF058A240930BE004AABF6 /* ExerciseVC.swift */,
-				66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */,
 				66FF0585240930BD004AABF6 /* SavedWorkoutsVC.swift */,
 				66D661EB2423E19A00A5FCC2 /* DisplayWorkoutVC.swift */,
+				66FF058C240930BE004AABF6 /* NewWorkoutVC.swift */,
+				66FF058A240930BE004AABF6 /* ExerciseVC.swift */,
 			);
 			path = Workouts;
 			sourceTree = "<group>";
@@ -186,13 +188,13 @@
 		669FDF282439D40C00B038C5 /* Plans */ = {
 			isa = PBXGroup;
 			children = (
+				669FDF292439D5E400B038C5 /* PlanDataClasses.swift */,
 				66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */,
 				66583C58243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift */,
 				66583C59243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift */,
 				66583C5A243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift */,
 				66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */,
 				66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */,
-				669FDF292439D5E400B038C5 /* PlanDataClasses.swift */,
 				66FF0587240930BE004AABF6 /* PlansVC.swift */,
 				66B798CF243A059B0019E37C /* DisplayPlanVC.swift */,
 				66B798CD243A05900019E37C /* NewPlanVC.swift */,
@@ -231,6 +233,7 @@
 			children = (
 				66ABC65B240D300100295591 /* Assets.xcassets */,
 				66093233242F5A08001BEC19 /* Gradients.swift */,
+				66D441F32440BB4F00FF62C2 /* TableViewCustomisation.swift */,
 				669FDF282439D40C00B038C5 /* Plans */,
 				669FDF252439D3B200B038C5 /* Workouts */,
 				66FF0581240930BD004AABF6 /* AppDelegate.swift */,
@@ -436,6 +439,7 @@
 				66583C5D243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift in Sources */,
 				66A48573242A5EC4004D4AE2 /* WorkoutEntity+CoreDataProperties.swift in Sources */,
 				66FF0597240930BE004AABF6 /* ExerciseVC.swift in Sources */,
+				66D441F42440BB4F00FF62C2 /* TableViewCustomisation.swift in Sources */,
 				66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */,
 				66FF0598240930BE004AABF6 /* WorkoutDataClasses.swift in Sources */,
 				66583C5E243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift in Sources */,

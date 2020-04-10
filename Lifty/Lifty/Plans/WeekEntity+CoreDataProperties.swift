@@ -44,12 +44,14 @@ extension WeekEntity {
 }
 
 func loadWeeks (planEntity: PlanEntity, loadedPlan: Plan) {
-    for _ in 1...planEntity.weeks!.count {
-        loadedPlan.weeks.append(Week())
-    }
-    for weekEntity in planEntity.weeks! {
-        let loadedWeek = Week()
-        loadDays(weekEntity: weekEntity as! WeekEntity, week: loadedWeek, loadedPlan: loadedPlan)
-        loadedPlan.weeks[Int((weekEntity as! WeekEntity).index)] = loadedWeek
+    if (planEntity.weeks!.count > 0) {
+        for _ in 1...planEntity.weeks!.count {
+            loadedPlan.weeks.append(Week())
+        }
+        for weekEntity in planEntity.weeks! {
+            let loadedWeek = Week()
+            loadDays(weekEntity: weekEntity as! WeekEntity, week: loadedWeek, loadedPlan: loadedPlan)
+            loadedPlan.weeks[Int((weekEntity as! WeekEntity).index)] = loadedWeek
+        }
     }
 }

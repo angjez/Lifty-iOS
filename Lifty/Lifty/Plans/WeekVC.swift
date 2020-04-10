@@ -24,19 +24,25 @@ class WeekVC: FormViewController {
         
         self.title =  "Week " + String(globalNewPlanVC!.chosenWeekIndex! + 1)
         
-        self.tableView.showsHorizontalScrollIndicator = false
-        self.tableView.showsVerticalScrollIndicator = false
-        
-        self.tableView.rowHeight = 70
-        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        self.tableView.separatorColor = UIColor.systemPink
-        self.tableView.backgroundColor = UIColor.white
-        self.tableView?.frame = CGRect(x: 20, y: (self.tableView?.frame.origin.y)!, width: (self.tableView?.frame.size.width)!-40, height: (self.tableView?.frame.size.height)!)
-        tableView.layoutMargins = UIEdgeInsets.zero
-        tableView.separatorInset = UIEdgeInsets.zero
+        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         createTrainingDaysForm()
         createDayRows()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        guard let tabBarController = self.tabBarController
+            else {
+                print("Error initializing tab bar controller!")
+                return
+        }
+        guard let navigationController = self.navigationController
+            else {
+                print("Error initializing navigation controller!")
+                return
+        }
+        
+        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
     }
     
     func createTrainingDaysForm () {
@@ -60,16 +66,10 @@ class WeekVC: FormViewController {
                 cell.stepper.stepValue = 1
                 cell.stepper.maximumValue = 7
                 cell.stepper.minimumValue = 1
-                cell.indentationLevel = 2
-                cell.indentationWidth = 1
-                cell.backgroundColor = UIColor.white
-                cell.layer.borderColor = UIColor(patternImage: pinkGradientImage!).cgColor
-                cell.layer.borderWidth = 3.0
-                cell.contentView.layoutMargins.right = 20
             }.cellUpdate { (cell, row) in
                 self.dayRowsHaveChanged()
                 cell.valueLabel.textColor = UIColor.systemPink
-                cell.textLabel!.textColor = UIColor.systemPink
+                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
         }
     }
     
