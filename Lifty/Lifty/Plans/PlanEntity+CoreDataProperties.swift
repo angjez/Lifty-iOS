@@ -49,19 +49,36 @@ func savePlan (plan: Plan) {
     let planEntity = PlanEntity(context: managedObjectContext)
     planEntity.name = plan.name
     
-    var weekEntities = [WeekEntity(context: managedObjectContext)]
-    for week in plan.weeks {
+    for (weekIndex, week) in plan.weeks.enumerated() {
         let newWeekEntity = WeekEntity(context: managedObjectContext)
-        saveWeekForPlan(week: week, weekEntity: newWeekEntity)
-        weekEntities.append(newWeekEntity)
+        newWeekEntity.ofPlan = planEntity
+        newWeekEntity.index = Int32(weekIndex)
+        for (dayIndex,day) in week.days.enumerated() {
+            let newDayEntity = DayEntity(context: managedObjectContext)
+            newDayEntity.ofWeek = newWeekEntity
+            newDayEntity.index = Int32(dayIndex)
+            for workout in day.workouts {
+                loadWorkoutsForSaving(dayEntity: newDayEntity, workoutName: workout.name)
+            }
+            newWeekEntity.days?.adding(newDayEntity)
+        }
+        planEntity.weeks?.adding(newWeekEntity)
     }
-    
-    planEntity.weeks = NSSet.init (array: weekEntities)
-    
     do {
         try managedObjectContext.save()
     } catch let error as NSError {
         print("Could not save. \(error), \(error.userInfo)")
+    }
+    
+    print(planEntity.name)
+    for (index, week) in planEntity.weeks!.enumerated() {
+        print("Week " + String(index))
+        for (index2, day) in (week as! WeekEntity).days!.enumerated() {
+            print("Day " + String(index2))
+            for workout in (day as! DayEntity).workouts! {
+                print((workout as! WorkoutEntity).name)
+            }
+        }
     }
 }
 
@@ -75,7 +92,7 @@ func loadPlans () {
         for planEntity in planEntities {
             if (planEntity.value(forKey: "name") as? String != nil) {
                 let loadedPlan = Plan(name: planEntity.value(forKey: "name") as! String)
-                loadWeeks(plan: loadedPlan)
+                loadWeeks(planEntity: planEntity, loadedPlan: loadedPlan)
                 globalPlansVC?.plans.append(loadedPlan)
             }
         }
@@ -83,6 +100,7 @@ func loadPlans () {
         print("Could not load. \(error), \(error.userInfo)")
     }
 }
+
 
 func deletePlan (plan: Plan) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }

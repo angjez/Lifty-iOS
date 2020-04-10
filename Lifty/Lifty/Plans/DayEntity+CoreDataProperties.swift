@@ -19,6 +19,7 @@ extension DayEntity {
     
     @NSManaged public var ofWeek: WeekEntity?
     @NSManaged public var workouts: NSSet?
+    @NSManaged public var index: Int32
     
 }
 
@@ -39,52 +40,28 @@ extension DayEntity {
     
 }
 
-func saveWorkoutsForDay (day: Day, dayEntity: DayEntity) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let managedObjectContext = appDelegate.persistentContainer.viewContext
-    
-    var workoutEntitiesForTheDay = [WorkoutEntity(context: managedObjectContext)]
-    let fetchRequest = NSFetchRequest<WorkoutEntity>(entityName: "WorkoutEntity")
-    do {
-        let workoutEntities = try managedObjectContext.fetch(fetchRequest)
-        for workout in day.workouts {
-            for workoutEntity in workoutEntities {
-                if ((workoutEntity.value(forKey: "name") as? String) == workout.name) {
-                    workoutEntitiesForTheDay.append(workoutEntity)
-                }
-            }
-        }
-    } catch let error as NSError {
-        print("Could not load. \(error), \(error.userInfo)")
-    }
-    dayEntity.workouts = NSSet.init (array: workoutEntitiesForTheDay)
-    
-    do {
-        try managedObjectContext.save()
-    } catch let error as NSError {
-        print("Could not save. \(error), \(error.userInfo)")
-    }
-}
 
-func loadDays(week: Week, plan: Plan) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let managedObjectContext = appDelegate.persistentContainer.viewContext
-    
-    let dayFetchRequest = NSFetchRequest<DayEntity>(entityName: "DayEntity")
-    do {
-        let dayEntities = try managedObjectContext.fetch(dayFetchRequest)
-        for dayEntity in dayEntities {
-            if dayEntity.ofWeek!.ofPlan!.name == plan.name {
-                let loadedDay = Day()
-                for workout in dayEntity.workouts! {
-                    loadWorkoutsForDay (day: loadedDay, workoutName: ((((workout as AnyObject).name) as String?)!))
-                }
-                if (!loadedDay.workouts.isEmpty) {
-                    week.days.append(loadedDay)
-                }
+func loadDays(weekEntity: WeekEntity, week: Week, loadedPlan: Plan) {
+    for _ in 1...weekEntity.days!.count {
+        week.days.append(Day())
+    }
+    for dayEntity in weekEntity.days! {
+        let loadedDay = Day()
+        for workout in (dayEntity as! DayEntity).workouts! {
+            if((workout as! WorkoutEntity).name != nil) {
+                loadWorkoutsForDay (day: loadedDay, workoutName: (workout as! WorkoutEntity).name!)
             }
         }
-    } catch let error as NSError {
-        print("Could not load. \(error), \(error.userInfo)")
+        week.days[Int((dayEntity as! DayEntity).index)] = loadedDay
+    }
+    
+    for (index, week) in loadedPlan.weeks.enumerated() {
+        print("Week " + String(index))
+        for (index2, day) in week.days.enumerated() {
+            print("Day " + String(index2))
+            for workout in day.workouts {
+                print(workout.name)
+            }
+        }
     }
 }

@@ -25,6 +25,7 @@ extension WorkoutEntity {
     @NSManaged public var restTime: String?
     @NSManaged public var rounds: Int32
     @NSManaged public var exercises: NSSet?
+    @NSManaged public var ofDays: NSSet?
     
 }
 
@@ -69,7 +70,7 @@ func saveWorkout (workout: Workout) {
     }
     
     workoutEntity.exercises = NSSet.init (array: exerciseEntities)
-
+    
     do {
         try managedObjectContext.save()
     } catch let error as NSError {
@@ -180,14 +181,49 @@ func loadWorkoutsForDay (day: Day, workoutName: String) {
     }
 }
 
+//func loadWorkoutsForSaving (dayEntity: DayEntity, workoutName: String) {
+//    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+//    let managedObjectContext = appDelegate.persistentContainer.viewContext
+//
+//    let fetchRequest = NSFetchRequest<WorkoutEntity>(entityName: "WorkoutEntity")
+//    do {
+//        let workoutEntities = try managedObjectContext.fetch(fetchRequest)
+//        for workoutEntity in workoutEntities {
+//            if (workoutEntity.value(forKey: "name") as? String == workoutName) {
+//                workoutEntity.ofDays?.adding(dayEntity)
+//                dayEntity.workouts?.adding(workoutEntity)
+//            }
+//        }
+//    } catch let error as NSError {
+//        print("Could not load. \(error), \(error.userInfo)")
+//    }
+//}
+
+func loadWorkoutsForSaving (dayEntity: DayEntity, workoutName: String) {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+    let managedObjectContext = appDelegate.persistentContainer.viewContext
+    
+    let fetchRequest = NSFetchRequest<WorkoutEntity>(entityName: "WorkoutEntity")
+    do {
+        let fetchedWorkoutEntities = try managedObjectContext.fetch(fetchRequest)
+        for workoutEntity in fetchedWorkoutEntities {
+            if (workoutEntity.value(forKey: "name") as? String == workoutName) {
+                dayEntity.addToWorkouts(workoutEntity)
+            }
+        }
+    } catch let error as NSError {
+        print("Could not load. \(error), \(error.userInfo)")
+    }
+}
+
 func deleteAllRecords(name: String) {
     //delete all data
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let context = appDelegate.persistentContainer.viewContext
-
+    
     let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: name)
     let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-
+    
     do {
         try context.execute(deleteRequest)
         try context.save()

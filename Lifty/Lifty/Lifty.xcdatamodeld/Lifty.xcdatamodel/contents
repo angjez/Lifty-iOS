@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="DayEntity" representedClassName="DayEntity" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="ofWeek" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeekEntity" inverseName="days" inverseEntity="WeekEntity"/>
-        <relationship name="workouts" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="WorkoutEntity" inverseName="ofDay" inverseEntity="WorkoutEntity"/>
+        <relationship name="workouts" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="WorkoutEntity" inverseName="ofDays" inverseEntity="WorkoutEntity"/>
     </entity>
     <entity name="ExerciseEntity" representedClassName=".ExerciseEntity" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -18,6 +19,7 @@
         <relationship name="weeks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WeekEntity" inverseName="ofPlan" inverseEntity="WeekEntity"/>
     </entity>
     <entity name="WeekEntity" representedClassName="WeekEntity" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DayEntity" inverseName="ofWeek" inverseEntity="DayEntity"/>
         <relationship name="ofPlan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlanEntity" inverseName="weeks" inverseEntity="PlanEntity"/>
     </entity>
@@ -28,13 +30,13 @@
         <attribute name="time" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseEntity" inverseName="ofWorkout" inverseEntity="ExerciseEntity"/>
-        <relationship name="ofDay" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity" inverseName="workouts" inverseEntity="DayEntity"/>
+        <relationship name="ofDays" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="DayEntity" inverseName="workouts" inverseEntity="DayEntity"/>
     </entity>
     <elements>
-        <element name="DayEntity" positionX="-45" positionY="72" width="128" height="73"/>
-        <element name="ExerciseEntity" positionX="-54" positionY="0" width="128" height="148"/>
-        <element name="PlanEntity" positionX="-63" positionY="54" width="128" height="73"/>
-        <element name="WeekEntity" positionX="-54" positionY="63" width="128" height="73"/>
-        <element name="WorkoutEntity" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="DayEntity" positionX="443.98046875" positionY="-255.1640625" width="128" height="88"/>
+        <element name="ExerciseEntity" positionX="-42.63671875" positionY="18.30859375" width="128" height="148"/>
+        <element name="PlanEntity" positionX="454.8125" positionY="126.953125" width="128" height="73"/>
+        <element name="WeekEntity" positionX="450.41015625" positionY="-74.58203125" width="128" height="88"/>
+        <element name="WorkoutEntity" positionX="-51.44921875" positionY="-272.87890625" width="128" height="148"/>
     </elements>
 </model>

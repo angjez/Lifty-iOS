@@ -104,7 +104,7 @@ class SavedWorkoutsVC: FormViewController {
                 self.workouts.remove(at: Int(row.tag!)!)
                 self.form.removeAll()
                 self.initiateForm()
-                completionHandler?(false)
+                completionHandler?(true)
         })
         deleteAction.actionBackgroundColor = .lightGray
         deleteAction.image = UIImage(systemName: "trash")

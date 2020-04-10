@@ -21,6 +21,7 @@ extension WeekEntity {
     }
     
     @NSManaged public var ofPlan: PlanEntity?
+    @NSManaged public var index: Int32
     @NSManaged public var days: NSSet?
     
 }
@@ -42,43 +43,13 @@ extension WeekEntity {
     
 }
 
-func saveWeekForPlan (week: Week, weekEntity: WeekEntity) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let managedObjectContext = appDelegate.persistentContainer.viewContext
-    
-    var dayEntities = [DayEntity(context: managedObjectContext)]
-    for day in week.days {
-        let newDayEntity = DayEntity(context: managedObjectContext)
-        saveWorkoutsForDay(day: day, dayEntity: newDayEntity)
-        dayEntities.append(newDayEntity)
+func loadWeeks (planEntity: PlanEntity, loadedPlan: Plan) {
+    for _ in 1...planEntity.weeks!.count {
+        loadedPlan.weeks.append(Week())
     }
-    
-    weekEntity.days = NSSet.init (array: dayEntities)
-    
-    do {
-        try managedObjectContext.save()
-    } catch let error as NSError {
-        print("Could not save. \(error), \(error.userInfo)")
-    }
-}
-
-func loadWeeks (plan: Plan) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let managedObjectContext = appDelegate.persistentContainer.viewContext
-    
-    let weekFetchRequest = NSFetchRequest<WeekEntity>(entityName: "WeekEntity")
-    do {
-        let weekEntities = try managedObjectContext.fetch(weekFetchRequest)
-        for weekEntity in weekEntities {
-            if weekEntity.ofPlan!.name == plan.name {
-                let loadedWeek = Week()
-                loadDays(week: loadedWeek, plan: plan)
-                if (!loadedWeek.days.isEmpty) {
-                    plan.weeks.append(loadedWeek)
-                }
-            }
-        }
-    } catch let error as NSError {
-        print("Could not load. \(error), \(error.userInfo)")
+    for weekEntity in planEntity.weeks! {
+        let loadedWeek = Week()
+        loadDays(weekEntity: weekEntity as! WeekEntity, week: loadedWeek, loadedPlan: loadedPlan)
+        loadedPlan.weeks[Int((weekEntity as! WeekEntity).index)] = loadedWeek
     }
 }
