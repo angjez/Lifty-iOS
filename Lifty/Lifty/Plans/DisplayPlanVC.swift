@@ -75,7 +75,8 @@ class DisplayPlanVC: FormViewController {
             <<< LabelRow () {
                 $0.title = globalPlansVC!.chosenPlan.name
             }.cellUpdate { cell, row in
-                cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 50)
+                cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 40)
+                cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.textColor = UIColor.systemPink
                 cell.indentationLevel = 2
                 cell.indentationWidth = 10

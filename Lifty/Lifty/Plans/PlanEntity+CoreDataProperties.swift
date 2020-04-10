@@ -69,17 +69,6 @@ func savePlan (plan: Plan) {
     } catch let error as NSError {
         print("Could not save. \(error), \(error.userInfo)")
     }
-    
-    print(planEntity.name)
-    for (index, week) in planEntity.weeks!.enumerated() {
-        print("Week " + String(index))
-        for (index2, day) in (week as! WeekEntity).days!.enumerated() {
-            print("Day " + String(index2))
-            for workout in (day as! DayEntity).workouts! {
-                print((workout as! WorkoutEntity).name)
-            }
-        }
-    }
 }
 
 func loadPlans () {

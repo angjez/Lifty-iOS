@@ -54,14 +54,4 @@ func loadDays(weekEntity: WeekEntity, week: Week, loadedPlan: Plan) {
         }
         week.days[Int((dayEntity as! DayEntity).index)] = loadedDay
     }
-    
-    for (index, week) in loadedPlan.weeks.enumerated() {
-        print("Week " + String(index))
-        for (index2, day) in week.days.enumerated() {
-            print("Day " + String(index2))
-            for workout in day.workouts {
-                print(workout.name)
-            }
-        }
-    }
 }
