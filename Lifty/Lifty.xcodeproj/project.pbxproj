@@ -11,6 +11,8 @@
 		66093234242F5A08001BEC19 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* Gradients.swift */; };
 		6621C15C243C810100B670CA /* ImageCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6621C159243C810100B670CA /* ImageCheckCell.swift */; };
 		6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */; };
+		665651C82444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
+		665651CB2444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
 		66583C5B243F297B00C8AB03 /* DayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */; };
 		66583C5C243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */; };
 		66583C5D243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */; };
@@ -232,8 +234,8 @@
 		66D505B424445E0000537D69 /* UserAccess */ = {
 			isa = PBXGroup;
 			children = (
-				66D505B024445DFA00537D69 /* RegisterVC.swift */,
 				66D505B524445E2F00537D69 /* LoginVC.swift */,
+				66D505B024445DFA00537D69 /* RegisterVC.swift */,
 				66D505B724445E4B00537D69 /* ResetPasswordVC.swift */,
 			);
 			path = UserAccess;
@@ -472,6 +474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				665651C82444B8E70077640E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +482,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				665651CB2444B8E70077640E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

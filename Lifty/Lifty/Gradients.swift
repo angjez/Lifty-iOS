@@ -61,39 +61,51 @@ extension CAGradientLayer {
 }
 
 func setBlueGradients (tabBarController: UITabBarController, navigationController: UINavigationController, view: UIView, tableView: UITableView) {
-        guard
-            let blueGradientImageTabBar = CAGradientLayer.blueGradient(on: tabBarController.tabBar)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
-        tabBarController.tabBar.barTintColor = UIColor(patternImage: blueGradientImageTabBar)
-        
-        guard
-            let blueGradientImageNavBar = CAGradientLayer.blueGradient(on: navigationController.navigationBar)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
-
-        navigationController.navigationBar.barTintColor = UIColor(patternImage: blueGradientImageNavBar)
+    guard
+        let blueGradientImageTabBar = CAGradientLayer.blueGradient(on: tabBarController.tabBar)
+        else {
+            print("Error creating gradient color!")
+            return
+    }
+    tabBarController.tabBar.barTintColor = UIColor(patternImage: blueGradientImageTabBar)
+    
+    guard
+        let blueGradientImageNavBar = CAGradientLayer.blueGradient(on: navigationController.navigationBar)
+        else {
+            print("Error creating gradient color!")
+            return
+    }
+    
+    navigationController.navigationBar.barTintColor = UIColor(patternImage: blueGradientImageNavBar)
 }
 
 func setPinkGradients (tabBarController: UITabBarController, navigationController: UINavigationController, view: UIView, tableView: UITableView) {
-        guard
-            let pinkGradientImageTabBar = CAGradientLayer.pinkGradient(on: tabBarController.tabBar)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
-        tabBarController.tabBar.barTintColor = UIColor(patternImage: pinkGradientImageTabBar)
-        
-        guard
-            let pinkGradientImageNavBar = CAGradientLayer.pinkGradient(on: navigationController.navigationBar)
-            else {
-                print("Error creating gradient color!")
-                return
-            }
+    guard
+        let pinkGradientImageTabBar = CAGradientLayer.pinkGradient(on: tabBarController.tabBar)
+        else {
+            print("Error creating gradient color!")
+            return
+    }
+    tabBarController.tabBar.barTintColor = UIColor(patternImage: pinkGradientImageTabBar)
+    
+    guard
+        let pinkGradientImageNavBar = CAGradientLayer.pinkGradient(on: navigationController.navigationBar)
+        else {
+            print("Error creating gradient color!")
+            return
+    }
+    
+    navigationController.navigationBar.barTintColor = UIColor(patternImage: pinkGradientImageNavBar)
+}
 
-        navigationController.navigationBar.barTintColor = UIColor(patternImage: pinkGradientImageNavBar)
+func setBackgroundGradient (view: UIView) {
+    
+    guard
+        let blueGradientColor = CAGradientLayer.blueGradient(on: view)
+        else {
+            print("Error creating gradient color!")
+            return
+    }
+    
+    view.backgroundColor = UIColor(patternImage: blueGradientColor)
 }

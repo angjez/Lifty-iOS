@@ -7,6 +7,7 @@
 //
 import UIKit
 import Eureka
+import Firebase
 
 var globalSavedWorkoutsVC: SavedWorkoutsVC?
 
@@ -46,6 +47,19 @@ class SavedWorkoutsVC: FormViewController {
         }
         
         setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+        
+        let user = Auth.auth().currentUser
+//                let firebaseAuth = Auth.auth()
+//                do {
+//                  try firebaseAuth.signOut()
+//                } catch let signOutError as NSError {
+//                  print ("Error signing out: %@", signOutError)
+//                }
+        print(user)
+        if(user == nil) {
+            print("not logged")
+            self.performSegue(withIdentifier: "LoginScreenSegue", sender: self)
+        }
     }
     
     @IBAction func addNewWorkout(_ sender: Any) {
@@ -54,7 +68,7 @@ class SavedWorkoutsVC: FormViewController {
             <<< ButtonRow () {
                 $0.title = "New workout"
                 $0.tag = "Add workout"
-            }
+        }
         let newWorkout = Workout(name: "")
         self.workouts.append(newWorkout)
         saveWorkout(workout: newWorkout)
