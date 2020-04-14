@@ -55,11 +55,13 @@
                     <tabBarItem key="tabBarItem" title="" image="square.and.pencil" catalog="system" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Plans" id="Xpb-5n-8Oi">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="ZHz-a7-uIK">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kkm-RB-rkj">
-                                <rect key="frame" x="20" y="0.0" width="128" height="44"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kkm-RB-rkj">
+                                <rect key="frame" x="20" y="0.0" width="74" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" image="person.crop.circle" catalog="system"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <state key="normal" image="person.crop.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
                                 <connections>
                                     <segue destination="7YK-fP-TSx" kind="presentation" identifier="ProfileSegueFromPlans" id="a6e-nd-g5a"/>
                                 </connections>
@@ -324,7 +326,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="6mY-Pb-YaS" kind="presentation" id="R7s-bQ-iSB"/>
+                                    <action selector="sendEmail:" destination="Aeb-61-uTm" eventType="touchUpInside" id="VVJ-kI-8pD"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7q5-1H-tX8">
@@ -357,21 +359,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31V-kn-lA0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4774" y="0.0"/>
-        </scene>
-        <!--Reset PasswordVC-->
-        <scene sceneID="Mgc-7G-ryC">
-            <objects>
-                <viewController id="6mY-Pb-YaS" customClass="ResetPasswordVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xJv-IK-4d8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="VAr-Sk-esm"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AXj-rE-Iw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-4775" y="820"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -493,11 +480,13 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Saved workouts" id="1uc-h1-wgC">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="CJJ-K1-SvR">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="78Z-00-uRK">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="78Z-00-uRK">
                                 <rect key="frame" x="20" y="0.0" width="74" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" image="person.crop.circle" catalog="system"/>
+                                <state key="normal" image="person.crop.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
                                 <connections>
                                     <segue destination="7YK-fP-TSx" kind="presentation" identifier="ProfileSegueFromWorkouts" id="DMM-GY-vuJ"/>
                                 </connections>
@@ -579,6 +568,21 @@
             </objects>
             <point key="canvasLocation" x="-4775" y="-868"/>
         </scene>
+        <!--Edit User DataVC-->
+        <scene sceneID="NVK-LV-TxY">
+            <objects>
+                <viewController id="2f9-M6-ZvS" customClass="EditUserDataVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xuJ-Fb-P6w">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="iV3-XU-GKx"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0sp-r9-mgi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2339" y="-1650"/>
+        </scene>
         <!--Display ProfileVC-->
         <scene sceneID="T1h-RK-66o">
             <objects>
@@ -605,6 +609,9 @@
                                 <state key="normal" title="Edit profile">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="editUserData:" destination="7YK-fP-TSx" eventType="touchUpInside" id="pEx-Bz-4G0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljB-YT-6ov">
                                 <rect key="frame" x="186" y="781" width="43" height="27"/>
@@ -628,6 +635,7 @@
                         <outlet property="LogOutButton" destination="ljB-YT-6ov" id="drJ-tR-e8M"/>
                         <outlet property="NameSurnameLabel" destination="bcZ-Rx-wir" id="Uv6-4u-BsI"/>
                         <outlet property="ProfileImageView" destination="OPL-l2-5LO" id="Kfv-nC-nRa"/>
+                        <segue destination="2f9-M6-ZvS" kind="presentation" identifier="EditUserDataSegue" id="Q4l-ca-FVx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAD-ag-CXs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -637,8 +645,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="a6e-nd-g5a"/>
-        <segue reference="cbm-Vw-iTM"/>
-        <segue reference="DEZ-He-KPz"/>
+        <segue reference="hgd-xa-kap"/>
+        <segue reference="GEQ-hl-XiF"/>
         <segue reference="URu-UD-b54"/>
     </inferredMetricsTieBreakers>
     <resources>

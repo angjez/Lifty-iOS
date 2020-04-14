@@ -9,12 +9,13 @@
 import UIKit
 import Firebase
 
-class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, sendUpdatedUsername {
     
     @IBOutlet weak var ProfileImageView: UIImageView!
     @IBOutlet weak var EditProfileButton: UIButton!
     @IBOutlet weak var LogOutButton: UIButton!
     @IBOutlet weak var NameSurnameLabel: UILabel!
+    
     
     var theme: UIColor?
     var gradientImage = UIImage()
@@ -34,6 +35,17 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         labelSetup()
     }
     
+    func sendUpdatedUsernameToUserDisplay(username: String) {
+        self.NameSurnameLabel.text = username
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditUserDataSegue" {
+            let senderVC: EditUserDataVC = segue.destination as! EditUserDataVC
+            senderVC.delegate = self
+        }
+    }
+    
     func labelSetup () {
         let user = Auth.auth().currentUser
         if let user = user {
@@ -51,15 +63,23 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(DisplayProfileVC.imageTapped(gesture:)))
         ProfileImageView.addGestureRecognizer(tapGesture)
         ProfileImageView.isUserInteractionEnabled = true
+        
+        let arr = DataBaseHelper.shareInstance.fetchImage()
+        if (!arr.isEmpty) {
+            ProfileImageView.image = UIImage(data: arr[0].image!)
+        }
     }
     
     @IBAction func logOut(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
-          try firebaseAuth.signOut()
+            try firebaseAuth.signOut()
         } catch let signOutError as NSError {
-          print ("Error signing out: %@", signOutError)
+            print ("Error signing out: %@", signOutError)
         }
+    }
+    @IBAction func editUserData(_ sender: Any) {
+        self.performSegue(withIdentifier: "EditUserDataSegue", sender: sender)
     }
     
     @objc func imageTapped(gesture: UIGestureRecognizer) {
@@ -84,6 +104,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.ProfileImageView.image = UIImage(systemName: "person.crop.circle")
+            deleteAllRecords(name: "UserImageEntity")
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -100,8 +121,12 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         guard let image = info[.editedImage] as? UIImage else { return }
         
         dismiss(animated: true)
+        deleteAllRecords(name: "UserImageEntity")
         
         self.ProfileImageView.image = image
+        if let imageData = ProfileImageView.image?.pngData() {
+            DataBaseHelper.shareInstance.saveImage(data: imageData)
+        }
     }
     
 }

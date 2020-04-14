@@ -122,6 +122,7 @@ class RegisterVC: FormViewController {
                 $0.title = "Password"
                 $0.add(rule: RuleMinLength(minLength: 8))
                 $0.add(rule: RuleMaxLength(maxLength: 20))
+                $0.add(rule: RuleRequired())
             }
             .cellUpdate { cell, row in
                 if !row.isValid {
@@ -147,6 +148,7 @@ class RegisterVC: FormViewController {
             <<< PasswordRow() {
                 $0.title = "Confirm Password"
                 $0.add(rule: RuleEqualsToRow(form: form, tag: "password"))
+                $0.add(rule: RuleRequired())
             }
             .cellUpdate { cell, row in
                 if !row.isValid {

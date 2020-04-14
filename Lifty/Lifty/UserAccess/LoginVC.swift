@@ -51,6 +51,24 @@ class LoginVC: UIViewController {
         
     }
     
+    @IBAction func sendEmail(_ sender: Any) {
+        if (LoginTextField.text != nil) &&  (LoginTextField.text!.isValidEmail) {
+            Auth.auth().sendPasswordReset(withEmail: LoginTextField.text!) { error in
+                let alert = UIAlertController(title: "Password reset email sent.", message: nil, preferredStyle: .alert)
+                alert.view.tintColor = UIColor.systemIndigo
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+            }
+        } else {
+            let alert = UIAlertController(title: "Incorrect email adress.", message: "Unable to send a password reset email.", preferredStyle: .alert)
+            alert.view.tintColor = UIColor.systemIndigo
+
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+        }
+    }
+    
     func setBorders (button : UIButton) {
         button.contentEdgeInsets = UIEdgeInsets(top: 15,left: 15,bottom: 15,right: 15);
         button.layer.borderColor = UIColor.white.cgColor
@@ -63,4 +81,12 @@ class LoginVC: UIViewController {
         textField.leftViewMode = .always
     }
     
+}
+
+extension String {
+  var isValidEmail: Bool {
+     let regularExpressionForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+     let testEmail = NSPredicate(format:"SELF MATCHES %@", regularExpressionForEmail)
+     return testEmail.evaluate(with: self)
+  }
 }
