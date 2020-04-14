@@ -143,9 +143,7 @@ class RegisterVC: FormViewController {
                         row.section?.insert(labelRow, at: indexPath)
                     }
                 }
-        }
-        
-        form +++ Section()
+            }
             <<< PasswordRow() {
                 $0.title = "Confirm Password"
                 $0.add(rule: RuleEqualsToRow(form: form, tag: "password"))
@@ -197,10 +195,15 @@ class RegisterVC: FormViewController {
                     let surnameRow: TextRow? = self.form.rowBy(tag: "surname")
                     let surname = surnameRow!.value!
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                        Analytics.setUserProperty(name, forName: "name")
-                        Analytics.setUserProperty(surname, forName: "surname")
+                        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                            guard let strongSelf = self else { return }
+                            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                            changeRequest?.displayName = name + " " + surname
+                            changeRequest?.commitChanges { (error) in
+                                self!.performSegue(withIdentifier: "RegisteredSegue", sender: self!.RegisteredButton)
+                            }
+                        }
                     }
-                    self.performSegue(withIdentifier: "RegisteredSegue", sender: self.RegisteredButton)
                 }
             }.cellUpdate { cell, row in
                 let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)

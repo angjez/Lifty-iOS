@@ -7,11 +7,14 @@
 //
 
 import UIKit
-
+import Firebase
 
 class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var ProfileImageView: UIImageView!
+    @IBOutlet weak var EditProfileButton: UIButton!
+    @IBOutlet weak var LogOutButton: UIButton!
+    @IBOutlet weak var NameSurnameLabel: UILabel!
     
     var theme: UIColor?
     var gradientImage = UIImage()
@@ -27,6 +30,19 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
             gradientImage = CAGradientLayer.blueGradient(on: self.view)!
         }
         
+        imageViewSetup()
+        labelSetup()
+    }
+    
+    func labelSetup () {
+        let user = Auth.auth().currentUser
+        if let user = user {
+            NameSurnameLabel.text = user.displayName
+            NameSurnameLabel.textColor = UIColor(patternImage: gradientImage)
+        }
+    }
+    
+    func imageViewSetup () {
         self.ProfileImageView.layer.cornerRadius = self.ProfileImageView.frame.size.width / 2
         self.ProfileImageView.clipsToBounds = true
         self.ProfileImageView.layer.borderWidth = 3.0
@@ -35,6 +51,15 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(DisplayProfileVC.imageTapped(gesture:)))
         ProfileImageView.addGestureRecognizer(tapGesture)
         ProfileImageView.isUserInteractionEnabled = true
+    }
+    
+    @IBAction func logOut(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print ("Error signing out: %@", signOutError)
+        }
     }
     
     @objc func imageTapped(gesture: UIGestureRecognizer) {

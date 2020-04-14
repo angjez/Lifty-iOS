@@ -50,12 +50,6 @@ class SavedWorkoutsVC: FormViewController {
         setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
         
         let user = Auth.auth().currentUser
-//                let firebaseAuth = Auth.auth()
-//                do {
-//                  try firebaseAuth.signOut()
-//                } catch let signOutError as NSError {
-//                  print ("Error signing out: %@", signOutError)
-//                }
         print(user)
         if(user == nil) {
             print("not logged")
