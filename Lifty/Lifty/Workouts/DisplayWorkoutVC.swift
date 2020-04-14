@@ -11,13 +11,10 @@ import UIKit
 class DisplayWorkoutVC: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var typeLabel: UILabel!
-    
     @IBOutlet weak var specyficsLabel: UILabel!
     
     @IBOutlet weak var exercisesTextView: UITextView!
-    
     @IBOutlet weak var timeRepsTextView: UITextView!
     
     var theme: UIColor?

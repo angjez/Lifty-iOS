@@ -11,6 +11,7 @@
 		66093234242F5A08001BEC19 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* Gradients.swift */; };
 		6621C15C243C810100B670CA /* ImageCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6621C159243C810100B670CA /* ImageCheckCell.swift */; };
 		6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */; };
+		66436BDB2445A15100A45D0D /* DisplayProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66436BDA2445A15100A45D0D /* DisplayProfileVC.swift */; };
 		665651C82444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
 		665651CB2444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
 		66583C5B243F297B00C8AB03 /* DayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */; };
@@ -107,6 +108,7 @@
 		66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		66436BDA2445A15100A45D0D /* DisplayProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayProfileVC.swift; sourceTree = "<group>"; };
 		66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -185,6 +187,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		66436BD72445A12E00A45D0D /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				66436BDA2445A15100A45D0D /* DisplayProfileVC.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
 		6649E3CA24334E7800991AB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +282,7 @@
 				66ABC65B240D300100295591 /* Assets.xcassets */,
 				66093233242F5A08001BEC19 /* Gradients.swift */,
 				66D441F32440BB4F00FF62C2 /* TableViewCustomisation.swift */,
+				66436BD72445A12E00A45D0D /* UserProfile */,
 				66D505B424445E0000537D69 /* UserAccess */,
 				669FDF282439D40C00B038C5 /* Plans */,
 				669FDF252439D3B200B038C5 /* Workouts */,
@@ -633,6 +644,7 @@
 				66D505B624445E2F00537D69 /* LoginVC.swift in Sources */,
 				669FDF2A2439D5E400B038C5 /* PlanDataClasses.swift in Sources */,
 				66583C5F243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift in Sources */,
+				66436BDB2445A15100A45D0D /* DisplayProfileVC.swift in Sources */,
 				6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */,
 				66FF0595240930BE004AABF6 /* PlansVC.swift in Sources */,
 				66093234242F5A08001BEC19 /* Gradients.swift in Sources */,

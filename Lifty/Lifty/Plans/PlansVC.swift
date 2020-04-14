@@ -14,12 +14,13 @@ var globalPlansVC: PlansVC?
 class PlansVC: FormViewController {
     
     @IBOutlet weak var newPlanButton: UIButton!
+    @IBOutlet weak var UserProfileButton: UIButton!
     
     var plans = [Plan]()
     var chosenPlanRow: ButtonRowOf<String>?
     var chosenPlan = Plan(name: "")
     var chosenPlanIndex: Int?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +31,7 @@ class PlansVC: FormViewController {
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         initiateForm()
-    
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,7 +54,7 @@ class PlansVC: FormViewController {
         form +++ Section()
             <<< ButtonRow () {
                 $0.tag = "Add plan"
-            }
+        }
         let newPlan = Plan(name: "")
         self.plans.append(newPlan)
         chosenPlan = plans.last!

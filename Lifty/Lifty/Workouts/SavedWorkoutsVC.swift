@@ -14,6 +14,7 @@ var globalSavedWorkoutsVC: SavedWorkoutsVC?
 class SavedWorkoutsVC: FormViewController {
     
     @IBOutlet weak var NewWorkoutButton: UIButton!
+    @IBOutlet weak var UserProfileButton: UIButton!
     
     private let greenView = UIView()
     
@@ -58,10 +59,12 @@ class SavedWorkoutsVC: FormViewController {
         print(user)
         if(user == nil) {
             print("not logged")
+            UIView.setAnimationsEnabled(false)
             self.performSegue(withIdentifier: "LoginScreenSegue", sender: self)
+            UIView.setAnimationsEnabled(true)
         }
     }
-    
+
     @IBAction func addNewWorkout(_ sender: Any) {
         UIView.setAnimationsEnabled(false)
         form +++ Section()
