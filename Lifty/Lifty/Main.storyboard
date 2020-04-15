@@ -75,7 +75,6 @@
                                 <state key="normal" image="plus" catalog="system"/>
                                 <connections>
                                     <action selector="addNewPlan:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="PRX-pJ-1UV"/>
-                                    <segue destination="NwI-OF-u6C" kind="push" identifier="NewPlanSegue" id="iVX-fE-1MY"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -83,11 +82,12 @@
                     <connections>
                         <outlet property="UserProfileButton" destination="kkm-RB-rkj" id="i2U-aN-g8L"/>
                         <outlet property="newPlanButton" destination="aFi-LS-7wm" id="5Ki-OI-pRf"/>
+                        <segue destination="NwI-OF-u6C" kind="push" identifier="NewPlanSegue" id="POM-Uh-55S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="747.82608695652175" y="430.58035714285711"/>
+            <point key="canvasLocation" x="748" y="431"/>
         </scene>
         <!--New PlanVC-->
         <scene sceneID="Yjk-vY-ZoY">
@@ -110,6 +110,9 @@
                         <viewLayoutGuide key="safeArea" id="rC7-dF-KyH"/>
                     </view>
                     <navigationItem key="navigationItem" id="dp3-tA-x9B"/>
+                    <connections>
+                        <segue destination="c0f-7l-h6F" kind="presentation" identifier="backToPlansSegue" modalPresentationStyle="fullScreen" id="3FS-om-s35"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xV1-BK-khs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -128,7 +131,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="UQI-er-X7U" kind="push" identifier="chooseWorkoutSegue" id="OIu-ps-ykh"/>
+                                    <segue destination="UQI-er-X7U" kind="push" identifier="chooseWorkoutSegue" id="zis-hw-Ih7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -136,6 +139,9 @@
                         <viewLayoutGuide key="safeArea" id="fEd-kz-xFo"/>
                     </view>
                     <navigationItem key="navigationItem" id="QBr-H6-ZcX"/>
+                    <connections>
+                        <segue destination="NwI-OF-u6C" kind="presentation" identifier="backToNewPlanSegue" modalPresentationStyle="fullScreen" id="Cnm-Pz-Qix"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7l-Qj-yJM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -386,6 +392,7 @@
             <objects>
                 <navigationController id="c0f-7l-h6F" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="igN-z7-HCV"/>
+                    <navigationItem key="navigationItem" id="zbu-nW-o4b"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="hdP-B9-9an">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -400,12 +407,12 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="dIg-Yk-kxU"/>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="43a-6O-HPx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTq-6Q-Pur" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749" y="1078"/>
+            <point key="canvasLocation" x="748" y="1238"/>
         </scene>
         <!--SavedWorkouts-->
         <scene sceneID="R80-cs-QfO">
@@ -541,7 +548,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRq-Ob-q4I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1731.8840579710147" y="1076.7857142857142"/>
+            <point key="canvasLocation" x="-322" y="1238"/>
         </scene>
         <!--RegisterVC-->
         <scene sceneID="Aoi-q9-sbN">
@@ -644,10 +651,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="a6e-nd-g5a"/>
-        <segue reference="hgd-xa-kap"/>
+        <segue reference="DMM-GY-vuJ"/>
+        <segue reference="DY2-Ei-qWc"/>
+        <segue reference="cbm-Vw-iTM"/>
         <segue reference="GEQ-hl-XiF"/>
         <segue reference="URu-UD-b54"/>
+        <segue reference="POM-Uh-55S"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="info" width="128" height="128"/>

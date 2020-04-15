@@ -9,25 +9,39 @@
 import UIKit
 import Eureka
 
-var globalWeekVC: WeekVC?
-
-class WeekVC: FormViewController {
+class WeekVC: FormViewController, passPlan, passWeek {
     
-    var chosenDayRow: ButtonRowOf<String>?
+    var planDelegate: passPlan?
+    var weekDelegate: passWeek?
+    var dayDelegate: passDay?
+    
     var chosenDay = Day()
     var chosenDayIndex: Int?
-
+    
+    var chosenPlan = Plan (name: "")
+    var chosenPlanIndex: Int?
+    var chosenWeek = Week()
+    var chosenWeekIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        globalWeekVC = self as! WeekVC
-        
-        self.title =  "Week " + String(globalNewPlanVC!.chosenWeekIndex! + 1)
+        self.title =  "Week " + String(self.chosenWeekIndex! + 1)
         
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         createTrainingDaysForm()
         createDayRows()
+    }
+    
+    func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
+        self.chosenPlan = chosenPlan
+        self.chosenPlanIndex = chosenPlanIndex
+    }
+    
+    func finishPassing(chosenWeek: Week, chosenWeekIndex: Int?) {
+        self.chosenWeek = chosenWeek
+        self.chosenWeekIndex = chosenWeekIndex
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,8 +66,8 @@ class WeekVC: FormViewController {
             <<< StepperRow() { row in
                 row.tag = "traningDaysStepperRow"
                 row.title = "Amount of training days"
-                if !globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.isEmpty {
-                    row.value = Cell<Double>.Value(globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.count)
+                if !self.chosenPlan.weeks[self.chosenWeekIndex!].days.isEmpty {
+                    row.value = Cell<Double>.Value(self.chosenPlan.weeks[self.chosenWeekIndex!].days.count)
                 }
                 else {
                     row.value = 1
@@ -75,54 +89,66 @@ class WeekVC: FormViewController {
     
     func dayRowsHaveChanged() {
         let traningDaysStepperRow: StepperRow? = form.rowBy(tag: "traningDaysStepperRow")
-        while Int(traningDaysStepperRow!.value!) > globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.count {
-            globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.append(Day())
+        while Int(traningDaysStepperRow!.value!) > self.chosenPlan.weeks[self.chosenWeekIndex!].days.count {
+            self.chosenPlan.weeks[self.chosenWeekIndex!].days.append(Day())
             form +++
                 ButtonRow () { row in
-                    row.title = "Day " + String(globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.count)
-                    row.tag = String(globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.count - 1)
-                    row.presentationMode = .segueName(segueName: "chooseWorkoutSegue", onDismiss: nil)
+                    row.title = "Day " + String(self.chosenPlan.weeks[self.chosenWeekIndex!].days.count)
+                    row.tag = String(self.chosenPlan.weeks[self.chosenWeekIndex!].days.count - 1)
+                    //                    row.presentationMode = .segueName(segueName: "chooseWorkoutSegue", onDismiss: nil)
                     row.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink
                     cell.indentationLevel = 2
                     cell.indentationWidth = 10
+                    cell.textLabel!.textAlignment = .left
             }
         }
-        while Int(traningDaysStepperRow!.value!) < globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.count {
+        while Int(traningDaysStepperRow!.value!) < self.chosenPlan.weeks[self.chosenWeekIndex!].days.count {
             for (index, row) in self.form.rows.enumerated() {
-                if row.tag == String(globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.count - 1) {
+                if row.tag == String(self.chosenPlan.weeks[self.chosenWeekIndex!].days.count - 1) {
                     self.form.remove(at: index)
                 }
             }
-            globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.removeLast()
+            self.chosenPlan.weeks[self.chosenWeekIndex!].days.removeLast()
         }
     }
     
     func createDayRows() {
         let traningDaysStepperRow: StepperRow? = form.rowBy(tag: "traningDaysStepperRow")
-        while Int(traningDaysStepperRow!.value!) > globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.count {
-            globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.append(Day())
+        while Int(traningDaysStepperRow!.value!) > self.chosenPlan.weeks[self.chosenWeekIndex!].days.count {
+            self.chosenPlan.weeks[self.chosenWeekIndex!].days.append(Day())
         }
-        for (index, day) in globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days.enumerated() {
+        for (index, day) in self.chosenPlan.weeks[self.chosenWeekIndex!].days.enumerated() {
             form +++
                 ButtonRow () { row in
                     row.title = "Day " + String(index+1)
                     row.tag = String(index)
-                    row.presentationMode = .segueName(segueName: "chooseWorkoutSegue", onDismiss: nil)
+                    //                    row.presentationMode = .segueName(segueName: "chooseWorkoutSegue", onDismiss: nil)
                     row.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink
                     cell.indentationLevel = 2
                     cell.indentationWidth = 10
+                    cell.textLabel!.textAlignment = .left
             }
         }
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        globalWeekVC!.chosenDayIndex = Int(row.tag!)
-        globalWeekVC!.chosenDay = globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days[chosenDayIndex!]
-        globalWeekVC!.chosenDayRow = row
+        self.chosenDayIndex = Int(row.tag!)
+        self.chosenDay = self.chosenPlan.weeks[self.chosenWeekIndex!].days[chosenDayIndex!]
+        self.performSegue(withIdentifier: "chooseWorkoutSegue", sender: nil)
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc2 = segue.destination as? ChooseWorkoutsVC{
+            self.planDelegate = vc2
+            self.weekDelegate = vc2
+            self.dayDelegate = vc2
+            self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
+            self.weekDelegate?.finishPassing(chosenWeek: chosenWeek, chosenWeekIndex: chosenWeekIndex)
+            self.dayDelegate?.finishPassing(chosenDay: chosenDay, chosenDayIndex: chosenDayIndex)
+        }
+    }
 }

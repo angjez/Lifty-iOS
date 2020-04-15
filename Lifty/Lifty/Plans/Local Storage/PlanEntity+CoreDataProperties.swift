@@ -71,8 +71,10 @@ func savePlan (plan: Plan) {
     }
 }
 
-func loadPlans () {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+
+func loadPlans () -> [Plan] {
+    var loadedPlans = [Plan]()
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return loadedPlans }
     let managedObjectContext = appDelegate.persistentContainer.viewContext
     
     let fetchRequest = NSFetchRequest<PlanEntity>(entityName: "PlanEntity")
@@ -82,12 +84,13 @@ func loadPlans () {
             if (planEntity.value(forKey: "name") as? String != nil) {
                 let loadedPlan = Plan(name: planEntity.value(forKey: "name") as! String)
                 loadWeeks(planEntity: planEntity, loadedPlan: loadedPlan)
-                globalPlansVC?.plans.append(loadedPlan)
+                loadedPlans.append(loadedPlan)
             }
         }
     } catch let error as NSError {
         print("Could not load. \(error), \(error.userInfo)")
     }
+    return loadedPlans
 }
 
 

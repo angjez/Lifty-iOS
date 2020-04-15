@@ -9,18 +9,18 @@
 import UIKit
 import Eureka
 
-var globalNewPlanVC: NewPlanVC?
-
-class NewPlanVC: FormViewController {
+class NewPlanVC: FormViewController, passPlan {
     
-    var chosenWeekRow: ButtonRowOf<String>?
+    var weekDelegate: passWeek?
+    var planDelegate: passPlan?
+    
+    var chosenPlan = Plan (name: "")
+    var chosenPlanIndex: Int?
     var chosenWeek = Week()
     var chosenWeekIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        globalNewPlanVC = self as! NewPlanVC
         
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
@@ -28,15 +28,30 @@ class NewPlanVC: FormViewController {
         createWeekRows()
     }
     
+    func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
+        self.chosenPlan = chosenPlan
+        self.chosenPlanIndex = chosenPlanIndex
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc2 = segue.destination as? WeekVC{
+            self.planDelegate = vc2
+            self.weekDelegate = vc2
+            self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
+            self.weekDelegate?.finishPassing(chosenWeek: self.chosenWeek, chosenWeekIndex: self.chosenWeekIndex)
+        }
+    }
+    
+    
     func createPlanTitleDurationForm () {
         
         let pinkGradientImage = CAGradientLayer.pinkGradient(on: self.view)
         form +++ Section ()
             <<< TextRow("Title").cellSetup { cell, row in
             }.cellUpdate { cell, row in
-                if (globalPlansVC!.chosenPlan.name != "Plan" && globalPlansVC!.chosenPlan.name != "") {
-                    cell.textField!.placeholder = globalPlansVC!.chosenPlan.name
-                    row.value = globalPlansVC!.chosenPlan.name
+                if (self.chosenPlan.name != "Plan" && self.chosenPlan.name != "") {
+                    cell.textField!.placeholder = self.chosenPlan.name
+                    row.value = self.chosenPlan.name
                 }
                 else {
                     cell.textField.placeholder = row.tag
@@ -48,8 +63,8 @@ class NewPlanVC: FormViewController {
             <<< StepperRow() { row in
                 row.tag = "weekStepperRow"
                 row.title = "Plan duration (in weeks)"
-                if !globalPlansVC!.chosenPlan.weeks.isEmpty {
-                    row.value = Cell<Double>.Value(globalPlansVC!.chosenPlan.weeks.count)
+                if !self.chosenPlan.weeks.isEmpty {
+                    row.value = Cell<Double>.Value(self.chosenPlan.weeks.count)
                 }
                 else {
                     row.value = 1
@@ -71,65 +86,63 @@ class NewPlanVC: FormViewController {
     
     func weekRowsHaveChanged() {
         let weekStepperRow: StepperRow? = form.rowBy(tag: "weekStepperRow")
-        while Int(weekStepperRow!.value!) > globalPlansVC!.chosenPlan.weeks.count {
-            globalPlansVC!.chosenPlan.weeks.append(Week())
+        while Int(weekStepperRow!.value!) > self.chosenPlan.weeks.count {
+            self.chosenPlan.weeks.append(Week())
             form +++
                 ButtonRow () { row in
-                    row.title = "Week " + String(globalPlansVC!.chosenPlan.weeks.count)
-                    row.tag = String(globalPlansVC!.chosenPlan.weeks.count - 1)
-                    row.presentationMode = .segueName(segueName: "weekSegue", onDismiss: nil)
+                    row.title = "Week " + String(self.chosenPlan.weeks.count)
+                    row.tag = String(self.chosenPlan.weeks.count - 1)
                     row.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink
                     cell.indentationLevel = 2
                     cell.indentationWidth = 10
+                    cell.textLabel!.textAlignment = .left
             }
         }
-        while Int(weekStepperRow!.value!) < globalPlansVC!.chosenPlan.weeks.count {
+        while Int(weekStepperRow!.value!) < self.chosenPlan.weeks.count {
             for (index, row) in self.form.rows.enumerated() {
-                if row.tag == String(globalPlansVC!.chosenPlan.weeks.count - 1) {
+                if row.tag == String(self.chosenPlan.weeks.count - 1) {
                     self.form.remove(at: index)
                 }
             }
-            globalPlansVC!.chosenPlan.weeks.removeLast()
+            self.chosenPlan.weeks.removeLast()
         }
     }
     
     func createWeekRows() {
         let weekStepperRow: StepperRow? = form.rowBy(tag: "weekStepperRow")
-        while Int(weekStepperRow!.value!) > globalPlansVC!.chosenPlan.weeks.count {
-            globalPlansVC!.chosenPlan.weeks.append(Week())
+        while Int(weekStepperRow!.value!) > self.chosenPlan.weeks.count {
+            self.chosenPlan.weeks.append(Week())
         }
-        for (index, week) in globalPlansVC!.chosenPlan.weeks.enumerated() {
+        for (index, week) in self.chosenPlan.weeks.enumerated() {
             form +++
                 ButtonRow () { row in
                     row.title = "Week " + String(index+1)
                     row.tag = String(index)
-                    row.presentationMode = .segueName(segueName: "weekSegue", onDismiss: nil)
                     row.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink
                     cell.indentationLevel = 2
                     cell.indentationWidth = 10
+                    cell.textLabel!.textAlignment = .left
             }
         }
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        globalNewPlanVC!.chosenWeekIndex = Int(row.tag!)
-        globalNewPlanVC!.chosenWeek = globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!]
-        globalNewPlanVC!.chosenWeekRow = row
+        self.chosenWeekIndex = Int(row.tag!)
+        self.chosenWeek = self.chosenPlan.weeks[self.chosenWeekIndex!]
+        self.performSegue(withIdentifier: "weekSegue", sender: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if isMovingFromParent
-        {
-            let titleRow: TextRow? = form.rowBy(tag: "Title")
-            globalPlansVC?.chosenPlan.name = titleRow!.value!
-            globalPlansVC?.initiateForm()
-            deletePlan(plan: globalPlansVC!.chosenPlan)
-            savePlan(plan: globalPlansVC!.chosenPlan)
-        }
+        let titleRow: TextRow? = form.rowBy(tag: "Title")
+        self.chosenPlan.name = titleRow!.value!
+        deletePlan(plan: self.chosenPlan)
+        savePlan(plan: self.chosenPlan)
+        print(self.chosenPlan)
+        globalPlansVC?.initiateForm()
         super.viewWillDisappear(animated)
     }
 }

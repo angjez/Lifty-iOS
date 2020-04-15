@@ -23,10 +23,10 @@ class DisplayWorkoutVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.tabBarController!.selectedIndex == 1  {
+        if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
             self.theme = .systemPink
             gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
-        } else if self.tabBarController!.selectedIndex == 0 {
+        } else if (globalSavedWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalSavedWorkoutsVC?.tabBarController!.selectedIndex == 0) {
             self.theme = .systemIndigo
             gradientImage = CAGradientLayer.blueGradient(on: self.view)!
         }

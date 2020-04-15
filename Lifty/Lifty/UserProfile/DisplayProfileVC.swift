@@ -40,6 +40,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(segue.identifier)
         if segue.identifier == "EditUserDataSegue" {
             let senderVC: EditUserDataVC = segue.destination as! EditUserDataVC
             senderVC.delegate = self

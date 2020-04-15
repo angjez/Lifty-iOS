@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 func customiseTableView (tableView: UITableView, themeColor: UIColor) {
+    tableView.preservesSuperviewLayoutMargins = false
     tableView.rowHeight = 70
     tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
     tableView.separatorColor = themeColor

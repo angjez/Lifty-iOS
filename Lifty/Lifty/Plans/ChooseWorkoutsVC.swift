@@ -9,9 +9,16 @@
 import UIKit
 import Eureka
 
-class ChooseWorkoutsVC: FormViewController {
+class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     
     let workoutsSelectable = SelectableSection<ImageCheckRow<String>>("Swipe right for workout preview", selectionType: .multipleSelection)
+    
+    var chosenPlan = Plan (name: "")
+    var chosenPlanIndex: Int?
+    var chosenWeek = Week()
+    var chosenWeekIndex: Int?
+    var chosenDay = Day()
+    var chosenDayIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +26,26 @@ class ChooseWorkoutsVC: FormViewController {
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         createSelectableWorkoutForm()
+    }
+    
+    func finishPassing(chosenDay: Day, chosenDayIndex: Int?) {
+
+        self.chosenDay = chosenDay
+        self.chosenDayIndex = chosenDayIndex
+    }
+    
+    func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
+        self.chosenPlan = chosenPlan
+        self.chosenPlanIndex = chosenPlanIndex
+    }
+    
+    func finishPassing(chosenWeek: Week, chosenWeekIndex: Int?) {
+        self.chosenWeek = chosenWeek
+        self.chosenWeekIndex = chosenWeekIndex
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +84,7 @@ class ChooseWorkoutsVC: FormViewController {
                 lrow.value = nil
                 lrow.leadingSwipe.actions = [infoAction]
                 lrow.leadingSwipe.performsFirstActionWithFullSwipe = true
-                for alreadyChosenWorkout in globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days[(globalWeekVC?.chosenDayIndex)!].workouts {
+                for alreadyChosenWorkout in self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts {
                     if workout.name == alreadyChosenWorkout.name {
                         lrow.value = workout.name
                         lrow.didSelect()
@@ -68,11 +95,11 @@ class ChooseWorkoutsVC: FormViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days[(globalWeekVC?.chosenDayIndex)!].workouts.removeAll()
+        self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.removeAll()
         for workout in globalSavedWorkoutsVC!.workouts {
             for selectableWorkoutRow in workoutsSelectable.selectedRows() {
                 if selectableWorkoutRow.title! == workout.name {
-                    globalPlansVC!.chosenPlan.weeks[globalNewPlanVC!.chosenWeekIndex!].days[(globalWeekVC?.chosenDayIndex)!].workouts.append(workout)
+                    self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.append(workout)
                 }
             }
         }

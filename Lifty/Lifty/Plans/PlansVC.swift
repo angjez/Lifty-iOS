@@ -16,9 +16,10 @@ class PlansVC: FormViewController {
     @IBOutlet weak var newPlanButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
+    var planDelegate: passPlan?
+    
     var plans = [Plan]()
-    var chosenPlanRow: ButtonRowOf<String>?
-    var chosenPlan = Plan(name: "")
+    var chosenPlan = Plan (name: "")
     var chosenPlanIndex: Int?
     
     override func viewDidLoad() {
@@ -26,12 +27,17 @@ class PlansVC: FormViewController {
         
         globalPlansVC = self as! PlansVC
         
-        loadPlans()
-        
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         initiateForm()
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc2 = segue.destination as? NewPlanVC{
+            self.planDelegate = vc2
+            self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,13 +63,14 @@ class PlansVC: FormViewController {
         }
         let newPlan = Plan(name: "")
         self.plans.append(newPlan)
-        chosenPlan = plans.last!
-        chosenPlanIndex = plans.count-1
-        chosenPlanRow = (self.form.rows.last as! ButtonRowOf<String>)
+        self.chosenPlan = plans.last!
+        self.chosenPlanIndex = plans.count-1
+        self.performSegue(withIdentifier: "NewPlanSegue", sender: self)
         UIView.setAnimationsEnabled(true)
     }
     
     func initiateForm () {
+        self.plans = loadPlans()
         form.removeAll()
         UIView.setAnimationsEnabled(false)
         for (index, plan) in plans.enumerated() {
@@ -103,10 +110,11 @@ class PlansVC: FormViewController {
             style: .normal,
             title: "Edit",
             handler: { (action, row, completionHandler) in
-                globalPlansVC!.chosenPlanIndex = Int(row.tag!)
-                globalPlansVC!.chosenPlan = self.plans[globalPlansVC!.chosenPlanIndex!]
-                globalPlansVC!.chosenPlanRow = (row as! ButtonRowOf<String>)
-                self.performSegue(withIdentifier: "NewPlanSegue", sender: self.newPlanButton)
+                let newPlanVC = NewPlanVC()
+                self.planDelegate = newPlanVC
+                self.chosenPlan = self.plans[globalPlansVC!.chosenPlanIndex!]
+                self.chosenPlanIndex = Int(row.tag!)
+                self.performSegue(withIdentifier: "NewPlanSegue", sender: self)
                 completionHandler?(true)
         })
         editAction.actionBackgroundColor = .lightGray
@@ -126,7 +134,6 @@ class PlansVC: FormViewController {
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
         globalPlansVC!.chosenPlanIndex = Int(row.tag!)
         globalPlansVC!.chosenPlan = plans[globalPlansVC!.chosenPlanIndex!]
-        globalPlansVC!.chosenPlanRow = row
     }
     
 }
