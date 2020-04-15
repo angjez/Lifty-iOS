@@ -64,7 +64,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         ProfileImageView.addGestureRecognizer(tapGesture)
         ProfileImageView.isUserInteractionEnabled = true
         
-        let arr = DataBaseHelper.shareInstance.fetchImage()
+        let arr = ImageManagement.shareInstance.fetchImage()
         if (!arr.isEmpty) {
             ProfileImageView.image = UIImage(data: arr[0].image!)
         }
@@ -104,6 +104,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.ProfileImageView.image = UIImage(systemName: "person.crop.circle")
+            ImageManagement.shareInstance.deleteImage()
             deleteAllRecords(name: "UserImageEntity")
         })
         
@@ -125,7 +126,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         
         self.ProfileImageView.image = image
         if let imageData = ProfileImageView.image?.pngData() {
-            DataBaseHelper.shareInstance.saveImage(data: imageData)
+            ImageManagement.shareInstance.saveImage(data: imageData)
         }
     }
     
