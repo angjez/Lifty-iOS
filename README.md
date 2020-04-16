@@ -14,10 +14,13 @@ Current features:
  ![Alt Text](https://i.imgur.com/uK111jM.gif)
  
  ![Alt Text](https://i.imgur.com/UAxRFoy.gif)
+ 
+ * user accounts
 
 Planned features:
 
   * ~~CRUD workout plans~~
-  * MySQL user database
+  * Firebase remote database
   * workout filtering by type and favourites
   * workout execution (workout timer)
+  * more login options (Google account, log in with Apple)
