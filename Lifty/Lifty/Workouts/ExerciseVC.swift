@@ -17,10 +17,7 @@ class ExerciseVC: FormViewController, passExercise{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
-        
+        self.replaceBackButton()
         
         guard let tabBarController = self.tabBarController
             else {
@@ -40,6 +37,12 @@ class ExerciseVC: FormViewController, passExercise{
         createTitleForm ()
         createExerciseForm ()
         createNotesForm ()
+    }
+    
+    func replaceBackButton () {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     func finishPassing(chosenExercise: Exercise, chosenRow: ButtonRowOf<String>?) {
@@ -85,8 +88,6 @@ class ExerciseVC: FormViewController, passExercise{
             }
             
             <<< IntRow() {
-                $0.cell.layer.borderWidth = 3.0
-                $0.cell.layer.borderColor = UIColor.lightGray.cgColor
                 $0.tag = "Amout of reps"
                 $0.title = "Amout of reps"
                 if (self.chosenExercise.exerciseType == "Reps") {
@@ -100,11 +101,11 @@ class ExerciseVC: FormViewController, passExercise{
                     row.cell.layer.borderWidth = 3.0
                     row.cell.layer.borderColor = UIColor.lightGray.cgColor
                     cell.titleLabel?.textColor = .red
+                } else {
+                    cell.titleLabel?.textColor = .systemIndigo
                 }
             }
             .onRowValidationChanged { cell, row in
-                row.cell.layer.borderWidth = 3.0
-                row.cell.layer.borderColor = UIColor.lightGray.cgColor
                 let rowIndex = row.indexPath!.row
                 while row.section!.count > rowIndex + 1 && row.section?[rowIndex  + 1] is LabelRow {
                     row.section?.remove(at: rowIndex + 1)
@@ -155,7 +156,9 @@ class ExerciseVC: FormViewController, passExercise{
                 }
                 $0.options.append("\(minutes):\(seconds)0")
                 $0.value = $0.options.first
-            }
+            }.cellUpdate { cell, row in
+                cell.textLabel?.textColor = .systemIndigo
+        }
     }
     
     func createNotesForm () {
@@ -227,12 +230,7 @@ class ExerciseVC: FormViewController, passExercise{
         }
         
         if !isValid {
-            let alert = UIAlertController(title: "Please fill all of the required fields", message: nil, preferredStyle: .alert)
-            alert.view.tintColor = UIColor.systemIndigo
-
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-
-            self.present(alert, animated: true)
+            self.invalidDataAlert()
         } else {
             self.chosenExercise.exerciseName = exerciseName!
             self.chosenExercise.exerciseType = exerciseType
@@ -242,5 +240,20 @@ class ExerciseVC: FormViewController, passExercise{
             navigationController?.popToRootViewController(animated: true)
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
+    }
+    
+    func invalidDataAlert () {
+        let alert = UIAlertController(title: "Required fields are empty.", message: "Leave without saving?", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.systemIndigo
+        
+        let leaveAction = UIAlertAction(title: "Yes", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        })
+        alert.addAction(leaveAction)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
     }
 }

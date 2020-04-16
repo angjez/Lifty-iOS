@@ -28,8 +28,6 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         super.viewDidLoad()
         
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
-        
-        self.workouts = loadWorkouts()
     }
     
     func finishPassingWithIndex(chosenWorkout: Workout, chosenWorkoutIndex: Int?) {
@@ -95,8 +93,9 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
     
     
     func initiateForm () {
-        form.removeAll()
+        self.workouts = loadWorkouts()
         UIView.setAnimationsEnabled(false)
+        form.removeAll()
         for (index, workout) in workouts.enumerated() {
             form +++ Section()
                 <<< ButtonRow () {

@@ -22,10 +22,18 @@ class NewPlanVC: FormViewController, passPlan {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.replaceBackButton()
+        
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         createPlanTitleDurationForm()
         createWeekRows()
+    }
+    
+    func replaceBackButton () {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
@@ -136,12 +144,27 @@ class NewPlanVC: FormViewController, passPlan {
         self.performSegue(withIdentifier: "weekSegue", sender: self)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    @objc func checkInput (sender: UIBarButtonItem) {
         let titleRow: TextRow? = form.rowBy(tag: "Title")
-        self.chosenPlan.name = titleRow!.value!
-        deletePlan(plan: self.chosenPlan)
-        savePlan(plan: self.chosenPlan)
-        print(self.chosenPlan)
-        super.viewWillDisappear(animated)
+        if titleRow!.value == nil {
+            let alert = UIAlertController(title: "Required fields are empty.", message: "Leave without saving?", preferredStyle: .alert)
+            alert.view.tintColor = UIColor.systemPink
+            
+            let leaveAction = UIAlertAction(title: "Yes", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.navigationController?.popToRootViewController(animated: true)
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+            })
+            alert.addAction(leaveAction)
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true)
+        } else {
+            self.chosenPlan.name = titleRow!.value!
+            deletePlan(plan: self.chosenPlan)
+            savePlan(plan: self.chosenPlan)
+            navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
 }

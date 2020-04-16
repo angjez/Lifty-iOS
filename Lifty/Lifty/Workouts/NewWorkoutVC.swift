@@ -23,9 +23,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
+        self.replaceBackButton()
         
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         
@@ -33,6 +31,12 @@ class NewWorkoutVC: FormViewController, passWorkout {
         createWorkoutTypeForm()
         createExercisesForm()
         
+    }
+    
+    func replaceBackButton () {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     func finishPassing(chosenWorkout: Workout) {
@@ -81,21 +85,21 @@ class NewWorkoutVC: FormViewController, passWorkout {
                 }
                 cell.textField!.textColor = UIColor.systemIndigo
                 setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
-        }.onRowValidationChanged { cell, row in
-            let rowIndex = row.indexPath!.row
-            while row.section!.count > rowIndex + 1 && row.section?[rowIndex  + 1] is LabelRow {
-                row.section?.remove(at: rowIndex + 1)
-            }
-            if !row.isValid {
-                for (index, validationMsg) in row.validationErrors.map({ $0.msg }).enumerated() {
-                    let labelRow = LabelRow() {
-                        $0.title = validationMsg
-                        $0.cell.height = { 30 }
-                    }
-                    let indexPath = row.indexPath!.row + index + 1
-                    row.section?.insert(labelRow, at: indexPath)
+            }.onRowValidationChanged { cell, row in
+                let rowIndex = row.indexPath!.row
+                while row.section!.count > rowIndex + 1 && row.section?[rowIndex  + 1] is LabelRow {
+                    row.section?.remove(at: rowIndex + 1)
                 }
-            }
+                if !row.isValid {
+                    for (index, validationMsg) in row.validationErrors.map({ $0.msg }).enumerated() {
+                        let labelRow = LabelRow() {
+                            $0.title = validationMsg
+                            $0.cell.height = { 30 }
+                        }
+                        let indexPath = row.indexPath!.row + index + 1
+                        row.section?.insert(labelRow, at: indexPath)
+                    }
+                }
         }
     }
     
@@ -134,6 +138,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
             .cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
+                } else {
+                    cell.textLabel?.textColor = .systemIndigo
                 }
             }
             .onRowValidationChanged { cell, row in
@@ -165,6 +171,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
             .cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
+                } else {
+                    cell.textLabel?.textColor = .systemIndigo
                 }
             }
             .onRowValidationChanged { cell, row in
@@ -212,6 +220,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
                 }
                 $0.options.append("\(minutes):\(seconds)0")
                 $0.value = $0.options.first
+            }.cellUpdate { cell, row in
+                cell.textLabel?.textColor = .systemIndigo
             }
             
             <<< IntRow("EMOMRounds") {
@@ -226,6 +236,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
             .cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
+                } else {
+                    cell.textLabel?.textColor = .systemIndigo
                 }
             }
             .onRowValidationChanged { cell, row in
@@ -262,6 +274,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
             .cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
+                } else {
+                    cell.textLabel?.textColor = .systemIndigo
                 }
             }
             .onRowValidationChanged { cell, row in
@@ -297,6 +311,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
             .cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
+                } else {
+                    cell.textLabel?.textColor = .systemIndigo
                 }
             }
             .onRowValidationChanged { cell, row in
@@ -339,6 +355,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
                 }
                 $0.options.append("\(minutes):\(seconds)0")
                 $0.value = $0.options.first
+            }.cellUpdate { cell, row in
+                cell.textLabel?.textColor = .systemIndigo
             }
             
             <<< PickerInputRow<String>("TabataRestTime"){
@@ -364,6 +382,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
                 }
                 $0.options.append("\(minutes):\(seconds)0")
                 $0.value = $0.options.first
+            }.cellUpdate { cell, row in
+                cell.textLabel?.textColor = .systemIndigo
         }
     }
     
@@ -406,10 +426,10 @@ class NewWorkoutVC: FormViewController, passWorkout {
                         $0.trailingSwipe.actions = [deleteAction]
                         $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                     }.cellUpdate { cell, row in
-                            cell.textLabel?.textColor = UIColor.systemIndigo
-                            cell.indentationLevel = 2
-                            cell.indentationWidth = 10
-                            cell.textLabel!.textAlignment = .left
+                        cell.textLabel?.textColor = UIColor.systemIndigo
+                        cell.indentationLevel = 2
+                        cell.indentationWidth = 10
+                        cell.textLabel!.textAlignment = .left
                     }
                 }
                 for exercise in self.chosenWorkout.exercises {
@@ -424,10 +444,10 @@ class NewWorkoutVC: FormViewController, passWorkout {
                         $0.trailingSwipe.actions = [deleteAction]
                         $0.trailingSwipe.performsFirstActionWithFullSwipe = true
                     }.cellUpdate { cell, row in
-                            cell.textLabel?.textColor = UIColor.systemIndigo
-                            cell.indentationLevel = 2
-                            cell.indentationWidth = 10
-                            cell.textLabel!.textAlignment = .left
+                        cell.textLabel?.textColor = UIColor.systemIndigo
+                        cell.indentationLevel = 2
+                        cell.indentationWidth = 10
+                        cell.textLabel!.textAlignment = .left
                     }
                 }
         }
@@ -477,12 +497,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
         
         print(isValid)
         if !isValid {
-            let alert = UIAlertController(title: "Please fill all of the required fields", message: nil, preferredStyle: .alert)
-            alert.view.tintColor = UIColor.systemIndigo
-
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-
-            self.present(alert, animated: true)
+            self.invalidDataAlert()
+            deleteWorkout(workout: self.chosenWorkout)
         } else {
             deleteWorkout(workout: self.chosenWorkout)
             saveWorkout(workout: self.chosenWorkout)
@@ -554,4 +570,18 @@ class NewWorkoutVC: FormViewController, passWorkout {
         }
     }
     
+    func invalidDataAlert () {
+        let alert = UIAlertController(title: "Required fields are empty.", message: "Leave without saving?", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.systemIndigo
+        
+        let leaveAction = UIAlertAction(title: "Yes", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        })
+        alert.addAction(leaveAction)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
 }

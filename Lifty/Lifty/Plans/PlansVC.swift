@@ -73,8 +73,8 @@ class PlansVC: FormViewController {
     
     func initiateForm () {
         self.plans = loadPlans()
-        form.removeAll()
         UIView.setAnimationsEnabled(false)
+        form.removeAll()
         for (index, plan) in plans.enumerated() {
             form +++ Section()
                 <<< ButtonRow () {
