@@ -10,11 +10,12 @@ import Eureka
 import Firebase
 
 class WorkoutsVC: FormViewController, passWorkoutAndIndex {
-
+    
     @IBOutlet weak var NewWorkoutButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
     var workoutDelegate: passWorkout?
+    var themeDelegate: passTheme?
     
     private let greenView = UIView()
     
@@ -44,6 +45,9 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         } else if let destinationVC = segue.destination as? DisplayWorkoutVC{
             self.workoutDelegate = destinationVC
             self.workoutDelegate?.finishPassing(chosenWorkout: chosenWorkout)
+        } else if let destinationVC = segue.destination as? DisplayProfileVC{
+            self.themeDelegate = destinationVC
+            self.themeDelegate?.finishPassing(theme: UIColor.systemIndigo, gradient: CAGradientLayer.blueGradient(on: self.view)!)
         }
     }
     
@@ -73,7 +77,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
             UIView.setAnimationsEnabled(true)
         }
     }
-
+    
     @IBAction func addNewWorkout(_ sender: Any) {
         UIView.setAnimationsEnabled(false)
         form +++ Section()

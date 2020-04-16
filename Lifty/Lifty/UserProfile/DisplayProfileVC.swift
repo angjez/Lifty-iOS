@@ -9,28 +9,21 @@
 import UIKit
 import Firebase
 
-class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, sendUpdatedUsername {
+class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, sendUpdatedUsername, passTheme {
     
     @IBOutlet weak var ProfileImageView: UIImageView!
     @IBOutlet weak var EditProfileButton: UIButton!
     @IBOutlet weak var LogOutButton: UIButton!
     @IBOutlet weak var NameSurnameLabel: UILabel!
     
+    var themeDelegate: passTheme?
     
     var theme: UIColor?
     var gradientImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
-//            self.theme = .systemPink
-//            gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
-//        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
-//            self.theme = .systemIndigo
-//            gradientImage = CAGradientLayer.blueGradient(on: self.view)!
-//        }
-        
+
         imageViewSetup()
         labelSetup()
     }
@@ -39,11 +32,19 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         self.NameSurnameLabel.text = username
     }
     
+    func finishPassing(theme: UIColor, gradient: UIImage) {
+        self.theme = theme
+        self.gradientImage = gradient
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier)
         if segue.identifier == "EditUserDataSegue" {
             let senderVC: EditUserDataVC = segue.destination as! EditUserDataVC
             senderVC.delegate = self
+        }
+        if let destinationVC = segue.destination as? EditUserDataVC{
+            self.themeDelegate = destinationVC
+            self.themeDelegate?.finishPassing(theme: self.theme!, gradient: self.gradientImage)
         }
     }
     

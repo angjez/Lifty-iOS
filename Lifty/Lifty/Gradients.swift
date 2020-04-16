@@ -9,6 +9,10 @@
 import UIKit
 import Foundation
 
+protocol passTheme {
+    func finishPassing (theme: UIColor, gradient: UIImage)
+}
+
 extension CAGradientLayer {
     
     class func blueGradient(on view: UIView) -> UIImage? {

@@ -14,24 +14,24 @@ protocol sendUpdatedUsername {
     func sendUpdatedUsernameToUserDisplay(username: String)
 }
 
-class EditUserDataVC: FormViewController {
+class EditUserDataVC: FormViewController, passTheme {
     
     var delegate: sendUpdatedUsername? = nil
+    var theme: UIColor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
-//            customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
-//        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
-//            customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
-//        }
+        customiseTableView(tableView: self.tableView, themeColor: self.theme!)
         
         self.initiateNameForm()
         self.initiateEmailForm()
         self.initiatePasswordForm()
     }
     
+    func finishPassing(theme: UIColor, gradient: UIImage) {
+        self.theme = theme
+    }
     
     func initiateNameForm() {
         form +++

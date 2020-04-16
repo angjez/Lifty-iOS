@@ -142,7 +142,6 @@ class NewPlanVC: FormViewController, passPlan {
         deletePlan(plan: self.chosenPlan)
         savePlan(plan: self.chosenPlan)
         print(self.chosenPlan)
-        globalPlansVC?.initiateForm()
         super.viewWillDisappear(animated)
     }
 }

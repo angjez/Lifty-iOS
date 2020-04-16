@@ -9,14 +9,13 @@
 import UIKit
 import Eureka
 
-var globalPlansVC: PlansVC?
-
 class PlansVC: FormViewController {
     
     @IBOutlet weak var newPlanButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
     var planDelegate: passPlan?
+    var themeDelegate: passTheme?
     
     var plans = [Plan]()
     var chosenPlan = Plan (name: "")
@@ -25,11 +24,7 @@ class PlansVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        globalPlansVC = self as! PlansVC
-        
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
-        
-        initiateForm()
         
     }
     
@@ -37,10 +32,17 @@ class PlansVC: FormViewController {
         if let destinationVC = segue.destination as? NewPlanVC{
             self.planDelegate = destinationVC
             self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
+        } else if let destinationVC = segue.destination as? DisplayPlanVC{
+            self.planDelegate = destinationVC
+            self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
+        } else if let destinationVC = segue.destination as? DisplayProfileVC{
+            self.themeDelegate = destinationVC
+            self.themeDelegate?.finishPassing(theme: UIColor.systemPink, gradient: CAGradientLayer.pinkGradient(on: self.view)!)
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        initiateForm()
         guard let tabBarController = self.tabBarController
             else {
                 print("Error initializing tab bar controller!")
@@ -78,12 +80,12 @@ class PlansVC: FormViewController {
                 <<< ButtonRow () {
                     $0.title = plan.name
                     $0.tag = String(index)
-                    $0.presentationMode = .segueName(segueName: "DisplayPlanSegue", onDismiss: nil)
                     $0.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink
                     cell.indentationLevel = 2
                     cell.indentationWidth = 10
+                    cell.textLabel!.textAlignment = .left
                 }.cellSetup { cell, _ in
                     let pinkGradientImage = CAGradientLayer.pinkGradient(on: self.view)
                     cell.backgroundColor = UIColor.white
@@ -112,7 +114,7 @@ class PlansVC: FormViewController {
             handler: { (action, row, completionHandler) in
                 let newPlanVC = NewPlanVC()
                 self.planDelegate = newPlanVC
-                self.chosenPlan = self.plans[globalPlansVC!.chosenPlanIndex!]
+                self.chosenPlan = self.plans[self.chosenPlanIndex!]
                 self.chosenPlanIndex = Int(row.tag!)
                 self.performSegue(withIdentifier: "NewPlanSegue", sender: self)
                 completionHandler?(true)
@@ -124,7 +126,6 @@ class PlansVC: FormViewController {
             row.baseCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             row.trailingSwipe.actions = [deleteAction]
             row.trailingSwipe.performsFirstActionWithFullSwipe = true
-            
             row.leadingSwipe.actions = [editAction]
             row.leadingSwipe.performsFirstActionWithFullSwipe = true
         }
@@ -132,8 +133,9 @@ class PlansVC: FormViewController {
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        globalPlansVC!.chosenPlanIndex = Int(row.tag!)
-        globalPlansVC!.chosenPlan = plans[globalPlansVC!.chosenPlanIndex!]
+        self.chosenPlanIndex = Int(row.tag!)
+        self.chosenPlan = plans[self.chosenPlanIndex!]
+        self.performSegue(withIdentifier: "DisplayPlanSegue", sender: self)
     }
     
 }

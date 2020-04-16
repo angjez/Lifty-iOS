@@ -9,9 +9,12 @@
 import UIKit
 import Eureka
 
-class DisplayPlanVC: FormViewController {
+class DisplayPlanVC: FormViewController, passPlan {
     
     var currentWeekIndex = 0
+    
+    var chosenPlan = Plan (name: "")
+    var chosenPlanIndex: Int?
     
     var planDelegate: passWorkoutFromPlans?
     var chosenWorkout = Workout(name: "")
@@ -35,6 +38,11 @@ class DisplayPlanVC: FormViewController {
         initiateWeekLabelForm()
         initiateDayRows ()
     }
+    
+    func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
+         self.chosenPlan = chosenPlan
+         self.chosenPlanIndex = chosenPlanIndex
+     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? DisplayWorkoutVC{
@@ -62,7 +70,7 @@ class DisplayPlanVC: FormViewController {
     func leftSwipe(){
         //        next day
         print("left")
-        if(currentWeekIndex < globalPlansVC!.chosenPlan.weeks.count - 1) {
+        if(currentWeekIndex < self.chosenPlan.weeks.count - 1) {
             currentWeekIndex += 1
             self.form.removeAll()
             self.reInit()
@@ -91,7 +99,7 @@ class DisplayPlanVC: FormViewController {
         let pinkGradientImage = CAGradientLayer.pinkGradient(on: self.view)
         form +++ Section()
             <<< LabelRow () {
-                $0.title = globalPlansVC!.chosenPlan.name
+                $0.title = self.chosenPlan.name
             }.cellUpdate { cell, row in
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 40)
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -115,7 +123,7 @@ class DisplayPlanVC: FormViewController {
     func initiateDayRows () {
         let pinkGradientImage = CAGradientLayer.pinkGradient(on: self.view)
         UIView.setAnimationsEnabled(false)
-        for (dayIndex, day) in globalPlansVC!.chosenPlan.weeks[currentWeekIndex].days.enumerated() {
+        for (dayIndex, day) in self.chosenPlan.weeks[currentWeekIndex].days.enumerated() {
             form +++ Section()
                 <<< LabelRow () {
                     $0.title = "Day " + String(dayIndex + 1)
@@ -123,7 +131,7 @@ class DisplayPlanVC: FormViewController {
                     cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 30)
                     setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
             }
-            for (workoutIndex, workout) in globalPlansVC!.chosenPlan.weeks[currentWeekIndex].days[dayIndex].workouts.enumerated() {
+            for (workoutIndex, workout) in self.chosenPlan.weeks[currentWeekIndex].days[dayIndex].workouts.enumerated() {
                 form +++ Section()
                     <<< ButtonRow () {
                         $0.title = workout.name
@@ -143,8 +151,8 @@ class DisplayPlanVC: FormViewController {
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        for (dayIndex, day) in globalPlansVC!.chosenPlan.weeks[currentWeekIndex].days.enumerated() {
-            for (workoutIndex, workout) in globalPlansVC!.chosenPlan.weeks[currentWeekIndex].days[dayIndex].workouts.enumerated() {
+        for (dayIndex, day) in self.chosenPlan.weeks[currentWeekIndex].days.enumerated() {
+            for (workoutIndex, workout) in self.chosenPlan.weeks[currentWeekIndex].days[dayIndex].workouts.enumerated() {
                 if workout.name == row.title {
                     self.chosenWorkout = workout
                 }
