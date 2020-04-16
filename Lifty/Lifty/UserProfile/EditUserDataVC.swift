@@ -21,11 +21,11 @@ class EditUserDataVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
-            customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
-        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
-            customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
-        }
+//        if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
+//            customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
+//        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
+//            customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
+//        }
         
         self.initiateNameForm()
         self.initiateEmailForm()

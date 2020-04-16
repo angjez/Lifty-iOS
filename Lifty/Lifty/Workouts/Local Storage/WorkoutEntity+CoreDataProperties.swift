@@ -99,9 +99,11 @@ func deleteWorkout (workout: Workout) {
     }
 }
 
-func loadWorkouts () {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+func loadWorkouts () -> [Workout] {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
     let managedObjectContext = appDelegate.persistentContainer.viewContext
+    
+    var loadedWorkouts = [Workout] ()
     
     let fetchRequest = NSFetchRequest<WorkoutEntity>(entityName: "WorkoutEntity")
     do {
@@ -132,12 +134,13 @@ func loadWorkouts () {
                         }
                     }
                 }
-                globalWorkoutsVC?.workouts.append(loadedWorkout)
+                loadedWorkouts.append(loadedWorkout)
             }
         }
     } catch let error as NSError {
         print("Could not load. \(error), \(error.userInfo)")
     }
+    return loadedWorkouts
 }
 
 func loadWorkoutsForDay (day: Day, workoutName: String) {

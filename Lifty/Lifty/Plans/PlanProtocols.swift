@@ -19,3 +19,7 @@ protocol passWeek {
 protocol passDay {
     func finishPassing (chosenDay: Day, chosenDayIndex: Int?)
 }
+
+protocol passWorkoutFromPlans {
+    func finishPassingFromPlans (chosenWorkout: Workout)
+}

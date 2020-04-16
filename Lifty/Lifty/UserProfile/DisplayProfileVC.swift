@@ -23,13 +23,13 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
-            self.theme = .systemPink
-            gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
-        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
-            self.theme = .systemIndigo
-            gradientImage = CAGradientLayer.blueGradient(on: self.view)!
-        }
+//        if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
+//            self.theme = .systemPink
+//            gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
+//        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
+//            self.theme = .systemIndigo
+//            gradientImage = CAGradientLayer.blueGradient(on: self.view)!
+//        }
         
         imageViewSetup()
         labelSetup()

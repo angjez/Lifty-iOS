@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DisplayWorkoutVC: UIViewController {
+class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -17,25 +17,19 @@ class DisplayWorkoutVC: UIViewController {
     @IBOutlet weak var exercisesTextView: UITextView!
     @IBOutlet weak var timeRepsTextView: UITextView!
     
+    var chosenWorkout = Workout(name: "")
+    
     var theme: UIColor?
     var gradientImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
-            self.theme = .systemPink
-            gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
-        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
-            self.theme = .systemIndigo
-            gradientImage = CAGradientLayer.blueGradient(on: self.view)!
-        }
-        
-        titleLabel.text = " " +  globalWorkoutsVC!.chosenWorkout.name + " "
-        typeLabel.text = " " + globalWorkoutsVC!.chosenWorkout.type
+        titleLabel.text = " " +  self.chosenWorkout.name + " "
+        typeLabel.text = " " + self.chosenWorkout.type
         checkType()
         loadExercises()
-
+        
         
         titleLabel.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
         titleLabel.layer.borderWidth = 3.0
@@ -45,29 +39,43 @@ class DisplayWorkoutVC: UIViewController {
         self.view.backgroundColor = UIColor.white
         
     }
-
+    
+    func finishPassing(chosenWorkout: Workout) {
+        self.chosenWorkout = chosenWorkout
+        self.theme = .systemIndigo
+        self.gradientImage = CAGradientLayer.blueGradient(on: self.view)!
+        self.viewDidLoad()
+    }
+    
+    func finishPassingFromPlans(chosenWorkout: Workout) {
+        self.chosenWorkout = chosenWorkout
+        self.theme = .systemPink
+        gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
+        self.viewDidLoad()
+    }
+    
     func checkType () {
         var rounds: String?
         specyficsLabel.text! += " " + " "
-        if (globalWorkoutsVC!.chosenWorkout.type != "AMRAP" && globalWorkoutsVC!.chosenWorkout.rounds>1) {
+        if (self.chosenWorkout.type != "AMRAP" && self.chosenWorkout.rounds>1) {
             rounds = " rounds of:"
         }
         else {
             rounds = " round of:"
         }
-        switch globalWorkoutsVC!.chosenWorkout.type {
+        switch self.chosenWorkout.type {
         case "AMRAP":
-            specyficsLabel.text! +=  "Time cap: " +  (globalWorkoutsVC!.chosenWorkout.time) + "'. "
+            specyficsLabel.text! +=  "Time cap: " +  (self.chosenWorkout.time) + "'. "
         case "EMOM":
-            specyficsLabel.text! += "Every " + (globalWorkoutsVC!.chosenWorkout.time
-        ) + ". "
-            specyficsLabel.text! +=  String(globalWorkoutsVC!.chosenWorkout.rounds) + rounds!
+            specyficsLabel.text! += "Every " + (self.chosenWorkout.time
+                ) + ". "
+            specyficsLabel.text! +=  String(self.chosenWorkout.rounds) + rounds!
         case "FOR TIME":
-            specyficsLabel.text! += "Time cap: " +  (globalWorkoutsVC!.chosenWorkout.time) + "'. "
-            specyficsLabel.text! += String(globalWorkoutsVC!.chosenWorkout.rounds) + rounds!
+            specyficsLabel.text! += "Time cap: " +  (self.chosenWorkout.time) + "'. "
+            specyficsLabel.text! += String(self.chosenWorkout.rounds) + rounds!
         case "TABATA":
-            specyficsLabel.text! += (globalWorkoutsVC!.chosenWorkout.time) + " on " + (globalWorkoutsVC!.chosenWorkout.restTime) + " off. "
-            specyficsLabel.text! +=  String(globalWorkoutsVC!.chosenWorkout.rounds) + rounds!
+            specyficsLabel.text! += (self.chosenWorkout.time) + " on " + (self.chosenWorkout.restTime) + " off. "
+            specyficsLabel.text! +=  String(self.chosenWorkout.rounds) + rounds!
         default:
             specyficsLabel.text! = ""
         }
@@ -75,12 +83,12 @@ class DisplayWorkoutVC: UIViewController {
         specyficsLabel.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
         specyficsLabel.layer.borderWidth = 3.0
         specyficsLabel.textColor = theme
-
+        
         
     }
     
     func loadExercises () {
-        for exercise in globalWorkoutsVC!.chosenWorkout.exercises {
+        for exercise in self.chosenWorkout.exercises {
             timeRepsTextView.text += "\n"
             exercisesTextView.text += "\n"
             if exercise.exerciseType == "Reps" {
@@ -106,7 +114,7 @@ class DisplayWorkoutVC: UIViewController {
         timeRepsTextView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         exercisesTextView.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
         exercisesTextView.layer.borderWidth = 3.0
-
+        
         timeRepsTextView.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
         timeRepsTextView.layer.borderWidth = 3.0
         
@@ -117,7 +125,7 @@ class DisplayWorkoutVC: UIViewController {
 
 //MARK: - UITextView
 extension UITextView{
-
+    
     func numberOfLines() -> Int{
         if let fontUnwrapped = self.font{
             return Int(self.contentSize.height / fontUnwrapped.lineHeight)
@@ -132,5 +140,5 @@ extension UITextView{
         self.frame = frame
         
     }
-
+    
 }

@@ -13,6 +13,9 @@ class DisplayPlanVC: FormViewController {
     
     var currentWeekIndex = 0
     
+    var planDelegate: passWorkoutFromPlans?
+    var chosenWorkout = Workout(name: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +34,13 @@ class DisplayPlanVC: FormViewController {
         initiatePlanLabelForm()
         initiateWeekLabelForm()
         initiateDayRows ()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? DisplayWorkoutVC{
+            self.planDelegate = destinationVC
+            self.planDelegate?.finishPassingFromPlans(chosenWorkout: chosenWorkout)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -117,12 +127,12 @@ class DisplayPlanVC: FormViewController {
                 form +++ Section()
                     <<< ButtonRow () {
                         $0.title = workout.name
-                        $0.presentationMode = .segueName(segueName: "DisplayWorkoutSegueFromPlanDisplay", onDismiss: nil)
                         $0.onCellSelection(self.assignCellRow)
                     }.cellUpdate { cell, row in
                         cell.textLabel?.textColor = UIColor.systemPink
                         cell.indentationLevel = 2
                         cell.indentationWidth = 10
+                        cell.textLabel!.textAlignment = .left
                 }
             }
         }
@@ -133,12 +143,14 @@ class DisplayPlanVC: FormViewController {
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        for (index, workout) in globalWorkoutsVC!.workouts.enumerated() {
-            if workout.name == row.title {
-                globalWorkoutsVC!.chosenWorkoutIndex = index
-                globalWorkoutsVC!.chosenWorkout = workout
+        for (dayIndex, day) in globalPlansVC!.chosenPlan.weeks[currentWeekIndex].days.enumerated() {
+            for (workoutIndex, workout) in globalPlansVC!.chosenPlan.weeks[currentWeekIndex].days[dayIndex].workouts.enumerated() {
+                if workout.name == row.title {
+                    self.chosenWorkout = workout
+                }
             }
         }
+        self.performSegue(withIdentifier: "DisplayWorkoutSegueFromPlanDisplay", sender: self)
     }
     
 }
