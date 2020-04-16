@@ -11,6 +11,11 @@ import Eureka
 
 class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     
+    var workoutDelegate: passWorkoutAndIndex?
+    var chosenWorkout = Workout(name: "")
+    var chosenWorkoutIndex: Int?
+    var workouts = [Workout]()
+    
     let workoutsSelectable = SelectableSection<ImageCheckRow<String>>("Swipe right for workout preview", selectionType: .multipleSelection)
     
     var chosenPlan = Plan (name: "")
@@ -23,9 +28,11 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.workouts = loadWorkouts()
+        
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
-//        createSelectableWorkoutForm()
+        createSelectableWorkoutForm()
     }
     
     func finishPassing(chosenDay: Day, chosenDayIndex: Int?) {
@@ -44,62 +51,69 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
         self.chosenWeekIndex = chosenWeekIndex
     }
     
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        guard let tabBarController = self.tabBarController
-//            else {
-//                print("Error initializing tab bar controller!")
-//                return
-//        }
-//        guard let navigationController = self.navigationController
-//            else {
-//                print("Error initializing navigation controller!")
-//                return
-//        }
-//
-//        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
-//    }
-//
-//    func createSelectableWorkoutForm () {
-//        let infoAction = SwipeAction(
-//            style: .normal,
-//            title: "Info",
-//            handler: { (action, row, completionHandler) in
-//                globalWorkoutsVC!.chosenWorkoutIndex = row.indexPath!.row
-//                globalWorkoutsVC!.chosenWorkout = globalWorkoutsVC!.workouts[globalWorkoutsVC!.chosenWorkoutIndex!]
-//                self.performSegue(withIdentifier: "DisplayWorkoutSegueFromChecklist", sender: self)
-//                completionHandler?(true)
-//        })
-//        infoAction.actionBackgroundColor = .lightGray
-//        infoAction.image = UIImage(systemName: "info")
-//
-//        form +++ workoutsSelectable
-//        for (index, workout) in globalWorkoutsVC!.workouts.enumerated()  {
-//            form.last! <<< ImageCheckRow<String>(workout.name + String(index)){ lrow in
-//                lrow.title = workout.name
-//                lrow.selectableValue = workout.name
-//                lrow.value = nil
-//                lrow.leadingSwipe.actions = [infoAction]
-//                lrow.leadingSwipe.performsFirstActionWithFullSwipe = true
-//                for alreadyChosenWorkout in self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts {
-//                    if workout.name == alreadyChosenWorkout.name {
-//                        lrow.value = workout.name
-//                        lrow.didSelect()
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.removeAll()
-//        for workout in globalWorkoutsVC!.workouts {
-//            for selectableWorkoutRow in workoutsSelectable.selectedRows() {
-//                if selectableWorkoutRow.title! == workout.name {
-//                    self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.append(workout)
-//                }
-//            }
-//        }
-//    }
-//
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? WorkoutsVC{
+            self.workoutDelegate = destinationVC
+            self.workoutDelegate?.finishPassingWithIndex(chosenWorkout: self.chosenWorkout, chosenWorkoutIndex: self.chosenWorkoutIndex)
+        }
+    }
+    
+
+    override func viewDidAppear(_ animated: Bool) {
+        guard let tabBarController = self.tabBarController
+            else {
+                print("Error initializing tab bar controller!")
+                return
+        }
+        guard let navigationController = self.navigationController
+            else {
+                print("Error initializing navigation controller!")
+                return
+        }
+
+        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+    }
+
+    func createSelectableWorkoutForm () {
+        let infoAction = SwipeAction(
+            style: .normal,
+            title: "Info",
+            handler: { (action, row, completionHandler) in
+                self.chosenWorkoutIndex = row.indexPath!.row
+                self.chosenWorkout = self.workouts[self.chosenWorkoutIndex!]
+                self.performSegue(withIdentifier: "DisplayWorkoutSegueFromChecklist", sender: self)
+                completionHandler?(true)
+        })
+        infoAction.actionBackgroundColor = .lightGray
+        infoAction.image = UIImage(systemName: "info")
+
+        form +++ workoutsSelectable
+        for (index, workout) in self.workouts.enumerated()  {
+            form.last! <<< ImageCheckRow<String>(workout.name + String(index)){ lrow in
+                lrow.title = workout.name
+                lrow.selectableValue = workout.name
+                lrow.value = nil
+                lrow.leadingSwipe.actions = [infoAction]
+                lrow.leadingSwipe.performsFirstActionWithFullSwipe = true
+                for alreadyChosenWorkout in self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts {
+                    if workout.name == alreadyChosenWorkout.name {
+                        lrow.value = workout.name
+                        lrow.didSelect()
+                    }
+                }
+            }
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.removeAll()
+        for workout in self.workouts {
+            for selectableWorkoutRow in workoutsSelectable.selectedRows() {
+                if selectableWorkoutRow.title! == workout.name {
+                    self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.append(workout)
+                }
+            }
+        }
+    }
+
 }

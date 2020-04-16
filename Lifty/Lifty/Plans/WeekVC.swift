@@ -95,7 +95,6 @@ class WeekVC: FormViewController, passPlan, passWeek {
                 ButtonRow () { row in
                     row.title = "Day " + String(self.chosenPlan.weeks[self.chosenWeekIndex!].days.count)
                     row.tag = String(self.chosenPlan.weeks[self.chosenWeekIndex!].days.count - 1)
-                    //                    row.presentationMode = .segueName(segueName: "chooseWorkoutSegue", onDismiss: nil)
                     row.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink
@@ -124,7 +123,6 @@ class WeekVC: FormViewController, passPlan, passWeek {
                 ButtonRow () { row in
                     row.title = "Day " + String(index+1)
                     row.tag = String(index)
-                    //                    row.presentationMode = .segueName(segueName: "chooseWorkoutSegue", onDismiss: nil)
                     row.onCellSelection(self.assignCellRow)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.textColor = UIColor.systemPink

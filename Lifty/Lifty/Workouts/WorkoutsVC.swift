@@ -9,8 +9,8 @@ import UIKit
 import Eureka
 import Firebase
 
-class WorkoutsVC: FormViewController {
-    
+class WorkoutsVC: FormViewController, passWorkoutAndIndex {
+
     @IBOutlet weak var NewWorkoutButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
@@ -29,6 +29,12 @@ class WorkoutsVC: FormViewController {
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         
         self.workouts = loadWorkouts()
+    }
+    
+    func finishPassingWithIndex(chosenWorkout: Workout, chosenWorkoutIndex: Int?) {
+        self.chosenWorkout = chosenWorkout
+        self.chosenWorkoutIndex = chosenWorkoutIndex
+        print("finished passing")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

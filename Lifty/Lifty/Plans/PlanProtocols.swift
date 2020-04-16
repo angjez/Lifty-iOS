@@ -23,3 +23,7 @@ protocol passDay {
 protocol passWorkoutFromPlans {
     func finishPassingFromPlans (chosenWorkout: Workout)
 }
+
+protocol passWorkoutAndIndex {
+    func finishPassingWithIndex (chosenWorkout: Workout, chosenWorkoutIndex: Int?)
+}
