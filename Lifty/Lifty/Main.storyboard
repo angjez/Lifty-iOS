@@ -417,7 +417,7 @@
         <!--SavedWorkouts-->
         <scene sceneID="R80-cs-QfO">
             <objects>
-                <viewController title="SavedWorkouts" id="o3s-eN-0NC" customClass="SavedWorkoutsVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SavedWorkouts" id="o3s-eN-0NC" customClass="WorkoutsVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="wMm-Xc-3YW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -439,10 +439,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKp-ur-IPO">
-                                            <rect key="frame" x="184" y="0.0" width="230" height="98"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKp-ur-IPO">
+                                            <rect key="frame" x="208" y="-15" width="182" height="128"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button"/>
+                                            <state key="normal" title="Button" image="arrow"/>
                                             <connections>
                                                 <segue destination="Aeb-61-uTm" kind="presentation" identifier="LoginScreenSegue" modalPresentationStyle="fullScreen" id="GEQ-hl-XiF"/>
                                             </connections>
@@ -659,6 +659,7 @@
         <segue reference="POM-Uh-55S"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow" width="128" height="128"/>
         <image name="info" width="128" height="128"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="pen" width="128" height="128"/>

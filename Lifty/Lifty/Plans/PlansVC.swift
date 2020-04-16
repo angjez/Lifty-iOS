@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  PlansVC.swift
 //  Lifty
 //
 //  Created by Angelika Jeziorska on 08/12/2019.
@@ -34,8 +34,8 @@ class PlansVC: FormViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc2 = segue.destination as? NewPlanVC{
-            self.planDelegate = vc2
+        if let destinationVC = segue.destination as? NewPlanVC{
+            self.planDelegate = destinationVC
             self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
         }
     }

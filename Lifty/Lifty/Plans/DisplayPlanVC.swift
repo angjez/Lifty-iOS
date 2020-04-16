@@ -133,10 +133,10 @@ class DisplayPlanVC: FormViewController {
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        for (index, workout) in globalSavedWorkoutsVC!.workouts.enumerated() {
+        for (index, workout) in globalWorkoutsVC!.workouts.enumerated() {
             if workout.name == row.title {
-                globalSavedWorkoutsVC!.chosenWorkoutIndex = index
-                globalSavedWorkoutsVC!.chosenWorkout = workout
+                globalWorkoutsVC!.chosenWorkoutIndex = index
+                globalWorkoutsVC!.chosenWorkout = workout
             }
         }
     }

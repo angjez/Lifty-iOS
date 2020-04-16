@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  WorkoutsVC.swift
 //  Lifty
 //
 //  Created by Angelika Jeziorska on 08/12/2019.
@@ -9,17 +9,18 @@ import UIKit
 import Eureka
 import Firebase
 
-var globalSavedWorkoutsVC: SavedWorkoutsVC?
+var globalWorkoutsVC: WorkoutsVC?
 
-class SavedWorkoutsVC: FormViewController {
+class WorkoutsVC: FormViewController {
     
     @IBOutlet weak var NewWorkoutButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
+    var workoutDelegate: passWorkout?
+    
     private let greenView = UIView()
     
     var workouts = [Workout]()
-    var chosenWorkoutRow: ButtonRowOf<String>?
     var chosenWorkout = Workout(name: "")
     var chosenWorkoutIndex: Int?
     
@@ -27,15 +28,24 @@ class SavedWorkoutsVC: FormViewController {
         
         super.viewDidLoad()
         
-        globalSavedWorkoutsVC = self as! SavedWorkoutsVC
+        globalWorkoutsVC = self as! WorkoutsVC
         
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         
         loadWorkouts()
-        initiateForm()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? NewWorkoutVC{
+            self.workoutDelegate = destinationVC
+            self.workoutDelegate?.finishPassing(chosenWorkout: chosenWorkout)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        UIView.setAnimationsEnabled(false)
+        initiateForm()
+        UIView.setAnimationsEnabled(true)
         guard let tabBarController = self.tabBarController
             else {
                 print("Error initializing tab bar controller!")
@@ -68,16 +78,15 @@ class SavedWorkoutsVC: FormViewController {
         }
         let newWorkout = Workout(name: "")
         self.workouts.append(newWorkout)
-        saveWorkout(workout: newWorkout)
         chosenWorkout = workouts.last!
         chosenWorkoutIndex = workouts.count-1
-        chosenWorkoutRow = (self.form.rows.last as! ButtonRowOf<String>)
         UIView.setAnimationsEnabled(true)
         self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
     }
     
     
     func initiateForm () {
+        form.removeAll()
         UIView.setAnimationsEnabled(false)
         for (index, workout) in workouts.enumerated() {
             form +++ Section()
@@ -117,9 +126,8 @@ class SavedWorkoutsVC: FormViewController {
             style: .normal,
             title: "Edit",
             handler: { (action, row, completionHandler) in
-                globalSavedWorkoutsVC!.chosenWorkoutIndex = Int(row.tag!)
-                globalSavedWorkoutsVC!.chosenWorkout = self.workouts[globalSavedWorkoutsVC!.chosenWorkoutIndex!]
-                globalSavedWorkoutsVC!.chosenWorkoutRow = (row as! ButtonRowOf<String>)
+                globalWorkoutsVC!.chosenWorkoutIndex = Int(row.tag!)
+                globalWorkoutsVC!.chosenWorkout = self.workouts[globalWorkoutsVC!.chosenWorkoutIndex!]
                 self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
                 completionHandler?(true)
         })
@@ -138,24 +146,8 @@ class SavedWorkoutsVC: FormViewController {
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {
-        globalSavedWorkoutsVC!.chosenWorkoutIndex = Int(row.tag!)
-        globalSavedWorkoutsVC!.chosenWorkout = workouts[globalSavedWorkoutsVC!.chosenWorkoutIndex!]
-        globalSavedWorkoutsVC!.chosenWorkoutRow = row
-    }
-    
-    func changeWorkoutData (modifiedWorkout: Workout) {
-        form.removeAll()
-        for (index, workout) in self.workouts.enumerated()  {
-            if workout.name == chosenWorkout.name && index == chosenWorkoutIndex {
-                deleteWorkout(workout: workout)
-                workout.assign(workoutToAssign: modifiedWorkout)
-                saveWorkout(workout: workout)
-                chosenWorkoutRow!.title = workout.name
-                chosenWorkoutRow!.updateCell()
-                break
-            }
-        }
-        initiateForm()
+        globalWorkoutsVC!.chosenWorkoutIndex = Int(row.tag!)
+        globalWorkoutsVC!.chosenWorkout = workouts[globalWorkoutsVC!.chosenWorkoutIndex!]
     }
     
 }

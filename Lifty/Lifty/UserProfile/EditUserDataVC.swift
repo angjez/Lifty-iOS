@@ -23,7 +23,7 @@ class EditUserDataVC: FormViewController {
         
         if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
             customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
-        } else if (globalSavedWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalSavedWorkoutsVC?.tabBarController!.selectedIndex == 0) {
+        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
             customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         }
         

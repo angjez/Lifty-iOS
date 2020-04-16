@@ -132,7 +132,7 @@ func loadWorkouts () {
                         }
                     }
                 }
-                globalSavedWorkoutsVC?.workouts.append(loadedWorkout)
+                globalWorkoutsVC?.workouts.append(loadedWorkout)
             }
         }
     } catch let error as NSError {

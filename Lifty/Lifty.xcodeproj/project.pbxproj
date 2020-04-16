@@ -30,7 +30,7 @@
 		66B11981244713C500FAC032 /* WeekVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B1197B244713C500FAC032 /* WeekVC.swift */; };
 		66B11982244713C500FAC032 /* PlansVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B1197C244713C500FAC032 /* PlansVC.swift */; };
 		66B11983244713C500FAC032 /* ChooseWorkoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B1197D244713C500FAC032 /* ChooseWorkoutsVC.swift */; };
-		66B119882447141800FAC032 /* SavedWorkoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B119842447141800FAC032 /* SavedWorkoutsVC.swift */; };
+		66B119882447141800FAC032 /* WorkoutsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B119842447141800FAC032 /* WorkoutsVC.swift */; };
 		66B119892447141800FAC032 /* DisplayWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B119852447141800FAC032 /* DisplayWorkoutVC.swift */; };
 		66B1198A2447141800FAC032 /* NewWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B119862447141800FAC032 /* NewWorkoutVC.swift */; };
 		66B1198B2447141800FAC032 /* ExerciseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B119872447141800FAC032 /* ExerciseVC.swift */; };
@@ -43,6 +43,7 @@
 		66D505B124445DFA00537D69 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B024445DFA00537D69 /* RegisterVC.swift */; };
 		66D505B624445E2F00537D69 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B524445E2F00537D69 /* LoginVC.swift */; };
 		66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B724445E4B00537D69 /* ResetPasswordVC.swift */; };
+		66E570B6244844D0009452D8 /* WorkoutProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570B5244844D0009452D8 /* WorkoutProtocols.swift */; };
 		66FF053524092C1C004AABF6 /* LiftyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053424092C1C004AABF6 /* LiftyTests.swift */; };
 		66FF054024092C1C004AABF6 /* LiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053F24092C1C004AABF6 /* LiftyUITests.swift */; };
 		66FF057324092D29004AABF6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FF057224092D29004AABF6 /* Default-568h@2x.png */; };
@@ -127,7 +128,7 @@
 		66B1197B244713C500FAC032 /* WeekVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekVC.swift; sourceTree = "<group>"; };
 		66B1197C244713C500FAC032 /* PlansVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansVC.swift; sourceTree = "<group>"; };
 		66B1197D244713C500FAC032 /* ChooseWorkoutsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseWorkoutsVC.swift; sourceTree = "<group>"; };
-		66B119842447141800FAC032 /* SavedWorkoutsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedWorkoutsVC.swift; sourceTree = "<group>"; };
+		66B119842447141800FAC032 /* WorkoutsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutsVC.swift; sourceTree = "<group>"; };
 		66B119852447141800FAC032 /* DisplayWorkoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayWorkoutVC.swift; sourceTree = "<group>"; };
 		66B119862447141800FAC032 /* NewWorkoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWorkoutVC.swift; sourceTree = "<group>"; };
 		66B119872447141800FAC032 /* ExerciseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseVC.swift; sourceTree = "<group>"; };
@@ -141,6 +142,7 @@
 		66D505B024445DFA00537D69 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		66D505B524445E2F00537D69 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		66D505B724445E4B00537D69 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		66E570B5244844D0009452D8 /* WorkoutProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutProtocols.swift; sourceTree = "<group>"; };
 		66FF051724092C18004AABF6 /* Lifty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lifty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053024092C1C004AABF6 /* LiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053424092C1C004AABF6 /* LiftyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftyTests.swift; sourceTree = "<group>"; };
@@ -220,8 +222,9 @@
 			children = (
 				66B1194F2446FCC200FAC032 /* Local Storage */,
 				66FF058B240930BE004AABF6 /* WorkoutDataClasses.swift */,
+				66E570B5244844D0009452D8 /* WorkoutProtocols.swift */,
 				66B119852447141800FAC032 /* DisplayWorkoutVC.swift */,
-				66B119842447141800FAC032 /* SavedWorkoutsVC.swift */,
+				66B119842447141800FAC032 /* WorkoutsVC.swift */,
 				66B119862447141800FAC032 /* NewWorkoutVC.swift */,
 				66B119872447141800FAC032 /* ExerciseVC.swift */,
 			);
@@ -661,6 +664,7 @@
 				66583C5D243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift in Sources */,
 				66B1199324472DA100FAC032 /* PlanProtocols.swift in Sources */,
 				66B119912447143D00FAC032 /* EditUserDataVC.swift in Sources */,
+				66E570B6244844D0009452D8 /* WorkoutProtocols.swift in Sources */,
 				66B119902447143D00FAC032 /* ImageSaver.swift in Sources */,
 				66A48573242A5EC4004D4AE2 /* WorkoutEntity+CoreDataProperties.swift in Sources */,
 				66D441F42440BB4F00FF62C2 /* TableViewCustomisation.swift in Sources */,
@@ -680,7 +684,7 @@
 				6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */,
 				66093234242F5A08001BEC19 /* Gradients.swift in Sources */,
 				66B11980244713C500FAC032 /* PlanDataClasses.swift in Sources */,
-				66B119882447141800FAC032 /* SavedWorkoutsVC.swift in Sources */,
+				66B119882447141800FAC032 /* WorkoutsVC.swift in Sources */,
 				66583C60243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift in Sources */,
 				66B119892447141800FAC032 /* DisplayWorkoutVC.swift in Sources */,
 				66B11982244713C500FAC032 /* PlansVC.swift in Sources */,

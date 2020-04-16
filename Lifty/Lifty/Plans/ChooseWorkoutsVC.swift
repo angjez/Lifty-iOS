@@ -68,8 +68,8 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
             style: .normal,
             title: "Info",
             handler: { (action, row, completionHandler) in
-                globalSavedWorkoutsVC!.chosenWorkoutIndex = row.indexPath!.row
-                globalSavedWorkoutsVC!.chosenWorkout = globalSavedWorkoutsVC!.workouts[globalSavedWorkoutsVC!.chosenWorkoutIndex!]
+                globalWorkoutsVC!.chosenWorkoutIndex = row.indexPath!.row
+                globalWorkoutsVC!.chosenWorkout = globalWorkoutsVC!.workouts[globalWorkoutsVC!.chosenWorkoutIndex!]
                 self.performSegue(withIdentifier: "DisplayWorkoutSegueFromChecklist", sender: self)
                 completionHandler?(true)
         })
@@ -77,7 +77,7 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
         infoAction.image = UIImage(systemName: "info")
         
         form +++ workoutsSelectable
-        for (index, workout) in globalSavedWorkoutsVC!.workouts.enumerated()  {
+        for (index, workout) in globalWorkoutsVC!.workouts.enumerated()  {
             form.last! <<< ImageCheckRow<String>(workout.name + String(index)){ lrow in
                 lrow.title = workout.name
                 lrow.selectableValue = workout.name
@@ -96,7 +96,7 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.removeAll()
-        for workout in globalSavedWorkoutsVC!.workouts {
+        for workout in globalWorkoutsVC!.workouts {
             for selectableWorkoutRow in workoutsSelectable.selectedRows() {
                 if selectableWorkoutRow.title! == workout.name {
                     self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.append(workout)

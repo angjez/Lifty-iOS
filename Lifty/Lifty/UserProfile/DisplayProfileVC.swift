@@ -26,7 +26,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
             self.theme = .systemPink
             gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
-        } else if (globalSavedWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalSavedWorkoutsVC?.tabBarController!.selectedIndex == 0) {
+        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
             self.theme = .systemIndigo
             gradientImage = CAGradientLayer.blueGradient(on: self.view)!
         }

@@ -8,24 +8,24 @@
 import UIKit
 import Eureka
 
-var globalNewWorkoutVC: NewWorkoutVC?
-
-class NewWorkoutVC: FormViewController {
+class NewWorkoutVC: FormViewController, passWorkout {
+    
+    var newWorkoutDelegate: passExercise?
     
     @IBOutlet weak var triggerButton: UIButton!
     
-    var workoutTypes =  ["AMRAP","EMOM","for time","tabata"]
-    let workout = Workout(name: "New")
     var exerciseIndex: Int = 0
-    var chosenCell: ButtonCellOf<String>?
     var chosenRow: ButtonRowOf<String>?
     var chosenExercise = Exercise(exerciseIndex: 0)
     
+    var chosenWorkout = Workout(name: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        globalNewWorkoutVC = self as! NewWorkoutVC
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
         
         customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         
@@ -33,6 +33,18 @@ class NewWorkoutVC: FormViewController {
         createWorkoutTypeForm()
         createExercisesForm()
         
+    }
+    
+    func finishPassing(chosenWorkout: Workout) {
+        self.chosenWorkout = chosenWorkout
+        print("finished passing")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? ExerciseVC{
+            self.newWorkoutDelegate = destinationVC
+            self.newWorkoutDelegate?.finishPassing(chosenExercise: self.chosenExercise, chosenRow: self.chosenRow)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,16 +67,35 @@ class NewWorkoutVC: FormViewController {
         form +++
             
             TextRow("Title").cellSetup { cell, row in
+                row.add(rule: RuleRequired())
             }.cellUpdate { cell, row in
-                if (globalSavedWorkoutsVC!.chosenWorkout.name != "Workout" && globalSavedWorkoutsVC!.chosenWorkout.name != "") {
-                    cell.textField!.placeholder = globalSavedWorkoutsVC!.chosenWorkout.name
-                    row.value = globalSavedWorkoutsVC!.chosenWorkout.name
+                if !row.isValid {
+                    cell.titleLabel?.textColor = .red
+                }
+                if (self.chosenWorkout.name != "Workout" && self.chosenWorkout.name != "") {
+                    cell.textField!.placeholder = self.chosenWorkout.name
+                    row.value = self.chosenWorkout.name
                 }
                 else {
                     cell.textField.placeholder = row.tag
                 }
                 cell.textField!.textColor = UIColor.systemIndigo
                 setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
+        }.onRowValidationChanged { cell, row in
+            let rowIndex = row.indexPath!.row
+            while row.section!.count > rowIndex + 1 && row.section?[rowIndex  + 1] is LabelRow {
+                row.section?.remove(at: rowIndex + 1)
+            }
+            if !row.isValid {
+                for (index, validationMsg) in row.validationErrors.map({ $0.msg }).enumerated() {
+                    let labelRow = LabelRow() {
+                        $0.title = validationMsg
+                        $0.cell.height = { 30 }
+                    }
+                    let indexPath = row.indexPath!.row + index + 1
+                    row.section?.insert(labelRow, at: indexPath)
+                }
+            }
         }
     }
     
@@ -79,8 +110,8 @@ class NewWorkoutVC: FormViewController {
                 $0.options = ["FOR TIME", "EMOM", "AMRAP", "TABATA"]
                 $0.cell.layer.borderWidth = 3.0
                 $0.cell.layer.borderColor = UIColor.lightGray.cgColor
-                if globalSavedWorkoutsVC!.chosenWorkout.type != "" {
-                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.type
+                if self.chosenWorkout.type != "" {
+                    $0.value = self.chosenWorkout.type
                 }
                 else {
                     $0.value = "FOR TIME"
@@ -94,8 +125,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("forTimeTime") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Time cap:"
-                if (globalSavedWorkoutsVC!.chosenWorkout.time != "-") {
-                    $0.value = Int(globalSavedWorkoutsVC!.chosenWorkout.time)
+                if (self.chosenWorkout.time != "-") {
+                    $0.value = Int(self.chosenWorkout.time)
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -125,8 +156,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("forTimeRounds") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Rounds:"
-                if (globalSavedWorkoutsVC!.chosenWorkout.rounds != 0) {
-                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.rounds
+                if (self.chosenWorkout.rounds != 0) {
+                    $0.value = self.chosenWorkout.rounds
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -160,8 +191,8 @@ class NewWorkoutVC: FormViewController {
             }
             <<< PickerInputRow<String>("EMOMTime"){
                 $0.title = "Every: "
-                if (globalSavedWorkoutsVC!.chosenWorkout.time != "-") {
-                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.time
+                if (self.chosenWorkout.time != "-") {
+                    $0.value = self.chosenWorkout.time
                 }
                 $0.options = []
                 
@@ -186,8 +217,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("EMOMRounds") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Rounds: "
-                if (globalSavedWorkoutsVC!.chosenWorkout.rounds != 0) {
-                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.rounds
+                if (self.chosenWorkout.rounds != 0) {
+                    $0.value = self.chosenWorkout.rounds
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -221,8 +252,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("AMRAPTime") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Time cap: "
-                if (globalSavedWorkoutsVC!.chosenWorkout.time != "-") {
-                    $0.value = Int(globalSavedWorkoutsVC!.chosenWorkout.time)
+                if (self.chosenWorkout.time != "-") {
+                    $0.value = Int(self.chosenWorkout.time)
                 }
                 $0.placeholder = "in minutes"
                 $0.add(rule: RuleGreaterThan(min: 0))
@@ -257,8 +288,8 @@ class NewWorkoutVC: FormViewController {
             <<< IntRow("TabataRounds") {
                 $0.add(rule: RuleRequired())
                 $0.title = "Rounds:"
-                if (globalSavedWorkoutsVC!.chosenWorkout.rounds != 0) {
-                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.rounds
+                if (self.chosenWorkout.rounds != 0) {
+                    $0.value = self.chosenWorkout.rounds
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -287,8 +318,8 @@ class NewWorkoutVC: FormViewController {
             
             <<< PickerInputRow<String>("TabataTime"){
                 $0.title = "Work: "
-                if (globalSavedWorkoutsVC!.chosenWorkout.time != "-") {
-                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.time
+                if (self.chosenWorkout.time != "-") {
+                    $0.value = self.chosenWorkout.time
                 }
                 $0.options = []
                 
@@ -312,8 +343,8 @@ class NewWorkoutVC: FormViewController {
             
             <<< PickerInputRow<String>("TabataRestTime"){
                 $0.title = "Rest: "
-                if (globalSavedWorkoutsVC!.chosenWorkout.restTime != "-") {
-                    $0.value = globalSavedWorkoutsVC!.chosenWorkout.restTime
+                if (self.chosenWorkout.restTime != "-") {
+                    $0.value = self.chosenWorkout.restTime
                 }
                 $0.options = []
                 
@@ -354,7 +385,7 @@ class NewWorkoutVC: FormViewController {
                 $0.tag = "exercises"
                 $0.addButtonProvider = { section in
                     return ButtonRow(){
-                        $0.title = "Add another exercise"
+                        $0.title = "Add an exercise"
                     }.cellUpdate { cell, row in
                         cell.textLabel?.textAlignment = .left
                         cell.textLabel?.textColor = UIColor.lightGray
@@ -362,56 +393,41 @@ class NewWorkoutVC: FormViewController {
                 }
                 $0.multivaluedRowToInsertAt = { index in
                     return ButtonRow () {
-                        
                         $0.title = "Exercise"
-                        $0.value = "tap to edit"
                         let newExercise = Exercise(exerciseIndex: index+1)
                         newExercise.reps = 0
                         newExercise.notes = ""
                         newExercise.exerciseTime = ""
-                        self.workout.exercises.append(newExercise)
+                        self.chosenWorkout.exercises.append(newExercise)
                         
-                        $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
                         $0.onCellSelection(self.selected)
                         
                         
                         $0.trailingSwipe.actions = [deleteAction]
                         $0.trailingSwipe.performsFirstActionWithFullSwipe = true
+                    }.cellUpdate { cell, row in
+                            cell.textLabel?.textColor = UIColor.systemIndigo
+                            cell.indentationLevel = 2
+                            cell.indentationWidth = 10
+                            cell.textLabel!.textAlignment = .left
                     }
                 }
-                if (globalSavedWorkoutsVC!.chosenWorkout.exercises.isEmpty) {
-                    $0  <<< ButtonRow () {
-                        
-                        $0.title = "Exercise"
-                        $0.value = "tap to edit"
-                        let newExercise = Exercise(exerciseIndex: 1)
-                        newExercise.reps = 0
-                        newExercise.notes = ""
-                        newExercise.exerciseTime = ""
-                        self.workout.exercises.append(newExercise)
-                        
-                        $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
-                        $0.onCellSelection(self.selected)
-                        
-                        
-                        $0.trailingSwipe.actions = [deleteAction]
-                        $0.trailingSwipe.performsFirstActionWithFullSwipe = true
-                    }
-                }
-                for exercise in globalSavedWorkoutsVC!.chosenWorkout.exercises {
+                for exercise in self.chosenWorkout.exercises {
                     $0  <<< ButtonRow () {
                         if (exercise.exerciseType == "Reps") {
                             $0.title = exercise.exerciseName + " " +  String(exercise.reps)
                         } else if (exercise.exerciseType == "Time") {
                             $0.title = exercise.exerciseName + " " +  exercise.exerciseTime
                         }
-                        $0.value = "tap to edit"
-                        self.workout.exercises.append(exercise)
-                        $0.presentationMode = .segueName(segueName: "ExerciseSegue", onDismiss: nil)
+                        self.chosenWorkout.exercises.append(exercise)
                         $0.onCellSelection(self.selected)
-                        
                         $0.trailingSwipe.actions = [deleteAction]
                         $0.trailingSwipe.performsFirstActionWithFullSwipe = true
+                    }.cellUpdate { cell, row in
+                            cell.textLabel?.textColor = UIColor.systemIndigo
+                            cell.indentationLevel = 2
+                            cell.indentationWidth = 10
+                            cell.textLabel!.textAlignment = .left
                     }
                 }
         }
@@ -419,88 +435,123 @@ class NewWorkoutVC: FormViewController {
     
     func selected(cell: ButtonCellOf<String>, row: ButtonRow) {
         exerciseIndex = row.indexPath!.row
-        chosenCell = cell
         chosenRow = row
-        for exercise in workout.exercises {
-            if exercise.exerciseIndex == exerciseIndex {
-                chosenExercise.assign(exerciseToAssign: exercise);
-            }
-        }
-    }
-    
-    func isModified(modifiedExercise: Exercise) {
-        for exercise in workout.exercises {
-            if exercise.exerciseIndex == exerciseIndex {
-                exercise.assign(exerciseToAssign: modifiedExercise)
-                if modifiedExercise.exerciseType == "Reps" {
-                    chosenRow?.title = exercise.exerciseName + " " + String(exercise.reps)
-                } else if (modifiedExercise.exerciseType == "Time")  {
-                    chosenRow?.title = exercise.exerciseName + " " + exercise.exerciseTime
-                }
-                chosenRow!.updateCell()
-                break
-            }
-        }
+        self.chosenExercise = self.chosenWorkout.exercises[exerciseIndex]
+        self.performSegue(withIdentifier: "ExerciseSegue", sender: self)
     }
     
     //    handle deletion
     
     func deleteExercise (index: Int) {
-        workout.exercises.remove(at: index)
+        chosenWorkout.exercises.remove(at: index)
     }
     
     //    save workout data upon view dismissal
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    @objc func checkInput (sender: UIBarButtonItem) {
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        var isValid = true
+        
         //        fix indexes
-        for (index, exercise) in workout.exercises.enumerated() {
+        for (index, exercise) in self.chosenWorkout.exercises.enumerated() {
             exercise.exerciseIndex = index
         }
         
-        //        getting workout title
-        let titleRow: TextRow? = form.rowBy(tag: "Title")
-        workout.name = titleRow!.value!
+        isValid = self.getTitle()
         
         //        getting workout type and specyfics
         let typeRow: SegmentedRow<String>? = form.rowBy(tag: "workoutTypes")
-        workout.type = typeRow!.value!
+        chosenWorkout.type = typeRow!.value!
         
-        if workout.type == "FOR TIME" {
-            let timeRow: IntRow? = form.rowBy(tag: "forTimeTime")
-            workout.time = String(describing: timeRow!.value!)
-            let roundsRow: IntRow? = form.rowBy(tag: "forTimeRounds")
-            workout.rounds = roundsRow!.value!
-            
-            workout.restTime = ""
+        if self.chosenWorkout.type == "FOR TIME" {
+            isValid = self.getForTimeData()
         }
-        if workout.type == "EMOM" {
-            let timeRow: PickerInputRow<String>? = form.rowBy(tag: "EMOMTime")
-            workout.time = timeRow!.value!
-            let roundsRow: IntRow? = form.rowBy(tag: "EMOMRounds")
-            workout.rounds = roundsRow!.value!
-            
-            workout.restTime = ""
+        if self.chosenWorkout.type == "EMOM" {
+            isValid = self.getEmomData()
         }
-        if workout.type == "AMRAP" {
-            let timeRow: IntRow? = form.rowBy(tag: "AMRAPTime")
-            workout.time = String(describing: timeRow?.value)
-            
-            workout.restTime = ""
-            workout.rounds = 0
+        if self.chosenWorkout.type == "AMRAP" {
+            isValid = self.getAmrapData()
         }
-        if workout.type == "TABATA" {
-            let roundsRow: IntRow? = form.rowBy(tag: "TabataRounds")
-            workout.rounds = roundsRow!.value!
-            let timeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataTime")
-            workout.time = timeRow!.value!
-            let restTimeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataRestTime")
-            workout.restTime = restTimeRow!.value!
+        if self.chosenWorkout.type == "TABATA" {
+            isValid = self.getTabataData()
         }
         
-        globalSavedWorkoutsVC!.changeWorkoutData(modifiedWorkout: workout)
+        print(isValid)
+        if !isValid {
+            let alert = UIAlertController(title: "Please fill all of the required fields", message: nil, preferredStyle: .alert)
+            alert.view.tintColor = UIColor.systemIndigo
+
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+        } else {
+            deleteWorkout(workout: self.chosenWorkout)
+            saveWorkout(workout: self.chosenWorkout)
+            navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
         
+    }
+    
+    func getTitle () -> Bool {
+        let titleRow: TextRow? = form.rowBy(tag: "Title")
+        if titleRow!.value == nil {
+            return false
+        } else {
+            self.chosenWorkout.name = titleRow!.value!
+            return true
+        }
+    }
+    
+    func getForTimeData () -> Bool {
+        let timeRow: IntRow? = form.rowBy(tag: "forTimeTime")
+        let roundsRow: IntRow? = form.rowBy(tag: "forTimeRounds")
+        if timeRow!.value == nil || roundsRow!.value == nil {
+            return false
+        } else {
+            self.chosenWorkout.restTime = ""
+            self.chosenWorkout.time = String(describing: timeRow!.value!)
+            self.chosenWorkout.rounds = roundsRow!.value!
+            return true
+        }
+    }
+    
+    func getEmomData () -> Bool {
+        let timeRow: PickerInputRow<String>? = form.rowBy(tag: "EMOMTime")
+        let roundsRow: IntRow? = form.rowBy(tag: "EMOMRounds")
+        if timeRow!.value == nil || roundsRow!.value == nil {
+            return false
+        } else {
+            self.chosenWorkout.time = timeRow!.value!
+            self.chosenWorkout.rounds = roundsRow!.value!
+            self.chosenWorkout.restTime = ""
+            return true
+        }
+    }
+    
+    func getAmrapData () -> Bool {
+        let timeRow: IntRow? = form.rowBy(tag: "AMRAPTime")
+        if timeRow!.value == nil {
+            return false
+        } else {
+            self.chosenWorkout.time = String(describing: timeRow!.value!)
+            self.chosenWorkout.restTime = ""
+            self.chosenWorkout.rounds = 0
+            return true
+        }
+    }
+    
+    func getTabataData () -> Bool {
+        let roundsRow: IntRow? = form.rowBy(tag: "TabataRounds")
+        let timeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataTime")
+        let restTimeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataRestTime")
+        if roundsRow!.value == nil || timeRow!.value == nil || restTimeRow!.value == nil {
+            return false
+        } else {
+            self.chosenWorkout.rounds = roundsRow!.value!
+            self.chosenWorkout.time = timeRow!.value!
+            self.chosenWorkout.restTime = restTimeRow!.value!
+            return true
+        }
     }
     
 }

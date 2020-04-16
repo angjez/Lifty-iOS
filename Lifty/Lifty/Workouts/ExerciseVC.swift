@@ -9,10 +9,18 @@
 import UIKit
 import Eureka
 
-class ExerciseVC: FormViewController{
+class ExerciseVC: FormViewController, passExercise{
+    
+    var chosenExercise = Exercise(exerciseIndex: 0)
+    var chosenRow: ButtonRowOf<String>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+        
         
         guard let tabBarController = self.tabBarController
             else {
@@ -34,14 +42,20 @@ class ExerciseVC: FormViewController{
         createNotesForm ()
     }
     
+    func finishPassing(chosenExercise: Exercise, chosenRow: ButtonRowOf<String>?) {
+        self.chosenExercise = chosenExercise
+        self.chosenRow = chosenRow
+        print("finished passing")
+    }
+    
     func createTitleForm () {
         let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
         form +++
             TextRow("Name").cellSetup { cell, row in
             } .cellUpdate { cell, row in
-                if globalNewWorkoutVC!.chosenExercise.exerciseName != "" && globalNewWorkoutVC!.chosenExercise.exerciseName != "Exercise" {
-                    cell.textField.placeholder = globalNewWorkoutVC!.chosenExercise.exerciseName
-                    row.value = globalNewWorkoutVC!.chosenExercise.exerciseName
+                if self.chosenExercise.exerciseName != "" && self.chosenExercise.exerciseName != "Exercise" {
+                    cell.textField.placeholder = self.chosenExercise.exerciseName
+                    row.value = self.chosenExercise.exerciseName
                 }
                 else {
                     cell.textField.placeholder = row.tag
@@ -58,7 +72,7 @@ class ExerciseVC: FormViewController{
                 $0.cell.layer.borderWidth = 3.0
                 $0.cell.layer.borderColor = UIColor.lightGray.cgColor
                 $0.options = ["Reps", "Time"]
-                if (globalNewWorkoutVC!.chosenExercise.exerciseType == "Time") {
+                if (self.chosenExercise.exerciseType == "Time") {
                     $0.value = "Time"
                 }
                 else {
@@ -75,8 +89,8 @@ class ExerciseVC: FormViewController{
                 $0.cell.layer.borderColor = UIColor.lightGray.cgColor
                 $0.tag = "Amout of reps"
                 $0.title = "Amout of reps"
-                if (globalNewWorkoutVC!.chosenExercise.exerciseType == "Reps") {
-                    $0.value = globalNewWorkoutVC!.chosenExercise.reps
+                if (self.chosenExercise.exerciseType == "Reps") {
+                    $0.value = self.chosenExercise.reps
                 }
                 $0.add(rule: RuleGreaterThan(min: 0))
                 $0.add(rule: RuleSmallerThan(max: 1000))
@@ -119,8 +133,8 @@ class ExerciseVC: FormViewController{
                 $0.tag = "Time: "
                 $0.title = "Time: "
                 $0.options = []
-                if (globalNewWorkoutVC!.chosenExercise.exerciseType == "Time") {
-                    $0.value = globalNewWorkoutVC!.chosenExercise.exerciseTime
+                if (self.chosenExercise.exerciseType == "Time") {
+                    $0.value = self.chosenExercise.exerciseTime
                 }
                 
                 $0.options.append("-")
@@ -151,22 +165,17 @@ class ExerciseVC: FormViewController{
                 $0.tag = "Notes"
                 $0.cell.layer.borderWidth = 3.0
                 $0.cell.layer.borderColor = UIColor.lightGray.cgColor
-                if (globalNewWorkoutVC!.chosenExercise.notes != nil) {
-                    $0.value = globalNewWorkoutVC!.chosenExercise.notes
+                if (self.chosenExercise.notes != nil) {
+                    $0.value = self.chosenExercise.notes
                 }
                 $0.placeholder = "Additional notes (weight used, technique etc.)."
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        let modifiedExercise = self.manageInput()
-        globalNewWorkoutVC!.isModified(modifiedExercise: modifiedExercise)
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    func manageInput () -> (Exercise) {
+    @objc func checkInput (sender: UIBarButtonItem){
+        
+        var isValid = true
         
         var reps: Int? = nil
         var time: String? = nil
@@ -175,25 +184,38 @@ class ExerciseVC: FormViewController{
         //        getting exercise name
         
         let nameRow: TextRow? = form.rowBy(tag: "Name")
-        exerciseName = nameRow!.value
+        if nameRow!.value == nil {
+            isValid = false
+        } else {
+            exerciseName = nameRow!.value!
+        }
         
         //        getting exercise type
         
         let typeRow: SegmentedRow<String>? = form.rowBy(tag: "exerciseType")
-        let exerciseType = typeRow!.value
+        let exerciseType = typeRow!.value!
         
         //        getting time/reps
         
         if exerciseType == "Time" {
             reps = 0
             let timeRow: PickerInputRow<String>? = form.rowBy(tag: "Time: ")
-            time = timeRow!.value
-            
+            if timeRow!.value == nil {
+                isValid = false
+            } else {
+                time = timeRow!.value!
+                self.chosenRow?.title = self.chosenExercise.exerciseName + " " +  String(self.chosenExercise.exerciseTime)
+            }
         }
         else if exerciseType == "Reps" {
             time = "-"
             let repsRow: IntRow? = form.rowBy(tag: "Amout of reps")
-            reps = repsRow!.value
+            if repsRow!.value == nil {
+                isValid = false
+            } else {
+            reps = repsRow!.value!
+                self.chosenRow?.title = self.chosenExercise.exerciseName + " " +  String(self.chosenExercise.reps)
+            }
         }
         
         //        getting notes
@@ -204,15 +226,21 @@ class ExerciseVC: FormViewController{
             notes = noteRow!.value!
         }
         
-        //        creating the object
-        
-        let modifiedExercise = Exercise (exerciseIndex: 0)
-        modifiedExercise.exerciseName = exerciseName!
-        modifiedExercise.exerciseType = exerciseType!
-        modifiedExercise.reps = reps!
-        modifiedExercise.exerciseTime = time!
-        modifiedExercise.notes = notes
-        
-        return modifiedExercise
+        if !isValid {
+            let alert = UIAlertController(title: "Please fill all of the required fields", message: nil, preferredStyle: .alert)
+            alert.view.tintColor = UIColor.systemIndigo
+
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+        } else {
+            self.chosenExercise.exerciseName = exerciseName!
+            self.chosenExercise.exerciseType = exerciseType
+            self.chosenExercise.reps = reps!
+            self.chosenExercise.exerciseTime = time!
+            self.chosenExercise.notes = notes
+            navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
 }

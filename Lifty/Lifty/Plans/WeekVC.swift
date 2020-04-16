@@ -142,10 +142,10 @@ class WeekVC: FormViewController, passPlan, passWeek {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc2 = segue.destination as? ChooseWorkoutsVC{
-            self.planDelegate = vc2
-            self.weekDelegate = vc2
-            self.dayDelegate = vc2
+        if let destinationVC = segue.destination as? ChooseWorkoutsVC{
+            self.planDelegate = destinationVC
+            self.weekDelegate = destinationVC
+            self.dayDelegate = destinationVC
             self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
             self.weekDelegate?.finishPassing(chosenWeek: chosenWeek, chosenWeekIndex: chosenWeekIndex)
             self.dayDelegate?.finishPassing(chosenDay: chosenDay, chosenDayIndex: chosenDayIndex)

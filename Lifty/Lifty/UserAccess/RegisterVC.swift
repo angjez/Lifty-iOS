@@ -14,6 +14,7 @@ class RegisterVC: FormViewController {
     
     @IBOutlet weak var RegisteredButton: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

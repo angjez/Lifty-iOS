@@ -26,13 +26,13 @@ class DisplayWorkoutVC: UIViewController {
         if (globalPlansVC?.tabBarController?.selectedIndex != nil) &&  (globalPlansVC?.tabBarController!.selectedIndex == 1){
             self.theme = .systemPink
             gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
-        } else if (globalSavedWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalSavedWorkoutsVC?.tabBarController!.selectedIndex == 0) {
+        } else if (globalWorkoutsVC?.tabBarController?.selectedIndex != nil) && (globalWorkoutsVC?.tabBarController!.selectedIndex == 0) {
             self.theme = .systemIndigo
             gradientImage = CAGradientLayer.blueGradient(on: self.view)!
         }
         
-        titleLabel.text = " " +  globalSavedWorkoutsVC!.chosenWorkout.name + " "
-        typeLabel.text = " " + globalSavedWorkoutsVC!.chosenWorkout.type
+        titleLabel.text = " " +  globalWorkoutsVC!.chosenWorkout.name + " "
+        typeLabel.text = " " + globalWorkoutsVC!.chosenWorkout.type
         checkType()
         loadExercises()
 
@@ -49,25 +49,25 @@ class DisplayWorkoutVC: UIViewController {
     func checkType () {
         var rounds: String?
         specyficsLabel.text! += " " + " "
-        if (globalSavedWorkoutsVC!.chosenWorkout.type != "AMRAP" && globalSavedWorkoutsVC!.chosenWorkout.rounds>1) {
+        if (globalWorkoutsVC!.chosenWorkout.type != "AMRAP" && globalWorkoutsVC!.chosenWorkout.rounds>1) {
             rounds = " rounds of:"
         }
         else {
             rounds = " round of:"
         }
-        switch globalSavedWorkoutsVC!.chosenWorkout.type {
+        switch globalWorkoutsVC!.chosenWorkout.type {
         case "AMRAP":
-            specyficsLabel.text! +=  "Time cap: " +  (globalSavedWorkoutsVC!.chosenWorkout.time) + "'. "
+            specyficsLabel.text! +=  "Time cap: " +  (globalWorkoutsVC!.chosenWorkout.time) + "'. "
         case "EMOM":
-            specyficsLabel.text! += "Every " + (globalSavedWorkoutsVC!.chosenWorkout.time
+            specyficsLabel.text! += "Every " + (globalWorkoutsVC!.chosenWorkout.time
         ) + ". "
-            specyficsLabel.text! +=  String(globalSavedWorkoutsVC!.chosenWorkout.rounds) + rounds!
+            specyficsLabel.text! +=  String(globalWorkoutsVC!.chosenWorkout.rounds) + rounds!
         case "FOR TIME":
-            specyficsLabel.text! += "Time cap: " +  (globalSavedWorkoutsVC!.chosenWorkout.time) + "'. "
-            specyficsLabel.text! += String(globalSavedWorkoutsVC!.chosenWorkout.rounds) + rounds!
+            specyficsLabel.text! += "Time cap: " +  (globalWorkoutsVC!.chosenWorkout.time) + "'. "
+            specyficsLabel.text! += String(globalWorkoutsVC!.chosenWorkout.rounds) + rounds!
         case "TABATA":
-            specyficsLabel.text! += (globalSavedWorkoutsVC!.chosenWorkout.time) + " on " + (globalSavedWorkoutsVC!.chosenWorkout.restTime) + " off. "
-            specyficsLabel.text! +=  String(globalSavedWorkoutsVC!.chosenWorkout.rounds) + rounds!
+            specyficsLabel.text! += (globalWorkoutsVC!.chosenWorkout.time) + " on " + (globalWorkoutsVC!.chosenWorkout.restTime) + " off. "
+            specyficsLabel.text! +=  String(globalWorkoutsVC!.chosenWorkout.rounds) + rounds!
         default:
             specyficsLabel.text! = ""
         }
@@ -80,7 +80,7 @@ class DisplayWorkoutVC: UIViewController {
     }
     
     func loadExercises () {
-        for exercise in globalSavedWorkoutsVC!.chosenWorkout.exercises {
+        for exercise in globalWorkoutsVC!.chosenWorkout.exercises {
             timeRepsTextView.text += "\n"
             exercisesTextView.text += "\n"
             if exercise.exerciseType == "Reps" {
