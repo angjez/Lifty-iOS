@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		034E633D7C0B28E5AB70B4C0 /* Pods_Lifty_LiftyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1FB9348896C61B67E36A1DB /* Pods_Lifty_LiftyUITests.framework */; };
+		4A74802AA4CEC51FE6B27D1A /* Pods_Lifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78743B41842CBE7A21142AE /* Pods_Lifty.framework */; };
+		64C47F2FC1544CFFC25CF57A /* Pods_Lifty_LiftyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F71727D17591F9A3A533B57 /* Pods_Lifty_LiftyUITests.framework */; };
 		66093234242F5A08001BEC19 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* Gradients.swift */; };
 		6621C15C243C810100B670CA /* ImageCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6621C159243C810100B670CA /* ImageCheckCell.swift */; };
 		6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */; };
@@ -44,6 +45,7 @@
 		66D505B624445E2F00537D69 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B524445E2F00537D69 /* LoginVC.swift */; };
 		66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B724445E4B00537D69 /* ResetPasswordVC.swift */; };
 		66E570B6244844D0009452D8 /* WorkoutProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570B5244844D0009452D8 /* WorkoutProtocols.swift */; };
+		66E570C324499FB9009452D8 /* UserDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570C224499FB9009452D8 /* UserDocument.swift */; };
 		66FF053524092C1C004AABF6 /* LiftyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053424092C1C004AABF6 /* LiftyTests.swift */; };
 		66FF054024092C1C004AABF6 /* LiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053F24092C1C004AABF6 /* LiftyUITests.swift */; };
 		66FF057324092D29004AABF6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FF057224092D29004AABF6 /* Default-568h@2x.png */; };
@@ -55,8 +57,7 @@
 		66FF0598240930BE004AABF6 /* WorkoutDataClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058B240930BE004AABF6 /* WorkoutDataClasses.swift */; };
 		66FFE8992433BBA300AE6072 /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 66FFE8952433BB9400AE6072 /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		66FFE89A2433BBAA00AE6072 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FFE8952433BB9400AE6072 /* Eureka.framework */; };
-		B01658EFBC8CFC5EEAB70CC4 /* Pods_LiftyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF911916386DEB46B3FCCD70 /* Pods_LiftyTests.framework */; };
-		DA4267AE101ECF2F64838929 /* Pods_Lifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A78FFD8180D5246F7FF4B7C /* Pods_Lifty.framework */; };
+		9B749C043E9CCB04DC2D3092 /* Pods_LiftyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9589481EE5156BEB161CF809 /* Pods_LiftyTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,7 +108,6 @@
 /* Begin PBXFileReference section */
 		00639EF449CF7032D9E966CF /* Pods-Lifty-LiftyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty-LiftyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Lifty-LiftyUITests/Pods-Lifty-LiftyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3B31509E9F0ADF250ED7AB57 /* Pods-Lifty-LiftyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty-LiftyUITests.release.xcconfig"; path = "Target Support Files/Pods-Lifty-LiftyUITests/Pods-Lifty-LiftyUITests.release.xcconfig"; sourceTree = "<group>"; };
-		5A78FFD8180D5246F7FF4B7C /* Pods_Lifty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lifty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66093233242F5A08001BEC19 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		6621C159243C810100B670CA /* ImageCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCheckCell.swift; path = ../../../Eureka/Example/Example/ImageCheckCell.swift; sourceTree = "<group>"; };
 		66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -143,6 +143,7 @@
 		66D505B524445E2F00537D69 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		66D505B724445E4B00537D69 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		66E570B5244844D0009452D8 /* WorkoutProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutProtocols.swift; sourceTree = "<group>"; };
+		66E570C224499FB9009452D8 /* UserDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDocument.swift; sourceTree = "<group>"; };
 		66FF051724092C18004AABF6 /* Lifty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lifty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053024092C1C004AABF6 /* LiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053424092C1C004AABF6 /* LiftyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftyTests.swift; sourceTree = "<group>"; };
@@ -160,11 +161,12 @@
 		66FF058D240930BE004AABF6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66FF058E240930BE004AABF6 /* Lifty-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lifty-Bridging-Header.h"; sourceTree = "<group>"; };
 		66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Eureka.xcodeproj; path = ../Eureka/Eureka.xcodeproj; sourceTree = "<group>"; };
+		7F71727D17591F9A3A533B57 /* Pods_Lifty_LiftyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lifty_LiftyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9191BC60B8CA5E3DF2F25479 /* Pods-Lifty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty.debug.xcconfig"; path = "Target Support Files/Pods-Lifty/Pods-Lifty.debug.xcconfig"; sourceTree = "<group>"; };
+		9589481EE5156BEB161CF809 /* Pods_LiftyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiftyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A479903367028B9EB2FBC081 /* Pods-Lifty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty.release.xcconfig"; path = "Target Support Files/Pods-Lifty/Pods-Lifty.release.xcconfig"; sourceTree = "<group>"; };
-		AF911916386DEB46B3FCCD70 /* Pods_LiftyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiftyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1FB9348896C61B67E36A1DB /* Pods_Lifty_LiftyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lifty_LiftyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E41224A362D6D7F5B6995C41 /* Pods-LiftyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftyTests.release.xcconfig"; path = "Target Support Files/Pods-LiftyTests/Pods-LiftyTests.release.xcconfig"; sourceTree = "<group>"; };
+		F78743B41842CBE7A21142AE /* Pods_Lifty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lifty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB3B405B93F043A50EA75CAD /* Pods-LiftyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftyTests.debug.xcconfig"; path = "Target Support Files/Pods-LiftyTests/Pods-LiftyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,7 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66FFE89A2433BBAA00AE6072 /* Eureka.framework in Frameworks */,
-				DA4267AE101ECF2F64838929 /* Pods_Lifty.framework in Frameworks */,
+				4A74802AA4CEC51FE6B27D1A /* Pods_Lifty.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B01658EFBC8CFC5EEAB70CC4 /* Pods_LiftyTests.framework in Frameworks */,
+				9B749C043E9CCB04DC2D3092 /* Pods_LiftyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				034E633D7C0B28E5AB70B4C0 /* Pods_Lifty_LiftyUITests.framework in Frameworks */,
+				64C47F2FC1544CFFC25CF57A /* Pods_Lifty_LiftyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +202,7 @@
 		66436BD72445A12E00A45D0D /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				66E570C024499F97009452D8 /* Remote Storage */,
 				66B1198C2447143D00FAC032 /* DisplayProfileVC.swift */,
 				66B1198E2447143D00FAC032 /* EditUserDataVC.swift */,
 				66B1198D2447143D00FAC032 /* ImageSaver.swift */,
@@ -210,9 +213,9 @@
 		6649E3CA24334E7800991AB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5A78FFD8180D5246F7FF4B7C /* Pods_Lifty.framework */,
-				C1FB9348896C61B67E36A1DB /* Pods_Lifty_LiftyUITests.framework */,
-				AF911916386DEB46B3FCCD70 /* Pods_LiftyTests.framework */,
+				F78743B41842CBE7A21142AE /* Pods_Lifty.framework */,
+				7F71727D17591F9A3A533B57 /* Pods_Lifty_LiftyUITests.framework */,
+				9589481EE5156BEB161CF809 /* Pods_LiftyTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 		669FDF252439D3B200B038C5 /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
+				66E570BD24499C86009452D8 /* Remote Storage */,
 				66B1194F2446FCC200FAC032 /* Local Storage */,
 				66FF058B240930BE004AABF6 /* WorkoutDataClasses.swift */,
 				66E570B5244844D0009452D8 /* WorkoutProtocols.swift */,
@@ -234,6 +238,7 @@
 		669FDF282439D40C00B038C5 /* Plans */ = {
 			isa = PBXGroup;
 			children = (
+				66E570C124499FA3009452D8 /* Remote Storage */,
 				66B1194C2446FCA900FAC032 /* Local Storage */,
 				66B1197A244713C400FAC032 /* PlanDataClasses.swift */,
 				66B1199224472DA000FAC032 /* PlanProtocols.swift */,
@@ -279,6 +284,28 @@
 				66D505B724445E4B00537D69 /* ResetPasswordVC.swift */,
 			);
 			path = UserAccess;
+			sourceTree = "<group>";
+		};
+		66E570BD24499C86009452D8 /* Remote Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Remote Storage";
+			sourceTree = "<group>";
+		};
+		66E570C024499F97009452D8 /* Remote Storage */ = {
+			isa = PBXGroup;
+			children = (
+				66E570C224499FB9009452D8 /* UserDocument.swift */,
+			);
+			path = "Remote Storage";
+			sourceTree = "<group>";
+		};
+		66E570C124499FA3009452D8 /* Remote Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Remote Storage";
 			sourceTree = "<group>";
 		};
 		66FF050E24092C18004AABF6 = {
@@ -672,6 +699,7 @@
 				66B11983244713C500FAC032 /* ChooseWorkoutsVC.swift in Sources */,
 				66FF0598240930BE004AABF6 /* WorkoutDataClasses.swift in Sources */,
 				66B11981244713C500FAC032 /* WeekVC.swift in Sources */,
+				66E570C324499FB9009452D8 /* UserDocument.swift in Sources */,
 				66583C5E243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift in Sources */,
 				66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */,
 				66583C5B243F297B00C8AB03 /* DayEntity+CoreDataClass.swift in Sources */,

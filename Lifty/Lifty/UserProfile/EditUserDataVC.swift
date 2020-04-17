@@ -223,8 +223,9 @@ class EditUserDataVC: FormViewController, passTheme {
                     changeRequest?.displayName = nameRow!.value! + " " + surnameRow!.value!
                     self.delegate?.sendUpdatedUsernameToUserDisplay(username: (nameRow!.value! + " " + surnameRow!.value!))
                 }
+                let userDocument = UserDocument(uid: user.uid)
+                userDocument.setUserDocument(name: nameRow!.value!, surname: surnameRow!.value!, email: emailRow!.value!)
                 changeRequest?.commitChanges { (error) in
-    
                 }
             }
         }

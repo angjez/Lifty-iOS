@@ -203,6 +203,11 @@ class RegisterVC: FormViewController {
                             let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                             changeRequest?.displayName = name + " " + surname
                             changeRequest?.commitChanges { (error) in
+                                let user = Auth.auth().currentUser
+                                if let user = user {
+                                    let userDocument = UserDocument(uid: user.uid)
+                                    userDocument.setUserDocument(name: nameRow!.value!, surname: surnameRow!.value!, email: emailRow!.value!)
+                                }
                                 self!.performSegue(withIdentifier: "RegisteredSegue", sender: self!.RegisteredButton)
                             }
                         }
