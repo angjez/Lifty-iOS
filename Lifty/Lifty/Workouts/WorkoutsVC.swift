@@ -67,7 +67,6 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
         
         let user = Auth.auth().currentUser
-        print(user)
         if(user == nil) {
             print("not logged")
             UIView.setAnimationsEnabled(false)
@@ -91,9 +90,15 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
     }
     
-    
     func initiateForm () {
         self.workouts = loadWorkouts()
+//        let user = Auth.auth().currentUser
+//        if let user = user {
+//            let workoutDocument = WorkoutDocument(uid: user.uid)
+//            for workout in self.workouts {
+//                workoutDocument.setWorkoutDocument(workout: workout)
+//            }
+//        }
         UIView.setAnimationsEnabled(false)
         form.removeAll()
         for (index, workout) in workouts.enumerated() {

@@ -9,17 +9,15 @@
 import Foundation
 import Firebase
 
-class UserDocument {
-    let db = Firestore.firestore()
+class UserDocument : Document {
     
     var name: String?
     var surname: String?
     var email: String?
-    var uid: String
     var userRef: DocumentReference? = nil
     
-    init(uid: String) {
-        self.uid = uid
+    override init(uid: String) {
+        super.init(uid: uid)
         self.userRef = db.collection("users").document(self.uid)
     }
     

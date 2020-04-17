@@ -8,6 +8,7 @@
 
 import UIKit
 import Eureka
+import Firebase
 
 class PlansVC: FormViewController {
     
@@ -73,6 +74,13 @@ class PlansVC: FormViewController {
     
     func initiateForm () {
         self.plans = loadPlans()
+        let user = Auth.auth().currentUser
+        if let user = user {
+            let planDocument = PlanDocument(uid: user.uid)
+            for plan in self.plans {
+                planDocument.setPlanDocument(plan: plan)
+            }
+        }
         UIView.setAnimationsEnabled(false)
         form.removeAll()
         for (index, plan) in plans.enumerated() {
