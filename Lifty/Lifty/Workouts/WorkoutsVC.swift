@@ -14,6 +14,8 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
     @IBOutlet weak var NewWorkoutButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
+    let viewCustomisation = ViewCustomisation()
+    
     var workoutDelegate: passWorkout?
     var themeDelegate: passTheme?
     
@@ -27,8 +29,26 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         
         super.viewDidLoad()
         
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIView.setAnimationsEnabled(false)
+        initiateForm()
+        UIView.setAnimationsEnabled(true)
+        
+        self.viewCustomisation.setBlueGradients(viewController: self)
+        
+        let user = Auth.auth().currentUser
+        if(user == nil) {
+            print("not logged")
+            UIView.setAnimationsEnabled(false)
+            self.performSegue(withIdentifier: "LoginScreenSegue", sender: self)
+            UIView.setAnimationsEnabled(true)
+        }
+    }
+    
+    //    MARK: Protocol stubs.
     
     func finishPassingWithIndex(chosenWorkout: Workout, chosenWorkoutIndex: Int?) {
         self.chosenWorkout = chosenWorkout
@@ -49,32 +69,6 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        UIView.setAnimationsEnabled(false)
-        initiateForm()
-        UIView.setAnimationsEnabled(true)
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-        
-        setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
-        
-        let user = Auth.auth().currentUser
-        if(user == nil) {
-            print("not logged")
-            UIView.setAnimationsEnabled(false)
-            self.performSegue(withIdentifier: "LoginScreenSegue", sender: self)
-            UIView.setAnimationsEnabled(true)
-        }
-    }
-    
     @IBAction func addNewWorkout(_ sender: Any) {
         UIView.setAnimationsEnabled(false)
         form +++ Section()
@@ -90,15 +84,10 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
     }
     
+    //    MARK: Form handling.
+    
     func initiateForm () {
         self.workouts = loadWorkouts()
-//        let user = Auth.auth().currentUser
-//        if let user = user {
-//            let workoutDocument = WorkoutDocument(uid: user.uid)
-//            for workout in self.workouts {
-//                workoutDocument.setWorkoutDocument(workout: workout)
-//            }
-//        }
         UIView.setAnimationsEnabled(false)
         form.removeAll()
         for (index, workout) in workouts.enumerated() {

@@ -18,7 +18,7 @@ class WorkoutDocument : Document {
         self.collectionRef = db.collection("workouts")
     }
     
-//    MARK: Methods for setting values for workouts.
+    //    MARK: Methods for setting values for workouts.
     
     func setWorkoutDocument (workout: Workout) {
         let batch = db.batch()
@@ -33,6 +33,13 @@ class WorkoutDocument : Document {
         for exercise in workout.exercises {
             setExerciseDocument(exercise: exercise, rootDoc: self.collectionRef!.document(self.uid).collection("workouts").document(workout.name), batch: batch)
         }
+        batch.commit() { err in
+            if let err = err {
+                print("Error writing batch \(err)")
+            } else {
+                print("Batch write succeeded.")
+            }
+        }
     }
     
     func setExerciseDocument(exercise: Exercise, rootDoc: DocumentReference, batch: WriteBatch) {
@@ -43,6 +50,23 @@ class WorkoutDocument : Document {
             "time": exercise.exerciseTime,
             "index": exercise.exerciseIndex,
         ], forDocument: exerciseRef)
+    }
+    
+    //    MARK: Methods for getting the values for workouts.
+    
+    func getWorkoutDocument () {
+        
+    }
+    
+    //    MARK: Methods for deleting workouts.
+    
+    func deleteWorkoutDocument (workout: Workout) {
+        let batch = db.batch()
+        let workoutsRef = self.collectionRef!.document(self.uid).collection("workouts").document(workout.name)
+        for exercise in workout.exercises {
+            setExerciseDocument(exercise: exercise, rootDoc: self.collectionRef!.document(self.uid).collection("workouts").document(workout.name), batch: batch)
+        }
+        batch.deleteDocument(workoutsRef)
         batch.commit() { err in
             if let err = err {
                 print("Error writing batch \(err)")
@@ -52,9 +76,9 @@ class WorkoutDocument : Document {
         }
     }
     
-//    MARK: Methods for getting the values for workouts.
-    
-    func getWorkoutDocument () {
-        
+    func deleteExerciseDocument(exercise: Exercise, rootDoc: DocumentReference, batch: WriteBatch) {
+        let exerciseRef = rootDoc.collection("exercises").document(exercise.exerciseName)
+        batch.deleteDocument(exerciseRef)
     }
+    
 }

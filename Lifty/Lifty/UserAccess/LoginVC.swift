@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+// MARK: TODO: Add more login options (Google account, log in with Apple)
+
 class LoginVC: UIViewController {
     
     @IBOutlet weak var LoggedButton: UIButton!
@@ -43,7 +45,8 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setBackgroundGradient(view: self.view)
+        let viewCustomisation = ViewCustomisation()
+        viewCustomisation.setBackgroundGradient(view: self.view)
         self.setPadding(textField: PasswordTextField)
         self.setPadding(textField: LoginTextField)
         self.setBorders(button: LoginButton)

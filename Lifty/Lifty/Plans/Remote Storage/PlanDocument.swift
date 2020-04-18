@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 class PlanDocument : Document {
-
+    
     var collectionRef: CollectionReference? = nil
     
     override init(uid: String) {
@@ -18,7 +18,7 @@ class PlanDocument : Document {
         self.collectionRef = db.collection("plans")
     }
     
-//    MARK: Methods for setting values for plans.
+    //    MARK: Methods for setting values for plans.
     
     func setPlanDocument (plan: Plan) {
         let batch = db.batch()
@@ -28,6 +28,13 @@ class PlanDocument : Document {
         ], forDocument: planRef)
         for (index, week) in plan.weeks.enumerated() {
             setWeekDocument(week: week, index: index, rootDoc: planRef, batch: batch)
+        }
+        batch.commit() { err in
+            if let err = err {
+                print("Error writing batch \(err)")
+            } else {
+                print("Batch write succeeded.")
+            }
         }
     }
     
@@ -56,6 +63,21 @@ class PlanDocument : Document {
         batch.setData([
             workout.name: true
         ], forDocument: workoutRef)
+    }
+    
+    //    MARK: Methods for getting the values for plans.
+    
+    
+    //    MARK: Methods for deleting plans.
+    
+    func deletePlanDocument (plan: Plan) {
+        let batch = db.batch()
+        print(plan.name)
+        let planRef = self.collectionRef!.document(self.uid).collection("plans").document(plan.name)
+        for (index, week) in plan.weeks.enumerated() {
+            deleteWeekDocument(week: week, index: index, rootDoc: planRef, batch: batch)
+        }
+        batch.deleteDocument(planRef)
         batch.commit() { err in
             if let err = err {
                 print("Error writing batch \(err)")
@@ -65,6 +87,21 @@ class PlanDocument : Document {
         }
     }
     
-//    MARK: Methods for getting the values for plans.
+    func deleteWeekDocument (week: Week, index: Int, rootDoc: DocumentReference, batch: WriteBatch) {
+        let weekRef = rootDoc.collection("weeks").document("Week " + String(index))
+        for (index, day) in week.days.enumerated() {
+            deleteDayAndWeekDocuments(day: day, index: index, rootDoc: weekRef, batch: batch)
+        }
+        batch.deleteDocument(weekRef)
+    }
+    
+    func deleteDayAndWeekDocuments (day: Day, index: Int, rootDoc: DocumentReference, batch: WriteBatch) {
+        let dayRef = rootDoc.collection("days").document("Day " + String(index))
+        for workout in day.workouts {
+            let workoutRef = dayRef.collection("workouts").document(workout.name)
+            batch.deleteDocument(workoutRef)
+        }
+        batch.deleteDocument(dayRef)
+    }
     
 }

@@ -16,13 +16,15 @@ protocol sendUpdatedUsername {
 
 class EditUserDataVC: FormViewController, passTheme {
     
+    let viewCustomisation = ViewCustomisation()
+    
     var delegate: sendUpdatedUsername? = nil
     var theme: UIColor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customiseTableView(tableView: self.tableView, themeColor: self.theme!)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: self.theme!)
         
         self.initiateNameForm()
         self.initiateEmailForm()

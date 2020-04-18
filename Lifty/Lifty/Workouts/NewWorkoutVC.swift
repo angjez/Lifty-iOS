@@ -14,6 +14,8 @@ class NewWorkoutVC: FormViewController, passWorkout {
     
     @IBOutlet weak var triggerButton: UIButton!
     
+    let viewCustomisation = ViewCustomisation()
+    
     var exerciseIndex: Int = 0
     var chosenRow: ButtonRowOf<String>?
     var chosenExercise = Exercise(exerciseIndex: 0)
@@ -25,7 +27,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
         
         self.replaceBackButton()
         
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         
         createWorkoutTitleForm()
         createWorkoutTypeForm()
@@ -39,6 +41,12 @@ class NewWorkoutVC: FormViewController, passWorkout {
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.viewCustomisation.setBlueGradients(viewController: self)
+    }
+    
+    //    MARK: Protocol stubs.
+    
     func finishPassing(chosenWorkout: Workout) {
         self.chosenWorkout = chosenWorkout
         print("finished passing")
@@ -51,20 +59,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-        
-        setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
-    }
+    //    MARK: Form handling.
     
     func createWorkoutTitleForm () {
         let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
@@ -84,7 +79,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
                     cell.textField.placeholder = row.tag
                 }
                 cell.textField!.textColor = UIColor.systemIndigo
-                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
+                self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
             }.onRowValidationChanged { cell, row in
                 let rowIndex = row.indexPath!.row
                 while row.section!.count > rowIndex + 1 && row.section?[rowIndex  + 1] is LabelRow {
@@ -123,7 +118,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
             }
             +++ Section(){
                 $0.tag = "for_time_t"
-                $0.hidden = "$workoutTypes != 'FOR TIME'" // .Predicate(NSPredicate(format: "$segments != 'FOR TIME'"))
+                $0.hidden = "$workoutTypes != 'FOR TIME'"
             }
             
             <<< IntRow("forTimeTime") {
@@ -392,7 +387,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
             style: .destructive,
             title: "Delete",
             handler: { (action, row, completionHandler) in
-                self.deleteExercise(index: row.indexPath!.row)
+                self.chosenWorkout.exercises.remove(at: row.indexPath!.row)
                 completionHandler?(true)
         })
         deleteAction.actionBackgroundColor = .lightGray
@@ -460,128 +455,4 @@ class NewWorkoutVC: FormViewController, passWorkout {
         self.performSegue(withIdentifier: "ExerciseSegue", sender: self)
     }
     
-    //    handle deletion
-    
-    func deleteExercise (index: Int) {
-        chosenWorkout.exercises.remove(at: index)
-    }
-    
-    //    save workout data upon view dismissal
-    @objc func checkInput (sender: UIBarButtonItem) {
-        
-        var isValid = true
-        
-        //        fix indexes
-        for (index, exercise) in self.chosenWorkout.exercises.enumerated() {
-            exercise.exerciseIndex = index
-        }
-        
-        isValid = self.getTitle()
-        
-        //        getting workout type and specyfics
-        let typeRow: SegmentedRow<String>? = form.rowBy(tag: "workoutTypes")
-        chosenWorkout.type = typeRow!.value!
-        
-        if self.chosenWorkout.type == "FOR TIME" {
-            isValid = self.getForTimeData()
-        }
-        if self.chosenWorkout.type == "EMOM" {
-            isValid = self.getEmomData()
-        }
-        if self.chosenWorkout.type == "AMRAP" {
-            isValid = self.getAmrapData()
-        }
-        if self.chosenWorkout.type == "TABATA" {
-            isValid = self.getTabataData()
-        }
-        
-        print(isValid)
-        if !isValid {
-            self.invalidDataAlert()
-            deleteWorkout(workout: self.chosenWorkout)
-        } else {
-            deleteWorkout(workout: self.chosenWorkout)
-            saveWorkout(workout: self.chosenWorkout)
-            navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-        
-    }
-    
-    func getTitle () -> Bool {
-        let titleRow: TextRow? = form.rowBy(tag: "Title")
-        if titleRow!.value == nil {
-            return false
-        } else {
-            self.chosenWorkout.name = titleRow!.value!
-            return true
-        }
-    }
-    
-    func getForTimeData () -> Bool {
-        let timeRow: IntRow? = form.rowBy(tag: "forTimeTime")
-        let roundsRow: IntRow? = form.rowBy(tag: "forTimeRounds")
-        if timeRow!.value == nil || roundsRow!.value == nil {
-            return false
-        } else {
-            self.chosenWorkout.restTime = ""
-            self.chosenWorkout.time = String(describing: timeRow!.value!)
-            self.chosenWorkout.rounds = roundsRow!.value!
-            return true
-        }
-    }
-    
-    func getEmomData () -> Bool {
-        let timeRow: PickerInputRow<String>? = form.rowBy(tag: "EMOMTime")
-        let roundsRow: IntRow? = form.rowBy(tag: "EMOMRounds")
-        if timeRow!.value == nil || roundsRow!.value == nil {
-            return false
-        } else {
-            self.chosenWorkout.time = timeRow!.value!
-            self.chosenWorkout.rounds = roundsRow!.value!
-            self.chosenWorkout.restTime = ""
-            return true
-        }
-    }
-    
-    func getAmrapData () -> Bool {
-        let timeRow: IntRow? = form.rowBy(tag: "AMRAPTime")
-        if timeRow!.value == nil {
-            return false
-        } else {
-            self.chosenWorkout.time = String(describing: timeRow!.value!)
-            self.chosenWorkout.restTime = ""
-            self.chosenWorkout.rounds = 0
-            return true
-        }
-    }
-    
-    func getTabataData () -> Bool {
-        let roundsRow: IntRow? = form.rowBy(tag: "TabataRounds")
-        let timeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataTime")
-        let restTimeRow: PickerInputRow<String>? = form.rowBy(tag: "TabataRestTime")
-        if roundsRow!.value == nil || timeRow!.value == nil || restTimeRow!.value == nil {
-            return false
-        } else {
-            self.chosenWorkout.rounds = roundsRow!.value!
-            self.chosenWorkout.time = timeRow!.value!
-            self.chosenWorkout.restTime = restTimeRow!.value!
-            return true
-        }
-    }
-    
-    func invalidDataAlert () {
-        let alert = UIAlertController(title: "Required fields are empty.", message: "Leave without saving?", preferredStyle: .alert)
-        alert.view.tintColor = UIColor.systemIndigo
-        
-        let leaveAction = UIAlertAction(title: "Yes", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        })
-        alert.addAction(leaveAction)
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true)
-    }
 }

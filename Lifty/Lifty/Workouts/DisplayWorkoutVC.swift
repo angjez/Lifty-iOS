@@ -25,12 +25,11 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = " " +  self.chosenWorkout.name + " "
-        typeLabel.text = " " + self.chosenWorkout.type
         checkType()
         loadExercises()
         
-        
+        titleLabel.text = " " +  self.chosenWorkout.name + " "
+        typeLabel.text = " " + self.chosenWorkout.type
         titleLabel.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
         titleLabel.layer.borderWidth = 3.0
         titleLabel.textColor = theme
@@ -39,6 +38,8 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
         self.view.backgroundColor = UIColor.white
         
     }
+    
+    //    MARK: Protocol stubs.
     
     func finishPassing(chosenWorkout: Workout) {
         self.chosenWorkout = chosenWorkout
@@ -53,6 +54,8 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
         gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
         self.viewDidLoad()
     }
+    
+    //    MARK: Assigning data to labels and text views.
     
     func checkType () {
         var rounds: String?
@@ -123,7 +126,7 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
     }
 }
 
-//MARK: - UITextView
+//MARK: - UITextView extension.
 extension UITextView{
     
     func numberOfLines() -> Int{

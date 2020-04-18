@@ -11,6 +11,8 @@ import Eureka
 
 class ExerciseVC: FormViewController, passExercise{
     
+    let viewCustomisation = ViewCustomisation()
+    
     var chosenExercise = Exercise(exerciseIndex: 0)
     var chosenRow: ButtonRowOf<String>?
     
@@ -19,24 +21,14 @@ class ExerciseVC: FormViewController, passExercise{
         
         self.replaceBackButton()
         
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-        
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
-        
-        setBlueGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
-        
-        createTitleForm ()
-        createExerciseForm ()
-        createNotesForm ()
+        self.createTitleForm ()
+        self.createExerciseForm ()
+        self.createNotesForm ()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.viewCustomisation.setBlueGradients(viewController: self)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
     }
     
     func replaceBackButton () {
@@ -45,11 +37,15 @@ class ExerciseVC: FormViewController, passExercise{
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
+    //    MARK: Protocol stubs.
+    
     func finishPassing(chosenExercise: Exercise, chosenRow: ButtonRowOf<String>?) {
         self.chosenExercise = chosenExercise
         self.chosenRow = chosenRow
         print("finished passing")
     }
+    
+    //    MARK: Form handling.
     
     func createTitleForm () {
         let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
@@ -64,7 +60,7 @@ class ExerciseVC: FormViewController, passExercise{
                     cell.textField.placeholder = row.tag
                 }
                 cell.textField!.textColor = UIColor.systemIndigo
-                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
+                self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
         }
     }
     
@@ -162,7 +158,7 @@ class ExerciseVC: FormViewController, passExercise{
     }
     
     func createNotesForm () {
-          form  +++ Section()
+        form  +++ Section()
             
             <<< TextAreaRow() {
                 $0.tag = "Notes"
@@ -176,84 +172,4 @@ class ExerciseVC: FormViewController, passExercise{
         }
     }
     
-    @objc func checkInput (sender: UIBarButtonItem){
-        
-        var isValid = true
-        
-        var reps: Int? = nil
-        var time: String? = nil
-        var exerciseName: String? = nil
-        
-        //        getting exercise name
-        
-        let nameRow: TextRow? = form.rowBy(tag: "Name")
-        if nameRow!.value == nil {
-            isValid = false
-        } else {
-            exerciseName = nameRow!.value!
-        }
-        
-        //        getting exercise type
-        
-        let typeRow: SegmentedRow<String>? = form.rowBy(tag: "exerciseType")
-        let exerciseType = typeRow!.value!
-        
-        //        getting time/reps
-        
-        if exerciseType == "Time" {
-            reps = 0
-            let timeRow: PickerInputRow<String>? = form.rowBy(tag: "Time: ")
-            if timeRow!.value == nil {
-                isValid = false
-            } else {
-                time = timeRow!.value!
-                self.chosenRow?.title = self.chosenExercise.exerciseName + " " +  String(self.chosenExercise.exerciseTime)
-            }
-        }
-        else if exerciseType == "Reps" {
-            time = "-"
-            let repsRow: IntRow? = form.rowBy(tag: "Amout of reps")
-            if repsRow!.value == nil {
-                isValid = false
-            } else {
-            reps = repsRow!.value!
-                self.chosenRow?.title = self.chosenExercise.exerciseName + " " +  String(self.chosenExercise.reps)
-            }
-        }
-        
-        //        getting notes
-        
-        let noteRow: TextAreaRow? = form.rowBy(tag: "Notes")
-        var notes = ""
-        if (noteRow!.value != nil && noteRow!.value != "") {
-            notes = noteRow!.value!
-        }
-        
-        if !isValid {
-            self.invalidDataAlert()
-        } else {
-            self.chosenExercise.exerciseName = exerciseName!
-            self.chosenExercise.exerciseType = exerciseType
-            self.chosenExercise.reps = reps!
-            self.chosenExercise.exerciseTime = time!
-            self.chosenExercise.notes = notes
-            navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-    }
-    
-    func invalidDataAlert () {
-        let alert = UIAlertController(title: "Required fields are empty.", message: "Leave without saving?", preferredStyle: .alert)
-        alert.view.tintColor = UIColor.systemIndigo
-        
-        let leaveAction = UIAlertAction(title: "Yes", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        })
-        alert.addAction(leaveAction)
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true)
-    }
 }

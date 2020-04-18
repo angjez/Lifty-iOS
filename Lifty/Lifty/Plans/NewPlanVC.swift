@@ -8,8 +8,11 @@
 
 import UIKit
 import Eureka
+import Firebase
 
 class NewPlanVC: FormViewController, passPlan {
+    
+    let viewCustomisation = ViewCustomisation()
     
     var weekDelegate: passWeek?
     var planDelegate: passPlan?
@@ -24,7 +27,7 @@ class NewPlanVC: FormViewController, passPlan {
         
         self.replaceBackButton()
         
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         createPlanTitleDurationForm()
         createWeekRows()
@@ -35,6 +38,8 @@ class NewPlanVC: FormViewController, passPlan {
         let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
         self.navigationItem.leftBarButtonItem = newBackButton
     }
+    
+    //    MARK: Protocol stubs.
     
     func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
         self.chosenPlan = chosenPlan
@@ -50,6 +55,7 @@ class NewPlanVC: FormViewController, passPlan {
         }
     }
     
+    //    MARK: Form handling.
     
     func createPlanTitleDurationForm () {
         
@@ -65,7 +71,7 @@ class NewPlanVC: FormViewController, passPlan {
                     cell.textField.placeholder = row.tag
                 }
                 cell.textField!.textColor = UIColor.systemPink
-                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
+                self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
         }
         form +++ Section ()
             <<< StepperRow() { row in
@@ -88,7 +94,7 @@ class NewPlanVC: FormViewController, passPlan {
             }.cellUpdate { (cell, row) in
                 self.weekRowsHaveChanged()
                 cell.valueLabel.textColor = UIColor.systemPink
-                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
+                self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
         }
     }
     
@@ -147,20 +153,16 @@ class NewPlanVC: FormViewController, passPlan {
     @objc func checkInput (sender: UIBarButtonItem) {
         let titleRow: TextRow? = form.rowBy(tag: "Title")
         if titleRow!.value == nil {
-            let alert = UIAlertController(title: "Required fields are empty.", message: "Leave without saving?", preferredStyle: .alert)
-            alert.view.tintColor = UIColor.systemPink
-            
-            let leaveAction = UIAlertAction(title: "Yes", style: .default, handler: {
-                (alert: UIAlertAction!) -> Void in
-                self.navigationController?.popToRootViewController(animated: true)
-                self.navigationController?.setNavigationBarHidden(false, animated: true)
-            })
-            alert.addAction(leaveAction)
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-            
-            self.present(alert, animated: true)
+            AlertView.showInvalidDataAlert(view: self, theme: UIColor.systemIndigo)
         } else {
             self.chosenPlan.name = titleRow!.value!
+            //            add data to Cloud Firestore
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let planDocument = PlanDocument(uid: user.uid)
+                planDocument.setPlanDocument(plan: self.chosenPlan)
+            }
+            //            add data locally
             deletePlan(plan: self.chosenPlan)
             savePlan(plan: self.chosenPlan)
             navigationController?.popToRootViewController(animated: true)

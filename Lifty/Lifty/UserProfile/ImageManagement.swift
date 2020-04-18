@@ -1,5 +1,5 @@
 //
-//  ImageSaver.swift
+//  ImageManagement.swift
 //  Lifty
 //
 //  Created by Angelika Jeziorska on 14/04/2020.
@@ -12,6 +12,7 @@ import CoreData
 import Firebase
 
 class ImageManagement {
+    
     static let shareInstance = ImageManagement()
     let user = Auth.auth().currentUser
     let storage = Storage.storage()
@@ -35,7 +36,7 @@ class ImageManagement {
             // Upload the file to the path
             let uploadTask = newUserPictureRef.putData(data, metadata: nil) { (metadata, error) in
                 guard let metadata = metadata else {
-                    // Uh-oh, an error occurred!
+                    // An error occurred!
                     return
                 }
                 let size = metadata.size
@@ -54,6 +55,7 @@ class ImageManagement {
             }
         }
     }
+    
     func fetchImage() -> [UserImageEntity] {
         var fetchingImage = [UserImageEntity]()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserImageEntity")
@@ -81,6 +83,7 @@ class ImageManagement {
         }
         return fetchingImage
     }
+    
     func deleteImage () {
         let storageRef = storage.reference()
         if let user = user {
@@ -95,5 +98,6 @@ class ImageManagement {
             }
         }
     }
+    
 }
 

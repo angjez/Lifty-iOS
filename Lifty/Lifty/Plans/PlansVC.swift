@@ -15,6 +15,8 @@ class PlansVC: FormViewController {
     @IBOutlet weak var newPlanButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
+    let viewCustomisation = ViewCustomisation()
+    
     var planDelegate: passPlan?
     var themeDelegate: passTheme?
     
@@ -25,7 +27,7 @@ class PlansVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
     }
     
@@ -44,18 +46,7 @@ class PlansVC: FormViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         initiateForm()
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-        
-        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+        self.viewCustomisation.setPinkGradients(viewController: self)
     }
     
     @IBAction func addNewPlan(_ sender: Any) {
@@ -72,15 +63,10 @@ class PlansVC: FormViewController {
         UIView.setAnimationsEnabled(true)
     }
     
+    //    MARK: Form handling.
+    
     func initiateForm () {
         self.plans = loadPlans()
-        let user = Auth.auth().currentUser
-        if let user = user {
-            let planDocument = PlanDocument(uid: user.uid)
-            for plan in self.plans {
-                planDocument.setPlanDocument(plan: plan)
-            }
-        }
         UIView.setAnimationsEnabled(false)
         form.removeAll()
         for (index, plan) in plans.enumerated() {
@@ -108,6 +94,11 @@ class PlansVC: FormViewController {
             title: "Delete",
             handler: { (action, row, completionHandler) in
                 UIView.setAnimationsEnabled(false)
+                let user = Auth.auth().currentUser
+                if let user = user {
+                    let planDocument = PlanDocument(uid: user.uid)
+                    planDocument.deletePlanDocument(plan: self.plans[Int(row.tag!)!])
+                }
                 deletePlan(plan: self.plans[Int(row.tag!)!])
                 self.plans.remove(at: Int(row.tag!)!)
                 self.form.removeAll()
@@ -122,7 +113,7 @@ class PlansVC: FormViewController {
             handler: { (action, row, completionHandler) in
                 let newPlanVC = NewPlanVC()
                 self.planDelegate = newPlanVC
-                self.chosenPlan = self.plans[self.chosenPlanIndex!]
+                self.chosenPlan = self.plans[Int(row.tag!)!]
                 self.chosenPlanIndex = Int(row.tag!)
                 self.performSegue(withIdentifier: "NewPlanSegue", sender: self)
                 completionHandler?(true)

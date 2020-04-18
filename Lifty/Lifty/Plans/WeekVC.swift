@@ -11,6 +11,8 @@ import Eureka
 
 class WeekVC: FormViewController, passPlan, passWeek {
     
+    let viewCustomisation = ViewCustomisation()
+    
     var planDelegate: passPlan?
     var weekDelegate: passWeek?
     var dayDelegate: passDay?
@@ -28,11 +30,13 @@ class WeekVC: FormViewController, passPlan, passWeek {
         
         self.title =  "Week " + String(self.chosenWeekIndex! + 1)
         
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         createTrainingDaysForm()
         createDayRows()
     }
+    
+    //    MARK: Protocol stubs.
     
     func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
         self.chosenPlan = chosenPlan
@@ -45,19 +49,21 @@ class WeekVC: FormViewController, passPlan, passWeek {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-        
-        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
+        self.viewCustomisation.setPinkGradients(viewController: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? ChooseWorkoutsVC{
+            self.planDelegate = destinationVC
+            self.weekDelegate = destinationVC
+            self.dayDelegate = destinationVC
+            self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
+            self.weekDelegate?.finishPassing(chosenWeek: chosenWeek, chosenWeekIndex: chosenWeekIndex)
+            self.dayDelegate?.finishPassing(chosenDay: chosenDay, chosenDayIndex: chosenDayIndex)
+        }
+    }
+    
+    //    MARK: Form handling.
     
     func createTrainingDaysForm () {
         
@@ -83,7 +89,7 @@ class WeekVC: FormViewController, passPlan, passWeek {
             }.cellUpdate { (cell, row) in
                 self.dayRowsHaveChanged()
                 cell.valueLabel.textColor = UIColor.systemPink
-                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
+                self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
         }
     }
     
@@ -139,14 +145,4 @@ class WeekVC: FormViewController, passPlan, passWeek {
         self.performSegue(withIdentifier: "chooseWorkoutSegue", sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? ChooseWorkoutsVC{
-            self.planDelegate = destinationVC
-            self.weekDelegate = destinationVC
-            self.dayDelegate = destinationVC
-            self.planDelegate?.finishPassing(chosenPlan: self.chosenPlan, chosenPlanIndex: self.chosenPlanIndex)
-            self.weekDelegate?.finishPassing(chosenWeek: chosenWeek, chosenWeekIndex: chosenWeekIndex)
-            self.dayDelegate?.finishPassing(chosenDay: chosenDay, chosenDayIndex: chosenDayIndex)
-        }
-    }
 }

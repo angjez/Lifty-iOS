@@ -16,6 +16,8 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     var chosenWorkoutIndex: Int?
     var workouts = [Workout]()
     
+    let viewCustomisation = ViewCustomisation()
+    
     let workoutsSelectable = SelectableSection<ImageCheckRow<String>>("Swipe right for workout preview", selectionType: .multipleSelection)
     
     var chosenPlan = Plan (name: "")
@@ -30,10 +32,16 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
         
         self.workouts = loadWorkouts()
         
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
-        createSelectableWorkoutForm()
+        self.createSelectableWorkoutForm()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.viewCustomisation.setPinkGradients(viewController: self)
+    }
+    
+    //    MARK: Protocol stubs.
     
     func finishPassing(chosenDay: Day, chosenDayIndex: Int?) {
 
@@ -58,21 +66,7 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
         }
     }
     
-
-    override func viewDidAppear(_ animated: Bool) {
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-
-        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
-    }
+    //    MARK: Form handling.
 
     func createSelectableWorkoutForm () {
         let infoAction = SwipeAction(

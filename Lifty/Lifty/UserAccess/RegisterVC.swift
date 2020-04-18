@@ -14,11 +14,12 @@ class RegisterVC: FormViewController {
     
     @IBOutlet weak var RegisteredButton: UIButton!
     
+    let viewCustomisation = ViewCustomisation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         self.initiateNameForm()
         self.initiateEmailForm()
         self.initiatePasswordForm()
@@ -215,7 +216,7 @@ class RegisterVC: FormViewController {
                 }
             }.cellUpdate { cell, row in
                 let blueGradientImage = CAGradientLayer.blueGradient(on: self.view)
-                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
+                self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemIndigo, borderColor: UIColor(patternImage: blueGradientImage!))
         }
     }
 }

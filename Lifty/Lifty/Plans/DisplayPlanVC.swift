@@ -5,11 +5,12 @@
 //  Created by Angelika Jeziorska on 05/04/2020.
 //  Copyright © 2020 Angelika Jeziorska. All rights reserved.
 //
-
 import UIKit
 import Eureka
 
 class DisplayPlanVC: FormViewController, passPlan {
+    
+    let viewCustomisation = ViewCustomisation()
     
     var currentWeekIndex = 0
     
@@ -22,9 +23,9 @@ class DisplayPlanVC: FormViewController, passPlan {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
-        //        add gesture recognizers
+        //        MARK: Gesture recognizers.
         
         let left = UISwipeGestureRecognizer(target : self, action : #selector(self.leftSwipe))
         left.direction = .left
@@ -39,6 +40,12 @@ class DisplayPlanVC: FormViewController, passPlan {
         initiateDayRows ()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.viewCustomisation.setPinkGradients(viewController: self)
+    }
+    
+    //    MARK: Protocol stubs.
+    
     func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
          self.chosenPlan = chosenPlan
          self.chosenPlanIndex = chosenPlanIndex
@@ -51,20 +58,7 @@ class DisplayPlanVC: FormViewController, passPlan {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        guard let tabBarController = self.tabBarController
-            else {
-                print("Error initializing tab bar controller!")
-                return
-        }
-        guard let navigationController = self.navigationController
-            else {
-                print("Error initializing navigation controller!")
-                return
-        }
-        
-        setPinkGradients(tabBarController: tabBarController, navigationController: navigationController, view: self.view, tableView: self.tableView)
-    }
+    //        MARK: Gesture recognizers.
     
     @objc
     func leftSwipe(){
@@ -94,6 +88,8 @@ class DisplayPlanVC: FormViewController, passPlan {
         self.initiateDayRows()
     }
     
+    //    MARK: Form handling.
+    
     func initiatePlanLabelForm () {
         UIView.setAnimationsEnabled(false)
         let pinkGradientImage = CAGradientLayer.pinkGradient(on: self.view)
@@ -103,7 +99,7 @@ class DisplayPlanVC: FormViewController, passPlan {
             }.cellUpdate { cell, row in
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 40)
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
-                setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
+                self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
         }
         UIView.setAnimationsEnabled(true)
     }
@@ -115,7 +111,7 @@ class DisplayPlanVC: FormViewController, passPlan {
         }.cellUpdate { cell, row in
             cell.height = {30}
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-            setLabelRowCellProperties(cell: cell, textColor: UIColor.lightGray, borderColor: UIColor.lightGray)
+            self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.lightGray, borderColor: UIColor.lightGray)
         }
         UIView.setAnimationsEnabled(true)
     }
@@ -129,7 +125,7 @@ class DisplayPlanVC: FormViewController, passPlan {
                     $0.title = "Day " + String(dayIndex + 1)
                 }.cellUpdate { cell, row in
                     cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-                    setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
+                    self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
             }
             for (workoutIndex, workout) in self.chosenPlan.weeks[currentWeekIndex].days[dayIndex].workouts.enumerated() {
                 form +++ Section()
