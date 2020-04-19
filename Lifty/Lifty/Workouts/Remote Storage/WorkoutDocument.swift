@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import SwiftyJSON
 
 class WorkoutDocument : Document {
     
@@ -49,13 +50,93 @@ class WorkoutDocument : Document {
             "type": exercise.exerciseType,
             "time": exercise.exerciseTime,
             "index": exercise.exerciseIndex,
+            "reps": exercise.reps,
+            "notes": exercise.notes
         ], forDocument: exerciseRef)
     }
     
     //    MARK: Methods for getting the values for workouts.
     
-    func getWorkoutDocument () {
-        
+    func getWorkoutDocument (completion: @escaping ([Workout]) -> Void)  {
+        var loadedWorkouts = [Workout]()
+        self.collectionRef!.document(self.uid).collection("workouts").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                completion(loadedWorkouts)
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let workout = Workout(name: "")
+                    self.manageLoadedWorkoutData(workout: workout, data: document.data())
+                    self.getWorkoutExercises(workoutName: workout.name, completion: { exercises in
+                        workout.exercises = exercises
+                    })
+                    loadedWorkouts.append(workout)
+                }
+                completion(loadedWorkouts)
+            }
+        }
+    }
+    
+    //    Assigning data to a workout.
+    func manageLoadedWorkoutData (workout: Workout, data: [String:Any]) {
+        for data in data {
+            switch data.key {
+            case "name":
+                workout.name = data.value as! String
+            case "type":
+                workout.type = data.value as! String
+            case "time":
+                workout.time = data.value as! String
+            case "restTime":
+                workout.restTime = data.value as! String
+            case "rounds":
+                workout.rounds = data.value as! Int
+            default:
+                print("Undefined key.")
+            }
+        }
+    }
+    
+    func getWorkoutExercises (workoutName: String, completion: @escaping ([Exercise]) -> Void) {
+        var exercises = [Exercise]()
+        self.collectionRef!.document(self.uid).collection("workouts").document(workoutName).collection("exercises").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                completion(exercises)
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let exercise = Exercise(exerciseIndex: 0)
+                    self.manageLoadedExerciseData(exercise: exercise, data: document.data())
+                    exercises.append(exercise)
+                }
+                for exercise in exercises {
+                    print(exercise.exerciseName)
+                }
+                completion(exercises)
+            }
+        }
+    }
+    
+    //    Assigning data to an exercise.
+    func manageLoadedExerciseData (exercise: Exercise, data: [String:Any]) {
+        for data in data {
+            switch data.key {
+            case "index":
+                exercise.exerciseIndex = data.value as! Int
+            case "name":
+                exercise.exerciseName = data.value as! String
+            case "type":
+                exercise.exerciseType = data.value as! String
+            case "notes":
+                exercise.notes = data.value as! String
+            case "time":
+                exercise.exerciseTime = data.value as! String
+            case "reps":
+                exercise.reps = data.value as! Int
+            default:
+                print("Undefined key.")
+            }
+        }
     }
     
     //    MARK: Methods for deleting workouts.

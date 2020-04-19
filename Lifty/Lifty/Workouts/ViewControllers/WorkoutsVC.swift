@@ -29,23 +29,31 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         
         super.viewDidLoad()
         
-        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        UIView.setAnimationsEnabled(false)
-        initiateForm()
-        UIView.setAnimationsEnabled(true)
-        
-        self.viewCustomisation.setBlueGradients(viewController: self)
-        
         let user = Auth.auth().currentUser
         if(user == nil) {
             print("not logged")
             UIView.setAnimationsEnabled(false)
             self.performSegue(withIdentifier: "LoginScreenSegue", sender: self)
             UIView.setAnimationsEnabled(true)
+        } else {
+            let workoutDocument = WorkoutDocument(uid: user!.uid)
+            workoutDocument.getWorkoutDocument(completion: { loadedWorkouts in
+                self.workouts = loadedWorkouts
+                print(self.workouts.count)
+                UIView.setAnimationsEnabled(false)
+                self.initiateForm()
+                UIView.setAnimationsEnabled(true)
+            })
+            
         }
+        
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        self.viewCustomisation.setBlueGradients(viewController: self)
+        
     }
     
     //    MARK: Protocol stubs.
@@ -69,6 +77,8 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         }
     }
     
+    //    MARK: Form handling.
+    
     @IBAction func addNewWorkout(_ sender: Any) {
         UIView.setAnimationsEnabled(false)
         form +++ Section()
@@ -84,10 +94,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
     }
     
-    //    MARK: Form handling.
-    
     func initiateForm () {
-        self.workouts = loadWorkouts()
         UIView.setAnimationsEnabled(false)
         form.removeAll()
         for (index, workout) in workouts.enumerated() {
@@ -117,6 +124,11 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
             handler: { (action, row, completionHandler) in
                 UIView.setAnimationsEnabled(false)
                 deleteWorkout(workout: self.workouts[Int(row.tag!)!])
+                let user = Auth.auth().currentUser
+                if let user = user {
+                    let workoutDocument = WorkoutDocument(uid: user.uid)
+                    workoutDocument.deleteWorkoutDocument (workout: self.workouts[Int(row.tag!)!])
+                }
                 self.workouts.remove(at: Int(row.tag!)!)
                 self.form.removeAll()
                 self.initiateForm()
@@ -144,6 +156,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
             row.leadingSwipe.performsFirstActionWithFullSwipe = true
         }
         UIView.setAnimationsEnabled(true)
+        self.viewDidAppear(false)
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {

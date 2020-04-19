@@ -155,16 +155,19 @@ class NewPlanVC: FormViewController, passPlan {
         if titleRow!.value == nil {
             AlertView.showInvalidDataAlert(view: self, theme: UIColor.systemIndigo)
         } else {
-            self.chosenPlan.name = titleRow!.value!
-            //            add data to Cloud Firestore
             let user = Auth.auth().currentUser
             if let user = user {
+                deletePlan(plan: self.chosenPlan)
+                //            add data to Cloud Firestore
                 let planDocument = PlanDocument(uid: user.uid)
+                if self.chosenPlan.name != "" {
+                    planDocument.deletePlanDocument(plan: self.chosenPlan)
+                }
+                self.chosenPlan.name = titleRow!.value!
                 planDocument.setPlanDocument(plan: self.chosenPlan)
+                //            add data locally
+                savePlan(plan: self.chosenPlan)
             }
-            //            add data locally
-            deletePlan(plan: self.chosenPlan)
-            savePlan(plan: self.chosenPlan)
             navigationController?.popToRootViewController(animated: true)
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }

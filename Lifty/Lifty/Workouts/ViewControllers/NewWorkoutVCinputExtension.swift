@@ -11,11 +11,21 @@ import Eureka
 import Firebase
 
 extension NewWorkoutVC {
+    
     //    MARK: Input handling.
     
     @objc func checkInput (sender: UIBarButtonItem) {
         
         var isValid = true
+        
+        if chosenWorkout.name != "" {
+            deleteWorkout(workout: self.chosenWorkout)
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let workoutDocument = WorkoutDocument(uid: user.uid)
+                workoutDocument.deleteWorkoutDocument(workout: self.chosenWorkout)
+            }
+        }
         
         //        fix indexes
         for (index, exercise) in self.chosenWorkout.exercises.enumerated() {
@@ -46,15 +56,14 @@ extension NewWorkoutVC {
             AlertView.showInvalidDataAlert(view: self, theme: UIColor.systemIndigo)
             deleteWorkout(workout: self.chosenWorkout)
         } else {
-//            add data to Cloud Firestore
+            //            add data to Cloud Firestore
             let user = Auth.auth().currentUser
             if let user = user {
                 let workoutDocument = WorkoutDocument(uid: user.uid)
                 workoutDocument.setWorkoutDocument(workout: self.chosenWorkout)
+                //            add data locally
+                saveWorkout(workout: self.chosenWorkout)
             }
-//            add data locally
-            deleteWorkout(workout: self.chosenWorkout)
-            saveWorkout(workout: self.chosenWorkout)
             navigationController?.popToRootViewController(animated: true)
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
