@@ -16,11 +16,13 @@ Current features:
  ![Alt Text](https://i.imgur.com/UAxRFoy.gif)
  
  * user accounts
+ * Firebase remote database
 
 Planned features:
 
+  * ~~CRUD workouts~~
   * ~~CRUD workout plans~~
-  * Firebase remote database
+  * ~~Firebase remote database~~
   * workout filtering by type and favourites
   * workout execution (workout timer)
   * more login options (Google account, log in with Apple)
