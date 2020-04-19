@@ -27,19 +27,6 @@ class PlansVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let user = Auth.auth().currentUser
-        if let user = user {
-            let planDocument = PlanDocument(uid: user.uid)
-            planDocument.getPlanDocument(completion: { loadedPlans in
-                self.plans = loadedPlans
-                print(self.plans.count)
-                UIView.setAnimationsEnabled(false)
-                self.initiateForm()
-                UIView.setAnimationsEnabled(true)
-            })
-            
-        }
-        
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
     }
@@ -78,6 +65,18 @@ class PlansVC: FormViewController {
     //    MARK: Form handling.
     
     func initiateForm () {
+        let user = Auth.auth().currentUser
+        if let user = user {
+            let planDocument = PlanDocument(uid: user.uid)
+            planDocument.getPlanDocument(completion: { loadedPlans in
+                self.plans = loadedPlans
+                print(self.plans.count)
+                UIView.setAnimationsEnabled(false)
+                self.initiateForm()
+                UIView.setAnimationsEnabled(true)
+            })
+            
+        }
         UIView.setAnimationsEnabled(false)
         form.removeAll()
         for (index, plan) in plans.enumerated() {
