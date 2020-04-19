@@ -27,6 +27,19 @@ class PlansVC: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let user = Auth.auth().currentUser
+        if let user = user {
+            let planDocument = PlanDocument(uid: user.uid)
+            planDocument.getPlanDocument(completion: { loadedPlans in
+                self.plans = loadedPlans
+                print(self.plans.count)
+                UIView.setAnimationsEnabled(false)
+                self.initiateForm()
+                UIView.setAnimationsEnabled(true)
+            })
+            
+        }
+        
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
     }
@@ -45,7 +58,6 @@ class PlansVC: FormViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        initiateForm()
         self.viewCustomisation.setPinkGradients(viewController: self)
     }
     
@@ -66,7 +78,6 @@ class PlansVC: FormViewController {
     //    MARK: Form handling.
     
     func initiateForm () {
-        self.plans = loadPlans()
         UIView.setAnimationsEnabled(false)
         form.removeAll()
         for (index, plan) in plans.enumerated() {
@@ -129,6 +140,7 @@ class PlansVC: FormViewController {
             row.leadingSwipe.performsFirstActionWithFullSwipe = true
         }
         UIView.setAnimationsEnabled(true)
+        self.viewDidAppear(false)
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {

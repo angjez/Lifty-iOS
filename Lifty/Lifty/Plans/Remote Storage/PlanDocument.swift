@@ -67,6 +67,95 @@ class PlanDocument : Document {
     
     //    MARK: Methods for getting the values for plans.
     
+    func getPlanDocument (completion: @escaping ([Plan]) -> Void)  {
+        var loadedPlans = [Plan]()
+        self.collectionRef!.document(self.uid).collection("plans").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                completion(loadedPlans)
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let plan = Plan(name: "")
+                    for data in document.data() {
+                        if data.key == "name" {
+                            plan.name = data.value as! String
+                        }
+                    }
+                    self.getPlanWeeks(planName: plan.name, completion: { weeks in
+                        plan.weeks = weeks
+                    })
+                    loadedPlans.append(plan)
+                }
+                completion(loadedPlans)
+            }
+        }
+    }
+    
+    func getPlanWeeks (planName: String, completion: @escaping ([Week]) -> Void) {
+        var weeks = [Week]()
+        self.collectionRef!.document(self.uid).collection("plans").document(planName).collection("weeks").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                completion(weeks)
+                print("Error getting documents: \(err)")
+            } else {
+                for (index, document) in querySnapshot!.documents.enumerated() {
+                    let week = Week()
+                    let docRef = self.collectionRef!.document(self.uid).collection("plans").document(planName).collection("weeks").document("Week " + String(index))
+                    self.getWeekDays(docRef: docRef, completion: { days in
+                        week.days = days
+                    })
+                    weeks.append(week)
+                }
+                completion(weeks)
+            }
+        }
+    }
+    
+    func getWeekDays (docRef: DocumentReference, completion: @escaping ([Day]) -> Void) {
+        var days = [Day]()
+        docRef.collection("days").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                completion(days)
+                print("Error getting documents: \(err)")
+            } else {
+                for (index, _) in querySnapshot!.documents.enumerated() {
+                    let day = Day()
+                    let workoutDocRef = docRef.collection("days").document("Day " + String(index))
+                    self.getDayWorkouts(workoutDocRef: workoutDocRef, completion: { workouts in
+                        day.workouts = workouts
+                    })
+                    days.append(day)
+                }
+                completion(days)
+            }
+        }
+    }
+    
+    func getDayWorkouts (workoutDocRef: DocumentReference, completion: @escaping ([Workout]) -> Void) {
+        var workouts = [Workout]()
+        var allWorkouts = [Workout]()
+        let workoutDocument = WorkoutDocument(uid: uid)
+        workoutDocument.getWorkoutDocument(completion: { loadedWorkouts in
+            allWorkouts = loadedWorkouts
+        })
+        workoutDocRef.collection("workouts").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                completion(workouts)
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    for data in document.data() {
+                        for workout in allWorkouts {
+                            if workout.name == data.key {
+                                workouts.append(workout)
+                            }
+                        }
+                    }
+                }
+                completion(workouts)
+            }
+        }
+    }
     
     //    MARK: Methods for deleting plans.
     
