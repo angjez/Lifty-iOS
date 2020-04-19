@@ -409,7 +409,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
                 $0.multivaluedRowToInsertAt = { index in
                     return ButtonRow () {
                         $0.title = "Exercise"
-                        let newExercise = Exercise(exerciseIndex: index+1)
+                        let newExercise = Exercise(exerciseIndex: index)
                         newExercise.reps = 0
                         newExercise.notes = ""
                         newExercise.exerciseTime = ""
@@ -450,6 +450,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
     
     func selected(cell: ButtonCellOf<String>, row: ButtonRow) {
         exerciseIndex = row.indexPath!.row
+        print(row.indexPath!.row)
         chosenRow = row
         self.chosenExercise = self.chosenWorkout.exercises[exerciseIndex]
         self.performSegue(withIdentifier: "ExerciseSegue", sender: self)

@@ -8,6 +8,7 @@
 
 import UIKit
 import Eureka
+import Firebase
 
 class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     
@@ -30,7 +31,13 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.workouts = loadWorkouts()
+        let user = Auth.auth().currentUser
+        if let user = user {
+            let workoutDocument = WorkoutDocument(uid: user.uid)
+            workoutDocument.getWorkoutDocument(completion: { loadedWorkouts in
+                self.workouts = loadedWorkouts
+            })
+        }
         
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         

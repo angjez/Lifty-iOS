@@ -21,12 +21,12 @@ extension ExerciseVC {
         isValid = getExerciseName()
         
         let typeRow: SegmentedRow<String>? = form.rowBy(tag: "exerciseType")
-        let exerciseType = typeRow!.value!
+        self.chosenExercise.exerciseType = typeRow!.value!
         
-        if exerciseType == "Time" {
+        if self.chosenExercise.exerciseType == "Time" {
             isValid = getForTimeExerciseData()
         }
-        else if exerciseType == "Reps" {
+        else if self.chosenExercise.exerciseType == "Reps" {
             isValid = getForRepsExerciseData()
         }
         

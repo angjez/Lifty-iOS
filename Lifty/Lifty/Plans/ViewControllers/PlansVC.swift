@@ -110,7 +110,6 @@ class PlansVC: FormViewController {
                     let planDocument = PlanDocument(uid: user.uid)
                     planDocument.deletePlanDocument(plan: self.plans[Int(row.tag!)!])
                 }
-                deletePlan(plan: self.plans[Int(row.tag!)!])
                 self.plans.remove(at: Int(row.tag!)!)
                 self.form.removeAll()
                 self.initiateForm()

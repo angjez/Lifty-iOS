@@ -25,15 +25,15 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkType()
-        loadExercises()
-        
         titleLabel.text = " " +  self.chosenWorkout.name + " "
         typeLabel.text = " " + self.chosenWorkout.type
         titleLabel.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
         titleLabel.layer.borderWidth = 3.0
         titleLabel.textColor = theme
         typeLabel.textColor = UIColor.lightGray
+        
+        checkType()
+        loadExercises()
         
         self.view.backgroundColor = UIColor.white
         
@@ -59,6 +59,7 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
     
     func checkType () {
         var rounds: String?
+        specyficsLabel.text! = ""
         specyficsLabel.text! += " " + " "
         if (self.chosenWorkout.type != "AMRAP" && self.chosenWorkout.rounds>1) {
             rounds = " rounds of:"
@@ -91,11 +92,12 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
     }
     
     func loadExercises () {
-        for exercise in self.chosenWorkout.exercises {
+        for exercise in chosenWorkout.exercises {
             timeRepsTextView.text += "\n"
             exercisesTextView.text += "\n"
             if exercise.exerciseType == "Reps" {
                 timeRepsTextView.text += String(exercise.reps) + "\n"
+                print()
                 exercisesTextView.text += exercise.exerciseName + "\n"
             }
             else if exercise.exerciseType == "Time" {

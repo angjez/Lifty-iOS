@@ -19,7 +19,6 @@ extension NewWorkoutVC {
         var isValid = true
         
         if chosenWorkout.name != "" {
-            deleteWorkout(workout: self.chosenWorkout)
             let user = Auth.auth().currentUser
             if let user = user {
                 let workoutDocument = WorkoutDocument(uid: user.uid)
@@ -29,6 +28,8 @@ extension NewWorkoutVC {
         
         //        fix indexes
         for (index, exercise) in self.chosenWorkout.exercises.enumerated() {
+            print(String(exercise.exerciseIndex))
+            print(exercise.exerciseName)
             exercise.exerciseIndex = index
         }
         
@@ -54,18 +55,18 @@ extension NewWorkoutVC {
         print(isValid)
         if !isValid {
             AlertView.showInvalidDataAlert(view: self, theme: UIColor.systemIndigo)
-            deleteWorkout(workout: self.chosenWorkout)
         } else {
             //            add data to Cloud Firestore
             let user = Auth.auth().currentUser
             if let user = user {
                 let workoutDocument = WorkoutDocument(uid: user.uid)
-                workoutDocument.setWorkoutDocument(workout: self.chosenWorkout)
-                //            add data locally
-                saveWorkout(workout: self.chosenWorkout)
+                workoutDocument.setWorkoutDocument(workout: self.chosenWorkout, completion: {
+                    let rootVC = self.navigationController!.viewControllers.first as! WorkoutsVC
+                    rootVC.initiateForm()
+                    self.navigationController?.popToRootViewController(animated: true)
+                    self.navigationController?.setNavigationBarHidden(false, animated: true)
+                })
             }
-            navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
         
     }

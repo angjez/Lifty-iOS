@@ -21,29 +21,32 @@ class WorkoutDocument : Document {
     
     //    MARK: Methods for setting values for workouts.
     
-    func setWorkoutDocument (workout: Workout) {
+    func setWorkoutDocument (workout: Workout, completion: @escaping () -> Void) {
         let batch = db.batch()
         let workoutsRef = self.collectionRef!.document(self.uid).collection("workouts").document(workout.name)
-        batch.setData([
-            "name": workout.name,
-            "type": workout.type,
-            "time": workout.time,
-            "restTime": workout.restTime,
-            "rounds": workout.rounds
-        ], forDocument: workoutsRef)
         for exercise in workout.exercises {
-            setExerciseDocument(exercise: exercise, rootDoc: self.collectionRef!.document(self.uid).collection("workouts").document(workout.name), batch: batch)
+            setExerciseDocument(exercise: exercise, rootDoc: self.collectionRef!.document(self.uid).collection("workouts").document(workout.name), batch: batch, completion: {
+                batch.setData([
+                    "name": workout.name,
+                    "type": workout.type,
+                    "time": workout.time,
+                    "restTime": workout.restTime,
+                    "rounds": workout.rounds
+                ], forDocument: workoutsRef)
+            })
         }
         batch.commit() { err in
             if let err = err {
+                completion()
                 print("Error writing batch \(err)")
             } else {
+                completion()
                 print("Batch write succeeded.")
             }
         }
     }
     
-    func setExerciseDocument(exercise: Exercise, rootDoc: DocumentReference, batch: WriteBatch) {
+    func setExerciseDocument(exercise: Exercise, rootDoc: DocumentReference, batch: WriteBatch, completion: @escaping () -> Void) {
         let exerciseRef = rootDoc.collection("exercises").document(exercise.exerciseName)
         batch.setData([
             "name": exercise.exerciseName,
@@ -53,6 +56,7 @@ class WorkoutDocument : Document {
             "reps": exercise.reps,
             "notes": exercise.notes
         ], forDocument: exerciseRef)
+        completion()
     }
     
     //    MARK: Methods for getting the values for workouts.
@@ -109,8 +113,8 @@ class WorkoutDocument : Document {
                     self.manageLoadedExerciseData(exercise: exercise, data: document.data())
                     exercises.append(exercise)
                 }
-                for exercise in exercises {
-                    print(exercise.exerciseName)
+                exercises.sort {
+                    $0.exerciseIndex < $1.exerciseIndex
                 }
                 completion(exercises)
             }
@@ -145,7 +149,8 @@ class WorkoutDocument : Document {
         let batch = db.batch()
         let workoutsRef = self.collectionRef!.document(self.uid).collection("workouts").document(workout.name)
         for exercise in workout.exercises {
-            setExerciseDocument(exercise: exercise, rootDoc: self.collectionRef!.document(self.uid).collection("workouts").document(workout.name), batch: batch)
+            deleteExerciseDocument(exercise: exercise, rootDoc: self.collectionRef!.document(self.uid).collection("workouts").document(workout.name), batch: batch, completion: {
+            })
         }
         batch.deleteDocument(workoutsRef)
         batch.commit() { err in
@@ -157,7 +162,7 @@ class WorkoutDocument : Document {
         }
     }
     
-    func deleteExerciseDocument(exercise: Exercise, rootDoc: DocumentReference, batch: WriteBatch) {
+    func deleteExerciseDocument(exercise: Exercise, rootDoc: DocumentReference, batch: WriteBatch, completion: @escaping () -> Void) {
         let exerciseRef = rootDoc.collection("exercises").document(exercise.exerciseName)
         batch.deleteDocument(exerciseRef)
     }

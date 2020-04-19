@@ -157,7 +157,6 @@ class NewPlanVC: FormViewController, passPlan {
         } else {
             let user = Auth.auth().currentUser
             if let user = user {
-                deletePlan(plan: self.chosenPlan)
                 //            add data to Cloud Firestore
                 let planDocument = PlanDocument(uid: user.uid)
                 if self.chosenPlan.name != "" {
@@ -165,8 +164,6 @@ class NewPlanVC: FormViewController, passPlan {
                 }
                 self.chosenPlan.name = titleRow!.value!
                 planDocument.setPlanDocument(plan: self.chosenPlan)
-                //            add data locally
-                savePlan(plan: self.chosenPlan)
             }
             navigationController?.popToRootViewController(animated: true)
             self.navigationController?.setNavigationBarHidden(false, animated: true)

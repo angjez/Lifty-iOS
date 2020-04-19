@@ -11,21 +11,11 @@
 		64C47F2FC1544CFFC25CF57A /* Pods_Lifty_LiftyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F71727D17591F9A3A533B57 /* Pods_Lifty_LiftyUITests.framework */; };
 		66093234242F5A08001BEC19 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* Gradients.swift */; };
 		6621C15C243C810100B670CA /* ImageCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6621C159243C810100B670CA /* ImageCheckCell.swift */; };
-		6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */; };
 		66436BE32445CE1C00A45D0D /* DeleteCoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66436BE22445CE1C00A45D0D /* DeleteCoreDataEntities.swift */; };
 		665651C82444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
 		665651CB2444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
-		66583C5B243F297B00C8AB03 /* DayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */; };
-		66583C5C243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */; };
-		66583C5D243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */; };
-		66583C5E243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C58243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift */; };
-		66583C5F243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C59243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift */; };
-		66583C60243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66583C5A243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift */; };
 		66976947244A17F5009F33CE /* ViewCustomisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66976946244A17F5009F33CE /* ViewCustomisation.swift */; };
 		6697694B244A1F44009F33CE /* ExerciseVCinputExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697694A244A1F44009F33CE /* ExerciseVCinputExtension.swift */; };
-		66A48571242A5EC4004D4AE2 /* ExerciseEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */; };
-		66A48573242A5EC4004D4AE2 /* WorkoutEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */; };
-		66A48575242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A48574242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift */; };
 		66ABC65C240D300100295591 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66ABC65B240D300100295591 /* Assets.xcassets */; };
 		66B1197E244713C500FAC032 /* DisplayPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B11978244713C400FAC032 /* DisplayPlanVC.swift */; };
 		66B1197F244713C500FAC032 /* NewPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B11979244713C400FAC032 /* NewPlanVC.swift */; };
@@ -116,19 +106,9 @@
 		3B31509E9F0ADF250ED7AB57 /* Pods-Lifty-LiftyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty-LiftyUITests.release.xcconfig"; path = "Target Support Files/Pods-Lifty-LiftyUITests/Pods-Lifty-LiftyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		66093233242F5A08001BEC19 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		6621C159243C810100B670CA /* ImageCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCheckCell.swift; path = ../../../Eureka/Example/Example/ImageCheckCell.swift; sourceTree = "<group>"; };
-		66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		66436BE22445CE1C00A45D0D /* DeleteCoreDataEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCoreDataEntities.swift; sourceTree = "<group>"; };
-		66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		66583C58243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		66583C59243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		66583C5A243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		66976946244A17F5009F33CE /* ViewCustomisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomisation.swift; sourceTree = "<group>"; };
 		6697694A244A1F44009F33CE /* ExerciseVCinputExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseVCinputExtension.swift; sourceTree = "<group>"; };
-		66A48574242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		66ABC65B240D300100295591 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66B11978244713C400FAC032 /* DisplayPlanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayPlanVC.swift; sourceTree = "<group>"; };
 		66B11979244713C400FAC032 /* NewPlanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPlanVC.swift; sourceTree = "<group>"; };
@@ -239,7 +219,6 @@
 				66E570B5244844D0009452D8 /* WorkoutProtocols.swift */,
 				66B81CB1244B6A39003467AD /* ViewControllers */,
 				66E570BD24499C86009452D8 /* Remote Storage */,
-				66B1194F2446FCC200FAC032 /* Local Storage */,
 			);
 			path = Workouts;
 			sourceTree = "<group>";
@@ -251,34 +230,9 @@
 				66B1199224472DA000FAC032 /* PlanProtocols.swift */,
 				66B81CB4244B6A5A003467AD /* ViewControllers */,
 				66E570C124499FA3009452D8 /* Remote Storage */,
-				66B1194C2446FCA900FAC032 /* Local Storage */,
 				6621C159243C810100B670CA /* ImageCheckCell.swift */,
 			);
 			path = Plans;
-			sourceTree = "<group>";
-		};
-		66B1194C2446FCA900FAC032 /* Local Storage */ = {
-			isa = PBXGroup;
-			children = (
-				66583C57243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift */,
-				66583C58243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift */,
-				66583C59243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift */,
-				66583C5A243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift */,
-				66583C55243F297B00C8AB03 /* DayEntity+CoreDataClass.swift */,
-				66583C56243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift */,
-			);
-			path = "Local Storage";
-			sourceTree = "<group>";
-		};
-		66B1194F2446FCC200FAC032 /* Local Storage */ = {
-			isa = PBXGroup;
-			children = (
-				66291969242A2796006723FE /* ExerciseEntity+CoreDataClass.swift */,
-				66A48574242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift */,
-				6629196B242A2796006723FE /* WorkoutEntity+CoreDataClass.swift */,
-				6629196C242A2796006723FE /* WorkoutEntity+CoreDataProperties.swift */,
-			);
-			path = "Local Storage";
 			sourceTree = "<group>";
 		};
 		66B81CB1244B6A39003467AD /* ViewControllers */ = {
@@ -718,45 +672,35 @@
 			files = (
 				66B1198A2447141800FAC032 /* NewWorkoutVC.swift in Sources */,
 				66976947244A17F5009F33CE /* ViewCustomisation.swift in Sources */,
-				66A48571242A5EC4004D4AE2 /* ExerciseEntity+CoreDataClass.swift in Sources */,
 				66436BE32445CE1C00A45D0D /* DeleteCoreDataEntities.swift in Sources */,
 				66B1197E244713C500FAC032 /* DisplayPlanVC.swift in Sources */,
 				6621C15C243C810100B670CA /* ImageCheckCell.swift in Sources */,
-				66A48575242A647C004D4AE2 /* ExerciseEntity+CoreDataProperties.swift in Sources */,
 				66E570CD244A0F52009452D8 /* Alert.swift in Sources */,
-				66583C5D243F297B00C8AB03 /* PlanEntity+CoreDataClass.swift in Sources */,
 				66B1199324472DA100FAC032 /* PlanProtocols.swift in Sources */,
 				66E570C72449B4B4009452D8 /* PlanDocument.swift in Sources */,
 				66B119912447143D00FAC032 /* EditUserDataVC.swift in Sources */,
 				66E570CB244A0C99009452D8 /* NewWorkoutVCinputExtension.swift in Sources */,
 				66E570B6244844D0009452D8 /* WorkoutProtocols.swift in Sources */,
 				66B119902447143D00FAC032 /* ImageManagement.swift in Sources */,
-				66A48573242A5EC4004D4AE2 /* WorkoutEntity+CoreDataProperties.swift in Sources */,
 				66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */,
 				66B11983244713C500FAC032 /* ChooseWorkoutsVC.swift in Sources */,
 				66FF0598240930BE004AABF6 /* WorkoutDataClasses.swift in Sources */,
 				6697694B244A1F44009F33CE /* ExerciseVCinputExtension.swift in Sources */,
 				66B11981244713C500FAC032 /* WeekVC.swift in Sources */,
 				66E570C324499FB9009452D8 /* UserDocument.swift in Sources */,
-				66583C5E243F297B00C8AB03 /* PlanEntity+CoreDataProperties.swift in Sources */,
 				66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */,
 				66E570C52449B4A3009452D8 /* WorkoutDocument.swift in Sources */,
-				66583C5B243F297B00C8AB03 /* DayEntity+CoreDataClass.swift in Sources */,
 				66B1197F244713C500FAC032 /* NewPlanVC.swift in Sources */,
 				66E570C92449B5B6009452D8 /* Document.swift in Sources */,
 				66B1198F2447143D00FAC032 /* DisplayProfileVC.swift in Sources */,
 				66FF058F240930BE004AABF6 /* AppDelegate.swift in Sources */,
 				66D505B624445E2F00537D69 /* LoginVC.swift in Sources */,
-				66583C5F243F297B00C8AB03 /* WeekEntity+CoreDataClass.swift in Sources */,
 				66B1198B2447141800FAC032 /* ExerciseVC.swift in Sources */,
-				6629196F242A2796006723FE /* WorkoutEntity+CoreDataClass.swift in Sources */,
 				66093234242F5A08001BEC19 /* Gradients.swift in Sources */,
 				66B11980244713C500FAC032 /* PlanDataClasses.swift in Sources */,
 				66B119882447141800FAC032 /* WorkoutsVC.swift in Sources */,
-				66583C60243F297B00C8AB03 /* WeekEntity+CoreDataProperties.swift in Sources */,
 				66B119892447141800FAC032 /* DisplayWorkoutVC.swift in Sources */,
 				66B11982244713C500FAC032 /* PlansVC.swift in Sources */,
-				66583C5C243F297B00C8AB03 /* DayEntity+CoreDataProperties.swift in Sources */,
 				66D505B124445DFA00537D69 /* RegisterVC.swift in Sources */,
 				66FF0590240930BE004AABF6 /* SceneDelegate.swift in Sources */,
 			);
