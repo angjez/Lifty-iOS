@@ -22,7 +22,7 @@ Planned features:
 
   * ~~CRUD workouts~~
   * ~~CRUD workout plans~~
-  * ~~Firebase remote database~~
+  * ~~Cloud Firestore remote database~~
   * workout filtering by type and favourites
   * workout execution (workout timer)
   * more login options (Google account, log in with Apple)
