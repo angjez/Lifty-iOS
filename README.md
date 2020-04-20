@@ -16,7 +16,7 @@ Current features:
  ![Alt Text](https://i.imgur.com/UAxRFoy.gif)
  
  * user accounts
- * Firebase remote database
+ * Cloud Firestore remote database
 
 Planned features:
 
