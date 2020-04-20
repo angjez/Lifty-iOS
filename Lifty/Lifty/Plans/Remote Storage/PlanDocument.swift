@@ -20,7 +20,7 @@ class PlanDocument : Document {
     
     //    MARK: Methods for setting values for plans.
     
-    func setPlanDocument (plan: Plan) {
+    func setPlanDocument (plan: Plan, completion: @escaping () -> Void) {
         let batch = db.batch()
         let planRef = self.collectionRef!.document(self.uid).collection("plans").document(plan.name)
         batch.setData([
@@ -31,8 +31,10 @@ class PlanDocument : Document {
         }
         batch.commit() { err in
             if let err = err {
+                completion()
                 print("Error writing batch \(err)")
             } else {
+                completion()
                 print("Batch write succeeded.")
             }
         }

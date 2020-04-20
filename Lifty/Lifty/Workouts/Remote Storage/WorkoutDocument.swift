@@ -24,15 +24,15 @@ class WorkoutDocument : Document {
     func setWorkoutDocument (workout: Workout, completion: @escaping () -> Void) {
         let batch = db.batch()
         let workoutsRef = self.collectionRef!.document(self.uid).collection("workouts").document(workout.name)
+        batch.setData([
+            "name": workout.name,
+            "type": workout.type,
+            "time": workout.time,
+            "restTime": workout.restTime,
+            "rounds": workout.rounds
+        ], forDocument: workoutsRef)
         for exercise in workout.exercises {
             setExerciseDocument(exercise: exercise, rootDoc: self.collectionRef!.document(self.uid).collection("workouts").document(workout.name), batch: batch, completion: {
-                batch.setData([
-                    "name": workout.name,
-                    "type": workout.type,
-                    "time": workout.time,
-                    "restTime": workout.restTime,
-                    "rounds": workout.rounds
-                ], forDocument: workoutsRef)
             })
         }
         batch.commit() { err in

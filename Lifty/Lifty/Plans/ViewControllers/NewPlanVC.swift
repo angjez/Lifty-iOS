@@ -163,10 +163,11 @@ class NewPlanVC: FormViewController, passPlan {
                     planDocument.deletePlanDocument(plan: self.chosenPlan)
                 }
                 self.chosenPlan.name = titleRow!.value!
-                planDocument.setPlanDocument(plan: self.chosenPlan)
+                planDocument.setPlanDocument(plan: self.chosenPlan, completion: {
+                    self.navigationController?.popToRootViewController(animated: true)
+                    self.navigationController?.setNavigationBarHidden(false, animated: true)
+                })
             }
-            navigationController?.popToRootViewController(animated: true)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
 }

@@ -25,10 +25,17 @@ class PlansVC: FormViewController {
     var chosenPlanIndex: Int?
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        self.initiateForm()
         
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.viewCustomisation.setPinkGradients(viewController: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,10 +49,6 @@ class PlansVC: FormViewController {
             self.themeDelegate = destinationVC
             self.themeDelegate?.finishPassing(theme: UIColor.systemPink, gradient: CAGradientLayer.pinkGradient(on: self.view)!)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.viewCustomisation.setPinkGradients(viewController: self)
     }
     
     @IBAction func addNewPlan(_ sender: Any) {
@@ -71,74 +74,69 @@ class PlansVC: FormViewController {
             planDocument.getPlanDocument(completion: { loadedPlans in
                 self.plans = loadedPlans
                 print(self.plans.count)
+                
                 UIView.setAnimationsEnabled(false)
-                self.initiateForm()
-                UIView.setAnimationsEnabled(true)
-            })
-            
-        }
-        UIView.setAnimationsEnabled(false)
-        form.removeAll()
-        for (index, plan) in plans.enumerated() {
-            form +++ Section()
-                <<< ButtonRow () {
-                    $0.title = plan.name
-                    $0.tag = String(index)
-                    $0.onCellSelection(self.assignCellRow)
-                }.cellUpdate { cell, row in
-                    cell.textLabel?.textColor = UIColor.systemPink
-                    cell.indentationLevel = 2
-                    cell.indentationWidth = 10
-                    cell.textLabel!.textAlignment = .left
-                }.cellSetup { cell, _ in
-                    let pinkGradientImage = CAGradientLayer.pinkGradient(on: self.view)
-                    cell.backgroundColor = UIColor.white
-                    cell.layer.borderColor = UIColor(patternImage: pinkGradientImage!).cgColor
-                    cell.layer.borderWidth = 3.0
-                    cell.contentView.layoutMargins.right = 20
-            }
-        }
-        
-        let deleteAction = SwipeAction(
-            style: .normal,
-            title: "Delete",
-            handler: { (action, row, completionHandler) in
-                UIView.setAnimationsEnabled(false)
-                let user = Auth.auth().currentUser
-                if let user = user {
-                    let planDocument = PlanDocument(uid: user.uid)
-                    planDocument.deletePlanDocument(plan: self.plans[Int(row.tag!)!])
-                }
-                self.plans.remove(at: Int(row.tag!)!)
                 self.form.removeAll()
-                self.initiateForm()
-                completionHandler?(false)
-        })
-        deleteAction.actionBackgroundColor = .lightGray
-        deleteAction.image = UIImage(systemName: "trash")
-        let editAction = SwipeAction(
-            style: .normal,
-            title: "Edit",
-            handler: { (action, row, completionHandler) in
-                let newPlanVC = NewPlanVC()
-                self.planDelegate = newPlanVC
-                self.chosenPlan = self.plans[Int(row.tag!)!]
-                self.chosenPlanIndex = Int(row.tag!)
-                self.performSegue(withIdentifier: "NewPlanSegue", sender: self)
-                completionHandler?(true)
-        })
-        editAction.actionBackgroundColor = .lightGray
-        editAction.image = UIImage(systemName: "pencil")
-        
-        for row in form.rows {
-            row.baseCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-            row.trailingSwipe.actions = [deleteAction]
-            row.trailingSwipe.performsFirstActionWithFullSwipe = true
-            row.leadingSwipe.actions = [editAction]
-            row.leadingSwipe.performsFirstActionWithFullSwipe = true
+                for (index, plan) in self.plans.enumerated() {
+                    self.form +++ Section()
+                        <<< ButtonRow () {
+                            $0.title = plan.name
+                            $0.tag = String(index)
+                            $0.onCellSelection(self.assignCellRow)
+                        }.cellUpdate { cell, row in
+                            cell.textLabel?.textColor = UIColor.systemPink
+                            cell.indentationLevel = 2
+                            cell.indentationWidth = 10
+                            cell.textLabel!.textAlignment = .left
+                        }.cellSetup { cell, _ in
+                            let pinkGradientImage = CAGradientLayer.pinkGradient(on: self.view)
+                            cell.backgroundColor = UIColor.white
+                            cell.layer.borderColor = UIColor(patternImage: pinkGradientImage!).cgColor
+                            cell.layer.borderWidth = 3.0
+                            cell.contentView.layoutMargins.right = 20
+                    }
+                }
+                
+                let deleteAction = SwipeAction(
+                    style: .normal,
+                    title: "Delete",
+                    handler: { (action, row, completionHandler) in
+                        let user = Auth.auth().currentUser
+                        if let user = user {
+                            let planDocument = PlanDocument(uid: user.uid)
+                            planDocument.deletePlanDocument(plan: self.plans[Int(row.tag!)!])
+                        }
+                        self.plans.remove(at: Int(row.tag!)!)
+                        self.form.remove(at: Int(row.tag!)!)
+                        completionHandler?(false)
+                })
+                deleteAction.actionBackgroundColor = .lightGray
+                deleteAction.image = UIImage(systemName: "trash")
+                let editAction = SwipeAction(
+                    style: .normal,
+                    title: "Edit",
+                    handler: { (action, row, completionHandler) in
+                        let newPlanVC = NewPlanVC()
+                        self.planDelegate = newPlanVC
+                        self.chosenPlan = self.plans[Int(row.tag!)!]
+                        self.chosenPlanIndex = Int(row.tag!)
+                        self.performSegue(withIdentifier: "NewPlanSegue", sender: self)
+                        completionHandler?(true)
+                })
+                editAction.actionBackgroundColor = .lightGray
+                editAction.image = UIImage(systemName: "pencil")
+                
+                for row in self.form.rows {
+                    row.baseCell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                    row.trailingSwipe.actions = [deleteAction]
+                    row.trailingSwipe.performsFirstActionWithFullSwipe = true
+                    row.leadingSwipe.actions = [editAction]
+                    row.leadingSwipe.performsFirstActionWithFullSwipe = true
+                }
+                UIView.setAnimationsEnabled(true)
+                self.viewDidAppear(false)
+            })
         }
-        UIView.setAnimationsEnabled(true)
-        self.viewDidAppear(false)
     }
     
     func assignCellRow(cell: ButtonCellOf<String>, row: ButtonRow) {

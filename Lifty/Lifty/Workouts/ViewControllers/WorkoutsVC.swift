@@ -121,15 +121,13 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
                     style: .normal,
                     title: "Delete",
                     handler: { (action, row, completionHandler) in
-                        UIView.setAnimationsEnabled(false)
                         let user = Auth.auth().currentUser
                         if let user = user {
                             let workoutDocument = WorkoutDocument(uid: user.uid)
                             workoutDocument.deleteWorkoutDocument (workout: self.workouts[Int(row.tag!)!])
                         }
                         self.workouts.remove(at: Int(row.tag!)!)
-                        self.form.removeAll()
-                        self.initiateForm()
+                        self.form.remove(at: Int(row.tag!)!)
                         completionHandler?(true)
                 })
                 deleteAction.actionBackgroundColor = .lightGray
