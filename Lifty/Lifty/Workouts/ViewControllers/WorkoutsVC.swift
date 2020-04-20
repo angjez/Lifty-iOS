@@ -11,6 +11,7 @@ import Firebase
 
 class WorkoutsVC: FormViewController, passWorkoutAndIndex {
     
+    
     @IBOutlet weak var NewWorkoutButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
@@ -25,9 +26,20 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
     var chosenWorkout = Workout(name: "")
     var chosenWorkoutIndex: Int?
     
+    // search controller's properties
+    let searchController = UISearchController(searchResultsController: nil)
+    var originalOptions = [ButtonRow]()
+    var currentOptions = [ButtonRow]()
+    var scopeTitles = ["All", "FOR TIME", "EMOM", "AMRAP", "TABATA"]
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.searchControllerSetup()
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
         
         let user = Auth.auth().currentUser
         if(user == nil) {
@@ -38,7 +50,10 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         }
         UIView.setAnimationsEnabled(false)
         self.initiateForm()
+        self.originalOptions = self.currentOptions
         UIView.setAnimationsEnabled(true)
+        
+        guard let navigationController = navigationController else { return }
         
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
     }
@@ -47,6 +62,38 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         
         self.viewCustomisation.setBlueGradients(viewController: self)
         
+    }
+    
+    func searchControllerSetup () {
+        searchController.searchResultsUpdater = self
+        definesPresentationContext = true
+        searchController.searchBar.scopeButtonTitles = scopeTitles
+        for subView in searchController.searchBar.subviews {
+            if let scopeBar = subView as? UISegmentedControl {
+                scopeBar.backgroundColor = UIColor.white
+                scopeBar.tintColor = UIColor.systemIndigo
+            }
+        }
+        searchController.searchBar.setScopeBarButtonTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemIndigo], for: .selected)
+        searchController.searchBar.setScopeBarButtonTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        if let topView = searchController.searchBar.subviews.first {
+            for subView in topView.subviews {
+                if let cancelButton = subView as? UIButton {
+                    cancelButton.tintColor = UIColor.white
+                    cancelButton.isEnabled = true
+                }
+            }
+        }
+        searchController.searchBar.delegate = self
+        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.backgroundColor = UIColor.white
+            textfield.tintColor = UIColor.systemIndigo
+            textfield.textColor = UIColor.systemIndigo
+            textfield.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemIndigo])
+            if let backgroundview = textfield.subviews.first {
+                backgroundview.backgroundColor = UIColor.white
+            }
+        }
     }
     
     //    MARK: Protocol stubs.
@@ -74,8 +121,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
     
     @IBAction func addNewWorkout(_ sender: Any) {
         UIView.setAnimationsEnabled(false)
-        form +++ Section()
-            <<< ButtonRow () {
+        form +++ ButtonRow () {
                 $0.title = "New workout"
                 $0.tag = "Add workout"
         }
@@ -97,11 +143,12 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
                 UIView.setAnimationsEnabled(false)
                 self.form.removeAll()
                 for (index, workout) in self.workouts.enumerated() {
-                    self.form +++ Section()
-                        <<< ButtonRow () {
+                    self.form +++
+                         ButtonRow () {
+                            self.originalOptions.append($0)
                             $0.title = workout.name
+                            $0.value = workout.type
                             $0.tag = String(index)
-                            $0.value = "tap to edit"
                             $0.onCellSelection(self.assignCellRow)
                         }.cellUpdate { cell, row in
                             cell.textLabel?.textColor = UIColor.systemIndigo
@@ -152,6 +199,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
                     row.leadingSwipe.performsFirstActionWithFullSwipe = true
                 }
                 UIView.setAnimationsEnabled(true)
+                self.tableView.reloadData()
                 self.viewDidAppear(false)
             })
         }
@@ -162,5 +210,5 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         self.chosenWorkout = workouts[self.chosenWorkoutIndex!]
         self.performSegue(withIdentifier: "DisplayWorkoutSegue", sender: self.NewWorkoutButton)
     }
-    
+
 }

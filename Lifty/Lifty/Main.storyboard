@@ -178,7 +178,7 @@
             <objects>
                 <viewController id="8dS-zr-tCA" customClass="DisplayWorkoutVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G3r-SG-xA3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eCa-AY-FEI">
@@ -597,7 +597,7 @@
         <segue reference="unB-qo-sSi"/>
         <segue reference="DY2-Ei-qWc"/>
         <segue reference="cbm-Vw-iTM"/>
-        <segue reference="jEo-nP-ykr"/>
+        <segue reference="u9Z-aB-Xyo"/>
         <segue reference="POM-Uh-55S"/>
     </inferredMetricsTieBreakers>
     <resources>

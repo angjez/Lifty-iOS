@@ -8,7 +8,15 @@
 
 import Foundation
 
-class Workout {
+class Workout: SearchItem, Equatable, CustomStringConvertible {
+    static func == (lhs: Workout, rhs: Workout) -> Bool {
+        return true
+    }
+    
+    
+    var description: String {
+        return name
+    }
     
     var name: String
     var type: String
@@ -36,6 +44,14 @@ class Workout {
         self.restTime = workoutToAssign.restTime
         self.rounds = workoutToAssign.rounds
         self.exercises = workoutToAssign.exercises
+    }
+    
+    func matchesSearchQuery(_ query: String) -> Bool {
+        return name.lowercased().contains(query.lowercased())
+    }
+    
+    func matchesScope(_ type: String) -> Bool {
+        return self.type == type
     }
 }
 

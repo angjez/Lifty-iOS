@@ -69,6 +69,7 @@ class ViewCustomisation {
         }
         
         navigationController.navigationBar.barTintColor = UIColor(patternImage: blueGradientImageNavBar)
+        navigationController.view.backgroundColor = UIColor(patternImage: blueGradientImageNavBar)
     }
     
     func setBackgroundGradient (view: UIView) {
