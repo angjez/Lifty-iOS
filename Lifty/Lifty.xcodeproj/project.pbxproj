@@ -12,7 +12,6 @@
 		66093234242F5A08001BEC19 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* Gradients.swift */; };
 		6621C15C243C810100B670CA /* ImageCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6621C159243C810100B670CA /* ImageCheckCell.swift */; };
 		6628CBD1244DF8D2004BC2AD /* DeleteCoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6628CBD0244DF8D1004BC2AD /* DeleteCoreDataEntities.swift */; };
-		6628CBD3244E064C004BC2AD /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6628CBD2244E064C004BC2AD /* SearchBar.swift */; };
 		6628CBD5244E19A8004BC2AD /* WorkoutSC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6628CBD4244E19A8004BC2AD /* WorkoutSC.swift */; };
 		665651C82444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
 		665651CB2444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
@@ -109,7 +108,6 @@
 		66093233242F5A08001BEC19 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		6621C159243C810100B670CA /* ImageCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCheckCell.swift; path = ../../../Eureka/Example/Example/ImageCheckCell.swift; sourceTree = "<group>"; };
 		6628CBD0244DF8D1004BC2AD /* DeleteCoreDataEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeleteCoreDataEntities.swift; path = "../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/DeleteCoreDataEntities.swift"; sourceTree = "<group>"; };
-		6628CBD2244E064C004BC2AD /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		6628CBD4244E19A8004BC2AD /* WorkoutSC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSC.swift; sourceTree = "<group>"; };
 		66976946244A17F5009F33CE /* ViewCustomisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomisation.swift; sourceTree = "<group>"; };
 		6697694A244A1F44009F33CE /* ExerciseVCinputExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseVCinputExtension.swift; sourceTree = "<group>"; };
@@ -333,7 +331,6 @@
 				66E570CC244A0F52009452D8 /* Alert.swift */,
 				66976946244A17F5009F33CE /* ViewCustomisation.swift */,
 				6628CBD0244DF8D1004BC2AD /* DeleteCoreDataEntities.swift */,
-				6628CBD2244E064C004BC2AD /* SearchBar.swift */,
 				66436BD72445A12E00A45D0D /* UserProfile */,
 				66D505B424445E0000537D69 /* UserAccess */,
 				669FDF282439D40C00B038C5 /* Plans */,
@@ -692,7 +689,6 @@
 				66B11983244713C500FAC032 /* ChooseWorkoutsVC.swift in Sources */,
 				66FF0598240930BE004AABF6 /* WorkoutDataClasses.swift in Sources */,
 				6697694B244A1F44009F33CE /* ExerciseVCinputExtension.swift in Sources */,
-				6628CBD3244E064C004BC2AD /* SearchBar.swift in Sources */,
 				66B11981244713C500FAC032 /* WeekVC.swift in Sources */,
 				66E570C324499FB9009452D8 /* UserDocument.swift in Sources */,
 				66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */,

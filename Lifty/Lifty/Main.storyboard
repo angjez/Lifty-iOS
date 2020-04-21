@@ -7,11 +7,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Workouts-->
+        <!--Navigation Controller-->
         <scene sceneID="Bal-DS-G3D">
             <objects>
                 <navigationController restorationIdentifier="navController" storyboardIdentifier="navController" id="uUZ-h3-t6a" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Workouts" image="list.bullet" catalog="system" id="KO6-Tk-KLJ"/>
+                    <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" id="KO6-Tk-KLJ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Vi3-fQ-agR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -25,7 +25,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="w6v-NG-6Ra" kind="relationship" relationship="rootViewController" id="LBM-SP-dfL"/>
+                        <segue destination="0iU-u0-gAb" kind="relationship" relationship="rootViewController" id="vgG-V2-6Bu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNn-du-G7I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -52,7 +52,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Plans" image="square.and.pencil" catalog="system" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="" image="square.and.pencil" catalog="system" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Plans" id="Xpb-5n-8Oi">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="ZHz-a7-uIK">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kkm-RB-rkj">
@@ -94,7 +94,7 @@
             <objects>
                 <viewController id="NwI-OF-u6C" customClass="NewPlanVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0V2-o3-x2a">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fit-lA-ZTZ">
@@ -123,7 +123,7 @@
             <objects>
                 <viewController id="nkv-tg-Shd" customClass="WeekVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="geC-bm-DTS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7R-iy-7XU">
@@ -131,7 +131,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="UQI-er-X7U" kind="push" identifier="chooseWorkoutSegue" id="zis-hw-Ih7"/>
+                                    <segue destination="UQI-er-X7U" kind="presentation" identifier="chooseWorkoutSegue" id="zis-hw-Ih7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -152,26 +152,34 @@
             <objects>
                 <viewController id="UQI-er-X7U" customClass="ChooseWorkoutsVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bcr-ft-F4F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihi-PV-9Yd">
-                                <rect key="frame" x="177" y="117" width="46" height="216"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="8dS-zr-tCA" kind="push" identifier="DisplayWorkoutSegueFromChecklist" id="QXd-sx-J1p"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="9CN-sf-S0T"/>
                     </view>
                     <navigationItem key="navigationItem" id="46J-K8-c4x"/>
+                    <connections>
+                        <segue destination="8dS-zr-tCA" kind="presentation" identifier="DisplayWorkoutSegueFromChecklist" id="hEt-l7-LCr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ukQ-VU-lMX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3468" y="431"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ggb-QX-gWC">
+            <objects>
+                <viewController id="xGK-Ln-jPr" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v6e-3k-GJH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="j95-qP-Bmj"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h5i-TJ-Jzf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5168" y="431"/>
         </scene>
         <!--Display WorkoutVC-->
         <scene sceneID="Tkt-wN-o0z">
@@ -229,6 +237,7 @@
                         <outlet property="timeRepsTextView" destination="Jxo-lp-PmZ" id="G2t-Lh-LaG"/>
                         <outlet property="titleLabel" destination="0AZ-IT-NZF" id="Y2J-QZ-M3S"/>
                         <outlet property="typeLabel" destination="efT-ma-may" id="CUq-kf-ZgU"/>
+                        <segue destination="xGK-Ln-jPr" kind="presentation" modalPresentationStyle="fullScreen" id="44w-nL-AWv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6dc-iQ-Jcz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -236,35 +245,31 @@
             <point key="canvasLocation" x="1731.8840579710147" y="-1045.3125"/>
         </scene>
         <!--Workouts-->
-        <scene sceneID="YUm-i8-grc">
+        <scene sceneID="v41-Vf-8aj">
             <objects>
-                <tableViewController id="w6v-NG-6Ra" customClass="WorkoutsVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="JGL-nB-WLf">
+                <viewController id="0iU-u0-gAb" customClass="WorkoutsVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="03f-48-LBM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="w6v-NG-6Ra" id="Npz-2P-lRO"/>
-                            <outlet property="delegate" destination="w6v-NG-6Ra" id="oMi-Fe-sUH"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Workouts" id="xjE-Cp-HYd">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="uRK-bm-KaL">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7g9-6V-ZeQ">
+                        <viewLayoutGuide key="safeArea" id="0D5-l3-UPd"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Workouts" id="OGg-vY-ogG">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="aYw-d5-XKc">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zvf-Pm-mCe">
                                 <rect key="frame" x="20" y="0.0" width="74" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <state key="normal" image="person.crop.circle" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                 </state>
                                 <connections>
-                                    <segue destination="7YK-fP-TSx" kind="presentation" identifier="ProfileSegueFromWorkouts" id="unB-qo-sSi"/>
+                                    <segue destination="7YK-fP-TSx" kind="presentation" identifier="ProfileSegueFromWorkouts" id="GFb-mv-kpY"/>
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="QDC-6e-DX5">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xre-SY-oNz">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="3UL-Gk-16Y">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7sd-W0-DYl">
                                 <rect key="frame" x="322" y="11" width="72" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -273,20 +278,18 @@
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="VqB-fT-kkn" kind="push" identifier="NewWorkoutSegue" id="mZh-Gy-Nxp"/>
+                                    <segue destination="VqB-fT-kkn" kind="push" identifier="NewWorkoutSegue" id="O9q-gR-JmN"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="NewWorkoutButton" destination="Xre-SY-oNz" id="3rj-HH-AHB"/>
-                        <outlet property="UserProfileButton" destination="7g9-6V-ZeQ" id="dZL-he-wOS"/>
-                        <segue destination="8dS-zr-tCA" kind="presentation" identifier="DisplayWorkoutSegue" id="u9Z-aB-Xyo"/>
+                        <segue destination="8dS-zr-tCA" kind="presentation" identifier="DisplayWorkoutSegue" id="Hp4-tr-CaI"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PKy-nn-um8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tzX-yP-lke" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="-306"/>
+            <point key="canvasLocation" x="748" y="-320"/>
         </scene>
         <!--Create new workout-->
         <scene sceneID="Gav-sP-eXi">
@@ -440,11 +443,11 @@
             </objects>
             <point key="canvasLocation" x="-517" y="431"/>
         </scene>
-        <!--Plans-->
+        <!--Navigation Controller-->
         <scene sceneID="4B8-S0-0VA">
             <objects>
                 <navigationController id="c0f-7l-h6F" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Plans" id="igN-z7-HCV"/>
+                    <tabBarItem key="tabBarItem" title="" id="igN-z7-HCV"/>
                     <navigationItem key="navigationItem" id="zbu-nW-o4b"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="hdP-B9-9an">
@@ -480,7 +483,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="8dS-zr-tCA" kind="push" identifier="DisplayWorkoutSegueFromPlanDisplay" id="jEo-nP-ykr"/>
+                                    <segue destination="8dS-zr-tCA" kind="presentation" identifier="DisplayWorkoutSegueFromPlanDisplay" id="jEo-nP-ykr"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -594,10 +597,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="unB-qo-sSi"/>
-        <segue reference="DY2-Ei-qWc"/>
+        <segue reference="GFb-mv-kpY"/>
+        <segue reference="3FS-om-s35"/>
         <segue reference="cbm-Vw-iTM"/>
-        <segue reference="u9Z-aB-Xyo"/>
+        <segue reference="Hp4-tr-CaI"/>
         <segue reference="POM-Uh-55S"/>
     </inferredMetricsTieBreakers>
     <resources>

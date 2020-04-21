@@ -128,6 +128,7 @@ class DisplayPlanVC: FormViewController, passPlan {
                     self.viewCustomisation.setLabelRowCellProperties(cell: cell, textColor: UIColor.systemPink, borderColor: UIColor(patternImage: pinkGradientImage!))
             }
             for (workoutIndex, workout) in self.chosenPlan.weeks[currentWeekIndex].days[dayIndex].workouts.enumerated() {
+                print(workout.name)
                 form +++ Section()
                     <<< ButtonRow () {
                         $0.title = workout.name

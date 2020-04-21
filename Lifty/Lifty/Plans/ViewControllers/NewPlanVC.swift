@@ -153,7 +153,8 @@ class NewPlanVC: FormViewController, passPlan {
     @objc func checkInput (sender: UIBarButtonItem) {
         let titleRow: TextRow? = form.rowBy(tag: "Title")
         if titleRow!.value == nil {
-            AlertView.showInvalidDataAlert(view: self, theme: UIColor.systemIndigo)
+            AlertView.showInvalidDataAlert(view: self, theme: UIColor.systemPink)
+            
         } else {
             let user = Auth.auth().currentUser
             if let user = user {

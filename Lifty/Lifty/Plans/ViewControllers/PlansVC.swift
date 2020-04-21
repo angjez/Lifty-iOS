@@ -53,10 +53,6 @@ class PlansVC: FormViewController {
     
     @IBAction func addNewPlan(_ sender: Any) {
         UIView.setAnimationsEnabled(false)
-        form +++ Section()
-            <<< ButtonRow () {
-                $0.tag = "Add plan"
-        }
         let newPlan = Plan(name: "")
         self.plans.append(newPlan)
         self.chosenPlan = plans.last!

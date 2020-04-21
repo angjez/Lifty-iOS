@@ -48,12 +48,9 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
             self.performSegue(withIdentifier: "LoginScreenSegue", sender: self)
             UIView.setAnimationsEnabled(true)
         }
-        UIView.setAnimationsEnabled(false)
+        
         self.initiateForm()
         self.originalOptions = self.currentOptions
-        UIView.setAnimationsEnabled(true)
-        
-        guard let navigationController = navigationController else { return }
         
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
     }
@@ -121,10 +118,6 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
     
     @IBAction func addNewWorkout(_ sender: Any) {
         UIView.setAnimationsEnabled(false)
-        form +++ ButtonRow () {
-                $0.title = "New workout"
-                $0.tag = "Add workout"
-        }
         let newWorkout = Workout(name: "")
         self.workouts.append(newWorkout)
         chosenWorkout = workouts.last!

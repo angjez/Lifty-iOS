@@ -124,6 +124,7 @@ class PlanDocument : Document {
                     let day = Day()
                     let workoutDocRef = docRef.collection("days").document("Day " + String(index))
                     self.getDayWorkouts(workoutDocRef: workoutDocRef, completion: { workouts in
+                        print(workouts.count)
                         day.workouts = workouts
                     })
                     days.append(day)
@@ -139,24 +140,24 @@ class PlanDocument : Document {
         let workoutDocument = WorkoutDocument(uid: uid)
         workoutDocument.getWorkoutDocument(completion: { loadedWorkouts in
             allWorkouts = loadedWorkouts
-        })
-        workoutDocRef.collection("workouts").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                completion(workouts)
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    for data in document.data() {
-                        for workout in allWorkouts {
-                            if workout.name == data.key {
-                                workouts.append(workout)
+            workoutDocRef.collection("workouts").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    completion(workouts)
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        for data in document.data() {
+                            for workout in allWorkouts {
+                                if workout.name == data.key {
+                                    workouts.append(workout)
+                                }
                             }
                         }
                     }
+                    completion(workouts)
                 }
-                completion(workouts)
             }
-        }
+        })
     }
     
     //    MARK: Methods for deleting plans.

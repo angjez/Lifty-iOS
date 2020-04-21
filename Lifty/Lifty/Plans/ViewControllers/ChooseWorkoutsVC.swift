@@ -12,9 +12,8 @@ import Firebase
 
 class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     
-    var workoutDelegate: passWorkoutAndIndex?
+    var workoutDelegate: passWorkoutFromPlans?
     var chosenWorkout = Workout(name: "")
-    var chosenWorkoutIndex: Int?
     var workouts = [Workout]()
     
     let viewCustomisation = ViewCustomisation()
@@ -31,14 +30,6 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let user = Auth.auth().currentUser
-        if let user = user {
-            let workoutDocument = WorkoutDocument(uid: user.uid)
-            workoutDocument.getWorkoutDocument(completion: { loadedWorkouts in
-                self.workouts = loadedWorkouts
-            })
-        }
-        
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
         
         self.createSelectableWorkoutForm()
@@ -51,61 +42,74 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
     //    MARK: Protocol stubs.
     
     func finishPassing(chosenDay: Day, chosenDayIndex: Int?) {
-
+        
         self.chosenDay = chosenDay
         self.chosenDayIndex = chosenDayIndex
     }
-
+    
     func finishPassing(chosenPlan: Plan, chosenPlanIndex: Int?) {
         self.chosenPlan = chosenPlan
         self.chosenPlanIndex = chosenPlanIndex
     }
-
+    
     func finishPassing(chosenWeek: Week, chosenWeekIndex: Int?) {
         self.chosenWeek = chosenWeek
         self.chosenWeekIndex = chosenWeekIndex
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? WorkoutsVC{
+        if let destinationVC = segue.destination as? DisplayWorkoutVC{
             self.workoutDelegate = destinationVC
-            self.workoutDelegate?.finishPassingWithIndex(chosenWorkout: self.chosenWorkout, chosenWorkoutIndex: self.chosenWorkoutIndex)
+            self.workoutDelegate?.finishPassingFromPlans(chosenWorkout: self.chosenWorkout)
         }
     }
     
     //    MARK: Form handling.
-
+    
     func createSelectableWorkoutForm () {
-        let infoAction = SwipeAction(
-            style: .normal,
-            title: "Info",
-            handler: { (action, row, completionHandler) in
-                self.chosenWorkoutIndex = row.indexPath!.row
-                self.chosenWorkout = self.workouts[self.chosenWorkoutIndex!]
-                self.performSegue(withIdentifier: "DisplayWorkoutSegueFromChecklist", sender: self)
-                completionHandler?(true)
-        })
-        infoAction.actionBackgroundColor = .lightGray
-        infoAction.image = UIImage(systemName: "info")
-
-        form +++ workoutsSelectable
-        for (index, workout) in self.workouts.enumerated()  {
-            form.last! <<< ImageCheckRow<String>(workout.name + String(index)){ lrow in
-                lrow.title = workout.name
-                lrow.selectableValue = workout.name
-                lrow.value = nil
-                lrow.leadingSwipe.actions = [infoAction]
-                lrow.leadingSwipe.performsFirstActionWithFullSwipe = true
-                for alreadyChosenWorkout in self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts {
-                    if workout.name == alreadyChosenWorkout.name {
-                        lrow.value = workout.name
-                        lrow.didSelect()
+        let user = Auth.auth().currentUser
+        if let user = user {
+            let workoutDocument = WorkoutDocument(uid: user.uid)
+            workoutDocument.getWorkoutDocument(completion: { loadedWorkouts in
+                self.workouts = loadedWorkouts
+                print(loadedWorkouts.count)
+                let infoAction = SwipeAction(
+                    style: .normal,
+                    title: "Info",
+                    handler: { (action, row, completionHandler) in
+                        for (index, workout) in self.workouts.enumerated()  {
+                            if workout.name + String(index) == row.tag {
+                                self.chosenWorkout = self.workouts[index]
+                                self.performSegue(withIdentifier: "DisplayWorkoutSegueFromChecklist", sender: self)
+                                completionHandler?(true)
+                            }
+                        }
+                })
+                infoAction.actionBackgroundColor = .lightGray
+                infoAction.image = UIImage(systemName: "info")
+                
+                self.form +++ self.workoutsSelectable
+                for (index, workout) in self.workouts.enumerated()  {
+                    self.form.last! <<< ImageCheckRow<String>(workout.name + String(index)){ lrow in
+                        lrow.title = workout.name
+                        lrow.selectableValue = workout.name
+                        lrow.value = nil
+                        lrow.leadingSwipe.actions = [infoAction]
+                        lrow.leadingSwipe.performsFirstActionWithFullSwipe = true
+                        for alreadyChosenWorkout in self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts {
+                            if workout.name == alreadyChosenWorkout.name {
+                                lrow.value = workout.name
+                                lrow.didSelect()
+                            }
+                        }
                     }
                 }
-            }
+                self.tableView.reloadData()
+                self.viewDidAppear(false)
+            })
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.chosenPlan.weeks[self.chosenWeekIndex!].days[(self.chosenDayIndex)!].workouts.removeAll()
         for workout in self.workouts {
@@ -116,5 +120,5 @@ class ChooseWorkoutsVC: FormViewController, passPlan, passWeek, passDay {
             }
         }
     }
-
+    
 }
