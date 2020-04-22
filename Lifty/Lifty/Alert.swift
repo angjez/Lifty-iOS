@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class AlertView: NSObject {
+    
     class func showInvalidDataAlert(view: UIViewController, theme: UIColor){
         let alert = UIAlertController(title: "Required fields are empty.", message: "Leave without saving?", preferredStyle: .alert)
         alert.view.tintColor = theme
@@ -23,4 +24,5 @@ class AlertView: NSObject {
         
         view.present(alert, animated: true, completion: nil)
     }
+    
 }

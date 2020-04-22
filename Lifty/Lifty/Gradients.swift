@@ -33,6 +33,15 @@ extension CAGradientLayer {
         return gradient.createGradientImage(on: view)
     }
     
+    class func greenGradient(on view: UIView) -> UIImage? {
+        let gradient = CAGradientLayer()
+        let green = #colorLiteral(red: 0.1882352941, green: 0.8196078431, blue: 0.3450980392, alpha: 1)
+        let limeGreen = #colorLiteral(red: 0.628940165, green: 0.8212791085, blue: 0, alpha: 1)
+        gradient.colors = [green.cgColor, limeGreen.cgColor]
+        setGradientBounds(gradient: gradient, view: view)
+        return gradient.createGradientImage(on: view)
+    }
+    
     private func createGradientImage(on view: UIView) -> UIImage? {
         var gradientImage: UIImage?
         UIGraphicsBeginImageContext(view.frame.size)

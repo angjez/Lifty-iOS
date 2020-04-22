@@ -8,16 +8,19 @@
 
 import UIKit
 
-class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
+class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans, UITextViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var specyficsLabel: UILabel!
+    @IBOutlet weak var startWorkoutButton: UIButton!
     
     @IBOutlet weak var exercisesTextView: UITextView!
     @IBOutlet weak var timeRepsTextView: UITextView!
     
     var chosenWorkout = Workout(name: "")
+    
+    var workoutDelegate: passWorkout?
     
     var theme: UIColor?
     var gradientImage = UIImage()
@@ -25,18 +28,43 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = " " +  self.chosenWorkout.name + " "
-        typeLabel.text = " " + self.chosenWorkout.type
-        titleLabel.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
-        titleLabel.layer.borderWidth = 3.0
-        titleLabel.textColor = theme
-        typeLabel.textColor = UIColor.lightGray
+        self.setLabels()
+        self.setButton()
+        
+        exercisesTextView.delegate  = self
+        timeRepsTextView.delegate  = self
+        timeRepsTextView.showsHorizontalScrollIndicator = false
+        exercisesTextView.showsVerticalScrollIndicator = false
         
         checkType()
         loadExercises()
         
         self.view.backgroundColor = UIColor.white
         
+    }
+    
+    func setLabels () {
+        titleLabel.text = " " +  self.chosenWorkout.name + " "
+        typeLabel.text = " " + self.chosenWorkout.type
+        titleLabel.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
+        titleLabel.layer.borderWidth = 3.0
+        titleLabel.textColor = theme
+        typeLabel.textColor = UIColor.lightGray
+    }
+    
+    func setButton () {
+        startWorkoutButton.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
+        startWorkoutButton.layer.borderWidth = 3.0
+        startWorkoutButton.setTitle("Start workout", for: .normal)
+        startWorkoutButton.setTitleColor(theme, for: .normal)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == exercisesTextView{
+            timeRepsTextView.contentOffset = exercisesTextView.contentOffset
+        }else{
+            exercisesTextView.contentOffset = timeRepsTextView.contentOffset
+        }
     }
     
     //    MARK: Protocol stubs.
@@ -53,6 +81,13 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
         self.theme = .systemPink
         gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
         self.viewDidLoad()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? TimerVC{
+            self.workoutDelegate = destinationVC
+            self.workoutDelegate?.finishPassing(chosenWorkout: self.chosenWorkout)
+        }
     }
     
     //    MARK: Assigning data to labels and text views.
@@ -87,7 +122,6 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans {
         specyficsLabel.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
         specyficsLabel.layer.borderWidth = 3.0
         specyficsLabel.textColor = theme
-        
         
     }
     
@@ -141,7 +175,11 @@ extension UITextView{
     func adjustUITextViewHeight()
     {
         var frame = self.frame
-        frame.size.height = self.contentSize.height
+        if self.contentSize.height < 500 {
+            frame.size.height = self.contentSize.height
+        } else {
+            frame.size.height = 500
+        }
         self.frame = frame
         
     }

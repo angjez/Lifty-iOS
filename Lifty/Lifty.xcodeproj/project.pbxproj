@@ -33,6 +33,7 @@
 		66B119912447143D00FAC032 /* EditUserDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B1198E2447143D00FAC032 /* EditUserDataVC.swift */; };
 		66B1199324472DA100FAC032 /* PlanProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B1199224472DA000FAC032 /* PlanProtocols.swift */; };
 		66BFBD5824444D8C006342BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66BFBD5524444D8C006342BA /* GoogleService-Info.plist */; };
+		66CFC912244F5140009E1CE9 /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CFC911244F5140009E1CE9 /* TimerVC.swift */; };
 		66D505B124445DFA00537D69 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B024445DFA00537D69 /* RegisterVC.swift */; };
 		66D505B624445E2F00537D69 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B524445E2F00537D69 /* LoginVC.swift */; };
 		66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B724445E4B00537D69 /* ResetPasswordVC.swift */; };
@@ -127,6 +128,7 @@
 		66B1198E2447143D00FAC032 /* EditUserDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserDataVC.swift; sourceTree = "<group>"; };
 		66B1199224472DA000FAC032 /* PlanProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanProtocols.swift; sourceTree = "<group>"; };
 		66BFBD5524444D8C006342BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		66CFC911244F5140009E1CE9 /* TimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
 		66D441F52441B9E700FF62C2 /* LiftyRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiftyRelease.entitlements; sourceTree = "<group>"; };
 		66D505B024445DFA00537D69 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		66D505B524445E2F00537D69 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -263,6 +265,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		66CFC910244F5051009E1CE9 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				66CFC911244F5140009E1CE9 /* TimerVC.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		66D505B424445E0000537D69 /* UserAccess */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +345,7 @@
 				66D505B424445E0000537D69 /* UserAccess */,
 				669FDF282439D40C00B038C5 /* Plans */,
 				669FDF252439D3B200B038C5 /* Workouts */,
+				66CFC910244F5051009E1CE9 /* Timer */,
 				66FF0581240930BD004AABF6 /* AppDelegate.swift */,
 				66FF0582240930BD004AABF6 /* SceneDelegate.swift */,
 				66FF0583240930BD004AABF6 /* Main.storyboard */,
@@ -694,6 +705,7 @@
 				66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */,
 				66E570C52449B4A3009452D8 /* WorkoutDocument.swift in Sources */,
 				66B1197F244713C500FAC032 /* NewPlanVC.swift in Sources */,
+				66CFC912244F5140009E1CE9 /* TimerVC.swift in Sources */,
 				66E570C92449B5B6009452D8 /* Document.swift in Sources */,
 				66B1198F2447143D00FAC032 /* DisplayProfileVC.swift in Sources */,
 				66FF058F240930BE004AABF6 /* AppDelegate.swift in Sources */,
