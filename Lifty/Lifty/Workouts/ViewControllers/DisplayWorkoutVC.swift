@@ -37,7 +37,6 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans, UIT
         exercisesTextView.showsVerticalScrollIndicator = false
         
         checkType()
-        loadExercises()
         
         self.view.backgroundColor = UIColor.white
         
@@ -73,6 +72,7 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans, UIT
         self.chosenWorkout = chosenWorkout
         self.theme = .systemIndigo
         self.gradientImage = CAGradientLayer.blueGradient(on: self.view)!
+        loadExercises()
         self.viewDidLoad()
     }
     
@@ -80,6 +80,7 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans, UIT
         self.chosenWorkout = chosenWorkout
         self.theme = .systemPink
         gradientImage = CAGradientLayer.pinkGradient(on: self.view)!
+        loadExercises()
         self.viewDidLoad()
     }
     
@@ -126,7 +127,9 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans, UIT
     }
     
     func loadExercises () {
+        print(chosenWorkout.exercises.count)
         for exercise in chosenWorkout.exercises {
+            print(exercise.exerciseName)
             timeRepsTextView.text += "\n"
             exercisesTextView.text += "\n"
             if exercise.exerciseType == "Reps" {
