@@ -52,6 +52,9 @@ class LoginVC: UIViewController {
         self.setBorders(button: LoginButton)
         self.setBorders(button: RegisterButton)
         
+        LoginTextField.layer.borderColor = UIColor.white.cgColor
+        PasswordTextField.layer.borderColor = UIColor.white.cgColor
+        
     }
     
     @IBAction func sendEmail(_ sender: Any) {

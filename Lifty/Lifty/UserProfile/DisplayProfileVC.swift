@@ -107,7 +107,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
             (alert: UIAlertAction!) -> Void in
             self.ProfileImageView.image = UIImage(systemName: "person.crop.circle")
             ImageManagement.shareInstance.deleteImage()
-            deleteAllRecords(name: "UserImageEntity")
+            // FIXME: deleting image from core data deleteAllRecords(name: "UserImageEntity")
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -124,7 +124,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         guard let image = info[.editedImage] as? UIImage else { return }
         
         dismiss(animated: true)
-        deleteAllRecords(name: "UserImageEntity")
+        // FIXME: deleting image from core data deleteAllRecords(name: "UserImageEntity")
         
         self.ProfileImageView.image = image
         if let imageData = ProfileImageView.image?.pngData() {
