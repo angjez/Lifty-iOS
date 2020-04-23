@@ -52,6 +52,11 @@ class LoginVC: UIViewController {
         self.setBorders(button: LoginButton)
         self.setBorders(button: RegisterButton)
         
+        LoginTextField.attributedPlaceholder = NSAttributedString(string: "Email adress",
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        
         LoginTextField.layer.borderColor = UIColor.white.cgColor
         PasswordTextField.layer.borderColor = UIColor.white.cgColor
         

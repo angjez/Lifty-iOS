@@ -24,6 +24,8 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
     @IBOutlet weak var lockScreenButton: UIButton!
     @IBOutlet weak var pauseWorkoutButton: UIButton!
     
+    @IBOutlet weak var workoutProgressView: UIProgressView!
+    
     var currentWorkout: Workout?
     var isPaused = false
     var isLocked = false
@@ -313,6 +315,7 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
             }
         }  else {
             timerLabel.text = nil
+            roundCounterLabel.text = nil
             secondaryTimer = nil
             secondaryTimer?.invalidate()
         }
@@ -341,12 +344,13 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
             default:
                 print("Unknown type.")
             }
+            self.startProgress()
         }
     }
     
     // MARK: Gesture regognisers for buttons.
     // MARK: TODO: Add an indicator for the user to know when to long press to finish a workout/unlock the screen.
-    
+
     func addPauseGestures() {
         let pauseTapGesture = UITapGestureRecognizer(target: self, action: #selector (pauseTap))
         let pausePressGesture = UILongPressGestureRecognizer(target: self, action: #selector(pausePress))
@@ -387,6 +391,7 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
     }
     
     @IBAction func lockTap(_ gestureRecognizer : UITapGestureRecognizer ) {
+        self.lockScreenButton.backgroundColor = UIColor.systemGreen
         if self.isPaused && !self.isLocked {
             self.isPaused = false
             self.pauseWorkoutButton.setImage(UIImage(systemName: "pause"), for: .normal)
@@ -413,6 +418,35 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
             self.lockScreenButton.setImage(UIImage(systemName: "lock.open"), for: .normal)
             self.pauseWorkoutButton.isEnabled = true
         }
+        if sender.state == .began {
+            lockScreenButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            UIView.animate(withDuration: 2.0,
+            delay: 0,
+            usingSpringWithDamping: 0.2,
+            initialSpringVelocity: 6.0,
+            options: .allowUserInteraction,
+            animations: { [weak self] in
+              self?.lockScreenButton.transform = .identity
+            },
+            completion: nil)
+            self.lockScreenButton.backgroundColor = #colorLiteral(red: 0.628940165, green: 0.8212791085, blue: 0, alpha: 1)
+        }
     }
     
+    // MARK: Progress view.
+    
+    func startProgress() {
+
+        workoutProgressView.progress = 0.0
+
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            if self.workoutTimeCap == self.workoutDuration {
+                timer.invalidate()
+                return
+            }
+            
+            self.workoutProgressView.progress = Float(self.workoutDuration/self.workoutTimeCap!)
+
+        }
+    }
 }
