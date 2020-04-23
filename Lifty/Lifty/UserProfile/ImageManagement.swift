@@ -64,20 +64,20 @@ class ImageManagement {
         } catch {
             print("Error while fetching the image")
         }
-//        no image in local storage, check if remote storage can provide one
+        //        no image in local storage, check if remote storage can provide one
         if(fetchingImage.isEmpty) {
             if let user = user {
                 let storageRef = storage.reference()
                 let userPictureRef = storageRef.child("UserProfileImages/" + (user.displayName!.trimmingCharacters(in: .whitespacesAndNewlines)) + ".jpg")
                 userPictureRef.getData(maxSize: 1 * 4096 * 4096) { data, error in
-                  if let error = error {
-                    print(error)
-                  } else {
-                    self.saveImage(data: data!)
-                    let imageInstance = UserImageEntity(context: self.context)
-                    imageInstance.image = data
-                    fetchingImage.append(imageInstance)
-                  }
+                    if let error = error {
+                        print(error)
+                    } else {
+                        self.saveImage(data: data!)
+                        let imageInstance = UserImageEntity(context: self.context)
+                        imageInstance.image = data
+                        fetchingImage.append(imageInstance)
+                    }
                 }
             }
         }
@@ -99,5 +99,18 @@ class ImageManagement {
         }
     }
     
+    func deleteImageFromCoreData() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserImageEntity")
+        do {
+            guard let workoutEntities = try? managedObjectContext.fetch(fetchRequest) else { return }
+
+            for workoutEntity in workoutEntities {
+                managedObjectContext.delete(workoutEntity)
+            }
+        }
+    }
 }
 

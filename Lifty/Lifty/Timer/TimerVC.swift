@@ -286,6 +286,9 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
             timer = nil
             label.textColor = .darkGray
             label.text = "Finished!"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
