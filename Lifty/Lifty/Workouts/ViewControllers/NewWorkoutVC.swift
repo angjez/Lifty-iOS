@@ -11,8 +11,7 @@ import Eureka
 class NewWorkoutVC: FormViewController, passWorkout {
     
     var newWorkoutDelegate: passExercise?
-    
-    @IBOutlet weak var triggerButton: UIButton!
+
     
     let viewCustomisation = ViewCustomisation()
     
@@ -23,6 +22,7 @@ class NewWorkoutVC: FormViewController, passWorkout {
     var chosenWorkout = Workout(name: "")
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         self.replaceBackButton()
@@ -450,7 +450,6 @@ class NewWorkoutVC: FormViewController, passWorkout {
     
     func selected(cell: ButtonCellOf<String>, row: ButtonRow) {
         exerciseIndex = row.indexPath!.row
-        print(row.indexPath!.row)
         chosenRow = row
         self.chosenExercise = self.chosenWorkout.exercises[exerciseIndex]
         self.performSegue(withIdentifier: "ExerciseSegue", sender: self)

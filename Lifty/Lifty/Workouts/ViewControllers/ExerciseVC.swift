@@ -9,7 +9,7 @@
 import UIKit
 import Eureka
 
-class ExerciseVC: FormViewController, passExercise{
+class ExerciseVC: FormViewController , passExercise {
     
     let viewCustomisation = ViewCustomisation()
     
@@ -17,20 +17,19 @@ class ExerciseVC: FormViewController, passExercise{
     var chosenRow: ButtonRowOf<String>?
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
         
         self.replaceBackButton()
         
-        self.createTitleForm ()
-        self.createExerciseForm ()
-        self.createNotesForm ()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.viewCustomisation.setBlueGradients(viewController: self)
-        self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
     }
-    
+
     func replaceBackButton () {
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.checkInput(sender:)))
@@ -42,7 +41,11 @@ class ExerciseVC: FormViewController, passExercise{
     func finishPassing(chosenExercise: Exercise, chosenRow: ButtonRowOf<String>?) {
         self.chosenExercise = chosenExercise
         self.chosenRow = chosenRow
-        print("finished passing")
+        self.createTitleForm ()
+        self.createExerciseTypeSection()
+        self.createForRepsSection()
+        self.createForTimeSection()
+        self.createNotesForm()
     }
     
     //    MARK: Form handling.
@@ -64,7 +67,8 @@ class ExerciseVC: FormViewController, passExercise{
         }
     }
     
-    func createExerciseForm () {
+    func createExerciseTypeSection () {
+        
         form +++
             Section()
             <<< SegmentedRow<String>("exerciseType"){
@@ -77,15 +81,20 @@ class ExerciseVC: FormViewController, passExercise{
                 else {
                     $0.value = "Reps"
                 }
-            }
-            +++ Section(){
-                $0.tag = "reps_t"
-                $0.hidden = "$exerciseType != 'Reps'"
+        }
+    }
+    
+    func createForRepsSection() {
+        form +++ Section(){
+            $0.tag = "reps_t"
+            $0.hidden = "$exerciseType != 'Reps'"
             }
             
             <<< IntRow() {
                 $0.tag = "Amout of reps"
                 $0.title = "Amout of reps"
+                $0.cell.layer.borderWidth = 3.0
+                $0.cell.layer.borderColor = UIColor.lightGray.cgColor
                 if (self.chosenExercise.exerciseType == "Reps") {
                     $0.value = self.chosenExercise.reps
                 }
@@ -118,11 +127,13 @@ class ExerciseVC: FormViewController, passExercise{
                         row.section?.insert(labelRow, at: indexPath)
                     }
                 }
-            }
-            
-            +++ Section(){
-                $0.tag = "time_t"
-                $0.hidden = "$exerciseType != 'Time'"
+        }
+    }
+    
+    func createForTimeSection() {
+        form +++ Section(){
+            $0.tag = "time_t"
+            $0.hidden = "$exerciseType != 'Time'"
             }
             <<< PickerInputRow<String>(){
                 $0.cell.layer.borderWidth = 3.0
@@ -164,9 +175,7 @@ class ExerciseVC: FormViewController, passExercise{
                 $0.tag = "Notes"
                 $0.cell.layer.borderWidth = 3.0
                 $0.cell.layer.borderColor = UIColor.lightGray.cgColor
-                if (self.chosenExercise.notes != nil) {
-                    $0.value = self.chosenExercise.notes
-                }
+                $0.value = self.chosenExercise.notes
                 $0.placeholder = "Additional notes (weight used, technique etc.)."
                 $0.textAreaHeight = .dynamic(initialTextViewHeight: 110)
         }

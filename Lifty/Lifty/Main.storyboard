@@ -381,13 +381,14 @@
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="VqB-fT-kkn" kind="push" identifier="NewWorkoutSegue" id="O9q-gR-JmN"/>
+                                    <segue destination="VqB-fT-kkn" kind="show" identifier="NewWorkoutSegue" id="Lfh-66-OES"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="8dS-zr-tCA" kind="presentation" identifier="DisplayWorkoutSegue" id="Hp4-tr-CaI"/>
+                        <segue destination="Aeb-61-uTm" kind="presentation" identifier="LoginScreenSegue" modalPresentationStyle="fullScreen" id="YTv-h8-6Lj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzX-yP-lke" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -397,26 +398,16 @@
         <!--Create new workout-->
         <scene sceneID="Gav-sP-eXi">
             <objects>
-                <viewController storyboardIdentifier="NewWorkoutStoryboard" id="VqB-fT-kkn" customClass="NewWorkoutVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewWorkoutStoryboard" modalPresentationStyle="fullScreen" id="VqB-fT-kkn" customClass="NewWorkoutVC" customModule="Lifty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="30o-iV-WYz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhC-IQ-Aza">
-                                <rect key="frame" x="184" y="100" width="46" height="101"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="u7c-u3-zg5" kind="show" identifier="ExerciseSegue" id="ISz-m1-M2j"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iNj-tD-26B"/>
                     </view>
                     <navigationItem key="navigationItem" title="Create new workout" id="aRu-Fc-cdB"/>
                     <connections>
-                        <outlet property="triggerButton" destination="bhC-IQ-Aza" id="HuP-lI-pck"/>
+                        <segue destination="u7c-u3-zg5" kind="show" identifier="ExerciseSegue" id="s9P-eT-sSr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VG8-ah-Twu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -437,7 +428,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wkf-hl-05h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2567" y="-320"/>
+            <point key="canvasLocation" x="3026" y="-320"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="mpr-mG-7GU">
@@ -702,10 +693,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="a6e-nd-g5a"/>
+        <segue reference="GFb-mv-kpY"/>
         <segue reference="3FS-om-s35"/>
         <segue reference="hgd-xa-kap"/>
-        <segue reference="hEt-l7-LCr"/>
+        <segue reference="YTv-h8-6Lj"/>
+        <segue reference="Hp4-tr-CaI"/>
         <segue reference="POM-Uh-55S"/>
     </inferredMetricsTieBreakers>
     <resources>
