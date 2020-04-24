@@ -104,6 +104,7 @@ class PlansVC: FormViewController {
                         }
                         self.plans.remove(at: Int(row.tag!)!)
                         self.form.remove(at: Int(row.tag!)!)
+                        self.reIndex()
                         completionHandler?(false)
                 })
                 deleteAction.actionBackgroundColor = .lightGray
@@ -140,6 +141,13 @@ class PlansVC: FormViewController {
         self.chosenPlan = plans[self.chosenPlanIndex!]
         self.performSegue(withIdentifier: "DisplayPlanSegue", sender: self)
     }
+    
+    func reIndex() {
+        for (index, row) in self.form.rows.enumerated() {
+            row.tag = String(index)
+        }
+    }
+
     
 }
 

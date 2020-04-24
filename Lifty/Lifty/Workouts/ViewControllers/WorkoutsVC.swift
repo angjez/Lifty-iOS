@@ -50,13 +50,13 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         }
         
         self.initiateForm()
-        self.originalOptions = self.currentOptions
         
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
+        self.currentOptions = self.originalOptions
         self.viewCustomisation.setBlueGradients(viewController: self)
         
     }
@@ -120,10 +120,10 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         UIView.setAnimationsEnabled(false)
         let newWorkout = Workout(name: "")
         self.workouts.append(newWorkout)
-        chosenWorkout = workouts.last!
-        chosenWorkoutIndex = workouts.count-1
+        self.chosenWorkout = workouts.last!
+        self.chosenWorkoutIndex = workouts.count-1
         UIView.setAnimationsEnabled(true)
-        self.performSegue(withIdentifier: "NewWorkoutSegue", sender: self.NewWorkoutButton)
+        self.performSegue(withIdentifier: "NewWorkoutSegue", sender: nil)
     }
     
     func initiateForm () {
@@ -132,9 +132,10 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
             let workoutDocument = WorkoutDocument(uid: user.uid)
             workoutDocument.getWorkoutDocument(completion: { loadedWorkouts in
                 self.workouts = loadedWorkouts
-                print(self.workouts.count)
                 UIView.setAnimationsEnabled(false)
                 self.form.removeAll()
+                self.originalOptions.removeAll()
+                self.currentOptions.removeAll()
                 for (index, workout) in self.workouts.enumerated() {
                     self.form +++
                          ButtonRow () {
@@ -142,6 +143,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
                             $0.title = workout.name
                             $0.value = workout.type
                             $0.tag = String(index)
+                            print(index)
                             $0.onCellSelection(self.assignCellRow)
                         }.cellUpdate { cell, row in
                             cell.textLabel?.textColor = UIColor.systemIndigo
@@ -168,6 +170,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
                         }
                         self.workouts.remove(at: Int(row.tag!)!)
                         self.form.remove(at: Int(row.tag!)!)
+                        self.reIndex()
                         completionHandler?(true)
                 })
                 deleteAction.actionBackgroundColor = .lightGray
@@ -202,6 +205,12 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         self.chosenWorkoutIndex = Int(row.tag!)
         self.chosenWorkout = workouts[self.chosenWorkoutIndex!]
         self.performSegue(withIdentifier: "DisplayWorkoutSegue", sender: self.NewWorkoutButton)
+    }
+    
+    func reIndex() {
+        for (index, row) in self.form.rows.enumerated() {
+            row.tag = String(index)
+        }
     }
 
 }

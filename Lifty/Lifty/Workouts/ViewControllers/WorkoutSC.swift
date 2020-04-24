@@ -40,8 +40,11 @@ extension WorkoutsVC: UISearchResultsUpdating, UISearchBarDelegate {
         UIView.setAnimationsEnabled(false)
         form.removeAll()
         for row in self.currentOptions {
+            print(row.tag!)
+
             form +++ row
         }
+        print("end")
         UIView.setAnimationsEnabled(true)
     }
     

@@ -165,6 +165,8 @@ class NewPlanVC: FormViewController, passPlan {
                 }
                 self.chosenPlan.name = titleRow!.value!
                 planDocument.setPlanDocument(plan: self.chosenPlan, completion: {
+                    let rootVC = self.navigationController!.viewControllers.first as! PlansVC
+                    rootVC.initiateForm()
                     self.navigationController?.popToRootViewController(animated: true)
                     self.navigationController?.setNavigationBarHidden(false, animated: true)
                 })

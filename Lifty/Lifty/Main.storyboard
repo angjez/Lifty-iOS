@@ -381,14 +381,17 @@
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="VqB-fT-kkn" kind="show" identifier="NewWorkoutSegue" id="Lfh-66-OES"/>
+                                    <action selector="addNewWorkout:" destination="0iU-u0-gAb" eventType="touchUpInside" id="6hn-zv-Ah7"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="NewWorkoutButton" destination="7sd-W0-DYl" id="O4U-no-VTF"/>
+                        <outlet property="UserProfileButton" destination="zvf-Pm-mCe" id="ZZh-Xa-v9K"/>
                         <segue destination="8dS-zr-tCA" kind="presentation" identifier="DisplayWorkoutSegue" id="Hp4-tr-CaI"/>
                         <segue destination="Aeb-61-uTm" kind="presentation" identifier="LoginScreenSegue" modalPresentationStyle="fullScreen" id="YTv-h8-6Lj"/>
+                        <segue destination="VqB-fT-kkn" kind="show" identifier="NewWorkoutSegue" id="zRv-e0-5rg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzX-yP-lke" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -693,7 +696,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="GFb-mv-kpY"/>
+        <segue reference="a6e-nd-g5a"/>
         <segue reference="3FS-om-s35"/>
         <segue reference="hgd-xa-kap"/>
         <segue reference="YTv-h8-6Lj"/>

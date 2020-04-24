@@ -283,13 +283,15 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
         
         label.text = timeString(time: workoutDuration)
         
-        if workoutDuration >= workoutTimeCap! {
+        if let timeCap = workoutTimeCap {
+            if workoutDuration >= timeCap {
             timer?.invalidate()
             timer = nil
             label.textColor = .darkGray
             label.text = "Finished!"
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 self.dismiss(animated: true, completion: nil)
+            }
             }
         }
     }
