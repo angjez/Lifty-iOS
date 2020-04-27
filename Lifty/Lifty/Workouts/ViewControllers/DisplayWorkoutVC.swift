@@ -31,11 +31,6 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans, UIT
         self.setLabels()
         self.setButton()
         
-        exercisesTextView.delegate  = self
-        timeRepsTextView.delegate  = self
-        timeRepsTextView.showsHorizontalScrollIndicator = false
-        exercisesTextView.showsVerticalScrollIndicator = false
-        
         checkType()
         
         self.view.backgroundColor = UIColor.white
@@ -56,6 +51,16 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans, UIT
         startWorkoutButton.layer.borderWidth = 3.0
         startWorkoutButton.setTitle("Start workout", for: .normal)
         startWorkoutButton.setTitleColor(theme, for: .normal)
+    }
+    
+    func setTextViewAppearance(textView: UITextView) {
+        textView.delegate  = self
+        textView.showsHorizontalScrollIndicator = false
+        textView.adjustUITextViewHeight()
+        textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        textView.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
+        textView.layer.borderWidth = 3.0
+        textView.textColor = theme
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -150,22 +155,13 @@ class DisplayWorkoutVC: UIViewController, passWorkout, passWorkoutFromPlans, UIT
                 }
             }
         }
-        exercisesTextView.adjustUITextViewHeight()
-        timeRepsTextView.adjustUITextViewHeight()
-        exercisesTextView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        timeRepsTextView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        exercisesTextView.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
-        exercisesTextView.layer.borderWidth = 3.0
         
-        timeRepsTextView.layer.borderColor = UIColor(patternImage: gradientImage).cgColor
-        timeRepsTextView.layer.borderWidth = 3.0
-        
-        exercisesTextView.textColor = theme
-        timeRepsTextView.textColor = theme
+        self.setTextViewAppearance(textView: exercisesTextView)
+        self.setTextViewAppearance(textView: timeRepsTextView)
     }
 }
 
-//MARK: - UITextView extension.
+//MARK: - UITextView extension for height adjustment.
 extension UITextView{
     
     func numberOfLines() -> Int{

@@ -53,14 +53,42 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
         self.setCircularButtons(button: pauseWorkoutButton)
         self.addPauseGestures()
         self.addLockGestures()
+        self.setTitleTypeLabel()
         
         countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(countdownTimerFires), userInfo: nil, repeats: true)
-        self.setTitleTypeLabel()
         
     }
     
     func finishPassing(chosenWorkout: Workout) {
         self.currentWorkout = chosenWorkout
+    }
+    
+    func setExerciseLabel(exercise: Exercise, label: UILabel) {
+        if exercise.exerciseType == "Reps" {
+            label.text = String(exercise.reps) + " "
+        } else {
+            label.text = exercise.exerciseTime + " "
+        }
+        label.text! += exercise.exerciseName
+    }
+    
+    func setExerciseTextView(exercise: Exercise, textView: UITextView) {
+        if exercise.exerciseType == "Reps" {
+            textView.text = String(exercise.reps) + " "
+        } else {
+            textView.text = exercise.exerciseTime + " "
+        }
+        textView.text! += exercise.exerciseName
+    }
+    
+    func setAllExercisesTextView() {
+        for exercise in self.currentWorkout!.exercises {
+            if exercise.exerciseType == "Reps" {
+                exercisesTextView.text += String(exercise.reps) + " " + exercise.exerciseName + "\n"
+            } else {
+                exercisesTextView.text += exercise.exerciseTime + " " + exercise.exerciseName + "\n"
+            }
+        }
     }
     
     func setTitleTypeLabel() {
@@ -84,42 +112,23 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
         switch self.currentWorkout?.type {
         case "AMRAP", "FOR TIME":
             typeTimeLabel.text! +=  " Time cap: " +  (workoutTime) + "'. "
+            setAllExercisesTextView()
         case "TABATA":
             self.currentExerciseLabel.text = "Work"
             self.roundCounterLabel!.text = "Round: 1/\(self.currentWorkout!.rounds)"
             typeTimeLabel.text! += " " + (workoutTime) + " on "
             typeTimeLabel.text! += (restTime) + " off. "
+            setAllExercisesTextView()
         case "EMOM":
             self.roundCounterLabel!.text = "Round: 1/\(self.currentWorkout!.rounds)"
             if (self.currentWorkout?.exercises.count)! >= 1 {
-                let currentExercise = self.currentWorkout?.exercises[0]
-                if currentExercise?.exerciseType == "Reps" {
-                    currentExerciseLabel.text = String(currentExercise!.reps) + " "
-                } else {
-                    currentExerciseLabel.text = currentExercise!.exerciseTime + " "
-                }
-                currentExerciseLabel.text! += currentExercise!.exerciseName
+                self.setExerciseLabel(exercise: (self.currentWorkout?.exercises[0])!, label: currentExerciseLabel)
             }
             if (self.currentWorkout?.exercises.count)! >= 2 {
-                let nextExercise = self.currentWorkout!.exercises[1]
-                if nextExercise.exerciseType == "Reps" {
-                    exercisesTextView.text = String(nextExercise.reps) + " "
-                } else {
-                    exercisesTextView.text = nextExercise.exerciseTime + " "
-                }
-                exercisesTextView.text += nextExercise.exerciseName
+                self.setExerciseTextView(exercise: (self.currentWorkout?.exercises[1])!, textView: exercisesTextView)
             }
         default:
             typeTimeLabel.text! = ""
-        }
-        if self.currentWorkout?.type != "EMOM" {
-            for exercise in self.currentWorkout!.exercises {
-                if exercise.exerciseType == "Reps" {
-                    exercisesTextView.text += String(exercise.reps) + " " + exercise.exerciseName + "\n"
-                } else {
-                    exercisesTextView.text += exercise.exerciseTime + " " + exercise.exerciseName + "\n"
-                }
-            }
         }
     }
     
@@ -186,21 +195,11 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
         }
         
         let currentExercise = self.currentWorkout!.exercises[completed % self.currentWorkout!.exercises.count]
-        if currentExercise.exerciseType == "Reps" {
-            currentExerciseLabel.text = String(currentExercise.reps) + " "
-        } else {
-            currentExerciseLabel.text = currentExercise.exerciseTime + " "
-        }
-        self.currentExerciseLabel.text! += currentExercise.exerciseName
+        self.setExerciseLabel(exercise: currentExercise, label: currentExerciseLabel)
         
         if completed < self.currentWorkout!.exercises.count * self.currentWorkout!.rounds {
             let nextExercise = self.currentWorkout!.exercises[(completed+1) % self.currentWorkout!.exercises.count]
-            if nextExercise.exerciseType == "Reps" {
-                exercisesTextView.text = String(nextExercise.reps) + " "
-            } else {
-                exercisesTextView.text = nextExercise.exerciseTime + " "
-            }
-            exercisesTextView.text += nextExercise.exerciseName
+            self.setExerciseTextView(exercise: nextExercise, textView: exercisesTextView)
         } else {
             exercisesTextView.text = nil
         }
@@ -238,6 +237,7 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
         }
         if let workTimeString = self.currentWorkout?.time {
             if let restTimeString = self.currentWorkout?.restTime {
+                
                 let workSeconds = getSeconds(workoutTimeString: workTimeString)
                 let restSeconds = getSeconds(workoutTimeString: restTimeString)
                 
@@ -285,13 +285,13 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
         
         if let timeCap = workoutTimeCap {
             if workoutDuration >= timeCap {
-            timer?.invalidate()
-            timer = nil
-            label.textColor = .darkGray
-            label.text = "Finished!"
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                self.dismiss(animated: true, completion: nil)
-            }
+                timer?.invalidate()
+                timer = nil
+                label.textColor = .darkGray
+                label.text = "Finished!"
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }
@@ -303,23 +303,26 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
             
             timerLabel.text = timeString(time: exerciseDuration)
             
-            if exerciseDuration >= exerciseTime! {
-                completed += 1
-                
-                if self.currentWorkout?.type == "EMOM" {
-                    nextEMOMexercise()
-                    exerciseDuration = 0.0
-                } else if self.currentWorkout?.type == "TABATA" {
-                    nextTABATAperiod()
-                    exerciseDuration = 0.0
+            if let exerciseTime = exerciseTime {
+                if exerciseDuration >= exerciseTime {
+                    completed += 1
+                    
+                    if self.currentWorkout?.type == "EMOM" {
+                        nextEMOMexercise()
+                        exerciseDuration = 0.0
+                    } else if self.currentWorkout?.type == "TABATA" {
+                        nextTABATAperiod()
+                        exerciseDuration = 0.0
+                    }
                     
                 }
+                
+            }  else {
+                timerLabel.text = nil
+                roundCounterLabel.text = nil
+                secondaryTimer = nil
+                secondaryTimer?.invalidate()
             }
-        }  else {
-            timerLabel.text = nil
-            roundCounterLabel.text = nil
-            secondaryTimer = nil
-            secondaryTimer?.invalidate()
         }
     }
     
@@ -352,7 +355,7 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
     
     // MARK: Gesture regognisers for buttons.
     // MARK: TODO: Add an indicator for the user to know when to long press to finish a workout/unlock the screen.
-
+    
     func addPauseGestures() {
         let pauseTapGesture = UITapGestureRecognizer(target: self, action: #selector (pauseTap))
         let pausePressGesture = UILongPressGestureRecognizer(target: self, action: #selector(pausePress))
@@ -423,14 +426,14 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
         if sender.state == .began {
             lockScreenButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
             UIView.animate(withDuration: 2.0,
-            delay: 0,
-            usingSpringWithDamping: 0.2,
-            initialSpringVelocity: 6.0,
-            options: .allowUserInteraction,
-            animations: { [weak self] in
-              self?.lockScreenButton.transform = .identity
-            },
-            completion: nil)
+                           delay: 0,
+                           usingSpringWithDamping: 0.2,
+                           initialSpringVelocity: 6.0,
+                           options: .allowUserInteraction,
+                           animations: { [weak self] in
+                            self?.lockScreenButton.transform = .identity
+                },
+                           completion: nil)
             self.lockScreenButton.backgroundColor = #colorLiteral(red: 0.628940165, green: 0.8212791085, blue: 0, alpha: 1)
         }
     }
@@ -438,17 +441,19 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
     // MARK: Progress view.
     
     func startProgress() {
-
+        
         workoutProgressView.progress = 0.0
-
+        
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
             if self.workoutTimeCap == self.workoutDuration {
                 timer.invalidate()
                 return
             }
             
+            let greenGradientImage = CAGradientLayer.greenGradient(on: self.workoutProgressView)
+            self.workoutProgressView.progressImage = greenGradientImage
             self.workoutProgressView.progress = Float(self.workoutDuration/self.workoutTimeCap!)
-
+            
         }
     }
 }

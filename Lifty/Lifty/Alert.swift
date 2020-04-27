@@ -17,7 +17,7 @@ class AlertView: NSObject {
         
         let leaveAction = UIAlertAction(title: "Yes", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            view.navigationController?.popToRootViewController(animated: true)
+            view.navigationController!.popViewController(animated: true)
         })
         alert.addAction(leaveAction)
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))

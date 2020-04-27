@@ -11,7 +11,6 @@ import Firebase
 
 class WorkoutsVC: FormViewController, passWorkoutAndIndex {
     
-    
     @IBOutlet weak var NewWorkoutButton: UIButton!
     @IBOutlet weak var UserProfileButton: UIButton!
     
@@ -37,7 +36,6 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         super.viewDidLoad()
         
         self.searchControllerSetup()
-        
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = true
         
@@ -50,7 +48,6 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         }
         
         self.initiateForm()
-        
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemIndigo)
     }
     
