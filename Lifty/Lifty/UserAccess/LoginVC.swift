@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import AnimatedGradientView
 
 // MARK: TODO: Add more login options (Google account, log in with Apple)
 
@@ -22,6 +23,29 @@ class LoginVC: UIViewController {
     
     @IBOutlet weak var LoginTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let animatedGradient = AnimatedGradientView(frame: view.bounds)
+        animatedGradient.animations = [
+        AnimatedGradientView.Animation(colorStrings: ["#8686E6", "#5E5CE6"], direction: .up, locations: [0.0, 0.5, 1.0], type: .axial),
+        AnimatedGradientView.Animation(colorStrings: ["#91CC00", "#30D33B"], direction: .upRight, locations: [0.0, 0.5, 1.0], type: .axial),
+        AnimatedGradientView.Animation(colorStrings: ["#FF7471", "#FF375F"], direction: .upRight, locations: [0.0, 0.5, 1.0], type: .axial)
+        ]
+        view.insertSubview(animatedGradient, at: 0)
+        
+        self.setPaddingAndBorders(textField: PasswordTextField)
+        self.setPaddingAndBorders(textField: LoginTextField)
+        self.setBorders(button: LoginButton)
+        self.setBorders(button: RegisterButton)
+        
+        LoginTextField.attributedPlaceholder = NSAttributedString(string: "Email adress",
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray5])
+        PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray5])
+        
+    }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
@@ -40,26 +64,6 @@ class LoginVC: UIViewController {
             }
         }
         return true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let viewCustomisation = ViewCustomisation()
-        viewCustomisation.setBackgroundGradient(view: self.view)
-        self.setPadding(textField: PasswordTextField)
-        self.setPadding(textField: LoginTextField)
-        self.setBorders(button: LoginButton)
-        self.setBorders(button: RegisterButton)
-        
-        LoginTextField.attributedPlaceholder = NSAttributedString(string: "Email adress",
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        
-        LoginTextField.layer.borderColor = UIColor.white.cgColor
-        PasswordTextField.layer.borderColor = UIColor.white.cgColor
-        
     }
     
     @IBAction func sendEmail(_ sender: Any) {
@@ -86,10 +90,12 @@ class LoginVC: UIViewController {
         button.layer.borderWidth = 3.0
     }
     
-    func setPadding (textField: UITextField) {
+    func setPaddingAndBorders (textField: UITextField) {
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         textField.leftView = paddingView
         textField.leftViewMode = .always
+        textField.layer.borderColor = UIColor.white.cgColor
+        textField.layer.borderWidth = 3.0
     }
     
 }

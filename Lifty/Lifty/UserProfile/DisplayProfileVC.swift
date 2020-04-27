@@ -75,8 +75,8 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
     @IBAction func logOut(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
-            try firebaseAuth.signOut()
             ImageManagement.shareInstance.deleteImageFromCoreData()
+            try firebaseAuth.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }

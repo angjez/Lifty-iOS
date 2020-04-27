@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		337B67E3A27C0DC951DB3DBE /* Pods_LiftyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4D13A671FA1EAC1E233A85 /* Pods_LiftyUITests.framework */; };
-		4A74802AA4CEC51FE6B27D1A /* Pods_Lifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78743B41842CBE7A21142AE /* Pods_Lifty.framework */; };
+		0CFABCF52F34062EF29236F9 /* libPods-LiftyUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CA5E43EE395F72029739FF /* libPods-LiftyUITests.a */; };
 		66093234242F5A08001BEC19 /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66093233242F5A08001BEC19 /* Gradients.swift */; };
 		6628CBD5244E19A8004BC2AD /* WorkoutSC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6628CBD4244E19A8004BC2AD /* WorkoutSC.swift */; };
 		665651C82444B8E70077640E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0583240930BD004AABF6 /* Main.storyboard */; };
@@ -53,7 +52,8 @@
 		66FF0592240930BE004AABF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66FF0584240930BD004AABF6 /* LaunchScreen.storyboard */; };
 		66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66FF0588240930BE004AABF6 /* Lifty.xcdatamodeld */; };
 		66FF0598240930BE004AABF6 /* WorkoutDataClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF058B240930BE004AABF6 /* WorkoutDataClasses.swift */; };
-		9B749C043E9CCB04DC2D3092 /* Pods_LiftyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9589481EE5156BEB161CF809 /* Pods_LiftyTests.framework */; };
+		A5337D013E419CD80F0DE0E3 /* libPods-LiftyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9ED67DCF68497A42822D748 /* libPods-LiftyTests.a */; };
+		F02C6C112D8BFA71E120880F /* libPods-Lifty.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 504B592457104E3B964EFCFC /* libPods-Lifty.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,27 +71,14 @@
 			remoteGlobalIDString = 66FF051624092C18004AABF6;
 			remoteInfo = Lifty;
 		};
-		66FFE8942433BB9400AE6072 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 51729DEB1B9A4F5E004A00EB;
-			remoteInfo = Eureka;
-		};
-		66FFE8962433BB9400AE6072 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 51729DF51B9A4F5E004A00EB;
-			remoteInfo = EurekaTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		00639EF449CF7032D9E966CF /* Pods-Lifty-LiftyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty-LiftyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Lifty-LiftyUITests/Pods-Lifty-LiftyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3B31509E9F0ADF250ED7AB57 /* Pods-Lifty-LiftyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty-LiftyUITests.release.xcconfig"; path = "Target Support Files/Pods-Lifty-LiftyUITests/Pods-Lifty-LiftyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		45CA5E43EE395F72029739FF /* libPods-LiftyUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiftyUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		498BC9DF19C7C565424A80F1 /* Pods-LiftyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftyUITests.release.xcconfig"; path = "Target Support Files/Pods-LiftyUITests/Pods-LiftyUITests.release.xcconfig"; sourceTree = "<group>"; };
-		5C4D13A671FA1EAC1E233A85 /* Pods_LiftyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiftyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		504B592457104E3B964EFCFC /* libPods-Lifty.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lifty.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66093233242F5A08001BEC19 /* Gradients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		6628CBD4244E19A8004BC2AD /* WorkoutSC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSC.swift; sourceTree = "<group>"; };
 		668180CA2456C7420026B4A3 /* ImageCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCheckCell.swift; path = ../../../../../Desktop/Eureka/Example/Example/ImageCheckCell.swift; sourceTree = "<group>"; };
@@ -142,13 +129,11 @@
 		66FF058B240930BE004AABF6 /* WorkoutDataClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDataClasses.swift; sourceTree = "<group>"; };
 		66FF058D240930BE004AABF6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66FF058E240930BE004AABF6 /* Lifty-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lifty-Bridging-Header.h"; sourceTree = "<group>"; };
-		66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Eureka.xcodeproj; path = ../Eureka/Eureka.xcodeproj; sourceTree = "<group>"; };
 		9191BC60B8CA5E3DF2F25479 /* Pods-Lifty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty.debug.xcconfig"; path = "Target Support Files/Pods-Lifty/Pods-Lifty.debug.xcconfig"; sourceTree = "<group>"; };
-		9589481EE5156BEB161CF809 /* Pods_LiftyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiftyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A03B209DBC11CD56D43EBE8 /* Pods-LiftyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftyUITests.debug.xcconfig"; path = "Target Support Files/Pods-LiftyUITests/Pods-LiftyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A479903367028B9EB2FBC081 /* Pods-Lifty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifty.release.xcconfig"; path = "Target Support Files/Pods-Lifty/Pods-Lifty.release.xcconfig"; sourceTree = "<group>"; };
 		E41224A362D6D7F5B6995C41 /* Pods-LiftyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftyTests.release.xcconfig"; path = "Target Support Files/Pods-LiftyTests/Pods-LiftyTests.release.xcconfig"; sourceTree = "<group>"; };
-		F78743B41842CBE7A21142AE /* Pods_Lifty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lifty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9ED67DCF68497A42822D748 /* libPods-LiftyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiftyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB3B405B93F043A50EA75CAD /* Pods-LiftyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiftyTests.debug.xcconfig"; path = "Target Support Files/Pods-LiftyTests/Pods-LiftyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A74802AA4CEC51FE6B27D1A /* Pods_Lifty.framework in Frameworks */,
+				F02C6C112D8BFA71E120880F /* libPods-Lifty.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B749C043E9CCB04DC2D3092 /* Pods_LiftyTests.framework in Frameworks */,
+				A5337D013E419CD80F0DE0E3 /* libPods-LiftyTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				337B67E3A27C0DC951DB3DBE /* Pods_LiftyUITests.framework in Frameworks */,
+				0CFABCF52F34062EF29236F9 /* libPods-LiftyUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,9 +179,9 @@
 		6649E3CA24334E7800991AB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F78743B41842CBE7A21142AE /* Pods_Lifty.framework */,
-				9589481EE5156BEB161CF809 /* Pods_LiftyTests.framework */,
-				5C4D13A671FA1EAC1E233A85 /* Pods_LiftyUITests.framework */,
+				504B592457104E3B964EFCFC /* libPods-Lifty.a */,
+				E9ED67DCF68497A42822D748 /* libPods-LiftyTests.a */,
+				45CA5E43EE395F72029739FF /* libPods-LiftyUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -300,7 +285,6 @@
 				66FF053324092C1C004AABF6 /* LiftyTests */,
 				66FF053E24092C1C004AABF6 /* LiftyUITests */,
 				66FF051824092C18004AABF6 /* Products */,
-				66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */,
 				6649E3CA24334E7800991AB3 /* Frameworks */,
 				92341F8209EAADBBEDBD4605 /* Pods */,
 			);
@@ -361,15 +345,6 @@
 			path = LiftyUITests;
 			sourceTree = "<group>";
 		};
-		66FFE8902433BB9400AE6072 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				66FFE8952433BB9400AE6072 /* Eureka.framework */,
-				66FFE8972433BB9400AE6072 /* EurekaTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		92341F8209EAADBBEDBD4605 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,7 +371,7 @@
 				66FF051324092C18004AABF6 /* Sources */,
 				66FF051424092C18004AABF6 /* Frameworks */,
 				66FF051524092C18004AABF6 /* Resources */,
-				FD9F0C2E086B8529BB3CF325 /* [CP] Embed Pods Frameworks */,
+				E84E3D1E99FC77F785282DD1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -480,12 +455,6 @@
 			mainGroup = 66FF050E24092C18004AABF6;
 			productRefGroup = 66FF051824092C18004AABF6 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 66FFE8902433BB9400AE6072 /* Products */;
-					ProjectRef = 66FFE88F2433BB9400AE6072 /* Eureka.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				66FF051624092C18004AABF6 /* Lifty */,
@@ -494,23 +463,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		66FFE8952433BB9400AE6072 /* Eureka.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Eureka.framework;
-			remoteRef = 66FFE8942433BB9400AE6072 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		66FFE8972433BB9400AE6072 /* EurekaTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = EurekaTests.xctest;
-			remoteRef = 66FFE8962433BB9400AE6072 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		66FF051524092C18004AABF6 /* Resources */ = {
@@ -588,6 +540,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E84E3D1E99FC77F785282DD1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lifty/Pods-Lifty-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lifty/Pods-Lifty-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lifty/Pods-Lifty-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F769D5F6E3EFCE03174D6C90 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -608,23 +577,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FD9F0C2E086B8529BB3CF325 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lifty/Pods-Lifty-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lifty/Pods-Lifty-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lifty/Pods-Lifty-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
