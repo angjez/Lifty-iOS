@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AnimatedGradientView
 
 class ViewCustomisation {
     
@@ -83,6 +84,16 @@ class ViewCustomisation {
         
         view.backgroundColor = UIColor(patternImage: blueGradientColor)
     }
+    
+//    func animatedGradientView(view: UIView) -> UIView {
+//        let animatedGradient = AnimatedGradientView(frame: view.bounds)
+//        animatedGradient.animations = [
+//        AnimatedGradientView.Animation(colorStrings: ["#8686E6", "#5E5CE6"], direction: .up, locations: [0.0, 0.5, 1.0], type: .axial),
+//        AnimatedGradientView.Animation(colorStrings: ["#91CC00", "#30D33B"], direction: .upRight, locations: [0.0, 0.5, 1.0], type: .axial),
+//        AnimatedGradientView.Animation(colorStrings: ["#FF7471", "#FF375F"], direction: .upRight, locations: [0.0, 0.5, 1.0], type: .axial)
+//        ]
+//        return animatedGradient
+//    }
     
     //    MARK: Tableview customisation.
     

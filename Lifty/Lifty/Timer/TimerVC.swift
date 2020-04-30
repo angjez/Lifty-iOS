@@ -377,11 +377,8 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
             self.isPaused = true
             // pause timers
             self.timer?.invalidate()
-            self.timer = nil
             self.secondaryTimer?.invalidate()
-            self.secondaryTimer = nil
             self.countdownTimer?.invalidate()
-            self.countdownTimer = nil
             
             self.pauseWorkoutButton.setImage(UIImage(systemName: "xmark"), for: .normal)
             self.pauseWorkoutButton.backgroundColor = .red

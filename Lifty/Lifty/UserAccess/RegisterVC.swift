@@ -9,6 +9,26 @@
 import UIKit
 import Eureka
 import Firebase
+import AnimatedGradientView
+
+class LiftyLogoView: UIView {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        let logoImage = UIImage(named: "icontransparent")
+        let imageView = UIImageView(image: logoImage)
+        imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        imageView.autoresizingMask = .flexibleWidth
+        self.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = UIColor.systemIndigo
+        addSubview(imageView)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
 class RegisterVC: FormViewController {
     
@@ -28,7 +48,9 @@ class RegisterVC: FormViewController {
     
     func initiateNameForm() {
         form +++
-            Section()
+            Section() {
+                $0.header = HeaderFooterView<LiftyLogoView>(.class)
+        }
             
             <<< TextRow("name") {
                 $0.title = "Name"

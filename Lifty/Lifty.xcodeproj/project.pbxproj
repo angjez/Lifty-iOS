@@ -36,6 +36,8 @@
 		66D505B124445DFA00537D69 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B024445DFA00537D69 /* RegisterVC.swift */; };
 		66D505B624445E2F00537D69 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B524445E2F00537D69 /* LoginVC.swift */; };
 		66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B724445E4B00537D69 /* ResetPasswordVC.swift */; };
+		66E31A9D245AB20400CC1D08 /* AchievementCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E31A9B245AB20400CC1D08 /* AchievementCVCell.swift */; };
+		66E31A9E245AB20400CC1D08 /* AchievementCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66E31A9C245AB20400CC1D08 /* AchievementCVCell.xib */; };
 		66E570B6244844D0009452D8 /* WorkoutProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570B5244844D0009452D8 /* WorkoutProtocols.swift */; };
 		66E570C324499FB9009452D8 /* UserDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570C224499FB9009452D8 /* UserDocument.swift */; };
 		66E570C52449B4A3009452D8 /* WorkoutDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570C42449B4A3009452D8 /* WorkoutDocument.swift */; };
@@ -106,6 +108,8 @@
 		66D505B024445DFA00537D69 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		66D505B524445E2F00537D69 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		66D505B724445E4B00537D69 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		66E31A9B245AB20400CC1D08 /* AchievementCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCVCell.swift; sourceTree = "<group>"; };
+		66E31A9C245AB20400CC1D08 /* AchievementCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementCVCell.xib; sourceTree = "<group>"; };
 		66E570B5244844D0009452D8 /* WorkoutProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutProtocols.swift; sourceTree = "<group>"; };
 		66E570C224499FB9009452D8 /* UserDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDocument.swift; sourceTree = "<group>"; };
 		66E570C42449B4A3009452D8 /* WorkoutDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDocument.swift; sourceTree = "<group>"; };
@@ -172,6 +176,8 @@
 				66B1198C2447143D00FAC032 /* DisplayProfileVC.swift */,
 				66B1198E2447143D00FAC032 /* EditUserDataVC.swift */,
 				66B1198D2447143D00FAC032 /* ImageManagement.swift */,
+				66E31A9B245AB20400CC1D08 /* AchievementCVCell.swift */,
+				66E31A9C245AB20400CC1D08 /* AchievementCVCell.xib */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -471,6 +477,7 @@
 			files = (
 				66FF0592240930BE004AABF6 /* LaunchScreen.storyboard in Resources */,
 				66FF057324092D29004AABF6 /* Default-568h@2x.png in Resources */,
+				66E31A9E245AB20400CC1D08 /* AchievementCVCell.xib in Resources */,
 				66FF0591240930BE004AABF6 /* Main.storyboard in Resources */,
 				66ABC65C240D300100295591 /* Assets.xcassets in Resources */,
 				66BFBD5824444D8C006342BA /* GoogleService-Info.plist in Resources */,
@@ -610,6 +617,7 @@
 				66B1197F244713C500FAC032 /* NewPlanVC.swift in Sources */,
 				66CFC912244F5140009E1CE9 /* TimerVC.swift in Sources */,
 				66E570C92449B5B6009452D8 /* Document.swift in Sources */,
+				66E31A9D245AB20400CC1D08 /* AchievementCVCell.swift in Sources */,
 				66B1198F2447143D00FAC032 /* DisplayProfileVC.swift in Sources */,
 				66FF058F240930BE004AABF6 /* AppDelegate.swift in Sources */,
 				66D505B624445E2F00537D69 /* LoginVC.swift in Sources */,

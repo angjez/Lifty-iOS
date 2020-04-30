@@ -27,7 +27,7 @@ class PlansVC: FormViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+
         self.initiateForm()
         
         self.viewCustomisation.customiseTableView(tableView: self.tableView, themeColor: UIColor.systemPink)
