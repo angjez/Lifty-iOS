@@ -23,6 +23,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
     var gradientImage = UIImage()
     
     var achievements = [AchievementCVModel]()
+    var achievementStats = [String:[Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

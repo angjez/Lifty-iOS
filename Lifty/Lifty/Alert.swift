@@ -25,4 +25,14 @@ class AlertView: NSObject {
         view.present(alert, animated: true, completion: nil)
     }
     
+    class func showAchievementUnlockedAlert(view: UIViewController, theme: UIColor, achievementType: String, achievementLevel: Int, completion: @escaping (()) -> Void){
+        let alert = UIAlertController(title: "Congratulations!", message: "You ulocked an achievement: level \(achievementType) in \(achievementType)!", preferredStyle: .alert)
+        alert.view.tintColor = theme
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { _ in
+            completion(())
+        }))
+        
+        view.present(alert, animated: true, completion: nil)
+    }
 }

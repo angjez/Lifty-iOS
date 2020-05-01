@@ -39,9 +39,6 @@ extension DisplayProfileVC : UICollectionViewDataSource, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AchievementCVCell", for: indexPath) as! AchievementCVCell
         cell.configure(with: achievements[indexPath.row], with: self.theme!)
         return cell
-}
-
-// MARK: Achievement data management.
-
-
+    }
+    
 }

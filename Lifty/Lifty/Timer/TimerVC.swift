@@ -150,7 +150,7 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
      + primary timer shows overall workout time
      + next up label displays all exercises in the workout
      
-     - round couner is empty (might add a round counter)
+     - round couner is empty (might add a round counter for AMRAP)
      - secondary timer is empty
      - current exercise label is empty
      */
@@ -290,6 +290,7 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
                 label.textColor = .darkGray
                 label.text = "Finished!"
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.updateAchievementData()
                     self.dismiss(animated: true, completion: nil)
                 }
             }
@@ -388,6 +389,9 @@ class TimerVC: UIViewController, passWorkout, UIGestureRecognizerDelegate {
     
     @IBAction func pausePress(_ sender: UILongPressGestureRecognizer) {
         if self.isPaused {
+            if currentWorkout?.type == "FOR TIME" {
+                self.updateAchievementData()
+            }
             self.dismiss(animated: true, completion: nil)
         }
     }
