@@ -35,6 +35,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
         
         super.viewDidLoad()
         
+        
         self.searchControllerSetup()
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = true
@@ -125,7 +126,7 @@ class WorkoutsVC: FormViewController, passWorkoutAndIndex {
     
     func initiateForm () {
         let user = Auth.auth().currentUser
-        if let user = user {
+        if let user = user {    
             let workoutDocument = WorkoutDocument(uid: user.uid)
             workoutDocument.getWorkoutDocument(completion: { loadedWorkouts in
                 self.workouts = loadedWorkouts

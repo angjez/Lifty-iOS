@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, sendUpdatedUsername, passTheme, UICollectionViewDataSource, UICollectionViewDelegate {
+class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, sendUpdatedUsername, passTheme {
     
     @IBOutlet weak var ProfileImageView: UIImageView!
     @IBOutlet weak var EditProfileButton: UIButton!
@@ -32,7 +32,7 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
         self.achievementCollectionView.dataSource = self
         self.achievementCollectionView.delegate = self
         self.achievementCollectionView.register(UINib.init(nibName: "AchievementCVCell", bundle: nil), forCellWithReuseIdentifier: "AchievementCVCell")
-
+        
         imageViewSetup()
         labelSetup()
     }
@@ -150,24 +150,5 @@ class DisplayProfileVC: UIViewController, UIImagePickerControllerDelegate, UINav
             ImageManagement.shareInstance.saveImage(data: imageData)
         }
     }
-    
-    // MARK: AchievementCollectionView methods.
-    
-    func addAchievements() {
-        let achievementLabels = ["Workout record", "FOR TIME record", "TABATA record", "AMRAP record", "EMOM record", "Time record"]
-        let achievementIcons = ["flame.fill", "hourglass", "playpause.fill", "bolt.fill", "burst.fill", "timer"]
-        for n in 0...achievementLabels.count-1 {
-            achievements.append(AchievementCVModel(achievementIcon: UIImage(systemName: achievementIcons[n])!, achievementLabel: achievementLabels[n], achievementLevelLabel: "0", progress: 50.0, total: 100.0))
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return achievements.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AchievementCVCell", for: indexPath) as! AchievementCVCell
-        cell.configure(with: achievements[indexPath.row], with: self.theme!)
-        return cell
-    }
+
 }

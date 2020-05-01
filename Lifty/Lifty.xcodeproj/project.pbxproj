@@ -38,6 +38,8 @@
 		66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D505B724445E4B00537D69 /* ResetPasswordVC.swift */; };
 		66E31A9D245AB20400CC1D08 /* AchievementCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E31A9B245AB20400CC1D08 /* AchievementCVCell.swift */; };
 		66E31A9E245AB20400CC1D08 /* AchievementCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66E31A9C245AB20400CC1D08 /* AchievementCVCell.xib */; };
+		66E31AA0245AC87800CC1D08 /* AchievementDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E31A9F245AC87800CC1D08 /* AchievementDocument.swift */; };
+		66E31AA2245AD20800CC1D08 /* DisplayProfileVCAchievementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E31AA1245AD20800CC1D08 /* DisplayProfileVCAchievementExtension.swift */; };
 		66E570B6244844D0009452D8 /* WorkoutProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570B5244844D0009452D8 /* WorkoutProtocols.swift */; };
 		66E570C324499FB9009452D8 /* UserDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570C224499FB9009452D8 /* UserDocument.swift */; };
 		66E570C52449B4A3009452D8 /* WorkoutDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570C42449B4A3009452D8 /* WorkoutDocument.swift */; };
@@ -45,6 +47,7 @@
 		66E570C92449B5B6009452D8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570C82449B5B6009452D8 /* Document.swift */; };
 		66E570CB244A0C99009452D8 /* NewWorkoutVCinputExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570CA244A0C99009452D8 /* NewWorkoutVCinputExtension.swift */; };
 		66E570CD244A0F52009452D8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E570CC244A0F52009452D8 /* Alert.swift */; };
+		66E96E9E245C3C8200574C00 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E96E9D245C3C8200574C00 /* Achievement.swift */; };
 		66FF053524092C1C004AABF6 /* LiftyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053424092C1C004AABF6 /* LiftyTests.swift */; };
 		66FF054024092C1C004AABF6 /* LiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FF053F24092C1C004AABF6 /* LiftyUITests.swift */; };
 		66FF057324092D29004AABF6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FF057224092D29004AABF6 /* Default-568h@2x.png */; };
@@ -110,6 +113,8 @@
 		66D505B724445E4B00537D69 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		66E31A9B245AB20400CC1D08 /* AchievementCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCVCell.swift; sourceTree = "<group>"; };
 		66E31A9C245AB20400CC1D08 /* AchievementCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementCVCell.xib; sourceTree = "<group>"; };
+		66E31A9F245AC87800CC1D08 /* AchievementDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementDocument.swift; sourceTree = "<group>"; };
+		66E31AA1245AD20800CC1D08 /* DisplayProfileVCAchievementExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayProfileVCAchievementExtension.swift; sourceTree = "<group>"; };
 		66E570B5244844D0009452D8 /* WorkoutProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutProtocols.swift; sourceTree = "<group>"; };
 		66E570C224499FB9009452D8 /* UserDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDocument.swift; sourceTree = "<group>"; };
 		66E570C42449B4A3009452D8 /* WorkoutDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDocument.swift; sourceTree = "<group>"; };
@@ -117,6 +122,7 @@
 		66E570C82449B5B6009452D8 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		66E570CA244A0C99009452D8 /* NewWorkoutVCinputExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutVCinputExtension.swift; sourceTree = "<group>"; };
 		66E570CC244A0F52009452D8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		66E96E9D245C3C8200574C00 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		66FF051724092C18004AABF6 /* Lifty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lifty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053024092C1C004AABF6 /* LiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FF053424092C1C004AABF6 /* LiftyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftyTests.swift; sourceTree = "<group>"; };
@@ -173,7 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				66E570C024499F97009452D8 /* Remote Storage */,
+				66E96E9D245C3C8200574C00 /* Achievement.swift */,
 				66B1198C2447143D00FAC032 /* DisplayProfileVC.swift */,
+				66E31AA1245AD20800CC1D08 /* DisplayProfileVCAchievementExtension.swift */,
 				66B1198E2447143D00FAC032 /* EditUserDataVC.swift */,
 				66B1198D2447143D00FAC032 /* ImageManagement.swift */,
 				66E31A9B245AB20400CC1D08 /* AchievementCVCell.swift */,
@@ -271,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				66E570C224499FB9009452D8 /* UserDocument.swift */,
+				66E31A9F245AC87800CC1D08 /* AchievementDocument.swift */,
 			);
 			path = "Remote Storage";
 			sourceTree = "<group>";
@@ -603,6 +612,7 @@
 				66B119912447143D00FAC032 /* EditUserDataVC.swift in Sources */,
 				66E570CB244A0C99009452D8 /* NewWorkoutVCinputExtension.swift in Sources */,
 				66E570B6244844D0009452D8 /* WorkoutProtocols.swift in Sources */,
+				66E31AA0245AC87800CC1D08 /* AchievementDocument.swift in Sources */,
 				66B119902447143D00FAC032 /* ImageManagement.swift in Sources */,
 				66FF0596240930BE004AABF6 /* Lifty.xcdatamodeld in Sources */,
 				66B11983244713C500FAC032 /* ChooseWorkoutsVC.swift in Sources */,
@@ -612,6 +622,7 @@
 				6697694B244A1F44009F33CE /* ExerciseVCinputExtension.swift in Sources */,
 				66B11981244713C500FAC032 /* WeekVC.swift in Sources */,
 				66E570C324499FB9009452D8 /* UserDocument.swift in Sources */,
+				66E96E9E245C3C8200574C00 /* Achievement.swift in Sources */,
 				66D505B824445E4B00537D69 /* ResetPasswordVC.swift in Sources */,
 				66E570C52449B4A3009452D8 /* WorkoutDocument.swift in Sources */,
 				66B1197F244713C500FAC032 /* NewPlanVC.swift in Sources */,
@@ -623,6 +634,7 @@
 				66D505B624445E2F00537D69 /* LoginVC.swift in Sources */,
 				66B1198B2447141800FAC032 /* ExerciseVC.swift in Sources */,
 				66093234242F5A08001BEC19 /* Gradients.swift in Sources */,
+				66E31AA2245AD20800CC1D08 /* DisplayProfileVCAchievementExtension.swift in Sources */,
 				66B11980244713C500FAC032 /* PlanDataClasses.swift in Sources */,
 				66B119882447141800FAC032 /* WorkoutsVC.swift in Sources */,
 				66B119892447141800FAC032 /* DisplayWorkoutVC.swift in Sources */,

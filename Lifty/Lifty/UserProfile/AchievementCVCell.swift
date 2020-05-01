@@ -11,7 +11,7 @@ import UIKit
 struct AchievementCVModel {
     let achievementIcon: UIImage
     let achievementLabel: String
-    let achievementLevelLabel: String
+    let achievementLevelLabel: Int
     let progress: Float
     let total: Float
 }
@@ -34,7 +34,7 @@ class AchievementCVCell: UICollectionViewCell {
         achievementIcon.image = model.achievementIcon
         achievementIcon.tintColor = color
         achievementLabel.text = model.achievementLabel
-        achievementLevelLabel.text = model.achievementLevelLabel
+        achievementLevelLabel.text = String(model.achievementLevelLabel)
         achievementProgressBar.progress = model.progress/model.total
         achievementProgressBar.progressTintColor = color
     }
