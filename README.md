@@ -21,6 +21,10 @@ An app for planning and executing workouts.
   * user accounts
     * fully editable accounts
     * password reminders
+  * 6 achievements with levels 1-5 (newbie, beginner, intermediate, advanced, expert) depending on the amount of executed workouts or time spent working out
+    * 4 workout-specyfic achievements
+    * Time record - overall time spent working out achievement
+    * Workout record - overall executed workouts
   * Cloud Firestore remote database
     * all workout/plan data is stored remotely as a Cloud Firestore JSON tree
 
@@ -30,8 +34,8 @@ An app for planning and executing workouts.
   * ~~CRUD workout plans~~
   * ~~Cloud Firestore remote database~~
   * ~~workout execution (workout timer)~~
-  * tap to add a round feature in timer for AMRAP and for time workouts
+  * ~~achievements~~ (achievement on-tap descriptions & level descriptions soon to be added)
+  * tap to add a round feature in timer for AMRAP
   * logging workouts (workout journal)
-  * achievements
-  * workout filtering ~~by type (implemented as search bar's feature)~~ and favourites
+  * workout filtering by ~~type (implemented as search bar's feature) and~~ favourites
   * more login options (Google account, log in with Apple)
